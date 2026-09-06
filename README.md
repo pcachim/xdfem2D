@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/xdfem2d_app/icons/xdfem2d_512.png" alt="xdfem2D logo" width="140">
+  <img src="assets/xdfem2d_logo.png" alt="xdfem2D logo" width="140">
 </p>
 
 <h1 align="center">xdfem2D</h1>
