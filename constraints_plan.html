@@ -1,0 +1,1115 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Plano de implementação de constraints (ligações cinemáticas) — xdfem2D - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plano-de-implementacao-de-constraints-ligacoes-cinematicas-xdfem2d" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plano de implementação de constraints (ligações cinemáticas) — xdfem2D
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modelling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-grillages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Grillages (overview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Phasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="engine-api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building an App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="plano-de-implementacao-de-constraints-ligacoes-cinematicas-xdfem2d">Plano de implementação de <em>constraints</em> (ligações cinemáticas) — xdfem2D<a class="headerlink" href="#plano-de-implementacao-de-constraints-ligacoes-cinematicas-xdfem2d" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Estado: implementado (Fases 0–5, por penalização).</strong> Este documento é o plano
+original. As Fases 0 a 5 estão concluídas — modelo de dados, solver por
+penalização, persistência, validação (<code>model_check</code>), interface (painel,
+diálogo, canvas, menus) e assistente AI — mais a recuperação das forças de
+constraint (método do resíduo) e a documentação de utilizador em
+<code>modelling.md</code> / <code>results.md</code>. Fica por fazer, como previsto, a Fase 2 exata
+(transformação mestre–escravo) e o diafragma rígido.</p>
+<p>Documento de planeamento. Descreve o modelo de dados, o motor de resolução, a
+serialização, a interface gráfica e a interação com o utilizador (incluindo o
+assistente AI) para acrescentar <em>constraints</em> ao xdfem2D.</p>
+</blockquote>
+<h2 id="1-o-que-sao-constraints-aqui">1. O que são "constraints" aqui<a class="headerlink" href="#1-o-que-sao-constraints-aqui" title="Permanent link">&para;</a></h2>
+<p>Hoje o xdfem2D restringe graus de liberdade (DOF) de duas formas: <code>Support</code>
+(apoios — fixa um DOF a um valor, tipicamente zero ou um assentamento imposto) e
+<code>NodeSpring</code>/<code>ElementSpring</code> (molas — acrescentam rigidez a um DOF). Ambas atuam
+sobre <strong>um único DOF de cada vez</strong>.</p>
+<p>Uma <em>constraint</em> (restrição de vínculo múltiplo, <em>multi-point constraint</em> — MPC)
+é diferente: relaciona <strong>vários DOFs entre si</strong> através de uma equação linear. Os
+casos que interessam a um pórtico 2D com 3 DOF por nó (ux, uy, tz):</p>
+<ul>
+<li><strong>Equal DOF / "body constraint"</strong> — obriga um conjunto de nós a partilhar o
+  mesmo valor de um ou mais DOFs (ex.: <code>uy</code> igual em vários nós).</li>
+<li><strong>Rigid link (master–slave)</strong> — um nó "escravo" segue um nó "mestre" como se
+  estivessem ligados por um corpo rígido:
+  <code>ux_s = ux_m − (y_s − y_m)·tz_m</code>, <code>uy_s = uy_m + (x_s − x_m)·tz_m</code>,
+  <code>tz_s = tz_m</code>. É a base de tudo o resto.</li>
+<li><strong>Rigid diaphragm (piso rígido)</strong> — caso especial do rigid link muito usado em
+  edifícios: um conjunto de nós de um piso partilha o deslocamento horizontal e a
+  rotação de um nó mestre do piso (translação transversal livre). Num modelo 2D
+  reduz-se essencialmente a "mesmo ux + mesma rotação de corpo".</li>
+<li><strong>Equação de vínculo genérica</strong> — <code>Σ cᵢ·dofᵢ = g</code>, a forma mais geral, da qual
+  todas as anteriores são casos particulares.</li>
+</ul>
+<p>Recomendação de âmbito para a 1.ª versão: implementar a <strong>equação genérica</strong> como
+representação interna única e oferecer ao utilizador três <em>atalhos</em> de alto nível
+(<strong>Equal DOF</strong>, <strong>Rigid link</strong>, <strong>Rigid diaphragm</strong>) que geram essas equações. É
+o mesmo padrão que o projeto já usa com <code>CANONICAL_SUPPORTS</code> (nomes canónicos para
+combinações de restrições).</p>
+<h2 id="2-estado-atual-relevante-levantamento">2. Estado atual relevante (levantamento)<a class="headerlink" href="#2-estado-atual-relevante-levantamento" title="Permanent link">&para;</a></h2>
+<p>O plano abaixo assenta no que existe hoje:</p>
+<ul>
+<li><strong>Numeração de DOF</strong> — <code>Structure2D.node_dof_index</code> (em <code>structure.py</code>, ~l.1537)
+  atribui <code>3·i</code> a cada nó, <code>num_dofs = 3·n_nós</code>. É invalidada (posta a <code>None</code>)
+  sempre que a topologia muda. É o ponto único onde o mapa DOF é definido.</li>
+<li><strong>Assemblagem</strong> — <code>assembly.py</code>: <code>assemble_stiffness</code> (esparsa CSR) e
+  <code>assemble_stiffness_reduced</code>. Molas de nó/elemento entram aqui.</li>
+<li><strong>Resolução</strong> — <code>solver.py::solve</code> particiona DOFs em <code>free</code>/<code>fixed</code>
+  (<code>_build_fixed_dofs</code>, <code>_augment_fixed_zero_stiffness</code>), resolve o sistema
+  reduzido e recupera reações como resíduo <code>K·U − F</code> nos DOFs fixos. Há caminhos
+  paralelos que <strong>repetem</strong> esta lógica: <code>_solve_geometric_nonlinear</code> (P-Delta,
+  ~l.1011), <code>_solve_nonlinear_springs</code> (~l.1230), <code>_solve_modal</code> (~l.1631) e
+  <code>_solve_spectrum</code> (~l.1839). Qualquer mecanismo de constraint tem de ser
+  aplicado de forma <strong>consistente nos cinco caminhos</strong>.</li>
+<li><strong>Modelo de dados</strong> — <code>models.py</code>: dataclasses <code>Support</code>, <code>SupportAssignment</code>,
+  <code>NodeSpring</code>, etc. Coleções vivem em <code>Structure2D.__init__</code> e há métodos
+  <code>add_*</code> correspondentes.</li>
+<li><strong>Serialização</strong> — <code>structure_io.py</code> (<code>_to_dict</code>/carregamento), com espelho em
+  <code>SupportSet</code> para variantes/faseamento; <code>model_json.py</code> para o formato <code>.x2d</code>
+  legível/gerado por AI (com <code>REQUIRED</code>, <code>missing_pieces</code>, validação de
+  referências).</li>
+<li><strong>Validação de topologia</strong> — <code>model_check.py</code> (nós isolados, coincidentes,
+  duplicados, apoios atribuídos a nós inexistentes).</li>
+<li><strong>GUI</strong> — <code>panels.py</code> tem <code>SupportPanel</code>, <code>NodeSpringPanel</code>, <code>ElemSpringPanel</code>
+  (tabelas <code>BaseTablePanel</code>); <code>dialogs.py</code> tem os diálogos correspondentes
+  (<code>SupportDialog</code>, <code>NodeSpringDialog</code>, …). <code>canvas.py</code> desenha os apoios.</li>
+<li><strong>Assistente AI</strong> — as ferramentas expostas ao LLM (<code>ai_context.py</code>,
+  <code>tool_schema.py</code>) são hoje <strong>só de leitura</strong> (consulta do modelo/resultados). A
+  criação de modelo por AI é feita via JSON (<code>model_json.py</code>). A interação de
+  edição do utilizador é pela GUI.</li>
+</ul>
+<h2 id="3-decisao-de-motor-como-impor-a-constraint-no-sistema">3. Decisão de motor: como impor a constraint no sistema<a class="headerlink" href="#3-decisao-de-motor-como-impor-a-constraint-no-sistema" title="Permanent link">&para;</a></h2>
+<p>Três técnicas clássicas. Recomendação: <strong>transformação master–slave (redução de
+DOF)</strong> como método base, por ser exata, não introduzir DOFs extra e encaixar
+diretamente no particionamento free/fixed já existente.</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Prós</th>
+<th>Contras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Transformação (master–slave)</strong> <code>U = T·U_m</code></td>
+<td>Exato; sem DOFs/parâmetros extra; <code>K_r = Tᵀ K T</code>, <code>F_r = Tᵀ F</code>; reações e pós-processamento limpos</td>
+<td>Requer eleger DOFs mestres e reescrever a assemblagem/recuperação; cadeias de constraints têm de ser resolvidas</td>
+</tr>
+<tr>
+<td><strong>Multiplicadores de Lagrange</strong></td>
+<td>Trata qualquer equação, inclusive redundantes; dá logo a "força de constraint"</td>
+<td>Aumenta o sistema (+1 DOF por equação); matriz deixa de ser definida positiva → afeta <code>splu</code>, modal (eigen) e P-Delta</td>
+</tr>
+<tr>
+<td><strong>Penalização</strong></td>
+<td>Trivial de somar a <code>K</code> (como uma mola muito rígida)</td>
+<td>Escolha do fator de penalização é frágil; mau condicionamento; constraint só aproximada</td>
+</tr>
+</tbody>
+</table>
+<p>Proposta faseada:</p>
+<ol>
+<li><strong>Fase 1</strong> — implementar o método da <strong>penalização</strong> primeiro. É o de menor
+   risco: um constraint <code>Σ cᵢ·dofᵢ = g</code> acrescenta <code>α·cᵀc</code> a <code>K</code> e <code>α·g·c</code> a <code>F</code>,
+   somando na assemblagem exatamente como as molas já somam. Serve para validar
+   toda a cadeia (dados → GUI → serialização → resultados) sem tocar no
+   particionamento do solver. Escolher <code>α</code> relativo ao maior termo diagonal de K.</li>
+<li><strong>Fase 2</strong> — substituir/complementar pela <strong>transformação master–slave</strong> para
+   ter constraints exatas e reações corretas, reutilizando o particionamento
+   free/fixed. Só avançar depois de a Fase 1 estar validada por testes.</li>
+</ol>
+<p>O documento assume esta ordem; a interface e a serialização são idênticas nas
+duas fases (só muda o interior do solver).</p>
+<h2 id="4-modelo-de-dados-modelspy-structurepy">4. Modelo de dados (<code>models.py</code> + <code>structure.py</code>)<a class="headerlink" href="#4-modelo-de-dados-modelspy-structurepy" title="Permanent link">&para;</a></h2>
+<p>Nova dataclass, no espírito das existentes:</p>
+<div class="highlight"><pre><span></span><code>@dataclass
+class Constraint:
+    id: str
+    kind: str            # 'equation' | 'equal_dof' | 'rigid_link'  (diafragma: versão futura)
+    # forma canónica genérica: sum(coef_i * dof_i) = value
+    terms: list          # list[(node_id, comp, coef)]  comp ∈ {'ux','uy','tz'}
+    value: float = 0.0
+    # campos de conveniência para os atalhos de alto nível:
+    master: str = ""     # node_id mestre (rigid_link)
+    slaves: list = None  # node_ids escravos
+    components: list = None  # ex.: ['ux','tz'] para equal_dof
+    enabled: bool = True
+</code></pre></div>
+<ul>
+<li>Coleção em <code>Structure2D.__init__</code>: <code>self.constraints: dict[str, Constraint] = {}</code>.</li>
+<li>Métodos: <code>add_constraint_equation(...)</code>, <code>add_rigid_link(master, slaves, ...)</code>,
+  <code>add_equal_dof(nodes, components)</code>, <code>remove_constraint(id)</code>.
+  (<code>add_diaphragm</code> fica para versão futura.)
+  Cada um <strong>invalida <code>self._node_dof_index = None</code></strong> (à semelhança de <code>add_node</code>),
+  porque a Fase 2 muda a contagem de DOFs livres.</li>
+<li>Uma função <code>expand_constraints(struc) -&gt; list[equations]</code> que converte os
+  atalhos de alto nível na lista de equações canónicas (usando as coordenadas dos
+  nós para o rigid link). Fica isolada e testável, no espírito de
+  <code>canonical_support_name</code>.</li>
+</ul>
+<h2 id="5-motor-de-resolucao-assemblypy-solverpy">5. Motor de resolução (<code>assembly.py</code> / <code>solver.py</code>)<a class="headerlink" href="#5-motor-de-resolucao-assemblypy-solverpy" title="Permanent link">&para;</a></h2>
+<p>Fase 1 (penalização):</p>
+<ul>
+<li>Nova <code>assembly._add_constraints(struc, K, F, alpha)</code> chamada a seguir a
+  <code>_add_element_springs</code>, somando <code>α·cᵀc</code>/<code>α·g·c</code>. <code>alpha</code> derivado de
+  <code>max(K.diagonal())</code>.</li>
+<li>Chamar em <strong>todos</strong> os pontos de montagem: <code>solve</code>, <code>_solve_geometric_nonlinear</code>,
+  <code>_solve_nonlinear_springs</code>, <code>_solve_modal</code> (só a parte de K; <strong>não</strong> somar à
+  massa), <code>_solve_spectrum</code>. Centralizar para evitar divergência (o próprio
+  código já comenta o cuidado de "os dois caminhos nunca discordarem").</li>
+</ul>
+<p>Fase 2 (transformação):</p>
+<ul>
+<li>Construir <code>T</code> (esparsa, <code>num_dofs × num_free_generalised</code>) a partir das equações;
+  DOFs escravos expressos em função dos mestres.</li>
+<li><code>K_r = Tᵀ K T</code>, <code>F_r = Tᵀ F</code>; resolver; recuperar <code>U = T·U_m</code>.</li>
+<li>Reações e forças de constraint a partir do resíduo, como já se faz para apoios.</li>
+<li>Detetar e rejeitar <strong>conflitos</strong>: escravo que também é apoio no mesmo DOF,
+  cadeias circulares (A escravo de B, B escravo de A), mestre inexistente.</li>
+</ul>
+<h2 id="6-serializacao">6. Serialização<a class="headerlink" href="#6-serializacao" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>structure_io.py</code>: acrescentar <code>'constraints': [...]</code> em <code>_to_dict</code> e o
+  carregamento simétrico. <strong>Não</strong> se acrescenta espelho em <code>SupportSet</code>: as
+  constraints vivem só no modelo base e não participam em variantes/faseamento
+  (decisão §9.3). Manter retro-compatibilidade: ficheiros antigos sem a chave
+  carregam com <code>constraints</code> vazio.</li>
+<li><code>model_json.py</code> (<code>.x2d</code>): documentar <code>constraints</code> como coleção <strong>opcional</strong>
+  (não entra em <code>REQUIRED</code>); acrescentar validação de referências em
+  <code>missing_pieces</code>/mapa de referências (<code>node_id</code> das terms tem de existir); e um
+  exemplo mínimo num dos templates. É aqui que o assistente AI passa a poder
+  <strong>gerar</strong> constraints.</li>
+</ul>
+<h2 id="7-validacao-model_checkpy">7. Validação (<code>model_check.py</code>)<a class="headerlink" href="#7-validacao-model_checkpy" title="Permanent link">&para;</a></h2>
+<p>Novas verificações, no estilo das existentes:</p>
+<ul>
+<li>Term com <code>node_id</code> inexistente ou <code>comp</code> inválido.</li>
+<li>Constraint que fixa um DOF já totalmente restringido por um apoio (redundância).</li>
+<li>Nó escravo com apoio no mesmo componente (sobre-restrição/conflito).</li>
+<li>Cadeias circulares / mestre que também é escravo.</li>
+<li>Constraint sobre <code>tz</code> de nós que só têm elementos CST (esses nós não têm DOF
+  rotacional ativo — coerente com a nota já existente sobre CST vs Allman).</li>
+</ul>
+<h2 id="8-interface-grafica-e-interacao-com-o-utilizador">8. Interface gráfica e interação com o utilizador<a class="headerlink" href="#8-interface-grafica-e-interacao-com-o-utilizador" title="Permanent link">&para;</a></h2>
+<p>Esta é a parte central do pedido. Três superfícies de interação, alinhadas com
+os padrões já usados no projeto.</p>
+<h3 id="81-novo-painel-constraintpanel-panelspy">8.1 Novo painel <code>ConstraintPanel</code> (<code>panels.py</code>)<a class="headerlink" href="#81-novo-painel-constraintpanel-panelspy" title="Permanent link">&para;</a></h3>
+<p>Uma tabela <code>BaseTablePanel</code> nova, irmã de <code>SupportPanel</code>/<code>NodeSpringPanel</code>,
+adicionada ao mesmo <code>QTabWidget</code> onde vivem apoios e molas. Colunas sugeridas:
+<code>ID</code>, <code>Tipo</code>, <code>Mestre</code>, <code>Nós/Escravos</code>, <code>Componentes</code>, <code>Ativa</code>. Botões
+adicionar/editar/remover como nos outros painéis.</p>
+<h3 id="82-novo-constraintdialog-dialogspy">8.2 Novo <code>ConstraintDialog</code> (<code>dialogs.py</code>)<a class="headerlink" href="#82-novo-constraintdialog-dialogspy" title="Permanent link">&para;</a></h3>
+<p>Diálogo com o tipo no topo e campos que <strong>se adaptam ao tipo escolhido</strong>, para o
+utilizador nunca ter de escrever a equação à mão nos casos comuns:</p>
+<ul>
+<li><strong>Rigid link</strong>: escolher nó mestre + lista de escravos (multi-seleção).</li>
+<li><strong>Equal DOF</strong>: escolher nós + <em>checkboxes</em> ux/uy/tz.</li>
+<li><strong>Equação genérica</strong> (modo avançado): tabela de termos <code>(nó, componente,
+  coeficiente)</code> + valor do lado direito.</li>
+</ul>
+<p>Pré-visualização em texto da(s) equação(ões) resultante(s), reaproveitando
+<code>expand_constraints</code>, para o utilizador confirmar antes de gravar. Validação
+inline (reutilizar §7) com mensagem clara quando há conflito com um apoio.</p>
+<h3 id="83-selecao-no-canvas-canvaspy">8.3 Seleção no canvas (<code>canvas.py</code>)<a class="headerlink" href="#83-selecao-no-canvas-canvaspy" title="Permanent link">&para;</a></h3>
+<p>Fluxo "selecionar nós → botão direito → <em>Criar constraint</em>", pré-preenchendo o
+diálogo com os nós selecionados (o canvas já tem seleção de nós para apoios).
+Desenho das constraints: uma linha tracejada mestre↔escravos para rigid
+link/diafragma e um marcador distinto para equal-DOF, com uma entrada na legenda.
+Mostrar/ocultar via <em>toggle</em> de visualização.</p>
+<h3 id="84-assistente-ai-ai_contextpy-tool_schemapy">8.4 Assistente AI (<code>ai_context.py</code> / <code>tool_schema.py</code>)<a class="headerlink" href="#84-assistente-ai-ai_contextpy-tool_schemapy" title="Permanent link">&para;</a></h3>
+<p>Duas frentes, sem sair do padrão atual (ferramentas de leitura + geração por JSON):</p>
+<ol>
+<li><strong>Leitura</strong> — nova ferramenta de consulta <code>get_constraints(struc, limit)</code> no
+   mesmo estilo de <code>get_geometry</code>/<code>get_loads</code>, e incluir uma linha-resumo em
+   <code>model_overview</code>/<code>summary_text</code> ("N constraints: X rigid links, Y diafragmas").
+   Assim o assistente pode <em>explicar</em> as constraints de um modelo aberto.</li>
+<li><strong>Criação</strong> — como a criação de modelo é feita por JSON <code>.x2d</code>, basta o §6
+   (documentar <code>constraints</code> em <code>model_json.py</code>, com exemplo e validação de
+   <code>missing_pieces</code>) para o assistente passar a poder <strong>propor</strong> modelos com
+   constraints. Mensagem de erro dedicada quando o utilizador define escravos mas
+   esquece o mestre — o mesmo tipo de "par esquecido" que <code>missing_pieces</code> já
+   apanha para <code>supports</code>/<code>support_assignments</code>.</li>
+</ol>
+<h3 id="85-principios-de-interacao">8.5 Princípios de interação<a class="headerlink" href="#85-principios-de-interacao" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Nomes canónicos, não equações</strong> para o caso comum (rigid link, diafragma,
+  equal DOF), reservando a equação genérica para um modo avançado — coerente com
+  a filosofia <code>CANONICAL_SUPPORTS</code> do projeto ("um nome que tem de ser adivinhado
+  é a falha que este projeto repete").</li>
+<li><strong>Feedback imediato</strong>: pré-visualização da equação e validação inline antes de
+  gravar.</li>
+<li><strong>Consistência</strong>: o mesmo objeto <code>Constraint</code> alimenta GUI, <code>.x2d</code>, canvas e
+  assistente — uma só fonte de verdade.</li>
+</ul>
+<h2 id="9-decisoes-de-ambito-fixadas">9. Decisões de âmbito (fixadas)<a class="headerlink" href="#9-decisoes-de-ambito-fixadas" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Método do solver</strong>: começar por <strong>penalização</strong> (Fase 1); <strong>master–slave</strong>
+   (Fase 2) fica para depois de a Fase 1 estar validada por testes.</li>
+<li><strong>Tipos na 1.ª versão</strong>: <strong>rigid link</strong>, <strong>equal DOF</strong> e <strong>equação genérica</strong>.
+   O <strong>diafragma</strong> fica de fora desta versão (pode ser acrescentado depois como
+   mais um atalho que gera equações, sem mudar o modelo de dados).</li>
+<li><strong>Âmbito no modelo</strong>: constraints <strong>só no modelo base</strong> — <strong>não</strong> entram em
+   variantes/faseamento nesta versão. Concretamente, <strong>não</strong> se acrescenta espelho
+   em <code>SupportSet</code> (§6 fica sem essa parte).</li>
+<li><strong>Assistente AI</strong>: <strong>ler e criar</strong>. Leitura via <code>get_constraints</code> + resumo;
+   criação via <code>.x2d</code> (documentar/validar <code>constraints</code> em <code>model_json.py</code>, §6/§8.4).</li>
+</ol>
+<h2 id="10-sequencia-de-implementacao-sugerida">10. Sequência de implementação sugerida<a class="headerlink" href="#10-sequencia-de-implementacao-sugerida" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>models.py</code> + <code>structure.py</code>: dataclass <code>Constraint</code>, coleção, métodos <code>add_*</code>,
+   <code>expand_constraints</code>, invalidação de <code>node_dof_index</code>.</li>
+<li><code>assembly.py</code>/<code>solver.py</code>: <code>_add_constraints</code> por penalização nos cinco
+   caminhos de solução.</li>
+<li><code>structure_io.py</code>: guardar/carregar <code>constraints</code>.</li>
+<li><code>model_check.py</code>: validações.</li>
+<li><code>panels.py</code> + <code>dialogs.py</code> + <code>canvas.py</code>: painel, diálogo, seleção e desenho.</li>
+<li><code>model_json.py</code>: documentar/validar <code>constraints</code> no <code>.x2d</code>.</li>
+<li><code>ai_context.py</code>: <code>get_constraints</code> + resumo.</li>
+<li>Fase 2: transformação master–slave a substituir a penalização.</li>
+<li><strong>Testes de verificação</strong> (<code>tests/</code>): rigid link vs. solução analítica; equal
+   DOF; diafragma; carga/gravação <em>round-trip</em> do <code>.x2d</code>; consistência entre os
+   cinco caminhos do solver; casos de conflito rejeitados por <code>model_check</code>.
+```</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

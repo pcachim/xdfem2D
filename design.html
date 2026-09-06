@@ -1,0 +1,1315 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+        <link rel="prev" href="results.html">
+      
+      
+        <link rel="next" href="variants.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Design (concrete, steel, timber) - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design (concrete, steel, timber)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modelling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-grillages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Grillages (overview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="design.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design codes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#buckling-lengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Buckling lengths
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Buckling lengths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#free-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Free-end members (cantilevers)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steel members (EC3)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timber members (EC5)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design report
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Design report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#report-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report tools (pandoc / Ollama)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-ec2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method (EC2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material-strengths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material strengths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sap2000-interchange" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAP2000 interchange
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limitations
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Phasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="engine-api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building an App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="design">Design<a class="headerlink" href="#design" title="Permanent link">&para;</a></h1>
+<p>xdfem2D includes member/section design to the Eurocodes, driven by the analysis
+results and the load combinations you choose:</p>
+<ul>
+<li><strong>Concrete — EN 1992-1-1 (EC2)</strong>: reinforcement of rectangular bar sections and
+  membrane (Wood/Baumann) reinforcement of concrete triangles, plus punching.</li>
+<li><strong>Steel — EN 1993-1-1 (EC3)</strong>: cross-section resistance and member buckling of
+  steel-section members.</li>
+<li><strong>Timber — EN 1995-1-1 (EC5)</strong>: ULS member checks of timber-section members.</li>
+</ul>
+<p>It is a <em>design aid</em>, not a substitute for engineering judgement: the concrete
+module covers rectangular sections in bending + shear, reports the required steel
+areas, and flags inadequate sections — it does not detail bars, check
+serviceability, or design columns for biaxial bending.</p>
+<div class="admonition note">
+<p class="admonition-title">Slabs and grillages</p>
+<p>The bar design above applies to <strong>plane</strong> frames and <strong>grillage</strong> beams. For a
+plate slab, the <a href="results.html"><strong>Wood–Armer (W-A)</strong> design moments</a> (<code>m*x,bot</code>,
+<code>m*y,bot</code>, <code>m*x,top</code>, <code>m*y,top</code>) are reported per triangle as results — the
+orthogonal-reinforcement moments an EC2 slab check consumes. See
+<a href="slabs-grillages.html">Slabs and Grillages</a>.</p>
+</div>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before running a design, the model needs:</p>
+<ol>
+<li><strong>Concrete sections</strong> — set the section's <em>type</em> to <strong>Concrete</strong> (Sections
+   sub-tab). Only elements whose section is of type Concrete are designed.</li>
+<li><strong>Material strengths</strong> — the section's material must carry a characteristic
+   concrete strength <code>fck</code> and steel strength <code>fyk</code> (in its design properties).
+   See <a href="#material-strengths">supported classes</a> below.</li>
+<li><strong>A solved model</strong> — run the analysis first (<span class="keys"><kbd class="key-f5">F5</kbd></span>); design uses the element
+   force results.</li>
+<li><strong>Combinations</strong> — design is performed for the load combinations (typically the
+   ULS combinations); define them on the Combinations sub-tab or generate them with
+   the automatic EN 1990 combinations.</li>
+</ol>
+<h2 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h2>
+<p>Everything lives in the <strong>Design</strong> menu (next to Analysis).</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Menu</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Design → Code preferences</strong></td>
+<td>Sets the code editions and partial factors — <code>γc</code>/<code>γs</code>/<code>αcc</code> (EC2), the <code>γM</code> factors (EC3/EC5), and the <a href="#buckling-lengths">free-end buckling</a> options.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Design → Design combinations</strong></td>
+<td>Picks which combinations are checked (default: all available).</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Design → Buckling lengths…</strong></td>
+<td>Assigns the per-member buckling-length factors <code>K</code> for the steel/timber member checks. See <a href="#buckling-lengths">Buckling lengths</a>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Design → Concrete/Steel/Timber…</strong></td>
+<td>Runs the chosen design and fills the <strong>Design</strong> results table (or the coloured design view).</td>
+</tr>
+</tbody>
+</table>
+<p>The Design menu items, after the two preferences entries and <em>Buckling lengths…</em>,
+are: <strong>Concrete Members (ULS)</strong>, <strong>Concrete Members (SLS)</strong>, <strong>Concrete Areas
+(ULS)</strong>, <strong>Steel Members (ULS)</strong>, <strong>Timber Members (ULS)</strong> and <strong>Punching…</strong>.</p>
+<p>Each concrete element is checked at its <strong>critical sections</strong> — both ends plus the
+span extremes of bending moment and shear — for every selected combination. The
+section requiring the most steel is marked as <strong>governing</strong> (★).</p>
+<h2 id="design-codes">Design codes<a class="headerlink" href="#design-codes" title="Permanent link">&para;</a></h2>
+<p>The <strong>default design code per material</strong> is set in <strong>File → Preferences → Design</strong>
+(concrete, steel, timber). The available options come from the same registry as
+<strong>Design → Code preferences</strong> — so concrete and timber offer their code editions
+(e.g. EN 1992-1-1:2004 / prEN 1992-1-1:2023, EN 1995-1-1:2004 / prEN
+1995-1-1:2025) and steel offers EN 1993-1-1.</p>
+<p>The code that a design run uses is recorded <strong>inside the <code>.x2d</code></strong>. When you reopen
+a file that was already designed, its stored code <strong>takes precedence</strong> over the
+preference default, so a model keeps the code it was designed with. The active code
+is shown in the results header.</p>
+<h2 id="buckling-lengths">Buckling lengths<a class="headerlink" href="#buckling-lengths" title="Permanent link">&para;</a></h2>
+<p>The steel (EC3 §6.3.3) and timber (EC5) member checks need the <strong>buckling length</strong>
+of each <em>physical member</em> — a chain of collinear bars, identified automatically —
+not of each bar. The buckling length is <code>L_cr = K × member length</code>, per axis:
+<code>K_y</code> (major / in-plane), <code>K_z</code> (minor / out-of-plane) and <code>K_LT</code> (lateral
+torsional).</p>
+<p>Open <strong>Design → Buckling lengths…</strong> to reveal the <strong>Buckling</strong> side panel:</p>
+<ul>
+<li>The read-only table lists the members of the current canvas selection (expanded
+  to whole physical members), with each bar's <strong>real length</strong> and the <strong>physical</strong>
+  member length. Selecting a row highlights that member on the canvas.</li>
+<li><strong>Load from selection</strong> replaces the table with the current selection; <strong>Add from
+  selection</strong> unions more members in; <strong>Load modified</strong> shows every member that
+  already carries a <code>K</code> override.</li>
+<li>Enter <code>K_y</code> / <code>K_z</code> / <code>K_LT</code> (use <code>.</code> as the decimal separator) and press
+  <strong>Apply to selected</strong> or <strong>Apply to all</strong> — the values are written to <em>every bar</em>
+  of the target members. <strong>Reset default</strong> clears the override (the member then
+  follows the global default). <strong>OK</strong> closes the panel.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">The model is 2D</p>
+<p>Because the model is planar, xdfem2D cannot see the out-of-plane bracing. By
+default <code>K_z</code> uses the same member length as <code>K_y</code> (both default to 1.0), so
+<strong>the out-of-plane length equals the in-plane one unless you set <code>K_z</code></strong>. Set
+the per-member <code>K_z</code> to reflect the real out-of-plane restraint.</p>
+</div>
+<h3 id="free-end">Free-end members (cantilevers)<a class="headerlink" href="#free-end" title="Permanent link">&para;</a></h3>
+<p>When a physical member has a <strong>truly free end</strong> — a boundary node with nothing
+attached (no support, spring, other bar, triangle or constraint) — xdfem2D treats
+it as a cantilever and applies an automatic <code>K</code> to <strong><code>K_y</code> and <code>K_z</code></strong> (a free tip
+is unrestrained in both planes). <code>K_LT</code> is left on the global default. An explicit
+override you set always wins. Such members are flagged with a <strong>⚑</strong> in the Buckling
+table.</p>
+<p>The behaviour is controlled in <strong>Design → Code preferences</strong>, group <em>Buckling —
+free-end members (cantilevers)</em>: <strong>Auto K for a free (cantilever) end</strong> (on by
+default) and <strong>K for a free end</strong> (default <code>2.0</code>; set e.g. <code>2.2</code> to allow for
+imperfect base fixity).</p>
+<h2 id="steel">Steel members (EC3)<a class="headerlink" href="#steel" title="Permanent link">&para;</a></h2>
+<p><strong>Design → Steel Members (ULS)</strong> runs the EN 1993-1-1 §6.2 (cross-section
+resistance: <code>N</code>, <code>M_y</code>, <code>M_z</code>, <code>V</code>, <code>T</code>) and §6.3.3 (member flexural + lateral
+torsional buckling) checks, once per physical member, over the selected
+combinations. Members need a section whose material is <strong>Steel</strong> and a supported
+shape (I, RHS/SHS, CHS). Results colour the <strong>Steel design</strong> view by utilisation
+and fill the Design table; the buckling lengths come from the <code>K</code> factors above.</p>
+<h2 id="timber">Timber members (EC5)<a class="headerlink" href="#timber" title="Permanent link">&para;</a></h2>
+<p><strong>Design → Timber Members (ULS)</strong> runs the EN 1995-1-1 ULS checks (<code>N + M_y + M_z</code>,
+<code>V + T</code> and the interactions, with the compression / LTB stability factors) once
+per physical member. The buckling lengths are obtained exactly like steel — same
+physical-member <code>K</code> factors. Results colour the <strong>Timber design</strong> view by ratio.</p>
+<h2 id="reading-the-results">Reading the results<a class="headerlink" href="#reading-the-results" title="Permanent link">&para;</a></h2>
+<p>The <strong>Design</strong> results panel lists one row per critical section / combination:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Element, Combination, Location</td>
+<td>which member, combination and section</td>
+</tr>
+<tr>
+<td>Reason</td>
+<td>why the section was checked (end, M⁺/M⁻ peak, V peak)</td>
+</tr>
+<tr>
+<td>M_Ed, N_Ed, V_Ed</td>
+<td>design action effects at that section</td>
+</tr>
+<tr>
+<td>As,bot / As,top [cm²]</td>
+<td>required tension- and compression-face steel</td>
+</tr>
+<tr>
+<td>Asw/s [cm²/m]</td>
+<td>required shear reinforcement (stirrup area per metre)</td>
+</tr>
+<tr>
+<td>cot θ</td>
+<td>strut inclination used by the variable-angle truss</td>
+</tr>
+<tr>
+<td>Strut</td>
+<td>concrete strut crushing limit <code>VRd,max</code></td>
+</tr>
+<tr>
+<td>Gov.</td>
+<td>★ marks the governing section of each element</td>
+</tr>
+</tbody>
+</table>
+<p>On the canvas you can also display the <strong>reinforcement envelopes</strong> along each member:
+the required longitudinal steel (As) view and the shear-reinforcement view show the
+maximum required steel along the span, enveloped over the selected design
+combinations.</p>
+<h2 id="design-report">Design report<a class="headerlink" href="#design-report" title="Permanent link">&para;</a></h2>
+<p><strong>Design → Design report…</strong> opens a <strong>Design report</strong> side panel (a tab in the
+left dock, like the Punching and Buckling workbenches) that produces a full,
+step-by-step calculation report — every partial result, the code clause, the
+symbolic expression and the numeric substitution — for the checks the engine
+actually ran. The panel is read-only with respect to the model, so it can be used
+on a locked model.</p>
+<p>Controls:</p>
+<ul>
+<li><strong>Material</strong> — lists only the design kinds present in the model: <em>Steel members
+  (EC3)</em>, <em>Timber members (EC5)</em>, <em>Concrete members (EC2)</em> (bars / grillage),
+  <em>Concrete areas (EC2)</em> (membrane / slab triangles) and <em>Punching (EC2)</em>.</li>
+<li><strong>Scope</strong> — <em>Whole model</em> or <em>Current selection</em> (defaults to the current
+  canvas selection). Selecting a row in the summary table highlights that
+  member / element / column / triangle on the canvas.</li>
+<li><strong>Detail</strong> — <em>Envelope (governing)</em> gives one report per member (the governing
+  case across the chosen combinations); <em>Per combination</em> gives one report per
+  member <strong>and</strong> combination.</li>
+<li><strong>Combinations</strong> — a multi-select; nothing selected means all available.</li>
+<li><strong>Format</strong> — <strong>HTML</strong> (self-contained, with MathJax equations and a linked
+  table of contents), <strong>PDF</strong> (composed pages with typeset equations and the
+  section figure), <strong>Word</strong> (<code>.docx</code>, equations as images, or native editable
+  <strong>OMML</strong> when <a href="#report-dependencies">pandoc</a> is installed) and <strong>Markdown</strong>
+  (with a sibling assets folder for the figures).</li>
+</ul>
+<p><strong>Preview</strong> renders the HTML and opens it; <strong>Export…</strong> saves in the chosen
+format. Each report embeds a small <strong>cross-section drawing</strong> (rectangle for
+concrete/timber, and the I / RHS / SHS / CHS outline for steel profiles).</p>
+<h3 id="report-dependencies">Report tools (pandoc / Ollama)<a class="headerlink" href="#report-dependencies" title="Permanent link">&para;</a></h3>
+<p>Editable Word equations use <strong>pandoc</strong>, and the local AI assistant uses
+<strong>Ollama</strong> — both optional external tools. <strong>Preferences → Dependencies</strong> shows
+whether each is installed, explains what it unlocks, and offers the per-OS
+install command (copy or run). Without them the app still works: Word equations
+fall back to images, and the assistant uses the remote providers you configure.</p>
+<h2 id="method-ec2">Method (EC2)<a class="headerlink" href="#method-ec2" title="Permanent link">&para;</a></h2>
+<p><strong>Flexure.</strong> Rectangular sections are designed for the dimensionless moment
+<code>μ = M_Ed / (b·d²·fcd)</code>, giving the tension steel <code>As</code>; when <code>μ</code> exceeds the
+singly-reinforced limit, compression steel is added. The effective depth is
+<code>d = h − cover</code>. Minimum and maximum steel ratios follow EC2 §9.2.1.</p>
+<p><strong>Shear.</strong> The concrete resistance <code>VRd,c</code> (EC2 §6.2.2) is checked first. When the
+shear exceeds it, the <strong>variable-angle truss model</strong> (§6.2.3) is used: the strut
+angle is swept from <code>cot θ = 2.5</code> (θ ≈ 21.8°) down to <code>cot θ = 1.0</code> (θ = 45°),
+choosing the flattest strut the concrete can carry so the stirrup demand <code>Asw/s</code> is
+minimised, while respecting the strut-crushing limit <code>VRd,max</code>. If the section
+crushes even at θ = 45°, it is reported as inadequate in shear at the crushing
+limit. The truss and <code>VRd,c</code> formulas are delegated to <code>eurocodepy</code>.</p>
+<p>All partial safety factors come from the Code-preferences dialog:
+<code>fcd = αcc·fck/γc</code> and <code>fyd = fyk/γs</code>.</p>
+<h2 id="material-strengths">Material strengths<a class="headerlink" href="#material-strengths" title="Permanent link">&para;</a></h2>
+<p>Strengths are looked up from the standard class strings:</p>
+<ul>
+<li><strong>Concrete</strong> <code>fck</code> [MPa]: C12/15, C16/20, C20/25, C25/30, C30/37, C35/45,
+  C40/50, C45/55, C50/60 (a bare <code>C30</code> form is also accepted).</li>
+<li><strong>Steel</strong> <code>fyk</code> [MPa]: A400 / A500 (and the B/S400, B/S500 variants).</li>
+</ul>
+<h2 id="sap2000-interchange">SAP2000 interchange<a class="headerlink" href="#sap2000-interchange" title="Permanent link">&para;</a></h2>
+<p>When you export to SAP2000, concrete materials are written as <strong>Eurocode 2-2004</strong>
+design data (concrete strength, a rebar material, per-frame design procedure,
+section cover and the EC2 preferences), and the load combinations are marked for
+concrete design. Importing a <code>.s2k</code> reads this back. See
+<a href="exporting.html#sap2000-s2k">Exporting → SAP2000</a>.</p>
+<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Rectangular sections only; flexure about the in-plane axis plus shear.</li>
+<li>ULS reinforcement only — no SLS (crack/deflection) checks and no bar detailing.</li>
+<li>Columns are not designed for axial + biaxial bending interaction.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1290 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+        <link rel="prev" href="assistant.html">
+      
+      
+        <link rel="next" href="file-formats.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Exporting - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exporting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exporting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modelling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-grillages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Grillages (overview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Phasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="exporting.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#drawing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Drawing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#report-write-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Report — Write Report…
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tables-to-excel-write-tables-to-excel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tables to Excel — Write Tables to Excel…
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cad-and-other-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CAD and other tools
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sap2000-s2k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAP2000 (.s2k)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ifc-ifc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IFC (.ifc)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="engine-api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building an App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="exporting">Exporting<a class="headerlink" href="#exporting" title="Permanent link">&para;</a></h1>
+<p>Import and export live in the <strong>File</strong> menu — <strong>Import…</strong> brings a model in from
+another tool, <strong>Export…</strong> writes the model out to a CAD/analysis format, and the
+report/table/drawing commands below produce deliverables.</p>
+<h2 id="drawing">Drawing<a class="headerlink" href="#drawing" title="Permanent link">&para;</a></h2>
+<p><strong>File → Print Graphics…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-e">E</kbd></span>) saves the current canvas as <strong>PNG</strong>, <strong>SVG</strong>,
+or <strong>PDF</strong>, with options for resolution (PNG), transparency, tight bounding box, and
+grid visibility.</p>
+<h2 id="report-write-report">Report — Write Report…<a class="headerlink" href="#report-write-report" title="Permanent link">&para;</a></h2>
+<p><strong>File → Write Report…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-w">W</kbd></span>) is the main report command. A single
+dialog lets you choose the <strong>format</strong> and the <strong>content</strong>:</p>
+<ul>
+<li><strong>Format</strong> — <strong>PDF</strong> (paginated A4, each case/combination on a new page, with
+  title, timestamp and page number), <strong>Word</strong> (<code>.docx</code>, editable — needs
+  <code>python-docx</code>), or <strong>Excel</strong> (<code>.xlsx</code> — needs <code>openpyxl</code>).</li>
+<li><strong>Content</strong> — any mix of: project info; the <strong>structure</strong> and <strong>loads</strong>
+  drawings; the <strong>model tables</strong>; the <strong>result tables</strong>; the <strong>result views</strong>
+  (deformed, diagrams, stress, …) for the cases you tick; and the <strong>design
+  views</strong>. Result content requires a solved model.</li>
+</ul>
+<h2 id="tables-to-excel-write-tables-to-excel">Tables to Excel — Write Tables to Excel…<a class="headerlink" href="#tables-to-excel-write-tables-to-excel" title="Permanent link">&para;</a></h2>
+<p><strong>File → Write Tables to Excel…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-t">T</kbd></span>) is the one-click shortcut: the
+model tables — plus the result tables if the model has been solved — go straight
+into a single <code>.xlsx</code> workbook, with no dialog. Headers are bold with frozen panes
+and auto-fit columns; sheets with no data are omitted.</p>
+<p>Model sheets:</p>
+<table>
+<thead>
+<tr>
+<th>Sheet</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Materials</td>
+<td>E, γ, α, unit mass</td>
+</tr>
+<tr>
+<td>Sections</td>
+<td>material, b, h, area, inertia</td>
+</tr>
+<tr>
+<td>Nodes</td>
+<td>ID, X, Y</td>
+</tr>
+<tr>
+<td>Elements</td>
+<td>ID, node i/j, section, hinges</td>
+</tr>
+<tr>
+<td>Supports</td>
+<td>node, support, UX/UY/TZ</td>
+</tr>
+<tr>
+<td>Node / Element springs</td>
+<td>stiffnesses</td>
+</tr>
+<tr>
+<td>Load cases</td>
+<td>ID, action type, self-weight factor</td>
+</tr>
+<tr>
+<td>Point / Distributed / Temperature loads, Settlements, Nodal masses</td>
+<td>per load case</td>
+</tr>
+<tr>
+<td>Analysis cases</td>
+<td>ID, type, coefficients, modal/spectrum/stored-K</td>
+</tr>
+<tr>
+<td>Combinations</td>
+<td>ID, type, analysis-case coefficients</td>
+</tr>
+<tr>
+<td>Spectral functions</td>
+<td>ID, description, damping, (T, Sa) points</td>
+</tr>
+</tbody>
+</table>
+<p>Result sheets (when solved):</p>
+<table>
+<thead>
+<tr>
+<th>Sheet</th>
+<th>Columns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Displacements</td>
+<td>Case type, Case, Node, ux, uy, rz</td>
+</tr>
+<tr>
+<td>Reactions</td>
+<td>Case type, Case, Node, Rx, Ry, Mz (with a bold <strong>Σ</strong> row per case)</td>
+</tr>
+<tr>
+<td>Constraint forces</td>
+<td>Case type, Case, Node, Fx, Fy, Mz (only if the model has constraints)</td>
+</tr>
+<tr>
+<td>Element forces</td>
+<td>Case type, Case, Element, End (i/j), N, V, M</td>
+</tr>
+<tr>
+<td>Span extremes</td>
+<td>Case, Element, |N|max, |V|max, M⁺, M⁻</td>
+</tr>
+<tr>
+<td>Reaction sums</td>
+<td>Case type, Case, ΣRx, ΣRy, ΣMz</td>
+</tr>
+<tr>
+<td>Modal</td>
+<td>Case, Mode, ω, f, T, Meff_X%, Meff_Y%, Cum X%, Cum Y%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cad-and-other-tools">CAD and other tools<a class="headerlink" href="#cad-and-other-tools" title="Permanent link">&para;</a></h2>
+<p><strong>File → Export…</strong> writes the model to one of several interchange formats; the
+chosen file filter drives the target:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Extension</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAP2000 text</td>
+<td><code>.s2k</code></td>
+<td>export <strong>and</strong> import</td>
+</tr>
+<tr>
+<td>DXF drawing</td>
+<td><code>.dxf</code></td>
+<td>export <strong>and</strong> import</td>
+</tr>
+<tr>
+<td>IFC (openBIM)</td>
+<td><code>.ifc</code></td>
+<td>export <strong>and</strong> import</td>
+</tr>
+<tr>
+<td>Autodesk Robot text</td>
+<td><code>.str</code></td>
+<td>export</td>
+</tr>
+<tr>
+<td>Python build script</td>
+<td><code>.py</code></td>
+<td>export — includes variants, support sets, variant combinations, and construction sequences</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DXF</strong> exports the geometry as a drawing and imports a drawing back into a model
+(lines become bars); it is the bridge to general CAD. <strong>Robot</strong> export writes the
+Autodesk Robot Structural Analysis text format. The <strong>Python</strong> export writes a
+script that rebuilds the model with the <code>xdfem2d</code> API — handy for versioning or
+programmatic edits — including variants, support sets, variant combinations, and
+construction sequences with all their phases and operations. <strong>Import…</strong> reads
+SAP2000 <code>.s2k</code>, DXF, or IFC.</p>
+<h2 id="sap2000-s2k">SAP2000 (<code>.s2k</code>)<a class="headerlink" href="#sap2000-s2k" title="Permanent link">&para;</a></h2>
+<p>xdfem2D can <strong>export to</strong> and <strong>import from</strong> the SAP2000 text interchange format
+(<code>.s2k</code>). The 2-D model is mapped to a planar SAP model in the X–Z plane
+(xdfem2D X → SAP X, xdfem2D Y → SAP Z), with the out-of-plane DOFs deactivated.
+This is a best-effort exchange — open the file in SAP2000 and verify a simple
+case (especially moment/temperature sign conventions).</p>
+<p>What is exchanged:</p>
+<table>
+<thead>
+<tr>
+<th>xdfem2D</th>
+<th>SAP2000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Load case</td>
+<td>Load pattern (SAP auto-creates its Linear Static case)</td>
+</tr>
+<tr>
+<td>Linear analysis case</td>
+<td>Linear Static case</td>
+</tr>
+<tr>
+<td><strong>NonLinear</strong> analysis case (unilateral springs)</td>
+<td>Nonlinear Static case (no P-Delta)</td>
+</tr>
+<tr>
+<td>Geometric Nonlinear (P-Delta)</td>
+<td>Nonlinear Static case (P-Delta)</td>
+</tr>
+<tr>
+<td>Modal / Spectrum / Mass</td>
+<td>Modal / Response-Spectrum case + Mass Source</td>
+</tr>
+<tr>
+<td>Combination (SomaLinear)</td>
+<td>Linear-Add combination</td>
+</tr>
+<tr>
+<td>Node spring</td>
+<td>Joint spring (uncoupled, <strong>bilateral only</strong>)</td>
+</tr>
+<tr>
+<td>Element (Winkler) spring</td>
+<td>Frame line spring; <strong>tension-/compression-only</strong> mode maps to the SAP "SimpleType"</td>
+</tr>
+<tr>
+<td>Concrete materials</td>
+<td>EC2 (Eurocode 2-2004) design data: concrete strength, rebar material, per-frame design procedure, section cover, and design preferences (γc, γs, αcc)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Unilateral node springs</p>
+<p>SAP joint springs are linear/bilateral, so a <strong>node</strong> spring's
+tension-/compression-only mode is not exported. Use a compression-/tension-only
+<strong>element</strong> spring (or a nonlinear link in SAP) to model unilateral support
+along a member. Element-spring modes round-trip both ways.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Concrete design under Eurocode 2</p>
+<p>When the model carries concrete materials, the export sets the concrete frame
+design code to <strong>Eurocode 2-2004</strong> and marks the load combinations for concrete
+design, so SAP runs the RC design under EC2. Importing a <code>.s2k</code> reads the
+concrete strength, safety factors and per-frame design flag back into xdfem2D.</p>
+</div>
+<h2 id="ifc-ifc">IFC (<code>.ifc</code>)<a class="headerlink" href="#ifc-ifc" title="Permanent link">&para;</a></h2>
+<p>xdfem2D can <strong>export to</strong> and <strong>import from</strong> IFC — the openBIM ISO 16739 exchange
+format — using the <strong>structural-analysis view</strong> (<code>IfcStructuralAnalysisModel</code>).
+This is the branch of IFC meant for finite-element exchange, so it mirrors the
+xdfem2D model closely; it is <em>not</em> the physical/architectural model (<code>IfcBeam</code>,
+<code>IfcSlab</code>, …). IFC support needs the optional <strong><code>ifcopenshell</code></strong> package — install
+the engine with the <code>ifc</code> extra (<code>pip install "xdfem2d[ifc]"</code>); the desktop app
+already includes it.</p>
+<p>Values use the same unit convention SAP2000 itself writes — <strong>kN, m, tonne, °C</strong>
+(force in kilonewtons, mass in tonnes, temperature in degrees Celsius) — with every
+unit, including the derived ones for elastic modulus, mass density, thermal
+expansion and line/area force, declared in the file so importers resolve the
+material and load units without warnings. Only nodes attached to a member are
+written (an isolated node is not a valid structural point connection).</p>
+<p>The 2-D model is placed in 3-D space by domain, following the SAP2000 convention:
+a <strong>plane</strong> model lies in the global <strong>X–Z</strong> plane (Y = 0) and a <strong>plate</strong> model in
+the <strong>X–Y</strong> plane (Z = 0). On import the plane is detected from the geometry and the
+domain inferred (X–Z → plane, X–Y → plate).</p>
+<p>What is exchanged:</p>
+<table>
+<thead>
+<tr>
+<th>xdfem2D</th>
+<th>IFC (structural analysis)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td><code>IfcStructuralAnalysisModel</code></td>
+</tr>
+<tr>
+<td>Node</td>
+<td><code>IfcStructuralPointConnection</code></td>
+</tr>
+<tr>
+<td>Bar element</td>
+<td><code>IfcStructuralCurveMember</code> (+ <code>IfcProfileDef</code> for the section)</td>
+</tr>
+<tr>
+<td>Triangle / quad</td>
+<td><code>IfcStructuralSurfaceMember</code> (thickness carried)</td>
+</tr>
+<tr>
+<td>Material</td>
+<td><code>IfcMaterial</code> + <code>Pset_MaterialMechanical</code> (E, ν, density)</td>
+</tr>
+<tr>
+<td>Support</td>
+<td><code>IfcBoundaryNodeCondition</code> on the point connection</td>
+</tr>
+<tr>
+<td>Load case</td>
+<td><code>IfcStructuralLoadCase</code></td>
+</tr>
+<tr>
+<td>Nodal load</td>
+<td><code>IfcStructuralPointAction</code></td>
+</tr>
+<tr>
+<td>Bar distributed load</td>
+<td><code>IfcStructuralLinearAction</code></td>
+</tr>
+<tr>
+<td>Area (slab) pressure</td>
+<td><code>IfcStructuralPlanarAction</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Domain choice on import</p>
+<p>If the geometry does not identify a plane (for example a single line of nodes),
+the importer asks whether to read the file as a <strong>plane</strong> or a <strong>plate</strong> model,
+just like the SAP2000 import. A genuinely three-dimensional IFC model (nodes
+varying out of a single plane) cannot be imported as a 2-D model and is
+reported rather than silently flattened.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Best-effort exchange</p>
+<p>A trapezoidal bar load is exported at its mean intensity, and the FE mesh of a
+slab is exchanged as its surface members (re-meshed on import). Open the file in
+an IFC viewer and verify a simple case before relying on it.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Physical-model files</p>
+<p>Many BIM tools export only the <strong>physical</strong> model (<code>IfcBeam</code>, <code>IfcColumn</code>,
+<code>IfcSlab</code>, …) with no structural-analysis model. When you import such a file,
+xdfem2D offers to bring in the <strong>geometry only</strong> — beam/column centre-lines as
+drawing polylines and slab/wall outlines as polygon regions — with no supports,
+loads, materials or sections. It is a drafting aid to trace over, not an
+analysis import.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

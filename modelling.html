@@ -1,0 +1,1507 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+        <link rel="prev" href="interface.html">
+      
+      
+        <link rel="next" href="slabs-grillages.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Modelling the Structure - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modelling-the-structure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Modelling the Structure
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="modelling.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#materials-and-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materials and sections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#triangle-surface-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Triangle (surface) elements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quadrilateral-surface-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quadrilateral (surface) elements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geometry-objects-parametric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry objects (parametric)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supports
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Springs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Springs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unilateral-tension-compression-only-springs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unilateral (tension-/compression-only) springs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraints-multi-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints (multi-point)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fields
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editing-on-the-canvas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing on the canvas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transforms-and-bulk-edits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transforms and bulk edits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-and-meshing-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking and meshing the model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-grillages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Grillages (overview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Phasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="engine-api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building an App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="modelling-the-structure">Modelling the Structure<a class="headerlink" href="#modelling-the-structure" title="Permanent link">&para;</a></h1>
+<p>Build a model from the <strong>Geometry</strong> and <strong>Properties</strong> tabs, or directly on the
+canvas. The model must be <strong>unlocked</strong> to edit (toggle with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-l">L</kbd></span>); running an
+analysis locks it.</p>
+<h2 id="materials-and-sections">Materials and sections<a class="headerlink" href="#materials-and-sections" title="Permanent link">&para;</a></h2>
+<p>Define these first, on the <strong>Properties</strong> tab.</p>
+<ul>
+<li><strong>Material</strong> — elastic modulus <code>E</code> (kN/m²), unit weight <code>γ</code> (kN/m³), and thermal
+  expansion <code>α</code> (1/°C).</li>
+<li>
+<p><strong>Section</strong> — a cross-section linked to a material. A <strong>Shape</strong> field selects the
+  geometry and which dimensions are needed; the <strong>area</strong> and <strong>second moment of
+  area</strong> are derived automatically and shown as read-only labels:</p>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>Dimensions used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generic</td>
+<td><code>b × h</code> (or a steel-profile override)</td>
+</tr>
+<tr>
+<td>Rectangular</td>
+<td>width <code>b</code>, height <code>h</code></td>
+</tr>
+<tr>
+<td>Circular</td>
+<td>diameter <code>d</code></td>
+</tr>
+<tr>
+<td>Rectangular hollow</td>
+<td><code>b × h</code>, wall thickness <code>t</code></td>
+</tr>
+<tr>
+<td>Circular hollow</td>
+<td>diameter <code>d</code>, wall thickness <code>t</code></td>
+</tr>
+<tr>
+<td>I</td>
+<td>flange width <code>b</code>, total height <code>h</code>, flange <code>tf</code>, web <code>tw</code></td>
+</tr>
+<tr>
+<td>T</td>
+<td>flange width <code>b</code>, total height <code>h</code>, flange <code>tf</code>, web <code>tw</code></td>
+</tr>
+</tbody>
+</table>
+<p>A steel profile picked from the library still fills the area/inertia directly.
+The separate <strong>Type</strong> field (Concrete / Steel / Timber / Other) is for material
+/design classification and is independent of the shape.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Built-in <code>Rigid</code> and <code>Dummy</code></p>
+<p>Every model is seeded with two reserved entries — a material and a section —
+called <strong>Rigid</strong> (numerically very stiff, for near-rigid links) and <strong>Dummy</strong>
+(zero stiffness, for a member that must be otherwise restrained). They are
+opened read-only, cannot be renamed or deleted, and are shown at the <strong>bottom</strong>
+of the material and section lists.</p>
+</div>
+<h2 id="nodes">Nodes<a class="headerlink" href="#nodes" title="Permanent link">&para;</a></h2>
+<p>A node has an <code>(x, y)</code> position. Add nodes from the <strong>Nodes</strong> sub-tab, the
+<strong>Structure</strong> menu, or with the <strong>Add node</strong> tool: enable it and click on the canvas
+to place nodes; press <span class="keys"><kbd class="key-escape">Esc</kbd></span> to stop.</p>
+<p>Double-click a node on the canvas to edit its position, support, or spring.</p>
+<h2 id="elements">Elements<a class="headerlink" href="#elements" title="Permanent link">&para;</a></h2>
+<p>An element's role follows from <em>what it spans</em> and the model's <strong>domain</strong>: a
+line element is a <strong>Beam</strong> in a plane model and a <strong>Grid</strong> member in a plate
+model; an area element — a <strong>triangle</strong> or a <strong>quad</strong> — is a <strong>Panel</strong> in a
+plane model and a <strong>Slab</strong> in a plate model. The tabs, menus and section dialogs
+use these names, so the same primitives read correctly in either domain.</p>
+<p>A <strong>bar element</strong> connects two nodes and references a section. Add elements from the
+<strong>Beams / Grid</strong> sub-tab or with the <strong>Add element</strong> tool: enable it, click the start
+node, then the end node.</p>
+<p>Each element end can carry a <strong>moment release (hinge)</strong>, drawn as a small open circle
+near the node.</p>
+<h2 id="triangle-surface-elements">Triangle (surface) elements<a class="headerlink" href="#triangle-surface-elements" title="Permanent link">&para;</a></h2>
+<p>For membranes, walls and plates in plane stress or plane strain, xdfem2D uses
+<strong>triangular surface elements</strong>. A <strong>triangle section</strong> carries a <code>thickness</code>, a
+material, a plane-stress/plane-strain flag, and a <strong>formulation</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Formulation</th>
+<th>DOFs per node</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CST</strong> (constant-strain triangle)</td>
+<td>ux, uy</td>
+<td>Fast, robust; overly stiff in bending. The node's rotation is left free (auto-restrained) unless a bar also frames in.</td>
+</tr>
+<tr>
+<td><strong>Allman</strong></td>
+<td>ux, uy, θz</td>
+<td>Adds an in-plane <em>drilling</em> rotation, so it can transfer moment to a frame member and converges faster in bending.</td>
+</tr>
+<tr>
+<td><strong>ES-FEM</strong> (edge-based smoothed)</td>
+<td>ux, uy</td>
+<td>Smooths CST over edge domains — softer, more accurate in bending — without adding a DOF.</td>
+</tr>
+</tbody>
+</table>
+<p>Add triangles one by one (three node picks) on the <strong>Triangles</strong> sub-tab, or let
+a <a href="#geometry-objects-parametric">polygon geometry object</a> mesh itself
+automatically.</p>
+<h2 id="quadrilateral-surface-elements">Quadrilateral (surface) elements<a class="headerlink" href="#quadrilateral-surface-elements" title="Permanent link">&para;</a></h2>
+<p>A <strong>quad</strong> is the 4-node counterpart of the triangle, for the same walls and
+slabs. Its main advantage is on a <strong>regular, structured mesh</strong> (a rectangular
+slab or wall panel): a triangle split introduces a directional (diagonal) bias
+in the stress/moment field near supports and point loads — a checkerboard
+pattern — that a quad avoids. Prefer quads on regular grids; keep triangles for
+irregular or concave outlines (the quad mesher is structured-only).</p>
+<p>A <strong>quad section</strong> carries the same <code>thickness</code> / material / plane-strain
+fields as a triangle section, with its own <strong>formulation</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Formulation</th>
+<th>Domain</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>QM6</strong> (incompatible-modes Q4)</td>
+<td>plane (wall)</td>
+<td>The recommended membrane quad — four internal bubble DOFs, condensed out, fix the bending-lock that plain Q4 suffers.</td>
+</tr>
+<tr>
+<td><strong>Q4</strong> (bilinear)</td>
+<td>plane (wall)</td>
+<td>Reference/patch-test element only — locks in bending, not recommended as the default.</td>
+</tr>
+<tr>
+<td><strong>MITC4</strong> (Mindlin, shear-locking-free)</td>
+<td>plate (slab)</td>
+<td>The recommended slab quad — the 4-node analogue of MITC3.</td>
+</tr>
+<tr>
+<td><strong>DKT4</strong> (thin, Kirchhoff)</td>
+<td>plate (slab)</td>
+<td>Four DKT triangles condensed to a quad; thin-plate analogue of DKT.</td>
+</tr>
+</tbody>
+</table>
+<p>Add quads one by one (four node picks, <strong>i → j → k → l</strong> counter-clockwise) from
+<strong>Structure ▸ Triangles ▸ Add quad</strong>, or let a rectangle/polygon object mesh
+into quads (below). A triangle and a quad are the same modelling role, so they
+share one selection, one <strong>Manage area elements…</strong> manager, one bulk/individual
+editor, and the same result views — pick the shape per element or per surface.</p>
+<div class="admonition note">
+<p class="admonition-title">Panel sections</p>
+<p>In the GUI a <strong>Panel</strong> pairs a triangle section and a quad section under one
+name (one material/thickness choice), and the surface's <strong>Mesh as:
+Triangles / Quads</strong> selector decides which is used. Programmatically they are
+two sections (<code>tri_sections</code> / <code>quad_sections</code>) that may share a name.</p>
+</div>
+<h2 id="geometry-objects-parametric">Geometry objects (parametric)<a class="headerlink" href="#geometry-objects-parametric" title="Permanent link">&para;</a></h2>
+<p>Instead of placing every node and element by hand, you can define the structure
+with <strong>parametric geometry objects</strong> that the program discretises into concrete
+nodes and elements <strong>at solve time</strong>. The editable model is left untouched; the
+analysis runs on the compiled mesh.</p>
+<table>
+<thead>
+<tr>
+<th>Object</th>
+<th>Becomes</th>
+<th>Defined by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Segment</strong></td>
+<td>bar elements</td>
+<td>two end points</td>
+</tr>
+<tr>
+<td><strong>Arc</strong></td>
+<td>bar elements (straight chords)</td>
+<td>centre + radius + angles, or three points</td>
+</tr>
+<tr>
+<td><strong>Multisegment</strong></td>
+<td>bar elements</td>
+<td>a chain of vertices, open or closed</td>
+</tr>
+<tr>
+<td><strong>Rectangle</strong></td>
+<td>triangle <strong>or quad</strong> mesh</td>
+<td>two opposite corners</td>
+</tr>
+<tr>
+<td><strong>Polygon</strong></td>
+<td>triangle <strong>or quad</strong> mesh</td>
+<td>a closed polygon boundary</td>
+</tr>
+</tbody>
+</table>
+<p>Polygons and rectangles are meshed by an automatic Delaunay mesher (the built-in
+one, or the higher-quality <a href="https://github.com/drufat/triangle">Triangle</a>
+library if installed) into <strong>triangles</strong>, or — on a convex quad outline with
+<strong>Mesh as: Quads</strong> and a quad section — by the structured mesher into <strong>quads</strong>
+(falling back to triangles per cell where a quad would be poorly shaped). When
+the model is analysed, objects <strong>auto-resolve T-junctions and crossings</strong>: a
+node sitting on another object's span, or two objects that cross, are welded so
+the parts act together.</p>
+<p>Create objects from <strong>Structure ▸ Objects</strong> (segment / arc / multisegment /
+rectangle / polygon). To turn an object into ordinary elements you can edit
+individually, use <strong>Edit ▸ Curve to bar</strong> or <strong>Edit ▸ Surface to mesh</strong> (which
+bakes the surface into its triangles and/or quads).</p>
+<div class="admonition tip">
+<p class="admonition-title">Propagation along an edge</p>
+<p>Supports and springs assigned to <strong>both</strong> corner nodes of a meshed edge
+propagate to the intermediate nodes the mesher creates along that edge. This
+is how you fix a whole wall base with two assignments instead of forty.</p>
+</div>
+<h2 id="supports">Supports<a class="headerlink" href="#supports" title="Permanent link">&para;</a></h2>
+<p>Supports restrain node degrees of freedom — <code>ux</code>, <code>uy</code>, <code>θz</code> in a plane model,
+<code>w</code>, <code>θx</code>, <code>θy</code> in a plate model (see <a href="domains.html">Domains</a>). Each restraint
+combination has a <strong>canonical name</strong>, so the same boundary condition is called
+the same thing whether it was drawn or written by script, and the canvas draws an
+expressive glyph per family. The name depends on the domain:</p>
+<table>
+<thead>
+<tr>
+<th>Restraints</th>
+<th>Plane name</th>
+<th>Plate name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all three</td>
+<td><code>FIXED</code></td>
+<td><code>CLAMPED</code></td>
+</tr>
+<tr>
+<td>two translations / <code>w</code> only</td>
+<td><code>PIN</code></td>
+<td><code>SIMPLE</code></td>
+</tr>
+<tr>
+<td>one only</td>
+<td><code>ROLLER-X</code> / <code>ROLLER-Y</code></td>
+<td><code>SYM-X</code> / <code>SYM-Y</code></td>
+</tr>
+<tr>
+<td>translation + one rotation</td>
+<td><code>GUIDED-X</code> / <code>GUIDED-Y</code></td>
+<td><code>CLAMP-X</code> / <code>CLAMP-Y</code></td>
+</tr>
+<tr>
+<td>rotation(s), free to move</td>
+<td><code>BLOCK</code></td>
+<td><code>BLOCK</code></td>
+</tr>
+</tbody>
+</table>
+<p>In the plate domain the glyphs read as slab edges: a simply-supported knife-edge
+(<code>SIMPLE</code>), a hatched clamp (<code>CLAMPED</code>), a supported edge with one rotation held
+(<code>CLAMP-X/Y</code>), and a dash-dot <strong>symmetry</strong> line (<code>SYM-X/Y</code>) — the last lets you
+model a whole slab from one wedge. The quick-preset buttons in the support dialog
+offer the domain's common cases (plane: PIN / ROLLER-X / FIXED; plate: SIMPLE /
+CLAMPED / SYM-X).</p>
+<p>Assign supports on the <strong>Supports</strong> sub-tab or via the node editor. The on-canvas
+legend names each colour with its canonical family (the <code>-X</code>/<code>-Y</code> variants share
+one entry).</p>
+<h2 id="springs">Springs<a class="headerlink" href="#springs" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Node springs</strong> — translational <code>Kx</code>, <code>Ky</code> and rotational <code>Kt</code> at a node.</li>
+<li><strong>Element springs</strong> — a Winkler elastic foundation along an element, per unit length.</li>
+</ul>
+<p>A structure may be supported by springs alone (no classic supports), as long as
+the springs restrain enough degrees of freedom to prevent rigid-body motion.</p>
+<h3 id="unilateral-tension-compression-only-springs">Unilateral (tension-/compression-only) springs<a class="headerlink" href="#unilateral-tension-compression-only-springs" title="Permanent link">&para;</a></h3>
+<p>Each <strong>translational</strong> component of a node or element spring has a behaviour mode:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Acts when…</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>both</strong> (default)</td>
+<td>always — resists in both directions</td>
+<td>ordinary elastic spring</td>
+</tr>
+<tr>
+<td><strong>compression</strong></td>
+<td>the spring is compressed (node moves in the −axis direction)</td>
+<td>soil under a footing, gap/contact support</td>
+</tr>
+<tr>
+<td><strong>tension</strong></td>
+<td>the spring is stretched (node moves in the +axis direction)</td>
+<td>tie / anchor that only pulls</td>
+</tr>
+</tbody>
+</table>
+<p>Set the mode per component (<code>Kx</code>/<code>Ky</code> for global axes, axial/transverse for an
+element spring in <em>local</em> axes) in the spring dialog, the node/element editor, or
+the bulk-edit dialog. Rotational stiffness <code>Kt</code> is always bilateral.</p>
+<div class="admonition important">
+<p class="admonition-title">Only NonLinear cases honour the mode</p>
+<p>Tension-/compression-only behaviour is applied <strong>only by a
+<a href="analysis.html#nonlinear-cases-unilateral-springs">NonLinear analysis case</a></strong>.
+In Linear (and every other) case the spring acts bilaterally, exactly as
+before. So model the unilateral effect by running a NonLinear case.</p>
+</div>
+<p>Sign convention: for a node spring the component direction is the global axis
+(or, for an element spring in local axes, the element's axial / transverse
+direction). "tension" is active when the displacement projected on that direction
+is positive; "compression" when it is negative. Element-spring activation is
+evaluated <strong>per end-node</strong>, consistent with the lumped foundation model.</p>
+<div class="admonition tip">
+<p class="admonition-title">Modelling a footing on soil (uplift)</p>
+<p>Give the base nodes/elements <strong>compression-only</strong> springs and <strong>remove any
+rigid vertical supports</strong> at those nodes (a rigid support in parallel with a
+spring fixes the DOF and makes the spring inert). Keep a minimal horizontal
+restraint to prevent rigid-body motion, then solve with a NonLinear case: the
+springs that go into tension deactivate and that part of the footing lifts.</p>
+</div>
+<h2 id="constraints-multi-point">Constraints (multi-point)<a class="headerlink" href="#constraints-multi-point" title="Permanent link">&para;</a></h2>
+<p>Supports and springs act on <strong>one</strong> degree of freedom at a time. A <strong>constraint</strong>
+instead couples <strong>several</strong> DOFs — of different nodes — through a linear equation.
+Three kinds are available, all built from the same underlying form
+<code>Σ cᵢ·dofᵢ = value</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rigid link</strong></td>
+<td>A master node and one or more slave nodes move as one rigid body: each slave follows the master's two translations and rotation (<code>ux_s = ux_m − Δy·θ_m</code>, <code>uy_s = uy_m + Δx·θ_m</code>, <code>θ_s = θ_m</code>). Use it for rigid offsets and eccentric connections.</td>
+</tr>
+<tr>
+<td><strong>Equal DOF</strong></td>
+<td>A set of nodes shares the same value of one or more components (<code>ux</code>, <code>uy</code>, <code>θz</code>) — e.g. tying several nodes to the same horizontal displacement.</td>
+</tr>
+<tr>
+<td><strong>Equation (advanced)</strong></td>
+<td>The raw linear form: a list of <code>(node, component, coefficient)</code> terms and a right-hand-side value.</td>
+</tr>
+</tbody>
+</table>
+<p>Create constraints on the <strong>Constraints</strong> sub-tab (Geometry), or from
+<strong>Structure ▸ Constraints ▸ Add constraint</strong> (also under <strong>Structure ▸ Nodes</strong>).
+The <em>Add constraint</em> tool lets you click the nodes to tie on the canvas — each
+picked node is highlighted — and finishes when you <strong>double-click the last node</strong>,
+which opens the editor pre-filled with those nodes. Press <strong>Esc</strong> to leave the
+mode. The dialog previews the resulting equation(s) before you save, and gives a
+default name per kind (<code>Rigid1</code>, <code>Equal1</code>, <code>Constraint1</code>, …).</p>
+<div class="admonition note">
+<p class="admonition-title">How constraints are imposed (penalty)</p>
+<p>Constraints are enforced by <strong>penalty</strong>: each equation adds a very stiff term
+to the stiffness matrix. This is robust and works across all analysis types
+(Linear, NonLinear, P-Delta, Modal, Spectrum), but it is <em>approximate</em> —
+results satisfy the constraint to about 1 part in 10⁶, with a tiny residual
+reaction. An exact master–slave formulation is planned for a future version.</p>
+</div>
+<p>The <strong>model check</strong> flags common mistakes: a constraint referencing a missing
+node, a rigid link whose master is also a slave, two rigid links forming a cycle,
+a tied DOF that a support already restrains, and a constraint on <code>θz</code> at a node
+with no rotational DOF (CST-only).</p>
+<p>See <a href="results.html#constraint-forces">Results ▸ Constraint forces</a> for the force
+each constraint transmits.</p>
+<h2 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h2>
+<p>A <strong>field</strong> is a named spatial expression — a formula in <code>x</code> and <code>y</code> — that can
+drive a value which varies across the model instead of a single constant. The
+main use is a <strong>Winkler foundation modulus that changes along a member</strong>: assign a
+field as an element spring's stiffness and the value is evaluated at each
+generated bar's midpoint. Define fields in <strong>Structure ▸ Fields</strong>, and preview one
+over the model with the <strong>Fields</strong> view mode.</p>
+<h2 id="editing-on-the-canvas">Editing on the canvas<a class="headerlink" href="#editing-on-the-canvas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Click to select; drag a rectangle for a window selection (left-to-right encloses,
+  right-to-left crosses).</li>
+<li><strong>Selection</strong> menu / panel: Select all, Invert, Clear, Edit nodes, Edit elements,
+  Delete.</li>
+<li>Cut/Copy/Paste (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-x">X</kbd></span> / <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> / <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-v">V</kbd></span>) duplicate a selection with an
+  offset. Undo/Redo (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-z">Z</kbd></span> / <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-y">Y</kbd></span>) cover all edits.</li>
+</ul>
+<h2 id="transforms-and-bulk-edits">Transforms and bulk edits<a class="headerlink" href="#transforms-and-bulk-edits" title="Permanent link">&para;</a></h2>
+<p>The <strong>Edit</strong> menu applies geometric transforms to the current selection:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Move</strong></td>
+<td>Translate by a vector</td>
+</tr>
+<tr>
+<td><strong>Array</strong></td>
+<td>Replicate along a grid (copies at a spacing, a count in each direction)</td>
+</tr>
+<tr>
+<td><strong>Rotate</strong></td>
+<td>Rotate about a point</td>
+</tr>
+<tr>
+<td><strong>Scale</strong></td>
+<td>Scale about a point</td>
+</tr>
+<tr>
+<td><strong>Mirror</strong></td>
+<td>Reflect across an axis</td>
+</tr>
+</tbody>
+</table>
+<p>Two commands <strong>bake</strong> parametric objects into ordinary, individually-editable
+elements: <strong>Curve to bar</strong> (segment / arc / multisegment → bars) and <strong>Area to triangle</strong>
+(rectangle / polygon → triangles); the object is then removed.</p>
+<p>To change many entities at once, select them and use <strong>Selection → Edit selected
+nodes / bars / triangles…</strong> for a bulk editor, or <strong>Divide bars…</strong> to subdivide
+selected members into several elements.</p>
+<h2 id="checking-and-meshing-the-model">Checking and meshing the model<a class="headerlink" href="#checking-and-meshing-the-model" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Structure → Model check</strong> (also in the Analysis menu) reports topology issues
+  that are <em>not</em> auto-fixed: isolated nodes, coincident nodes, unconnected
+  T-junctions and crossings, duplicate bars, masses on restrained DOFs, and the
+  <a href="#constraints-multi-point">constraint checks</a> above.</li>
+<li><strong>Analysis → Generate mesh</strong> (<span class="keys"><kbd class="key-f6">F6</kbd></span>) compiles the geometry objects into the
+  concrete mesh the solver uses, so you can inspect it before running — it is
+  shown via the <strong>Mesh</strong> overlay checkbox on the Structure view (Display panel ▸
+  Model tab), which draws the generated mesh over the geometry objects.</li>
+<li><strong>Analysis → Model info</strong> shows a summary of the model's size and contents.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

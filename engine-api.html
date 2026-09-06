@@ -1,0 +1,2226 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+        <link rel="prev" href="file-formats.html">
+      
+      
+        <link rel="next" href="shortcuts.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Engine Reference (API & JSON) - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#engine-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Engine Reference (API & JSON)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modelling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-grillages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Grillages (overview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Phasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="engine-api.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-solve-and-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model, solve and I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#materials-and-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materials and sections
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Materials and sections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#materials-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materials — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#materials-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materials — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sections-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sections — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sections-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sections — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes and elements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nodes and elements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-elements-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes and elements — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodes-and-elements-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes and elements — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-objects-parametric-meshed-at-solve-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry objects (parametric; meshed at solve time)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Geometry objects (parametric; meshed at solve time)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geometry-objects-create_area-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry objects — create_area (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry-objects-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geometry objects — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supports-and-springs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supports and springs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Supports and springs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supports-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supports — convenience
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supports-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supports — fundamental
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supports-on-an-edge-support_edge-and-pin_edge-fix_edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supports on an edge — support_edge (and pin_edge / fix_edge / …)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#springs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Springs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-cases-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load cases — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-cases-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load cases — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bar-and-area-loads-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bar and area loads — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bar-and-area-loads-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bar and area loads — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-and-edge-loads-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node and edge loads — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-and-edge-loads-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node and edge loads — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-weight-temperature-and-settlement-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-weight, temperature and settlement — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-weight-temperature-and-settlement-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-weight, temperature and settlement — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-combinations-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis, combinations, dynamics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis, combinations, dynamics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analysis-cases-create_-convenience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis cases — create_* (convenience)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-cases-add_-fundamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analysis cases — add_* (fundamental)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinations-and-dynamics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinations and dynamics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraints-and-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints and fields
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constraints and fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removal-facade-delete_-free_edge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removal facade — delete_* / free_edge
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-cuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section cuts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplified-api-the-simple-facade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simplified API (the "simple" facade)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compatibility-appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compatibility appendix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#member-buckling-steel-ec3-timber-ec5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Member buckling (steel EC3 / timber EC5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-reports-calculation-trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design reports (calculation trace)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON data structure
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JSON data structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top level
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-the-slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes on the slots
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        See also
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="building.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building an App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="engine-reference">Engine Reference<a class="headerlink" href="#engine-reference" title="Permanent link">&para;</a></h1>
+<p>The calculation engine (<code>xdfem2d</code>) is usable on its own, without the interface.
+This page documents what it exposes: the <strong>Python API</strong> (a) and the <strong>JSON data
+structure</strong> (b) that <code>.x2d</code>/<code>.json</code> files store.</p>
+<p>Units are metres, kN, kN·m and kN/m². Angles are in degrees where an angle is
+named. A model has a fixed <strong>domain</strong> — <code>plane</code> (frames/walls: ux, uy, θz) or
+<code>plate</code> (slabs/grillages: w, θx, θy); the three DOF slots keep the same
+positions in both, only their meaning changes.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">xdfem2d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Structure2D</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">Structure2D</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="s2">"plane"</span><span class="p">)</span>   <span class="c1"># or "plate"</span>
+</code></pre></div>
+<h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#python-api">Python API</a></li>
+<li><a href="#model-solve-and-io">Model, solve and I/O</a></li>
+<li><a href="#materials-and-sections">Materials and sections</a></li>
+<li><a href="#nodes-and-elements">Nodes and elements</a></li>
+<li><a href="#geometry-objects-parametric-meshed-at-solve-time">Geometry objects (parametric; meshed at solve time)</a></li>
+<li><a href="#supports-and-springs">Supports and springs</a></li>
+<li><a href="#loads">Loads</a></li>
+<li><a href="#analysis-combinations-dynamics">Analysis, combinations, dynamics</a></li>
+<li><a href="#constraints-and-fields">Constraints and fields</a></li>
+<li><a href="#section-cuts">Section cuts</a></li>
+<li><a href="#simplified-api-the-simple-facade">Simplified API (the "simple" facade)</a></li>
+<li><a href="#compatibility-appendix">Compatibility appendix</a></li>
+<li><a href="#member-buckling-steel-ec3--timber-ec5">Member buckling (steel EC3 / timber EC5)</a></li>
+<li><a href="#design-reports-calculation-trace">Design reports (calculation trace)</a></li>
+<li><a href="#json-data-structure">JSON data structure</a></li>
+<li><a href="#top-level">Top level</a></li>
+<li><a href="#notes-on-the-slots">Notes on the slots</a></li>
+<li><a href="#see-also">See also</a></li>
+</ul>
+<h2 id="python-api">Python API<a class="headerlink" href="#python-api" title="Permanent link">&para;</a></h2>
+<p>Everything below is a method of <code>Structure2D</code>, <strong>except</strong> "Section cuts",
+"Member buckling" and "Design reports", which live as plain functions in
+their own Qt-free modules (<code>xdfem2d.cuts</code>, <code>xdfem2d.steel_members</code>,
+<code>xdfem2d.design_report</code>) — each of those sections says so again where it
+starts. Signatures omit <code>self</code>; <code>… -&gt; Type</code> is the object returned. Loads
+take a positive value in the axis direction (gravity is negative). In the
+plate domain the aliases <code>fz/mx/my</code>, <code>w/tx/ty</code>, <code>kz/ktx/kty</code> fill the same
+slots as <code>fx/fy/mz</code>, <code>ux/uy/tz</code>, <code>kx/ky/kt</code>.</p>
+<p>The sections below follow the order in which a model is typically built:
+model + solve, materials/sections, elements, geometry, supports, loads,
+analysis, constraints — then the simplified facade and the design layer
+(buckling, reports).</p>
+<blockquote>
+<p><strong>The <code>create_*</code> / <code>add_*</code> convention, used throughout this document:</strong>
+most things can be built two ways — a <strong><code>create_*</code> shortcut</strong> (a
+magnitude/name, sane defaults, get-or-create where that makes sense; prefer
+this) or the <strong>generic <code>add_*</code> call it forwards to</strong> (every field spelled
+out; reach for it only when a shortcut cannot express what you need — a
+local-frame load with both components, a trapezoidal axial load, and
+similar). Each subsection below lists the <code>create_*</code> layer directly above
+the <code>add_*</code> layer it delegates to, so the two stay next to each other
+instead of the convention being re-explained per subsection.</p>
+<p>A few terms are used interchangeably below for the same thing: <strong>"geometry
+object"</strong>, <strong>"surface object"</strong> and <strong>"region"</strong> all mean an item in
+<code>geometry_objects</code> (a <code>GeoRectangle</code>, <code>GeoPolygon</code>, <code>GeoSegment</code>, …,
+meshed into bars/triangles/quads at solve time) — the canonical name in
+code and in the JSON structure is <em>geometry object</em>.</p>
+</blockquote>
+<h3 id="model-solve-and-io">Model, solve and I/O<a class="headerlink" href="#model-solve-and-io" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Structure2D(domain="plane")
+calculate() -&gt; dict                         # assemble + solve; returns results
+check_references()                          # raise on dangling/invalid refs
+domain_problems() -&gt; list[str]              # features unsupported by the domain
+save(path)                                  # write .x2d / .json
+load(path) -&gt; Structure2D                   # (classmethod-style) read a file
+</code></pre></div>
+<h3 id="materials-and-sections">Materials and sections<a class="headerlink" href="#materials-and-sections" title="Permanent link">&para;</a></h3>
+<p><code>create_*</code> (convenience) directly above the <code>add_*</code> (fundamental) it
+forwards to — see the convention note above.</p>
+<h4 id="materials-create_-convenience">Materials — create_* (convenience)<a class="headerlink" href="#materials-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_material(...)                                    # == add_material, pure alias
+create_rc_material(concrete="C30/37", steel="B500B",
+                   name=None) -&gt; Material                # get-or-create, deduped by name
+create_steel_material(steel="S275", name=None) -&gt; Material
+create_timber_material(timber="C24", name=None) -&gt; Material
+</code></pre></div>
+<p><code>name=None</code> derives the name from the class string (e.g. <code>"C30/37"</code>).
+Get-or-create: two calls with the same class dedupe to one <code>Material</code>.</p>
+<h4 id="materials-add_-fundamental">Materials — add_* (fundamental)<a class="headerlink" href="#materials-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_material(name, elastic_modulus, unit_weight, alpha=1e-5, unit_mass=None,
+             material_type=None, design=None, poisson=0.2) -&gt; Material
+add_concrete_material(material_name, concrete_class, steel_class,
+                      gamma_c=1.5, gamma_s=1.15, alpha_cc=1.0) -&gt; ConcreteMaterial
+</code></pre></div>
+<p><code>add_concrete_material</code> links EC2 design metadata onto an already-existing
+material by name — a different job from <code>create_rc_material</code>, which makes
+the physical material itself.</p>
+<h4 id="sections-create_-convenience">Sections — create_* (convenience)<a class="headerlink" href="#sections-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_bar_section(name, material_name, b, h, **kw) -&gt; Section
+    # material_name resolves an unrecognised Eurocode class automatically first
+create_area_section(name, material_name, thickness=0.2, **kw) -&gt; TriSection
+    # domain-aware pair: plane -&gt; CST (tri) / QM6 (quad), plate -&gt; MITC3 (tri) / MITC4 (quad)
+    # add_area_section under the hood: a same-named TriSection AND QuadSection,
+    # so create_area_element resolves whichever shape it ends up building
+
+create_rc_section(name, b, h, concrete="C30/37", steel="B500B",
+                  cover=0.045) -&gt; Section                # material + section, one call
+create_steel_section(name, profile, grade="S275") -&gt; Section   # profile e.g. "IPE300"
+create_timber_bar_section(name, b, h, timber="C24",
+                          service_class="SC1") -&gt; Section       # no add_* predecessor
+</code></pre></div>
+<p><code>create_rc_section</code>/<code>create_steel_section</code>/<code>create_timber_bar_section</code> are
+the canonical names for a material-plus-section shortcut per family;
+<code>add_rc_section</code>/<code>add_steel_section</code> are kept working as aliases (see the
+compatibility appendix).</p>
+<h4 id="sections-add_-fundamental">Sections — add_* (fundamental)<a class="headerlink" href="#sections-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_section(name, material_name, b, h, area_override=None, inertia_override=None,
+            profile_name=None, section_type=None, rc_cover=0.045, rc_alpha_s=90.0,
+            rc_bar_phi=16.0, shape=None, tw=0.0, tf=0.0, rc_shear_min=True,
+            torsion_override=None) -&gt; Section          # beam / grid section (J)
+add_tri_section(name, material_name, thickness=0.1, plane_strain=False,
+                formulation="CST", rc_cover=0.045, rc_alpha_s=90.0,
+                rc_bar_phi=16.0, rc_shear_min=True) -&gt; TriSection   # panel
+add_plate_section(name, material_name, thickness=0.2, formulation="MITC3", **kw) -&gt; TriSection  # slab
+add_quad_section(name, material_name, thickness=0.1, plane_strain=False,
+                 formulation="MITC4", **kw) -&gt; QuadSection
+    # 4-node area section. formulation: "Q4"/"QM6" (plane wall) | "MITC4"/"DKT4" (plate slab)
+add_area_section(name, material_name, thickness=0.1, plane_strain=False,
+                 formulation="CST", quad_formulation="QM6", **kw) -&gt; TriSection
+    # add_tri_section + add_quad_section under one name; returns the TriSection,
+    # the QuadSection is self.quad_sections[name]. A bad quad_formulation rolls
+    # the tri half back rather than leaving an unpaired section.
+</code></pre></div>
+<p>The quad section fields mirror the triangle section's; a wall uses <code>"QM6"</code>
+(recommended) or <code>"Q4"</code>, a slab uses <code>"MITC4"</code> (recommended) or <code>"DKT4"</code>. Edge,
+area (pz), temperature and Winkler-spring loads all have quad targets, via the
+same <code>add_area_load</code> / <code>create_temperature</code> / <code>add_area_spring</code> dispatchers (the
+id resolves to the triangle or quad list) plus <code>add_quad_edge_load</code> /
+<code>add_quad_temperature_load</code>.</p>
+<p><code>add_tri_section</code>/<code>add_quad_section</code> stay the exact single-shape calls they
+always were — every existing caller that already knows its shape keeps using
+them unchanged. <code>add_area_section</code> is a newer, additional entry point for a
+caller (the <code>create_*</code> layer, or a GUI dialog) that wants "a section under
+this name, whichever shape ends up used" without picking tri or quad up
+front; internally the registries (<code>self.tri_sections</code>, <code>self.quad_sections</code>)
+stay separate, paired only at this call.</p>
+<p>Every field spelled out, <code>material_name</code> must already exist — what every
+<code>create_*</code> call above forwards to.</p>
+<h3 id="nodes-and-elements">Nodes and elements<a class="headerlink" href="#nodes-and-elements" title="Permanent link">&para;</a></h3>
+<h4 id="nodes-and-elements-create_-convenience">Nodes and elements — create_* (convenience)<a class="headerlink" href="#nodes-and-elements-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_node(x, y, id=None) -&gt; Node                       # id auto-assigned: "1", "2", ...
+create_node_list(outline, id_prefix=None) -&gt; list[Node]   # flexible outline, see Geometry objects
+create_bar_element(section, node_i, node_j, id=None, **kw) -&gt; BarElement
+    # id auto: "B1", "B2", ...; section first, then the nodes it applies to;
+    # node_i/node_j: id or Node; section: name or Section
+create_area_element(section, node_i, node_j, node_k, node_l=None, id=None, **kw)
+        -&gt; TriElement | QuadElement
+    # id auto: "T1", "T2", ... (triangle) or "Q1", "Q2", ... (quad); section first;
+    # node_l is the only thing that decides triangle (3 nodes) vs quad (4 nodes) —
+    # one call covers both instead of picking add_tri_element/add_quad_element
+    # up front
+</code></pre></div>
+<p><code>id</code> optional (auto-assigned), and node/section arguments accept the object
+returned by another <code>create_*</code> call as well as a raw id/name. Section comes
+first in both calls — the target it belongs to precedes the nodes it applies
+to, one order across the whole <code>create_*</code> element layer:</p>
+<div class="highlight"><pre><span></span><code><span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">create_node_list</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sec</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s2">"B30x60"</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+<h4 id="nodes-and-elements-add_-fundamental">Nodes and elements — add_* (fundamental)<a class="headerlink" href="#nodes-and-elements-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_node(id, x, y) -&gt; Node
+add_bar_element(id, node_i, node_j, section_name, hinge_i=False, hinge_j=False,
+                rc_design=False, rc_cover=0.025, rc_cotg_theta=1.0,
+                rc_alpha_s=90.0) -&gt; BarElement          # Beam (plane) / Grid (plate)
+add_tri_element(id, node_i, node_j, node_k, section_name) -&gt; TriElement  # Panel/Slab
+add_quad_element(id, node_i, node_j, node_k, node_l, section_name) -&gt; QuadElement
+    # 4-node area element; nodes counter-clockwise; Panel/Slab (see add_quad_section)
+add_area_element(id, node_i, node_j, node_k, node_l=None, *, section_name)
+        -&gt; TriElement | QuadElement
+    # 3 nodes -&gt; add_tri_element, 4 (node_l given) -&gt; add_quad_element;
+    # section_name is keyword-only (its slot would otherwise shift depending
+    # on which branch runs)
+</code></pre></div>
+<p><strong>Element ids are unique across kinds</strong> — a bar, a triangle and a quad may
+not share the same id. A quad is validated at creation (4 distinct nodes, counter-clockwise
+winding, convex, positive Jacobian); a bad quad raises rather than being
+silently repaired.</p>
+<p><code>add_tri_element</code>/<code>add_quad_element</code> stay the exact single-shape calls they
+always were — the ~200 existing call sites that already know their shape
+keep using them unchanged. <code>add_area_element</code> is a newer, additional entry
+point for a caller that does not know the shape up front (the <code>create_*</code>
+layer, or an LLM); it dispatches to one of the other two rather than
+replacing them. <strong><code>section_name</code> is keyword-only</strong> on <code>add_area_element</code>
+specifically because its positional slot would otherwise shift depending on
+which branch runs.</p>
+<h3 id="geometry-objects-parametric-meshed-at-solve-time">Geometry objects (parametric; meshed at solve time)<a class="headerlink" href="#geometry-objects-parametric-meshed-at-solve-time" title="Permanent link">&para;</a></h3>
+<h4 id="geometry-objects-create_area-convenience">Geometry objects — create_area (convenience)<a class="headerlink" href="#geometry-objects-create_area-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_area(id, outline, thickness, concrete="C30/37", steel="B500B",
+           cover=0.045, target_size=0.5)                           # 2 pts → rectangle, ≥3 → polygon
+</code></pre></div>
+<p>Region + RC section in one call; the domain picks slab (plate) or wall
+(plane). <code>add_panel</code> is kept working as an alias (see the compatibility
+appendix). Keep the return: <code>.node_ids</code> are the real corner nodes
+(rectangle, CCW order: bottom-left, bottom-right, top-right, top-left) — for
+example to put <code>create_node_load</code> on one specific corner. Named edges
+(<code>support_edge</code>, "### Supports and springs") work on this outline as long
+as the 4 points are given in that same order.</p>
+<p><code>outline</code> (and any point list — including <code>create_node_list</code> above) is
+flexible: <code>[(x,y),…]</code> pairs, a flat <code>[x1,y1,x2,y2,…]</code>, <code>{"x":…,"y":…}</code>
+dicts, or two columns <code>[[x1,x2,…],[y1,y2,…]]</code> (for 3+ points). Exactly 2
+points build a rectangle; 3 or more build a polygon — including a rectangle
+spelled out as its 4 corners.</p>
+<h4 id="geometry-objects-add_-fundamental">Geometry objects — add_* (fundamental)<a class="headerlink" href="#geometry-objects-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_geo_segment(id, x1, y1, x2, y2, section_name="", divisions=1,
+                max_chord=0.0) -&gt; GeoSegment
+add_geo_arc(id, cx, cy, radius, start_angle, end_angle, section_name="",
+            divisions=8, max_chord=0.0) -&gt; GeoArc
+add_geo_arc_3pts(id, p1, pm, p2, section_name="", divisions=8, max_chord=0.0)
+add_geo_multisegment(id, vertices, closed=False, section_name="", divisions=1,
+                     max_chord=0.0) -&gt; GeoMultisegment
+add_geo_rectangle(id, corner_a, corner_c, section_name="",
+                  target_size=0.5, prefer_quad=True) -&gt; GeoRectangle
+add_geo_polygon(id, vertices, section_name="", target_size=0.5,
+                prefer_quad=True) -&gt; GeoPolygon
+remove_geo_object(id)
+</code></pre></div>
+<p>The old names <code>add_geo_line</code> / <code>add_geo_polyline</code> / <code>add_geo_surface</code> remain as
+aliases of <code>add_geo_segment</code> / <code>add_geo_multisegment</code> / <code>add_geo_polygon</code>. For
+a rectangle/polygon the section argument is <code>section_name</code> (the old keyword
+<code>tri_section_name=</code> still works); the stored attribute and the <code>.x2d</code> field
+keep the name <code>tri_section_name</code>.</p>
+<h3 id="supports-and-springs">Supports and springs<a class="headerlink" href="#supports-and-springs" title="Permanent link">&para;</a></h3>
+<p><code>create_*</code>/<code>pin</code>/<code>fix</code>/<code>roller</code>/<code>symm</code> (convenience) directly above the
+<code>add_*</code> (fundamental) each forwards to — see the convention note above.</p>
+<h4 id="supports-convenience">Supports — convenience<a class="headerlink" href="#supports-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>pin(nodes)                   # plane: ux,uy   · plate: w
+fix(nodes)                   # plane: ux,uy,θz · plate: w,θx,θy
+roller(nodes, free="x")      # plane only — frees one translation
+symm(nodes, axis="x")        # plate only — symmetry line (w free, θ about axis fixed)
+create_support(nodes, ux=False, uy=False, tz=False, w=None, tx=None, ty=None,
+               name=None)
+</code></pre></div>
+<p><code>nodes</code>: a single id/Node, or a list of either (same list-or-single rule as
+loads). <code>pin</code>/<code>fix</code>/<code>roller</code>/<code>symm</code> cover the common cases with an
+auto-assigned canonical support name (<code>"PIN"</code>, <code>"FIXED"</code>, <code>"ROLLER-X"</code>, <code>"SYM-X"</code>, …);
+<code>create_support</code> is the generic one-call create-and-assign underneath them.</p>
+<p><strong><code>True</code> fixes that DOF, <code>False</code> frees it — every flag defaults to <code>False</code>,
+so <code>create_support(nodes)</code> on its own restrains nothing.</strong> A model that
+means to fully fix a node has to say <code>ux=True, uy=True, tz=True</code> (or just
+call <code>fix(nodes)</code>); writing all three explicitly as <code>False</code> "to be clear"
+restrains nothing and turns the structure into a mechanism — a real mistake
+a script has made. <code>w</code>/<code>tx</code>/<code>ty</code> are the plate-domain aliases of the same
+three (<code>ux</code>,<code>uy</code>,<code>tz</code>) slots.</p>
+<h4 id="supports-fundamental">Supports — fundamental<a class="headerlink" href="#supports-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_support(name, ux=False, uy=False, tz=False, w=None, tx=None, ty=None) -&gt; Support
+assign_support(node_id, support_name) -&gt; SupportAssignment
+</code></pre></div>
+<p>The two calls every convenience wrapper above forwards to: create the named
+restraint, then assign it to a node. Reach for these directly to reuse one
+named <code>Support</code> across many <code>assign_support</code> calls without re-specifying its
+flags each time.</p>
+<h4 id="supports-on-an-edge-support_edge-and-pin_edge-fix_edge">Supports on an edge — support_edge (and pin_edge / fix_edge / …)<a class="headerlink" href="#supports-on-an-edge-support_edge-and-pin_edge-fix_edge" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>support_edge(object_id, edge, kind="pin")            # the general call
+pin_edge(object_id, edge)                 # = support_edge(…, 'pin')   plate SIMPLE · plane PIN
+fix_edge(object_id, edge)                 # = support_edge(…, 'fix')   plate CLAMPED · plane FIXED
+roller_edge(object_id, edge, free="x")    # = support_edge(…, 'roller-x'/'roller-y')  plane only
+symm_edge(object_id, edge, axis="x")      # = support_edge(…, 'symm-x'/'symm-y')      plate only
+support_object_edge(object_id, edge, support_name)    # any named support / 'free'
+free_edge(object_id, edge)                            # remove — clear that edge
+</code></pre></div>
+<p><code>support_edge</code> is the general call; <code>pin_edge</code>/<code>fix_edge</code>/<code>roller_edge</code>/
+<code>symm_edge</code> are it with a fixed <code>kind</code>. <code>edge</code>: <code>'all'</code> |
+<code>'bottom'/'right'/'top'/'left'</code> | an integer index (vertex <code>i</code> → <code>i+1</code>,
+wrapping) — the same vocabulary <code>create_edge_load</code> (see "### Loads") uses.
+<code>kind</code>: <code>pin</code> | <code>fix</code> | <code>symm-x</code> | <code>symm-y</code> | <code>roller-x</code> | <code>roller-y</code>. All are
+domain-aware (<code>roller-*</code> is plane-only, <code>symm-*</code> plate-only, exactly as the node
+methods are) and resolve to the canonical support (<code>SIMPLE</code>/<code>CLAMPED</code>/…).</p>
+<p>They all write the object's per-edge <code>edge_supports</code> list, so <strong>every mesh node
+the edge generates</strong> is restrained, and restraints can differ per edge (e.g.
+clamped / simply / clamped / simply around a rectangle). This is the reliable
+route: an earlier <code>support_edge</code> restrained only the two corner nodes and left
+<code>edge_support_mode</code> to propagate the rest — the approach the per-edge list was
+added to replace.</p>
+<p><code>support_object_edge</code> takes an explicit support name instead of a <code>kind</code>: any
+support already defined (or a canonical name such as <code>SIMPLE</code> / <code>CLAMPED</code>), or
+<code>'free'</code> to clear that edge. <code>free_edge</code> is the inverse of the whole family — it
+frees an edge whether it was restrained through the <code>edge_supports</code> list or by
+corner-node assignments.</p>
+<p>In a JSON model the same thing is the object's <code>"edge_supports"</code> key: a list
+with one entry per edge in perimeter order (a rectangle is bottom, right, top,
+left), each a support name or <code>"free"</code>. For example, a slab simply supported on
+two opposite edges:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rectangle"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"tri_section_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Slab"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"node_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"R1.p0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"R1.p1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"R1.p2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"R1.p3"</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"edge_supports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"SIMPLE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"free"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SIMPLE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"free"</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>When <code>edge_supports</code> is absent, <code>edge_support_mode</code> (<code>"common"</code> default /
+<code>"equal"</code> / <code>"none"</code>) instead propagates each edge from whatever supports its
+two corner nodes carry — the older corner-propagation fallback, used when the
+corners are supported directly (<code>assign_support</code>/<code>pin</code> on the corner nodes)
+rather than through <code>edge_supports</code>.</p>
+<h4 id="springs">Springs<a class="headerlink" href="#springs" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_node_spring(node_id, kx=0.0, ky=0.0, kt=0.0, mode_x="both", mode_y="both",
+                kz=None, ktx=None, kty=None) -&gt; NodeSpring
+add_element_spring(element_id, kx=0.0, ky=0.0, coord_sys="global",
+                   mode_x="both", mode_y="both") -&gt; ElementSpring
+add_line_element_spring(object_id, kx=0.0, ky=0.0, kx_field="", ky_field="",
+                        coord_sys="global", mode_x="both", mode_y="both")
+add_area_spring(target_id, kz=0.0)          # Winkler slab-on-grade (plate)
+</code></pre></div>
+<p>No <code>create_*</code> layer — springs have no single "common case" to shortcut the
+way a pinned/fixed support does.</p>
+<h3 id="loads">Loads<a class="headerlink" href="#loads" title="Permanent link">&para;</a></h3>
+<p><code>create_*</code> (convenience) directly above the <code>add_*</code> (fundamental) it
+forwards to, grouped by domain — see the convention note above. Split into
+small subsections so a search for one call returns its own explanation
+intact. Every load below belongs to a <code>LoadCase</code>, so that pair comes first.</p>
+<h4 id="load-cases-create_-convenience">Load cases — create_* (convenience)<a class="headerlink" href="#load-cases-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_load_case(id=None, self_weight_factor=0.0, action_type=None,
+                 create_analysis_case=True) -&gt; LoadCase
+</code></pre></div>
+<p><code>id</code> optional — auto-assigned (<code>"LC1"</code>, <code>"LC2"</code>, …) when omitted.
+<code>action_type</code> accepts the Eurocode letter (<code>"G"</code>/<code>"Q"</code>/<code>"W"</code>/<code>"E"</code>/<code>"T"</code>),
+the word (<code>"permanent"</code>/<code>"live"</code>/<code>"wind"</code>/<code>"seismic"</code>/<code>"temperature"</code>,
+case-insensitive), or the old dashed label — whichever is written, the
+stored value is always the letter. <code>create_analysis_case=True</code> also creates
+a matching <code>AnalysisCase</code> with the same id (see "### Analysis, combinations,
+dynamics" below) so a new load case is solvable right away, without a
+separate call.</p>
+<h4 id="load-cases-add_-fundamental">Load cases — add_* (fundamental)<a class="headerlink" href="#load-cases-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_load_case(id, self_weight_factor=0.0, action_type=None,
+              create_analysis_case=True) -&gt; LoadCase
+</code></pre></div>
+<p><code>id</code> required — what <code>create_load_case</code> above forwards to.</p>
+<h4 id="bar-and-area-loads-create_-convenience">Bar and area loads — create_* (convenience)<a class="headerlink" href="#bar-and-area-loads-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_bar_uniform_load(elements, load_case_id=None, q=None, direction="down")     # UDL on a bar or geo line object
+create_bar_distributed_load(elements, load_case_id=None, q_i=None, q_j=None, direction="down")  # trapezoidal; bars only
+create_bar_point_load(elements, load_case_id=None, p=None, at=0.5, direction="down")  # bars only; at = span fraction
+create_area_uniform_load(targets, load_case_id=None, p=None, direction="down")  # slab (plate); area equivalent of the above
+</code></pre></div>
+<p><code>elements</code>/<code>targets</code>: a single id/object, or a list of either (list in, list
+out). <code>load_case_id</code> optional: omitted/<code>None</code> uses a default case (<code>"LC1"</code>),
+auto-created on first use. <code>direction</code>: <code>"down"</code> (gravity: −Y plane / −Z
+plate), <code>"up"</code>, <code>"perp"</code> (⊥ to the bar, local) and <code>"axial"</code> — the last two
+bars only, plane domain (<code>create_bar_distributed_load</code> only takes
+<code>"down"</code>/<code>"up"</code>). On a geometry line id (<code>GeoSegment</code>/<code>GeoMultisegment</code>/
+<code>GeoArc</code>), <code>create_bar_uniform_load</code> forwards to <code>add_line_distributed_load</code>
+instead (<code>"down"</code>/<code>"up"</code> only — no local axis before meshing).</p>
+<p><code>create_area_uniform_load</code> is the area/region counterpart of the three bar
+shortcuts above — the same "one value, spread uniformly" idea, applied to a
+geometry object (every triangle/quad it meshes into) or a single tri/quad
+element instead of a bar. Plate domain only; <code>targets</code> accepts an id,
+object, or list.</p>
+<p>It carries "uniform" in its name even though the physical quantity is a
+pressure [kN/m²], not a line load [kN/m] — that's a naming choice, not a
+unit mismatch. The reason: <code>api_reference_tool</code>'s <code>name</code> lookup matches on
+substrings of the method name, not on the docstring. An assistant whose
+<code>add_uniform_load</code> call failed (wrong target — that's the bar method) and
+who then searches for "uniform" needs the area facade to turn up by that
+same word, not only by "area" or "pressure".</p>
+<h4 id="bar-and-area-loads-add_-fundamental">Bar and area loads — add_* (fundamental)<a class="headerlink" href="#bar-and-area-loads-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_distributed_load(element_id, load_case_id, fxe=0.0, fxd=0.0, fye=0.0,
+                     fyd=0.0, coord_sys="global", fze=None, fzd=None)
+add_uniform_load(element_id, load_case_id, fx=0.0, fy=0.0, coord_sys="global", fz=None)
+add_element_point_load(element_id, load_case_id, a, fx=0.0, fy=0.0, mz=0.0,
+                       coord_sys="global", fz=None)
+add_area_load(target_id, load_case_id, pz=0.0)      # slab pressure (plate); create_area_uniform_load forwards to this
+add_line_distributed_load(object_id, load_case_id, fx=0.0, fy=0.0, fx_field="",
+                          fy_field="", coord_sys="global")
+</code></pre></div>
+<p>Signed components (<code>fx</code>/<code>fy</code>/...) in a chosen frame (<code>coord_sys</code>), not a
+named direction — what every <code>create_bar_*</code> call above forwards to. Reach
+for these directly for a load <code>create_bar_*</code> cannot express (a trapezoidal
+axial load, a local-frame point load with both fx and fy).</p>
+<h4 id="node-and-edge-loads-create_-convenience">Node and edge loads — create_* (convenience)<a class="headerlink" href="#node-and-edge-loads-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_node_load(nodes, load_case_id=None, p=None, direction="down") -&gt; PointLoad
+create_edge_load(object_id, edge, load_case_id=None, p=None, direction="perp")
+</code></pre></div>
+<p>(<code>create_area_uniform_load</code> — a slab's uniform pressure over a whole region —
+moved to "Bar and area loads" above, next to <code>add_area_load</code>; it is not a
+node/edge call.)</p>
+<p><code>create_node_load</code> direction: <code>"down"</code>/<code>"up"</code> (both domains — plane: global
+∓Y; plate: transverse, ∓Z). <code>"left"</code>/<code>"right"</code> (global ∓X) are <strong>plane
+domain only</strong>. <code>create_edge_load</code>'s <code>edge</code>: <code>'all'</code> | <code>'bottom'/'right'/
+'top'/'left'</code> | an integer index — same vocabulary as <code>support_edge</code>.
+<code>direction</code>: <code>"perp"</code> (outward normal) or <code>"tang"</code> (along the edge, sign
+follows the edge's own winding, not a global direction — for a rectangle,
+<code>'top'</code> is <strong>−X</strong>, not +X; use <code>create_node_load</code> on the corner node for an
+unambiguous global push instead of guessing <code>"tang"</code>'s sign).</p>
+<h4 id="node-and-edge-loads-add_-fundamental">Node and edge loads — add_* (fundamental)<a class="headerlink" href="#node-and-edge-loads-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_point_load(node_id, load_case_id, fx=0.0, fy=0.0, mz=0.0,
+               fz=None, mx=None, my=None) -&gt; PointLoad
+add_tri_edge_load(id, tri_id, node_a, node_b, load_case_id, fx=0.0, fy=0.0,
+                  coord_sys="global", pn=0.0, pt=0.0)
+add_surface_edge_load(id, object_id, node_a, node_b, load_case_id, fx=0.0,
+                      fy=0.0, coord_sys="global", pn=0.0, pt=0.0)
+</code></pre></div>
+<p><code>add_point_load</code> is the only way to put a moment (<code>mz</code>/<code>mx</code>/<code>my</code>) or an
+in-plane force on a plate node — what neither <code>create_node_load</code> nor
+<code>create_area_uniform_load</code> can express. <code>add_tri_edge_load</code> addresses an
+already-meshed triangle's edge (post-solve ids); <code>create_edge_load</code> above
+works pre-mesh, on the geometry object itself.</p>
+<h4 id="self-weight-temperature-and-settlement-create_-convenience">Self-weight, temperature and settlement — create_* (convenience)<a class="headerlink" href="#self-weight-temperature-and-settlement-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_self_weight(factor=1.0, load_case=None) -&gt; LoadCase   # sets/creates self_weight_factor
+create_temperature(target, uniform=0.0, gradient=0.0, load_case=None)
+create_support_settlement(nodes, load_case_id=None, ux=0.0, uy=0.0, tz=0.0,
+                          w=None, tx=None, ty=None)
+</code></pre></div>
+<p><code>create_temperature</code> dispatches by target type: bar → <code>add_temperature_load</code>,
+triangle → <code>add_tri_temperature_load</code>, quad → <code>add_quad_temperature_load</code>,
+geo line object → <code>add_line_temperature_load</code>, geo area object →
+<code>add_area_temperature_load</code>. It only takes a single <code>uniform</code>/<code>gradient</code>
+value, never a field: <code>add_area_temperature_load</code>/<code>add_line_temperature_load</code>
+below are the ones that accept <code>field_name</code>/<code>grad_field_name</code> for a ΔT that
+varies spatially (sampled per generated mesh node/bar); use them directly
+for that case, the same way <code>create_bar_distributed_load</code> above is the one
+to reach for when <code>create_bar_uniform_load</code>'s <code>"down"</code>/<code>"up"</code>-only
+<code>direction</code> is not enough. <code>create_support_settlement</code>'s <code>nodes</code>: a single
+id/Node, or a list of either; <code>w</code>/<code>tx</code>/<code>ty</code> are the plate-domain aliases of
+<code>ux</code>/<code>uy</code>/<code>tz</code>.</p>
+<h4 id="self-weight-temperature-and-settlement-add_-fundamental">Self-weight, temperature and settlement — add_* (fundamental)<a class="headerlink" href="#self-weight-temperature-and-settlement-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_temperature_load(bar_id, load_case_id, dt_uniform=0.0,
+                     dt_gradient=0.0, alpha=None)          # bars — alpha: accepted, no effect (see below)
+add_tri_temperature_load(tri_id, load_case_id, dt_i=0.0, dt_j=0.0, dt_k=0.0,
+                         dt_gradient=0.0)                   # triangles
+add_quad_temperature_load(quad_id, load_case_id, dt_i=0.0, dt_j=0.0, dt_k=0.0,
+                          dt_l=0.0, dt_gradient=0.0)         # quads
+add_area_temperature_load(object_id, load_case_id, dt_uniform=0.0,
+                          dt_gradient=0.0, field_name="", grad_field_name="")
+add_line_temperature_load(object_id, load_case_id, dt_uniform=0.0,
+                          dt_gradient=0.0, field_name="", grad_field_name="")
+add_support_settlement(node_id, load_case_id, ux=0.0, uy=0.0, tz=0.0,
+                       w=None, tx=None, ty=None)
+</code></pre></div>
+<p><code>bar_id</code>/<code>dt_uniform</code>/<code>dt_gradient</code> are the canonical names for
+<code>add_temperature_load</code> now — matching <code>tri_id</code>/<code>quad_id</code> and
+<code>dt_uniform</code>/<code>dt_gradient</code> elsewhere in the temperature-load family, instead
+of the bar's old generic <code>element_id</code> and <code>delta_t_uniform</code>/
+<code>delta_t_gradient</code>. The old <code>element_id=</code>/<code>delta_t_uniform=</code>/
+<code>delta_t_gradient=</code> keywords still work (same pattern as <code>tri_section_name=</code>
+above); the stored <code>TemperatureLoad</code> attributes and the <code>.x2d</code> field keep
+the names <code>element_id</code>/<code>delta_t_uniform</code>/<code>delta_t_gradient</code>.</p>
+<p><strong><code>alpha</code> is a different thing from a deprecated alias — it is accepted but
+has no effect at all.</strong> Unlike the keywords above (each still sets the value
+it names, just under an old spelling), passing <code>alpha</code> to
+<code>add_temperature_load</code> changes nothing: the thermal expansion coefficient
+always comes from the element's material (<code>Material.alpha</code>) at analysis
+time. The parameter exists only so old call sites that already pass <code>alpha</code>
+keep working: <code>TemperatureLoad</code> has nowhere to store it.</p>
+<h3 id="analysis-combinations-dynamics">Analysis, combinations, dynamics<a class="headerlink" href="#analysis-combinations-dynamics" title="Permanent link">&para;</a></h3>
+<p><code>AnalysisCase</code> controls how a model is solved (linear, modal, spectrum, …);
+see "Load cases", in "### Loads" above, for <code>LoadCase</code> — what loads exist
+and which case id they belong to, a different concept that only shares the
+word "case". <code>create_*</code> (convenience) directly above the <code>add_*</code>
+(fundamental) it forwards to — see the convention note above.</p>
+<h4 id="analysis-cases-create_-convenience">Analysis cases — create_* (convenience)<a class="headerlink" href="#analysis-cases-create_-convenience" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>create_analysis_case(id=None, analysis_type="Linear", coefficients=None, **kwargs) -&gt; AnalysisCase
+</code></pre></div>
+<p><code>id</code> optional — auto-assigned (<code>"AC1"</code>, <code>"AC2"</code>, …) when omitted.
+<code>create_load_case</code>'s <code>create_analysis_case=True</code> (see "### Loads" above)
+already creates one of these with a matching id for the common case; call
+this directly only for a case that needs a different id or a non-default
+<code>analysis_type</code>.</p>
+<h4 id="analysis-cases-add_-fundamental">Analysis cases — add_* (fundamental)<a class="headerlink" href="#analysis-cases-add_-fundamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_analysis_case(id, analysis_type="Linear", coefficients=None, **kwargs)
+    # analysis_type: Linear | NonLinear | Mass | Modal | Spectrum | GeometricNonlinear
+</code></pre></div>
+<p><code>id</code> required — what <code>create_analysis_case</code> above forwards to.</p>
+<h4 id="combinations-and-dynamics">Combinations and dynamics<a class="headerlink" href="#combinations-and-dynamics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>add_load_combination(id, coefficients, combo_type="SomaLinear") -&gt; LoadCombination
+add_nodal_mass(node_id, mass_case_id, mx=0.0, my=0.0, mtz=0.0) -&gt; NodalMass
+add_spectral_function(id, description="", damping=0.05, points=None)
+</code></pre></div>
+<p>No <code>create_*</code> layer for these three — no auto-id convenience has been
+needed for them yet.</p>
+<h3 id="constraints-and-fields">Constraints and fields<a class="headerlink" href="#constraints-and-fields" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>add_rigid_link(master, slaves, id="") -&gt; Constraint     # slaves rigidly follow master
+add_equal_dof(nodes, components, id="") -&gt; Constraint    # ties listed DOF components equal across nodes
+add_constraint_equation(terms, value=0.0, id="") -&gt; Constraint  # general linear MPC: sum(terms) = value
+add_field(name, expression="0.0")           # f(x, y) sampled at nodes
+</code></pre></div>
+<p>Companion <strong><code>remove_*</code></strong> and <strong><code>rename_*</code></strong> methods exist for nodes, elements,
+sections, materials, load cases, combinations, analysis cases and geometry
+objects — plus loads (<code>remove_point_loads</code>, <code>remove_distributed_loads</code>,
+<code>remove_area_load</code>, the <code>remove_*_temperature_load</code> family) and springs
+(<code>remove_node_spring</code>, <code>remove_element_spring</code>, <code>remove_area_spring</code>,
+<code>remove_line_element_spring</code>). The load/temperature removes take a
+<code>load_case_id=""</code> that clears every case on the target, or one named case.</p>
+<h4 id="removal-facade-delete_-free_edge">Removal facade — delete_* / free_edge<a class="headerlink" href="#removal-facade-delete_-free_edge" title="Permanent link">&para;</a></h4>
+<p>The intent-level inverses of the <code>create_*</code>/<code>pin</code>/<code>support</code> layer — the removal
+twin of <code>create_*</code>, and what to reach for when undoing an edit:</p>
+<div class="highlight"><pre><span></span><code>delete_support(nodes)                 # unassign the support on a node / list of nodes
+free_edge(object_id, edge)            # free an edge (inverse of support_edge/pin_edge)
+delete_area(object_id)                # delete a region/line object (= remove_geo_object)
+delete_load(target, load_case_id="")  # node / bar / area loads on a target
+delete_temperature(target, load_case_id="")   # bar / triangle / quad / object
+delete_spring(target)                 # node / element / area / line spring
+</code></pre></div>
+<p>Each is a forgiving wrapper over the low-level <code>remove_*</code>: removing what is not
+there is a no-op, so one <code>delete_load('N1')</code> clears whatever loads <code>N1</code> carries
+without the caller first classifying the target. The low-level <code>remove_*</code> are
+the by-id/by-name primitives (used by the GUI and scripts); the <code>delete_*</code>/
+<code>free_edge</code> facade is the one the assistant browses and uses.</p>
+<p>Advanced entry points (variants, construction sequences, support sets,
+<code>with_active</code>, <code>derive_variant</code>, <code>stiffness_hash</code>) support the staging and
+study features and are documented with those.</p>
+<h3 id="section-cuts">Section cuts<a class="headerlink" href="#section-cuts" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>add_cut(id, x1, y1, x2, y2, name="") -&gt; Cut
+remove_cut(cut_id)
+rename_cut(old_id, new_id)
+</code></pre></div>
+<p>A <code>Cut</code> is a straight segment <code>(x1,y1) -&gt; (x2,y2)</code> that reports the
+resultant of the internal forces crossing it — bars and areas, combined and
+separately — for one case (load case, analysis case, or <code>SomaLinear</code>
+combination) at a time. Evaluation lives in the Qt-free <code>xdfem2d.cuts</code>
+module, not on <code>Structure2D</code> itself:</p>
+<div class="highlight"><pre><span></span><code>cut_result(struc, results, cut, case, ref_point=None) -&gt; dict
+    # {'domain', 'bars': [...], 'areas': [...],
+    #  'resultant': {'bars', 'areas', 'total'}, 'reason'}
+    # bars/areas per-crossing detail; resultant['total'] is what a Results
+    # panel shows. ref_point defaults to the cut's own midpoint.
+cut_distribution(cutres, n=101) -&gt; dict
+    # {'s', 'fields', 'markers'} — sampled per-length area fields (piecewise
+    # constant per triangle) plus bar crossings as point markers, for
+    # plotting the distribution along the cut.
+cuts_report(struc, results, cases, ref_point=None) -&gt; list[dict]
+    # one row per (cut, case): cut_id, cut_name, case, total_&lt;N|V|M or
+    # V|Mb|Mt&gt;, reason — every cut against every case id, for CSV export.
+
+cut_bar_resultant(struc, results, cut, case, ref_point=None) -&gt; dict
+cut_area_resultant(struc, results, cut, case, ref_point=None) -&gt; dict
+    # the two halves cut_result sums; called directly only if you want one
+    # side in isolation.
+find_bar_crossings(struc, cut) -&gt; list[dict]        # {elem_id, a, s, x, y}
+find_triangle_crossings(struc, cut) -&gt; list[dict]    # {tri_id, s0, s1, p0, p1}
+    # pure geometry — every bar/triangle the cut crosses, no results needed.
+</code></pre></div>
+<p>Resultant keys are <code>N, V, M</code> for a plane cut (axial along the cut's normal,
+shear along its tangent, in-plane moment about <code>ref_point</code>) or <code>V, Mb, Mt</code>
+for a plate cut (transverse shear, bending and twisting moment — the same
+<code>mn</code>/<code>mnt</code> split slab results already use). <code>struc</code> must be the <strong>compiled</strong>
+model (<code>geo_expand.expand_geometry</code>'s output) when the model has geometry
+objects, matching whatever handle the GUI already keeps for tri-field
+plotting — cuts are evaluated against the solved mesh, not the editable
+objects. See <code>dev/CUT_PLAN.md</code> for the sign conventions, the tolerance
+policy at element edges/nodes, and the phase-by-phase implementation notes.</p>
+<h3 id="simplified-api-the-simple-facade">Simplified API (the "simple" facade)<a class="headerlink" href="#simplified-api-the-simple-facade" title="Permanent link">&para;</a></h3>
+<p>Thin, lossless shortcuts over the generic methods for the common cases: a
+<strong>magnitude + a named direction</strong> instead of signed components and a reference
+frame, and a support <strong>created and assigned in one call</strong>. They read the model's
+domain and adapt (plane vs plate), and raise a clear error when a direction or
+support does not apply. Nothing new is stored — each forwards to the generic
+method, so a model built this way is identical to the long form.</p>
+<p>Not a separate block of its own: every <code>create_*</code> shortcut is documented
+next to the <code>add_*</code> call it forwards to, under that call's own domain
+heading above — loads, supports, materials/sections/nodes/geometry, and
+load/analysis cases each pair <code>create_*</code> (convenience) with <code>add_*</code>
+(fundamental) in one place, instead of repeating either here.</p>
+<h3 id="compatibility-appendix">Compatibility appendix<a class="headerlink" href="#compatibility-appendix" title="Permanent link">&para;</a></h3>
+<p>Every name below still works exactly as documented historically — nothing
+was removed or renamed away, only given a canonical counterpart. The JSON
+file format does not change: whichever name builds the model, <code>save()</code>
+writes the same thing.</p>
+<table>
+<thead>
+<tr>
+<th>Still works (unchanged)</th>
+<th>Canonical name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add_rc_section</code></td>
+<td><code>create_rc_section</code></td>
+<td>same signature, pure rename</td>
+</tr>
+<tr>
+<td><code>add_steel_section</code></td>
+<td><code>create_steel_section</code></td>
+<td>same signature, pure rename</td>
+</tr>
+<tr>
+<td><code>add_panel</code></td>
+<td><code>create_area</code></td>
+<td>same signature, pure rename</td>
+</tr>
+<tr>
+<td><code>add_geo_line</code></td>
+<td><code>add_geo_segment</code></td>
+<td>pure rename, both still work</td>
+</tr>
+<tr>
+<td><code>add_geo_polyline</code></td>
+<td><code>add_geo_multisegment</code></td>
+<td>pure rename, both still work</td>
+</tr>
+<tr>
+<td><code>add_geo_surface</code></td>
+<td><code>add_geo_polygon</code></td>
+<td>pure rename, both still work</td>
+</tr>
+</tbody>
+</table>
+<p>No name in this table is deprecated or warns — every one is a permanent
+alias. <code>add_concrete_material</code>, <code>add_material</code>, <code>add_section</code>,
+<code>add_tri_section</code>, <code>add_quad_section</code>, <code>add_plate_section</code>, <code>add_node</code>,
+<code>add_bar_element</code>, <code>add_tri_element</code>, <code>add_quad_element</code>,
+<code>pin</code>/<code>fix</code>/<code>roller</code>/<code>symm</code>, <code>add_support_settlement</code>, and every generic
+<code>add_*</code> load/support/analysis call keep their original names unchanged —
+they are the fundamental layer the <code>create_*</code> convenience methods forward
+to, not aliases themselves. <code>add_area_section</code>/<code>add_area_element</code> are a
+newer addition to that same fundamental layer, not a replacement for
+<code>add_tri_*</code>/<code>add_quad_*</code>: they pair/dispatch to them for a caller that does
+not know tri vs quad up front, while every existing tri/quad call site
+keeps calling the single-shape methods directly. See
+<code>dev/XDFEM2D_ENGINE.md</code> for the full design rationale and phased
+implementation history.</p>
+<p><strong>Exception — the pre-existing simple-facade load calls do not follow this
+rule.</strong> <code>add_bar_load</code>, <code>add_bar_point_load</code>, <code>add_node_load</code>,
+<code>add_pressure</code>, <code>add_self_weight</code> and <code>add_temperature</code> are gone, with no
+alias: renamed outright to <code>create_bar_uniform_load</code>,
+<code>create_bar_point_load</code>, <code>create_node_load</code>, <code>create_area_uniform_load</code>,
+<code>create_self_weight</code> and <code>create_temperature</code>. Unlike everything else in
+this document, this is a real, unqualified rename — the project had not
+shipped when it was made, so there was no installed base calling the old
+names to protect.</p>
+<p><code>create_area_uniform_load</code> itself went through two further renames after
+that, both for the same reason (findability by an assistant searching
+<code>api_reference_tool</code>, whose <code>name</code> argument matches a substring of the
+method name, not the docstring):</p>
+<ol>
+<li>From <code>create_pressure</code> — "pressure" had no lexical link back to a bar's
+   distributed/uniform load, so an assistant asked for a distributed load
+   on a slab region had no way to find it by name.</li>
+<li>From <code>create_area_load</code> — the resulting name still had no lexical link
+   to "uniform", so an assistant whose <code>add_uniform_load</code> call failed (the
+   fundamental bar method — wrong for an area target) and who searched for
+   "uniform" next still found no area-load facade.</li>
+</ol>
+<p>See <code>dev/XDFEM2D_ENGINE.md</code> for the full reasoning.</p>
+<h3 id="member-buckling-steel-ec3-timber-ec5">Member buckling (steel EC3 / timber EC5)<a class="headerlink" href="#member-buckling-steel-ec3-timber-ec5" title="Permanent link">&para;</a></h3>
+<p>The steel and timber member checks work on <strong>physical members</strong> — chains of
+collinear bars grouped by <code>xdfem2d.steel_members.identify_members(struc)</code>. Each
+<code>BarElement</code> carries the per-member buckling-length <strong>factors</strong> used by the design
+(buckling length <code>= K × physical-member length</code>); leave them <code>None</code> to inherit the
+global default from the design preferences:</p>
+<div class="highlight"><pre><span></span><code>BarElement.sd_ky   # K for flexural buckling about y (major / in-plane)
+BarElement.sd_kz   # K for flexural buckling about z (minor / out-of-plane)
+BarElement.sd_klt  # K for the lateral-torsional length
+BarElement.sd_ltb  # bool: member susceptible to lateral-torsional buckling
+</code></pre></div>
+<p>Free-end (cantilever) detection helpers in <code>xdfem2d.steel_members</code>:</p>
+<div class="highlight"><pre><span></span><code>member_free_ends(struc, member)   -&gt; (free_i, free_j)   # a truly-free end node
+member_has_free_end(struc, member) -&gt; bool
+cantilever_k_for(struc, member, prefs) -&gt; float | None  # auto K (Ky, Kz) or None
+</code></pre></div>
+<p>A node is a <em>free end</em> when nothing is attached to it (a single incident bar and no
+support, node spring, triangle or constraint). When enabled (<code>cantilever_auto</code>,
+default on), such members take <code>cantilever_k</code> (default <code>2.0</code>) for <code>sd_ky</code>/<code>sd_kz</code>
+unless an explicit value is set.</p>
+<h3 id="design-reports-calculation-trace">Design reports (calculation trace)<a class="headerlink" href="#design-reports-calculation-trace" title="Permanent link">&para;</a></h3>
+<p>Every design routine can, with <code>with_reports=True</code>, attach a full step-by-step
+<strong>calculation report</strong> for the governing case of each member / section / column /
+triangle. The report <em>content</em> — clause, symbolic expression, LaTeX and numeric
+substitution — is produced by <strong><code>eurocodepy</code></strong> through an optional <code>trace</code>
+(<a href="https://github.com/paulocachim/eurocodepy"><code>eurocodepy.calc_report.CalcReport</code></a>):
+the check computes exactly as before and the trace only <strong>records</strong> what was
+computed, so the reported numbers are, by construction, the ones used. The app
+only gathers and renders; it never re-derives formulas.</p>
+<p>The EC2 procedures are owned by <code>eurocodepy</code> composites, each taking an input
+dataclass and an optional <code>trace</code>:</p>
+<div class="highlight"><pre><span></span><code>eurocode2_shear_check(ShearInput, v_ed, trace=None)      # §6.2 shear
+eurocode2_punching_check(PunchInput, n_ed, …, trace=None) # §6.4 / :2023 §8.4
+eurocode2_membrane_check(MembraneInput, trace=None)       # §6.109 membrane (areas)
+eurocode2_slab_check(SlabInput, trace=None)               # §6.1 slab flexure (areas)
+calc_torsion(…, trace=None)                               # §6.3 grillage torsion
+calc_asl_nm(…, trace=None)                                # §6.1 M-N flexure
+</code></pre></div>
+<p>Gathering and rendering live in <code>xdfem2d.design_report</code> (Qt-free):</p>
+<div class="highlight"><pre><span></span><code>build_reports(struc, results, material, prefs=None, combinations=None) -&gt; {id: report}
+    # material: "steel" | "timber" | "concrete" | "concrete_area" | "punching"
+filter_reports(reports, material, struc,
+               selected_bars=None, selected_nodes=None, selected_tris=None)
+reports_from(design_output) -&gt; {id: report}      # normalise a routine's output
+report_base_id(report) -&gt; str                    # member/element/column/triangle id
+per_combination_key(base_id, combo) / merge_per_combination({combo: {id: report}})
+render_html(reports, title)   / render_markdown(...) / render_pdf(...) / render_docx(...)
+write_markdown_bundle(reports, md_path, title)   # .md + &lt;stem&gt;_assets/ figures
+section_figure_png(geom)      # cross-section drawing (rect / I / RHS / SHS / CHS)
+pandoc_available()            # gates the native editable-OMML Word route
+EXPECTED_SCHEMA / schema_mismatches(reports)     # report-schema version guard
+</code></pre></div>
+<p>A report dict has the shape <code>{schema_version, title, meta, sections:[{title,
+steps:[{symbol, value, unit, clause, expr, latex, subst, note, ok}]}]}</code>. The GUI
+consumes these through the <strong>Design → Design report…</strong> side panel.</p>
+<h2 id="json-data-structure">JSON data structure<a class="headerlink" href="#json-data-structure" title="Permanent link">&para;</a></h2>
+<p><code>save()</code> writes a single JSON object; <code>load()</code> reads it. Every list mirrors the
+matching <code>add_*</code> method — a list entry carries the same fields as that call's
+arguments. Absent keys take their defaults, so a file stays readable as the
+format grows (e.g. <code>domain</code> absent ⇒ <code>plane</code>).</p>
+<h3 id="top-level">Top level<a class="headerlink" href="#top-level" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>{
+  "domain": "plane",                  // "plane" | "plate"
+  "project_info": { "Project name": "...", "Designer": "...", ... },
+  "propagate_edge_supports": true,
+  "propagate_edge_springs": true,
+
+  "nodes":            [ {"id","x","y"} ],
+  "materials":        [ {"name","elastic_modulus","unit_weight","alpha",
+                         "unit_mass","material_type","poisson","design"} ],
+  "sections":         [ {"name","material_name","b","h","area_override",
+                         "inertia_override","torsion_override","profile_name",
+                         "shape","tw","tf","rc_cover","rc_alpha_s","rc_bar_phi",
+                         "rc_shear_min"} ],
+  "tri_sections":     [ {"name","material_name","thickness","plane_strain",
+                         "formulation","rc_cover","rc_alpha_s","rc_bar_phi",
+                         "rc_shear_min"} ],
+  "quad_sections":    [ {"name","material_name","thickness","plane_strain",
+                         "formulation", ...} ],   // same fields as tri_sections
+  "bar_elements":     [ {"id","node_i","node_j","section_name","hinge_i",
+                         "hinge_j","rc_design","rc_cover","rc_cotg_theta",
+                         "rc_alpha_s"} ],
+  "tri_elements":     [ {"id","node_i","node_j","node_k","section_name"} ],
+  "quad_elements":    [ {"id","node_i","node_j","node_k","node_l","section_name"} ],
+  // quad loads mirror the triangle ones, keyed by "quad_id":
+  //   quad_area_loads, quad_edge_loads, quad_temperature_loads, quad_area_springs
+
+  "geometry_objects": [ {"kind","id","node_ids", ...} ],
+  "supports":         [ {"name","ux","uy","tz"} ],
+  "support_assignments": [ {"node_id","support_name"} ],
+  "node_springs":     [ {"node_id","kx","ky","kt","mode_x","mode_y"} ],
+  "element_springs":  [ {"element_id","kx","ky","coord_sys","mode_x","mode_y"} ],
+  "constraints":      [ {"id","kind","terms","value","master","slaves",...} ],
+
+  "load_cases":       [ {"id","self_weight_factor","action_type"} ],
+  "point_loads":      [ {"node_id","load_case_id","fx","fy","mz"} ],
+  "distributed_loads":[ {"element_id","load_case_id","fxe","fxd","fye","fyd",
+                         "coord_sys"} ],
+  "element_point_loads": [ {"element_id","load_case_id","a","fx","fy","mz",
+                            "coord_sys"} ],
+  "tri_edge_loads":     [ {"id","tri_id","node_a","node_b","load_case_id","fx",
+                           "fy","coord_sys","pn","pt"} ],
+  "surface_edge_loads": [ {"id","object_id","node_a","node_b","load_case_id",
+                           "fx","fy","coord_sys","pn","pt"} ],
+  "tri_area_loads":     [ {"tri_id","load_case_id","pz"} ],
+  "surface_area_loads": [ {"object_id","load_case_id","pz"} ],
+  "tri_area_springs":     [ {"tri_id","kz"} ],
+  "surface_area_springs": [ {"object_id","kz"} ],
+  "support_settlements":  [ {"node_id","load_case_id","ux","uy","tz"} ],
+  "temperature_loads":    [ {"element_id","load_case_id","delta_t_uniform",
+                             "delta_t_gradient"} ],
+  "tri_temperature_loads":  [ {"tri_id","load_case_id","dt_i","dt_j","dt_k",
+                               "dt_gradient"} ],
+  "quad_temperature_loads": [ {"quad_id","load_case_id","dt_i","dt_j","dt_k",
+                               "dt_l","dt_gradient"} ],
+  "area_temperature_loads": [ {"object_id","load_case_id","dt_uniform",
+                               "field_name","dt_gradient","grad_field_name"} ],
+  "line_temperature_loads": [ {"object_id","load_case_id","dt_uniform",
+                               "dt_gradient","field_name","grad_field_name"} ],
+  "line_distributed_loads": [ {"object_id","load_case_id","fx","fy","fx_field",
+                               "fy_field","coord_sys"} ],
+  "line_element_springs":   [ {"object_id","kx","ky","kx_field","ky_field",
+                               "coord_sys","mode_x","mode_y"} ],
+
+  "cuts":              [ {"id","name","x1","y1","x2","y2"} ],
+
+  "load_combinations": [ {"id","combo_type","coefficients",
+                          "analysis_coefficients"} ],
+  "analysis_cases":    [ {"id","analysis_type","coefficients","num_modes",
+                          "modal_case_id","spectrum_id","combination_rule",
+                          "direction","damping", ...} ],
+  "nodal_masses":      [ {"node_id","mass_case_id","mx","my","mtz"} ],
+  "spectral_functions":[ {"id","description","damping","points"} ],
+  "fields":            [ {"name","expression"} ]
+}
+</code></pre></div>
+<h3 id="notes-on-the-slots">Notes on the slots<a class="headerlink" href="#notes-on-the-slots" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The three per-node components are <strong>positional</strong>: they are written with the
+  canonical (plane) names <code>ux/uy/tz</code>, <code>fx/fy/mz</code>, <code>kx/ky/kt</code> in <em>both</em> domains.
+  In a plate model read them as <code>w/θx/θy</code>, <code>fz/mx/my</code>, <code>kz/kθx/kθy</code>. Readers also
+  accept the plate aliases on input.</li>
+<li><strong><code>geometry_objects[].kind</code></strong> is one of <code>segment</code>, <code>arc</code>, <code>multisegment</code>,
+  <code>rectangle</code>, <code>polygon</code>. The old spellings <code>line</code>, <code>polyline</code>, <code>surface</code> are
+  still read. Line-like objects carry <code>section_name</code>, <code>divisions</code>, <code>max_chord</code>;
+  area-like objects carry <code>tri_section_name</code>, <code>target_size</code>, <code>edge_support_mode</code>,
+  <code>edge_spring_mode</code>.</li>
+<li><strong><code>tri_sections[].formulation</code></strong> is <code>CST</code>, <code>Allman</code> or <code>ES-FEM</code> (panel /
+  membrane) in the plane domain, or a plate-bending element in the plate domain:
+  <code>MITC3</code> (shear-deformable, the default — valid for thin and thick slabs) or
+  <code>DKT</code> (thin-plate / Kirchhoff).</li>
+</ul>
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>dev/XDFEM2D_ENGINE.md</code> — full design rationale and phased implementation
+  history behind the <code>create_*</code>/<code>add_*</code> split and the compatibility appendix
+  (see "Compatibility appendix" above).</li>
+<li><code>dev/CUT_PLAN.md</code> — section-cut sign conventions, the tolerance policy at
+  element edges/nodes, and phase-by-phase implementation notes (see "Section
+  cuts" above).</li>
+<li><a href="https://github.com/paulocachim/eurocodepy"><code>eurocodepy.calc_report.CalcReport</code></a>
+  — the calculation-trace type consumed by <code>with_reports=True</code> (see "Design
+  reports" above).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
