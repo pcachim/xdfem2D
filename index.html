@@ -20,7 +20,7 @@
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="assets/xdfem2d_logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
@@ -94,8 +94,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="assets/xdfem2d_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -220,8 +219,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+  <img src="assets/xdfem2d_logo.png" alt="logo">
 
     </a>
     xdfem2D
@@ -296,6 +294,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#two-domains-one-model-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two domains, one model type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-it-does" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -303,6 +312,67 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="What it does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elements-modelling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elements &amp; modelling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loads-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads &amp; analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structural-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structural design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variants-phasing-interoperability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variants, phasing &amp; interoperability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interface-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interface &amp; results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -829,14 +899,14 @@
   
   
     <li class="md-nav__item">
-      <a href="building.html" class="md-nav__link">
+      <a href="license.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Building an App
+    Licenses & Disclaimer
   
 
     
@@ -866,30 +936,84 @@
 
 
 
+<p align="center">
+  <img src="assets/xdfem2d_logo.png" alt="xdfem2D logo" width="140">
+</p>
+
 <h1 id="xdfem2d">xdfem2D<a class="headerlink" href="#xdfem2d" title="Permanent link">&para;</a></h1>
-<p><strong>xdfem2D</strong> is a 2D plane-frame structural analysis application: a Python analysis
-library (<code>xdfem2d</code>) paired with a PySide6 desktop interface for building
-models, running analyses, and reviewing results interactively.</p>
+<p><strong>xdfem2D</strong> is a 2D finite-element structural analysis application — frames,
+walls, slabs and grillages — pairing a Python analysis library (<code>xdfem2d</code>) with a
+PySide6 desktop interface for building models, running analyses, and reviewing
+results interactively.</p>
 <p>Units throughout are <strong>kN · m · kNm</strong>.</p>
+<h2 id="two-domains-one-model-type">Two domains, one model type<a class="headerlink" href="#two-domains-one-model-type" title="Permanent link">&para;</a></h2>
+<p>Every model is either <strong>plane</strong> (a frame or wall in its own plane) or <strong>plate</strong> (a
+slab or grillage bending out of plane) — chosen once, in <strong>New model</strong>, and fixed
+for the model's life. The two share the same solver machinery but mean different
+things element by element: see <a href="domains.html">Domains (plane vs plate)</a> for the
+full comparison, and <a href="slabs-grillages.html">Slabs and Grillages</a> for a plate-focused
+walkthrough.</p>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
+<h3 id="elements-modelling">Elements &amp; modelling<a class="headerlink" href="#elements-modelling" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Euler–Bernoulli beam–column elements with a full 6 degrees of freedom (3 per node).</li>
-<li>Pinned, roller, fixed, guided and rotational supports, plus node and element
+<li><strong>Plane</strong>: Euler–Bernoulli beam–column elements (full 6-DOF, 3 per node) and
+  membrane triangles (CST / Allman / ES-FEM) for walls and panels, with automatic
+  Delaunay meshing of polygon surfaces.</li>
+<li><strong>Plate</strong>: grillage beams (bending + St-Venant torsion) and plate-bending
+  triangles — MITC3 (shear-deformable, thin and thick slabs) and DKT (thin-plate).</li>
+<li>Pinned, roller, fixed, guided and rotational supports (plane) or their plate
+  equivalents (simple, clamped, symmetry); node springs and element foundation
   (Winkler) springs, including tension-only / compression-only (unilateral) springs.</li>
+<li>Parametric geometry (arcs, polylines) that auto-resolves T-junctions and
+  crossings, plus automatic topology checks (isolated/coincident nodes,
+  unconnected junctions, duplicate bars).</li>
+</ul>
+<h3 id="loads-analysis">Loads &amp; analysis<a class="headerlink" href="#loads-analysis" title="Permanent link">&para;</a></h3>
+<ul>
 <li>Point loads, trapezoidal distributed loads, thermal loads, support settlements,
-  nodal masses, and self-weight by load-case factor.</li>
-<li>A clear three-tier analysis model: <strong>load cases</strong> define loads, <strong>analysis cases</strong>
-  solve them, and <strong>combinations</strong> combine analysis cases.</li>
-<li>Analysis types: Linear, NonLinear (unilateral springs), Mass, Modal
-  (eigenvalue), Response Spectrum, and Geometric Nonlinear (P-Delta).</li>
-<li>Results: displacements, reactions, element end-forces, N/V/M diagrams along each
-  member, deformed and modal shapes, and reaction sums.</li>
-<li>Simplified <strong>Eurocode 2</strong> reinforced-concrete design (flexure + shear) for
-  rectangular sections — see <a href="design.html">Reinforced-Concrete Design</a>.</li>
-<li>Interactive canvas with cursor-anchored wheel zoom, middle-button pan, window
-  zoom, selection, and named <strong>Scenes</strong> (saved working subsets of the model).</li>
-<li>Exports: drawing (PNG/SVG/PDF), a formatted <strong>PDF results report</strong>, and a
-  structured <strong>Excel workbook</strong>.</li>
+  nodal masses, self-weight by load-case factor, and — in the plate domain — area
+  pressure and Winkler area springs (slab on grade).</li>
+<li>A clear three-tier model — <strong>load cases</strong> (define loads) → <strong>analysis cases</strong>
+  (solve them) → <strong>combinations</strong> (combine analysis cases) — mirroring the
+  convention used by mainstream structural software.</li>
+<li>Analysis types: Linear, NonLinear (unilateral springs, active-set iteration),
+  Mass, Modal (eigenvalue), Response Spectrum (EC8), and Geometric Nonlinear
+  (P-Delta) — the last two available in the plane domain.</li>
+<li>Load combinations: linear, envelope (max/min), SRSS, and automatic Eurocode
+  (EC0) combination generation.</li>
+</ul>
+<h3 id="structural-design">Structural design<a class="headerlink" href="#structural-design" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Concrete — EC2</strong>: reinforcement design (flexure + shear) for rectangular
+  sections, EC2 crack-width (SLS) verification, and punching shear.</li>
+<li><strong>Steel — EC3</strong>: cross-section resistance and member buckling checks.</li>
+<li><strong>Timber — EC5</strong>: ULS member checks.</li>
+<li><strong>Slabs</strong>: Wood–Armer design moments reported per triangle, ready for an EC2
+  slab check.</li>
+<li><strong>EC8</strong> seismic response spectra (elastic and design).</li>
+</ul>
+<h3 id="variants-phasing-interoperability">Variants, phasing &amp; interoperability<a class="headerlink" href="#variants-phasing-interoperability" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Variants</strong>: parallel what-if scenarios over a shared model, combined with the
+  same arithmetic as load combinations.</li>
+<li><strong>Construction phasing</strong>: incremental analysis carrying forward locked-in
+  internal forces from earlier phases.</li>
+<li>Import/export <strong>DXF</strong>, import/export <strong>SAP2000</strong> (<code>.s2k</code>), and export to
+  <strong>Autodesk Robot</strong> (<code>.str</code>).</li>
+</ul>
+<h3 id="interface-results">Interface &amp; results<a class="headerlink" href="#interface-results" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Interactive canvas: cursor-anchored zoom, pan, window selection, hover
+  tooltips, and named <strong>Scenes</strong> (saved working subsets of the model).</li>
+<li>Parametric <strong>templates</strong> (portal frame, continuous beam, frame, Warren/Howe/
+  Pratt trusses, parabolic arch) to start a model in seconds.</li>
+<li>An optional <strong>AI Assistant</strong> panel that answers questions about the open model
+  in plain language — local by default (via Ollama), or a remote model with your
+  own API key. See <a href="assistant.html">The AI Assistant</a>.</li>
+<li>Results: displacements, reactions, element end-forces, N/V/M diagrams, deformed
+  and modal shapes, membrane stresses / slab moments, and reaction sums.</li>
+<li>Exports: drawing (PNG/SVG/PDF), a formatted PDF results report, an Excel
+  workbook (model or results), and Word reports.</li>
 </ul>
 <h2 id="how-the-pieces-fit-together">How the pieces fit together<a class="headerlink" href="#how-the-pieces-fit-together" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>Load case      →   Analysis case      →   Combination
@@ -901,6 +1025,8 @@ only a definition of loads; it is an <em>analysis case</em> that actually gets s
 picture.</p>
 <h2 id="where-to-start">Where to start<a class="headerlink" href="#where-to-start" title="Permanent link">&para;</a></h2>
 <ul>
+<li>Starting a new model? Read <a href="domains.html">Domains (plane vs plate)</a> first — it's
+  the one choice you can't change later.</li>
 <li>New here? Read <a href="installation.html">Installation</a> then <a href="getting-started.html">Getting Started</a>.</li>
 <li>Want a tour of the windows and controls? See <a href="interface.html">The Interface</a>.</li>
 <li>Building a model? See <a href="modelling.html">Modelling</a> and <a href="loads.html">Loads</a>.</li>
