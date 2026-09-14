@@ -5,8 +5,9 @@
 <h1 align="center">xdfem2D</h1>
 
 <p align="center">
-  2D plane-frame structural analysis: a Python FEM library (<code>xdfem2d</code>)
-  paired with a PySide6 desktop application.<br>
+  2D finite-element structural analysis — frames, walls, slabs and grillages:
+  a Python FEM library (<code>xdfem2d</code>) paired with a PySide6 desktop
+  application.<br>
   Units throughout: <b>kN · m · kNm</b>.
 </p>
 
@@ -24,60 +25,102 @@
 
 ---
 
+## Two domains, one model type
+
+Every model is either **plane** (a frame or wall in its own plane) or **plate**
+(a slab or grillage bending out of plane) — chosen once, in **New model**, and
+fixed for the model's life. The two domains share the same solver machinery but
+give different meaning to supports, loads and results element by element. See
+[Domains](https://pcachim.github.io/xdfem2D/domains.html) for the full
+comparison.
+
 ## Features
 
 ### Modelling & elements
-- Euler–Bernoulli beam–column elements (full 6-DOF, 3 per node)
-- Constant-strain triangle (CST) plane-stress/plane-strain surface elements,
-  with automatic Delaunay meshing of polygon surfaces (built-in mesher, or the
-  higher-quality [Triangle](https://github.com/drufat/triangle) library as an
-  optional extra)
-- Pinned, roller, fixed, guided, and rotational supports
+
+- **Plane**: Euler–Bernoulli beam–column elements (full 6-DOF, 3 per node) and
+  membrane triangles for walls/panels — **CST**, **Allman**, and **ES-FEM**
+  formulations — with automatic Delaunay meshing of polygon surfaces (built-in
+  mesher).Quadrilateral membrane elements (**QM6**,
+  **Q4**) are also available.
+- **Plate**: grillage beams (bending + St-Venant torsion) and plate-bending
+  triangles — **MITC3** (shear-deformable, thin and thick slabs) and **DKT**
+  (thin-plate); quadrilateral plate elements (**MITC4**, **DKT4**) as well.
+- Pinned, roller, fixed, guided, and rotational supports (plane) or their
+  plate equivalents — simple, clamped, symmetry (plate)
 - Node springs (Kx/Ky/Kt) and element foundation (Winkler) springs, including
-  tension-only / compression-only (unilateral) springs
-- Parametric geometry objects (arcs, polylines) that auto-resolve T-junctions
-  and crossings when the model is analysed
+  tension-only / compression-only (unilateral) springs; area (Winkler) springs
+  for slabs on grade
+- Multi-point **constraints**
+- Parametric geometry objects (arcs, polylines, rectangles, polygons) that
+  auto-resolve T-junctions and crossings when the model is analysed
 - Automatic topology checks: isolated nodes, coincident nodes, unconnected
   junctions/crossings, duplicate bars
 
 ### Loads & analysis
-- Point loads, trapezoidal distributed loads (global or local axes),
-  thermal loads, support settlements, nodal masses, and self-weight by
-  load-case factor
+
+- Point loads, trapezoidal distributed loads (global or local axes), thermal
+  loads, support settlements, nodal masses, and self-weight by load-case
+  factor; area pressure and Winkler area springs for slabs (plate domain)
 - A three-tier model — **load cases** (define loads) → **analysis cases**
   (solve them) → **combinations** (combine analysis cases) — mirroring the
   convention used by mainstream structural software
 - Analysis types: Linear, NonLinear (unilateral springs, active-set
   iteration), Mass, Modal (eigenvalue), Response Spectrum (EC8), and
-  Geometric Nonlinear (P-Delta)
+  Geometric Nonlinear (P-Delta) — the last two in the plane domain
 - Load combinations: linear, envelope (max/min), SRSS, and automatic
-  Eurocode (EC0) combination generation
+  Eurocode (EN 1990) combination generation
 
 ### Structural design
-- Simplified **Eurocode 2** reinforced-concrete design for rectangular
-  sections: flexural + shear reinforcement, with EC2 crack-width (SLS)
-  verification
+
+- **Concrete — EN 1992-1-1 (EC2)**: reinforcement design (flexure + shear)
+  for rectangular bar sections, membrane (Wood/Baumann) reinforcement of
+  concrete triangles, EC2 crack-width (SLS) verification, and punching shear
+- **Steel — EN 1993-1-1 (EC3)**: cross-section resistance and member
+  buckling checks (I, RHS/SHS, CHS profiles), with automatic physical-member
+  buckling lengths
+- **Timber — EN 1995-1-1 (EC5)**: ULS member checks, with the same
+  physical-member buckling lengths as steel
+- **Slabs**: Wood–Armer design moments reported per triangle, ready for an
+  EC2 slab check
 - **EC8** seismic response spectra (elastic and design)
+- A step-by-step **Design report** (HTML/PDF/Word/Markdown), with the code
+  clause, symbolic expression and numeric substitution for every check
 
 ### Variants, phasing & interoperability
+
 - **Variants**: parallel what-if scenarios over a shared model, combined with
   the same arithmetic as load combinations
 - **Construction phasing / sequencing**: incremental analysis carrying
   forward locked-in internal forces from earlier phases
 - Import a second model into a shared entity space, welding coincident nodes
   automatically (the shared foundation behind variants and phasing)
-- Import/export **DXF** drawings, import/export **SAP2000** (`.s2k`), and
-  export to **Autodesk Robot** (`.str`)
+- Import/export **DXF** drawings, import/export **SAP2000** (`.s2k`),
+  import/export **IFC** (openBIM structural-analysis model), and export to
+  **Autodesk Robot** (`.str`)
+
+### AI Assistant (optional)
+
+- An **AI panel** answers questions about the open model in plain language —
+  local by default via [Ollama](https://ollama.com), or a remote provider
+  (OpenAI, Google Gemini, DeepSeek, and others) with your own API key
+- Can propose a **new model** (a small beam/wall/slab/grillage template) or a
+  Python build script from a plain-language request, for review before use
+- See [The AI Assistant](https://pcachim.github.io/xdfem2D/assistant.html)
 
 ### Interface & results
+
 - Interactive canvas: cursor-anchored zoom, pan, window selection, hover
   tooltips, and named **Scenes** (saved working subsets of the model)
-- Parametric **templates** (portal frame, continuous beam, frame, Warren/
-  Howe/Pratt trusses, parabolic arch) to start a model in seconds
+- Parametric **templates** across six families — Beams & Frames, Slabs,
+  Walls, Trusses, Grillages, Arches — to start a model in seconds
+- Configurable colour maps, diagram/utilisation-ratio styling, and
+  savable/loadable visualisation style presets
 - Results: displacements, reactions, element end-forces, N/V/M diagrams,
-  deformed and modal shapes, CST stress fields, and reaction sums
-- Exports: drawing (PNG/SVG/PDF), a formatted PDF results report, an Excel
-  workbook (model or results), and Word reports
+  deformed and modal shapes, membrane stresses / slab moments, cut
+  resultants, and reaction sums
+- Exports: drawing (PNG/SVG/PDF), a formatted PDF/Word/Excel results report,
+  an Excel workbook (model or results), and Word reports
 - Save/load structures as `.x2d` (default, includes results) or `.json`
   (structure only)
 
@@ -96,19 +139,18 @@ Full documentation (also built from this repo) is published at
 
 ## Graphical Interface
 
-```bash
-uv run xdfem2d   # launch the GUI
-```
-
 ### Layout
 
 | Area | Contents |
 |---|---|
-| Left panel — **Properties** | Project · Materials · Bar sections · CST sections |
-| Left panel — **Geometry** | Nodes · Bars · Triangles · Supports · Springs |
-| Left panel — **Loads** | Loads · Edge loads · Analysis Cases · Combinations |
-| Left panel — **Results** / **Design** | Numerical results (displacements, reactions, forces) / RC design table |
+| Left panel — **Geometry** | Nodes · Elements · Supports · Springs · Constraints |
+| Left panel — **Properties** | Materials · Sections |
+| Left panel — **Loads** | Loads · Analysis Cases · Combinations |
+| Left panel — **Analysis** | Results / Design |
 | Right | Structure canvas |
+
+On-demand workbench tabs (Punching, Buckling lengths, Cuts, Design report) open
+beside the tables/assistant panel when needed.
 
 ### Toolbar
 
@@ -116,10 +158,13 @@ uv run xdfem2d   # launch the GUI
 |---|---|
 | ▶ Run (F5) | Run FEM analysis and save results |
 | 🔒 Lock / 🔓 Unlock (Ctrl+L) | Lock model after analysis / unlock to edit |
-| View | Switch canvas display: Structure · Deformed · M · V · N · Reactions |
+| View | Switch canvas display: Structure · Deformed · M · V · N · Reactions · Modal · … |
 | Case | Select load case or combination to display |
 | Scene | Switch to a named working subset of the model, or the full model |
 | Scale | Deformation scale multiplier (e.g. 100 × real), with an Auto option |
+
+A coloured **domain badge** (blue Plane / green Plate) shows which domain the
+open model uses.
 
 ### Keyboard shortcuts
 
@@ -130,10 +175,13 @@ uv run xdfem2d   # launch the GUI
 | Ctrl+O | Open file |
 | Ctrl+S | Save |
 | Ctrl+Shift+S | Save As |
-| Ctrl+E | Export drawing |
+| Ctrl+Shift+W | Write Report (PDF/Word/Excel) |
+| Ctrl+Shift+T | Write Tables to Excel |
+| Ctrl+E | Print graphics |
 | F5 | Run analysis |
+| F6 | Generate mesh |
 | Ctrl+L | Toggle lock |
-| Ctrl+1 … Ctrl+8 | Switch view mode (Structure … Modal) |
+| Ctrl+1 … Ctrl+9 | Switch view mode (Structure … Reinforcement) |
 | F9 | Show/hide tables panel |
 | Ctrl+F | Find object |
 | F1 | Open documentation |
@@ -151,12 +199,13 @@ the app, or [Keyboard Shortcuts](https://pcachim.github.io/xdfem2D/shortcuts.htm
 
 | Extension | Description |
 |---|---|
-| `.x2d` | ZIP containing `structure.json` + `results.json` — default format |
+| `.x2d` | ZIP containing `structure.json` + `results.json` (+ view state) — default format |
 | `.json` | Structure definition only (no results) |
 
-Analysis results can additionally be exported to `.json`, `.xlsx`, or a PDF
-report; the model alone can be exported to `.xlsx`, DXF, SAP2000 (`.s2k`), or
-Robot (`.str`) — see [Exporting](https://pcachim.github.io/xdfem2D/exporting.html).
+Analysis results can additionally be exported to `.json`, `.xlsx`, or a
+PDF/Word report; the model alone can be exported to `.xlsx`, DXF, SAP2000
+(`.s2k`), IFC, Robot (`.str`), or a Python build script — see
+[Exporting](https://pcachim.github.io/xdfem2D/exporting.html).
 
 After every successful analysis the `.x2d` file is saved automatically.
 Opening a `.x2d` that contains results restores them and locks the model.
@@ -168,7 +217,7 @@ Opening a `.x2d` that contains results restores them and locks the model.
 ```python
 from xdfem2d import Structure2D
 
-struc = Structure2D()
+struc = Structure2D()  # domain="plane" by default; domain="plate" for slabs/grillages
 
 # Nodes
 struc.add_node('N1', 0.0, 0.0)
@@ -226,10 +275,12 @@ save_json(results,  'results.json')
 save_excel(results, 'results.xlsx')
 ```
 
-### RC design (EC2)
+### Structural design (EC2 / EC3 / EC5)
 
 ```python
-from xdfem2d import design_reinforcement
+from xdfem2d import design_reinforcement          # concrete members (EC2)
+from xdfem2d.steel_design import design_steel_members    # steel members (EC3)
+from xdfem2d.timber_design import design_timber_members  # timber members (EC5)
 
 struc.bar_elements_by_id['E2'].rc_design = True
 struc.bar_elements_by_id['E2'].rc_cover   = 0.03   # m
@@ -247,6 +298,16 @@ for elem_id, cases in rc.items():
               f"As_bot={r.As_bot*1e4:.2f} cm²  "
               f"As_top={r.As_top*1e4:.2f} cm²  "
               f"Asw/s={r.Asw_s*1e4:.2f} cm²/m")
+```
+
+### Model utilities
+
+```python
+from xdfem2d import model_check, model_to_python, check_script
+
+issues = model_check(struc)          # topology / consistency checks
+source = model_to_python(struc)      # write the model back out as a Python build script
+problems = check_script(source)      # check a build script without running it
 ```
 
 ### Variants and construction phasing
@@ -269,6 +330,7 @@ phase_results = run_sequence(struc, sequence)
 from xdfem2d.dxf_io import load_dxf, save_dxf
 from xdfem2d.sap2000_io import save_s2k, load_s2k
 from xdfem2d.robot_io import save_str
+from xdfem2d.ifc_io import save_ifc, load_ifc   # needs the 'ifc' extra
 ```
 
 ## Sample file
@@ -289,8 +351,8 @@ separately:
 
 | Component | What it does | License |
 |---|---|---|
-| [xdfem2d](https://github.com/pcachim/xdfem2D) | The 2D finite-element calculation engine at the core of the app — frames, plates/slabs and grillages, load cases and combinations, modal and response-spectrum analysis. Also on PyPI (`pip install xdfem2d`). | LGPLv3 — [LICENSE-engine.md](LICENSE-engine.md) |
-| [eurocodepy](https://github.com/pcachim/eurocodepy) | Eurocode material databases and design checks (concrete, steel, timber) used by the engine for reinforced-concrete and timber design. | LGPLv3 |
+| [xdfem2d](https://github.com/pcachim/xdfem2D) | The 2D finite-element calculation engine at the core of the app — frames, walls, plates/slabs and grillages, load cases and combinations, modal and response-spectrum analysis, and EC2/EC3/EC5 design. Also on PyPI (`pip install xdfem2d`). | LGPLv3 — [LICENSE-engine.md](LICENSE-engine.md) |
+| [eurocodepy](https://github.com/pcachim/eurocodepy) | Eurocode material databases and design checks (concrete, steel, timber) used by the engine for reinforced-concrete, steel and timber design. | LGPLv3 |
 
 The LGPLv3 allows both libraries to be embedded in xdfem2D's freeware
 distribution while keeping them free software: you may obtain, modify and
