@@ -1073,54 +1073,50 @@ quoting the correct figure.</p>
 <p>A small model here does not give worse answers. It gives wrong answers that look
 exactly like right ones.</p>
 <h3 id="tested-models">Tested models<a class="headerlink" href="#tested-models" title="Permanent link">&para;</a></h3>
-<p>Measured with <code>tools/bench_assistant.py</code>, seven questions x five repetitions,
-July 2026:</p>
+<p>Measured with <code>tools/bench_assistant.py --task=query</code>, 18 benchmark files,
+99 questions, temperature 0, September 2026:</p>
 <table>
 <thead>
 <tr>
 <th>Model</th>
 <th>Correct</th>
-<th>s/answer</th>
+<th>Median s/answer</th>
+<th>Max s/answer</th>
 <th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><code>qwen3.5:4b</code> (<code>--think=off</code>)</td>
+<td>98/99</td>
+<td>4.4</td>
+<td>14.8</td>
+<td>Recommended — fastest of the group, same accuracy as the next two.</td>
+</tr>
+<tr>
+<td><code>granite4.2:3b</code></td>
+<td>98/99</td>
+<td>6.2</td>
+<td>16.2</td>
+<td>Equally reliable, slower; occasionally confuses bar peaks with shell peaks.</td>
+</tr>
+<tr>
 <td><code>granite4.1:8b</code></td>
-<td>35/35</td>
-<td>11</td>
-<td>Recommended — nothing answers better, and nothing correct is faster.</td>
-</tr>
-<tr>
-<td><code>qwen3.5:9b</code></td>
-<td>35/35</td>
-<td>26*</td>
-<td>Equally reliable, well over twice as slow.</td>
-</tr>
-<tr>
-<td><code>gemma4:12b-mlx</code></td>
-<td>35/35</td>
-<td>36</td>
-<td>Equally reliable, slower again.</td>
-</tr>
-<tr>
-<td><code>granite4.1:3b</code></td>
-<td>32/35</td>
-<td>5</td>
-<td>Fabricated coordinates; inverted a design concept.</td>
+<td>96/99</td>
+<td>11.8</td>
+<td>23.4</td>
+<td>No longer a candidate — over twice as slow for the same or worse accuracy.</td>
 </tr>
 </tbody>
 </table>
-<p>Three models answer every question correctly, so accuracy does not choose
-between them — speed does. Note that the smallest model is the fastest and the
-least trustworthy: the two are not in tension here, they are unrelated.</p>
-<p>* measured before tool results were capped, a change that cut the others by
-about a quarter; treat it as an upper bound.</p>
+<p>The app now has three work modes (Auto / Create / Query — see the Task selector
+in the panel); <code>--task=create</code> and <code>--task=query</code> benchmark them separately.
+<code>qwen3.5:4b</code> is the current default, and the one being tuned first.</p>
 <p>Times are from one machine. Without a usable GPU the same model can be several
 times slower.</p>
 <p>These names will age. The benchmark will not: it computes the right answers from
 the model file itself, so it stays valid as models and files change.</p>
-<div class="highlight"><pre><span></span><code>PYTHONPATH=src python3 tools/bench_assistant.py yourfile.x2d a_model --runs=5
+<div class="highlight"><pre><span></span><code>PYTHONPATH=src python3 tools/bench_assistant.py --task=query yourfile.x2d a_model --runs=5
 </code></pre></div>
 <p>Rank by the <strong>stable</strong> column — questions answered correctly on <em>every</em> run.
 A model that is right four times in five is not one to compute with.</p>

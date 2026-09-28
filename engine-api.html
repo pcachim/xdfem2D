@@ -1823,7 +1823,7 @@ this directly only for a case that needs a different id or a non-default
 </code></pre></div>
 <p><code>id</code> required — what <code>create_analysis_case</code> above forwards to.</p>
 <h4 id="combinations-and-dynamics">Combinations and dynamics<a class="headerlink" href="#combinations-and-dynamics" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>add_load_combination(id, coefficients, combo_type="SomaLinear") -&gt; LoadCombination
+<div class="highlight"><pre><span></span><code>add_load_combination(id, coefficients, combo_type="LinearSum") -&gt; LoadCombination
 add_nodal_mass(node_id, mass_case_id, mx=0.0, my=0.0, mtz=0.0) -&gt; NodalMass
 add_spectral_function(id, description="", damping=0.05, points=None)
 </code></pre></div>
@@ -1867,7 +1867,7 @@ rename_cut(old_id, new_id)
 </code></pre></div>
 <p>A <code>Cut</code> is a straight segment <code>(x1,y1) -&gt; (x2,y2)</code> that reports the
 resultant of the internal forces crossing it — bars and areas, combined and
-separately — for one case (load case, analysis case, or <code>SomaLinear</code>
+separately — for one case (load case, analysis case, or <code>LinearSum</code>
 combination) at a time. Evaluation lives in the Qt-free <code>xdfem2d.cuts</code>
 module, not on <code>Structure2D</code> itself:</p>
 <div class="highlight"><pre><span></span><code>cut_result(struc, results, cut, case, ref_point=None) -&gt; dict
