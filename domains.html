@@ -385,6 +385,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Choosing the domain">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changing-the-domain-of-an-empty-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing the domain of an empty model
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -682,6 +699,315 @@
   
   
   
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="tutorials/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_15" id="__nav_15_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/supports.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/build-a-beam.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a beam or a bar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/modify-and-delete.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edit or delete
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/slabs-and-walls.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs and walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/change-section-material.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Change a section or material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="assistant.html" class="md-nav__link">
         
@@ -856,9 +1182,11 @@
 
 
 <h1 id="domains-plane-vs-plate">Domains (plane vs plate)<a class="headerlink" href="#domains-plane-vs-plate" title="Permanent link">&para;</a></h1>
-<p>Every xdfem2D model lives in one of two <strong>domains</strong>. The choice is made <strong>once</strong>,
-in <strong>New model</strong>, and is fixed for the model's life — because every support, load
-and result changes meaning between them, there is no switching.</p>
+<p>Every xdfem2D model lives in one of two <strong>domains</strong>. The choice is made in
+<strong>New model</strong>, and it is fixed as soon as the model has geometry — because every
+support, load and result changes meaning between them, nodes, bars and areas
+cannot be switched from one to the other. While the model is still <strong>empty</strong>
+(no nodes, bars, areas or objects) the domain can be changed: see below.</p>
 <table>
 <thead>
 <tr>
@@ -896,6 +1224,16 @@ with a shear wall for <em>Frame / Wall (in-plane)</em>, and a supported slab fie
 highlights); a double-click selects and confirms in one gesture. A coloured
 <strong>domain badge</strong> in the toolbar (blue <strong>Plane</strong> / green <strong>Plate</strong>) then shows which
 one is active, and the window title carries the document name.</p>
+<h3 id="changing-the-domain-of-an-empty-model">Changing the domain of an empty model<a class="headerlink" href="#changing-the-domain-of-an-empty-model" title="Permanent link">&para;</a></h3>
+<p>Click the coloured <strong>domain badge</strong> in the toolbar while the model has no
+geometry; the same two cards as in <em>New model</em> open, on the current domain. What
+does not depend on the domain (materials, beam sections, load cases) stays; the
+support definitions and area sections, which do, are removed and named in the
+status bar. <strong>Undo</strong> brings them back. Once the first node, bar or area exists
+the badge stops being a button, and its tooltip says the domain is fixed; use
+<strong>File ▸ New</strong> to work in the other domain. In a script,
+<code>model.set_domain('plate')</code> does the same and raises an error if the model has
+geometry.</p>
 <h2 id="what-follows-from-the-domain">What follows from the domain<a class="headerlink" href="#what-follows-from-the-domain" title="Permanent link">&para;</a></h2>
 <p>The interface is domain-aware throughout — the same primitives read correctly in
 either domain (see <a href="https://github.com/pcachim/xdfem2D">Topology</a>):</p>
@@ -999,7 +1337,7 @@ either domain (see <a href="https://github.com/pcachim/xdfem2D">Topology</a>):</
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
