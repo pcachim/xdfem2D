@@ -1,0 +1,1044 @@
+"""
+Construction phasing — incremental analysis (Phase 3, Mode B).
+
+A construction phase models a structure that already carries a locked-in state of
+internal forces (built in earlier phases) to which a new increment is added:
+
+    F_final = F_initial (inherited)  +  ΔF (this phase's new loads)
+
+Because member end forces are linear in the displacements and loads, the initial
+state enters as a pure additive offset on the recovered member forces. This is
+implemented as **post-processing of the result dict** — the solver is not
+modified and its assembly is not duplicated. The increment is a normal
+``calculate()`` on the phase's active geometry with only the phase's loads.
+
+Scope (this module): the additive member-force model and Method 1 for
+displacements (the reported displacement is the increment Δu; u0 is ignored).
+Method 2 (cumulative u0), multi-phase chaining and self-weight masking of old
+elements are the subject of Phase 4 (see dev/plano_fase4_encadeamento.md).
+"""
+from __future__ import annotations
+
+import copy
+import dataclasses
+
+from .models import Variant, ElementInitialState, OpAction, OpTarget
+
+
+def solve_phase(base, phase, support_sets=None, _sub=None,
+                tri_initial_state: dict | None = None) -> dict:
+    """Solve one construction phase and return a result dict.
+
+    Returns a dict with::
+
+        {
+          'element_forces': {elem_id: {'i': [N,V,M], 'j': [N,V,M]}},  # final
+          'displacements':  {node_id: [ux,uy,rz]},                    # increment
+          'reactions':      {node_id: [rx,ry,mz]},                    # increment
+          'increment':      {... element_forces of ΔF only ...},
+          'initial_state':  {elem_id: ElementInitialState},
+          'tri_stress':     {tri_id: {...}},                          # final
+        }
+
+    The element/triangle forces are the **final** state (initial + increment);
+    the displacements/reactions are the increment (Method 1).
+
+    ``tri_initial_state``: the triangle twin of ``phase.initial_state`` —
+    ``{tri_id: {base field: value}}`` (the *linear* fields only: sx/sy/txy or
+    mx/my/mxy/vx/vy). Unlike bars' ``initial_state`` this is never persisted
+    on the phase itself (see ``solve_sequence``, which threads it phase to
+    phase at runtime) — a sequence always starts a plate/wall region with a
+    zero carried state; only chaining *within* one sequence is supported.
+    """
+    if _sub is not None:
+        sub = _sub
+    else:
+        v = Variant(id=f"__phase__{phase.id}",
+                    active_elements=phase.active_elements,
+                    support_set_id=phase.support_set_id)
+        sub = base.derive_variant(v, support_sets, filter_tri=True)
+    # A phase with no cases at all (pure geometry growth, or a sequence that
+    # stripped every unused case) has a zero increment by definition — skip
+    # the solve; _superpose_cases builds the zero-filled shape from geometry.
+    res = sub.calculate() if sub.load_cases else {}
+
+    incr = _superpose_cases(sub, res, phase.applied_cases,
+                            getattr(phase, 'case_factors', None))
+    final_ef = _add_initial_state(incr['element_forces'], phase.initial_state)
+    final_tri = _add_tri_initial_state(incr['tri_stress'], incr['_tri_kind'],
+                                       tri_initial_state)
+
+    return {
+        'element_forces':       final_ef,
+        'displacements':        incr['displacements'],
+        'reactions':            incr['reactions'],
+        'increment':            incr,
+        'initial_state':        dict(phase.initial_state),
+        'tri_stress':           final_tri,
+        'element_distribution': incr.get('element_distribution', {}),
+    }
+
+
+def _superpose_cases(sub, res, case_ids, case_factors=None) -> dict:
+    """Linear superposition of the given load cases' results — bar element
+    forces AND triangle stress/moments alike, plus whatever a geometry
+    object active on *sub* expanded into (its generated ids only exist on
+    the compiled mesh solved to produce *res*, via ``res['object_trace']``).
+
+    ``case_factors``: optional ``{case_id: factor}`` — a case not present
+    (or ``None``/falsy altogether) defaults to a unit factor (1.0), the
+    previous, implicit behaviour. Lets a phase apply a fraction of a case
+    (e.g. 50% of live load during an intermediate stage) instead of only
+    ever "all of it or none of it" — see ``models.Operation.factor``."""
+    case_factors = case_factors or {}
+    from .variants import _tri_kind, _TRI_BASE_FIELDS
+
+    obj_nodes: set = set()
+    obj_ids: set = set()
+    trace = res.get('object_trace', {}) or {}
+    for oid in getattr(sub, 'geometry_objects', {}):
+        info = trace.get(oid, {})
+        obj_nodes.update(info.get('nodes', []) or [])
+        obj_ids.update(info.get('elems', []) or [])
+        obj_ids.update(info.get('tris', []) or [])
+        # Quads generated by an object are area elements just like its
+        # triangles — accumulate their stress/moment too (they report through
+        # the same tri_stress dict; dev/refactor_area_path.md Phase 2).
+        obj_ids.update(info.get('quads', []) or [])
+
+    node_ids = list(sub.nodes.keys()) + list(obj_nodes)
+    elem_ids = [e.id for e in sub.bar_elements] + list(obj_ids)
+    # Area-element ids (triangles AND quads) share the tri_stress accumulation
+    # below — a quad's moment/stress is a per-element result keyed by its own id
+    # in exactly the same dict, so it superposes across phases identically.
+    tri_ids = ([t.id for t in getattr(sub, 'tri_elements', [])]
+               + [q.id for q in getattr(sub, 'quad_elements', [])]
+               + list(obj_ids))
+    # An empty applied_cases means *no* new loads in this phase (zero increment);
+    # it must not fall back to "all cases".
+    case_ids = list(case_ids or [])
+
+    disp = {n: [0.0, 0.0, 0.0] for n in node_ids}
+    reac = {n: [0.0, 0.0, 0.0] for n in node_ids}
+    ef = {e: {'i': [0.0, 0.0, 0.0], 'j': [0.0, 0.0, 0.0]} for e in elem_ids}
+    # Base (linear) fields only — derived fields (principal/Wood-Armer) are
+    # recomputed once from the accumulated base state, not summed directly
+    # (they are nonlinear functions of it — see variants._tri_derived).
+    tri_kind: dict = {}
+    tri_acc: dict = {}
+    ts_by_case = res.get('tri_stress', {})
+    for tid in tri_ids:
+        for cid in case_ids:
+            d = ts_by_case.get(cid, {}).get(tid)
+            if d is not None:
+                tri_kind[tid] = _tri_kind(d)
+                break
+        if tri_kind.get(tid):
+            tri_acc[tid] = {f: 0.0 for f in _TRI_BASE_FIELDS[tri_kind[tid]]}
+
+    dist_src = res.get('element_distribution', {})   # {cid: {eid: {x,N,V,M}}}
+    dist_acc: dict = {}   # {eid: {x, N, V, M}} — summed over applied cases
+
+    for cid in case_ids:
+        factor = case_factors.get(cid, 1.0)
+        if factor is None:
+            factor = 1.0
+        d = res['displacements'].get(cid, {})
+        r = res['reactions'].get(cid, {})
+        f = res['element_forces'].get(cid, {})
+        for n in node_ids:
+            for k in range(3):
+                disp[n][k] += factor * d.get(n, [0.0, 0.0, 0.0])[k]
+                reac[n][k] += factor * r.get(n, [0.0, 0.0, 0.0])[k]
+        for e in elem_ids:
+            fe = f.get(e)
+            if fe is None:
+                continue
+            for end in ('i', 'j'):
+                for k in range(3):
+                    ef[e][end][k] += factor * fe[end][k]
+        ts = ts_by_case.get(cid, {})
+        for tid, kind in tri_kind.items():
+            td = ts.get(tid)
+            if td is None:
+                continue
+            for fld in _TRI_BASE_FIELDS[kind]:
+                tri_acc[tid][fld] += factor * td.get(fld, 0.0)
+        # Accumulate element N/V/M distributions for smooth diagram rendering.
+        for eid in elem_ids:
+            dd = dist_src.get(cid, {}).get(eid)
+            if dd is None:
+                continue
+            import numpy as np
+            xs = dd['x']
+            npts = len(xs)
+            if eid not in dist_acc:
+                dist_acc[eid] = {'x': xs,
+                                 'N': [0.0] * npts,
+                                 'V': [0.0] * npts,
+                                 'M': [0.0] * npts}
+            acc = dist_acc[eid]
+            for k in range(npts):
+                acc['N'][k] += factor * dd['N'][k]
+                acc['V'][k] += factor * dd['V'][k]
+                acc['M'][k] += factor * dd['M'][k]
+
+    return {'displacements': disp, 'reactions': reac, 'element_forces': ef,
+           'tri_stress': tri_acc, '_tri_kind': tri_kind,
+           'element_distribution': dist_acc}
+
+
+def _add_initial_state(increment_ef: dict, initial_state: dict) -> dict:
+    """Return ``increment + initial_state`` per element end (final member forces)."""
+    out = {e: {'i': list(v['i']), 'j': list(v['j'])}
+           for e, v in increment_ef.items()}
+    for eid, st in initial_state.items():
+        if eid not in out:
+            out[eid] = {'i': [0.0, 0.0, 0.0], 'j': [0.0, 0.0, 0.0]}
+        i0 = list(getattr(st, 'i', (0.0, 0.0, 0.0)))
+        j0 = list(getattr(st, 'j', (0.0, 0.0, 0.0)))
+        for k in range(3):
+            out[eid]['i'][k] += i0[k]
+            out[eid]['j'][k] += j0[k]
+    return out
+
+
+def _accumulate_dist(prev: dict, incr: dict) -> dict:
+    """Return the element-wise sum of two distribution dicts.
+
+    *prev* is the accumulated distribution from all earlier phases;
+    *incr* is the increment from the current phase (from _superpose_cases).
+    Elements present only in *incr* (newly active) start from zero.
+    Elements present only in *prev* (active in earlier phases but not this
+    one's active set) keep their previous value unchanged.
+    """
+    import numpy as np
+    out = {eid: dict(d) for eid, d in prev.items()}
+    for eid, dd in incr.items():
+        if eid not in out:
+            out[eid] = dd
+            continue
+        pa = out[eid]
+        # Use the increment's x-grid (may differ if loads changed between phases)
+        xs = dd['x']
+        npts = len(xs)
+        # Interpolate previous accumulated values onto the new grid if needed
+        pa_xs = pa['x']
+        for comp in ('N', 'V', 'M'):
+            if list(pa_xs) == list(xs):
+                acc = [pa[comp][k] + dd[comp][k] for k in range(npts)]
+            else:
+                pa_arr = np.asarray(pa[comp], dtype=float)
+                inc_arr = np.asarray(dd[comp], dtype=float)
+                pa_interp = np.interp(xs, pa_xs, pa_arr)
+                acc = list(pa_interp + inc_arr)
+            out[eid][comp] = acc
+        out[eid]['x'] = list(xs)
+    return out
+
+
+def _correct_dist_boundaries(dist: dict, final_ef: dict) -> dict:
+    """Shift N/V/M distributions so their boundary values match *final_ef*.
+
+    *dist* holds the superposed distributions for the increment (from
+    _superpose_cases).  *final_ef* is the *accumulated* end forces
+    (increment + initial_state).  We apply a constant shift on N and V and
+    a linear correction on M (M_shift(x) = dM + dV·x) so the distribution
+    boundaries agree with the true accumulated forces at each end.
+    This is the same boundary-correction step used by the solver's
+    _linear_superpose / _solve_nonlinear_springs for ordinary analysis cases.
+    """
+    if not dist:
+        return {}
+    import numpy as np
+    out: dict = {}
+    for eid, dd in dist.items():
+        ef = final_ef.get(eid)
+        if ef is None:
+            out[eid] = dd
+            continue
+        xs = np.asarray(dd['x'], dtype=float)
+        Ns = np.asarray(dd['N'], dtype=float)
+        Vs = np.asarray(dd['V'], dtype=float)
+        Ms = np.asarray(dd['M'], dtype=float)
+        if len(xs) == 0:
+            out[eid] = dd
+            continue
+        # Shift to match accumulated i-end forces
+        dN = ef['i'][0] - Ns[0]
+        dV = ef['i'][1] - Vs[0]
+        dM = ef['i'][2] - Ms[0]
+        Ns = Ns + dN
+        Vs = Vs + dV
+        Ms = Ms + dM + dV * xs
+        out[eid] = {'x': list(xs), 'N': list(Ns), 'V': list(Vs), 'M': list(Ms)}
+    return out
+
+
+def _add_tri_initial_state(increment: dict, tri_kind: dict,
+                           tri_initial_state: dict | None) -> dict:
+    """Return the final per-triangle result: increment's base fields + the
+    carried initial state, with the derived (principal/Wood-Armer) fields
+    recomputed from that final base state — the triangle twin of
+    :func:`_add_initial_state`.
+
+    ``increment``/``tri_kind`` are ``_superpose_cases``'s ``'tri_stress'`` /
+    ``'_tri_kind'`` entries."""
+    from .variants import _tri_derived
+    tri_initial_state = tri_initial_state or {}
+    out = {}
+    from .variants import _TRI_BASE_FIELDS
+    for tid, kind in (tri_kind or {}).items():
+        base = dict(increment.get(tid, {}))
+        i0 = tri_initial_state.get(tid)
+        if i0:
+            for fld in _TRI_BASE_FIELDS[kind]:
+                base[fld] = base.get(fld, 0.0) + i0.get(fld, 0.0)
+        formulation = i0.get('formulation', kind) if i0 else kind
+        entry = dict(base)
+        entry.update(_tri_derived(kind, base, formulation))
+        out[tid] = entry
+    # A triangle carried from a previous phase but absent from this phase's
+    # increment (e.g. it exists in the sub-structure but this phase applied no
+    # case touching it) still needs to report its inherited state unchanged.
+    from .variants import _tri_kind
+    for tid, i0 in tri_initial_state.items():
+        if tid in out or not i0:
+            continue
+        kind = _tri_kind(i0)
+        if kind is None:
+            continue
+        entry = dict(i0)
+        entry.update(_tri_derived(kind, i0, i0.get('formulation', kind)))
+        out[tid] = entry
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Operations — a phase's authored log of what it adds/removes, replayed on
+# top of the previous phase's resolved state (see models.Operation).
+# ---------------------------------------------------------------------------
+
+def _stage_element_ids(struc, stage: int) -> set:
+    """Every bar/triangle whose ``stage`` attribute equals *stage* exactly —
+    the elements newly built AT that stage (not "up to", unlike
+    ``workflows.phases_from_stages``' cumulative phase generator: an
+    Operation is one incremental step, so successive "add Stage k"
+    operations across phases reproduce the same cumulative growth by
+    replay, one stage at a time)."""
+    out = set()
+    for e in list(struc.bar_elements) + list(getattr(struc, 'tri_elements', [])):
+        if int(getattr(e, 'stage', 1) or 1) == stage:
+            out.add(e.id)
+    return out
+
+
+def resolve_phase_state(prev_active, prev_support_set_id, operations, all_ids,
+                        struc=None):
+    """Replay one phase's ``operations`` on top of the previous phase's
+    *resolved* state and return the phase's own resolved
+    ``(active_elements, support_set_id, applied_cases, case_factors)``.
+
+    ``prev_active``: the previous phase's resolved active-elements set, or
+    ``None``/empty for "nothing built yet" (the first phase) — treated as an
+    empty set to replay against, since a first phase must ADD whatever it
+    wants active.
+
+    ``all_ids``: every bar/tri/geometry-object id in the base model — used
+    only to collapse a resolved set that ends up equal to "everything" back
+    to ``None`` (the existing active_elements convention elsewhere).
+
+    ``struc``: the base :class:`~xdfem2d.structure.Structure2D` — only
+    needed to expand a "stage" GROUP ELEMENTS operation (see
+    :class:`~xdfem2d.models.Operation`) dynamically against the model's
+    CURRENT ``stage`` attribute; a "scene" group's ``ids`` are already
+    concrete (scenes are GUI/view state, unknown to the engine — see
+    ``Operation.group_kind``'s docstring), so they need no expansion here.
+    Passing ``struc=None`` while a "stage" operation is present raises
+    ``ValueError`` rather than silently doing nothing.
+
+    Elements: ADD/REMOVE add or drop the group's resolved ids from the
+    active set. Supports: ADD sets ``support_set_id`` to the given (single)
+    id — carrying whatever restraints AND springs that SupportSet defines,
+    see ``Structure2D.derive_variant``; REMOVE clears it back to ``None``
+    (the base's own supports/springs). Loads: ADD appends a case id to the
+    resolved ``applied_cases`` (in first-seen order); REMOVE drops it. Each
+    ADDed case also carries its ``op.factor`` (default 1.0) into the
+    resolved ``case_factors`` dict — the last ADD of a given case id wins if
+    it is added more than once (mirrors ``support_set_id``: later
+    operations override earlier ones).
+    """
+    active = set(prev_active) if prev_active else set()
+    support_set_id = prev_support_set_id
+    added_cases: list = []
+    removed_cases: set = set()
+    factor_by_case: dict = {}
+    for op in (operations or []):
+        if op.target == OpTarget.ELEMENTS:
+            if op.group_kind == "stage":
+                if struc is None:
+                    raise ValueError(
+                        f"Operation '{op.id}': a 'stage' group needs the "
+                        "base structure to resolve — pass resolve_phase_"
+                        "state(..., struc=base).")
+                ids = set()
+                for s in (op.ids or ()):
+                    ids |= _stage_element_ids(struc, int(s))
+            else:
+                ids = set(op.ids or ())
+            if op.action == OpAction.ADD:
+                active |= ids
+            else:
+                active -= ids
+        elif op.target == OpTarget.SUPPORTS:
+            ids = tuple(op.ids or ())
+            if op.action == OpAction.ADD:
+                support_set_id = ids[0] if ids else support_set_id
+            else:
+                support_set_id = None
+        elif op.target == OpTarget.LOADS:
+            ids = tuple(op.ids or ())
+            if op.action == OpAction.ADD:
+                factor = getattr(op, 'factor', 1.0)
+                if factor is None:
+                    factor = 1.0
+                for cid in ids:
+                    if cid not in added_cases:
+                        added_cases.append(cid)
+                    factor_by_case[cid] = factor
+            else:
+                removed_cases.update(ids)
+    applied_cases = [c for c in added_cases if c not in removed_cases]
+    case_factors = {c: factor_by_case.get(c, 1.0) for c in applied_cases}
+    resolved_active = None if active == set(all_ids) else active
+    return resolved_active, support_set_id, applied_cases, case_factors
+
+
+def _validate_sequence(base, sequence):
+    """Fail fast on the input errors that used to be silent (see
+    devs/sequences_analise_plano.md — B2, B3, B5, B6)."""
+    phases = list(getattr(sequence, 'phases', []) or [])
+    if not phases:
+        raise ValueError(
+            f"Construction sequence '{sequence.id}' has no phases.")
+    ids = [p.id for p in phases]
+    dups = sorted({i for i in ids if ids.count(i) > 1})
+    if dups:
+        raise ValueError(
+            f"Construction sequence '{sequence.id}': duplicate phase "
+            f"id(s) {dups} — results would silently overwrite each other.")
+    known = set(getattr(base, 'load_cases_by_id', {}))
+    for p in phases:
+        # A phase authored with Operations declares its load cases via
+        # LOADS/ADD operations rather than ``applied_cases`` directly (that
+        # field is only the *resolved* cache — see resolve_phase_state), so
+        # check both sources here.
+        declared = set(p.applied_cases or [])
+        for op in (getattr(p, 'operations', None) or []):
+            if op.target == OpTarget.LOADS and op.action == OpAction.ADD:
+                declared.update(op.ids or ())
+        unknown = sorted(declared - known)
+        if unknown:
+            raise ValueError(
+                f"Phase '{p.id}': unknown load case(s) {unknown} — they "
+                "would contribute a silent zero increment.")
+    for p in phases[1:]:
+        if getattr(p, 'initial_state', None):
+            raise ValueError(
+                f"Phase '{p.id}': initial_state is computed by the sequence "
+                "(inherited from the previous phase). Set it only on the "
+                "FIRST phase, e.g. via initial_state_from_results().")
+
+
+def solve_sequence(base, sequence, support_sets=None) -> dict:
+    """Solve an ordered :class:`ConstructionSequence` phase by phase.
+
+    Each phase inherits the accumulated final element-force state of all previous
+    phases; self-weight is applied only to elements *new* in each phase (so an
+    old element's weight, already in its inherited state, is not double counted).
+    The same rule extends to every load of a case that is re-applied in a later
+    phase: only entities new in that phase receive it (no double counting).
+
+    Element REMOVAL between phases is handled mechanically: the locked-in end
+    forces of each removed element are applied to the remaining structure as
+    release forces (an internal load case added to the phase's increment) and
+    the removed element leaves the carried state — so removing a loaded prop
+    redistributes, and reports no ghost forces.
+
+    Support REMOVAL (a phase's ``support_set_id`` no longer restraining a DOF
+    that a previous phase did — e.g. striking a temporary prop) is handled the
+    same way by default (``phase.release_supports=True``): the accumulated
+    reaction at that DOF is released as an equivalent load on the remaining
+    structure, so the reaction redistributes instead of vanishing. Set
+    ``release_supports=False`` on a phase to opt out (the reaction is simply
+    dropped, no redistribution) — see ``dev/SUPPORT_RELEASE_PLAN.md``.
+
+    The first phase's ``initial_state`` (if any) seeds the carried state; later
+    phases must leave it empty (validated).
+
+    Returns ``{'phases': {phase_id: result}, 'final': accumulated_result}`` where
+    each result has the same shape as :func:`solve_phase`. With
+    ``displacement_method='cumulative'`` (Method 2) the reported displacements are
+    ``u0 + Δu``; otherwise they are the per-phase increment (Method 1).
+    Displacements are always stored as per-phase increments; cumulative
+    summation is a display option applied at result-viewing time.
+    """
+    _validate_sequence(base, sequence)
+    method = 'increment'  # always store increments; cumulative is a view option
+    # elem_id -> ElementInitialState; seeded by the first phase's declared state.
+    accumulated_forces: dict = dict(
+        getattr(sequence.phases[0], 'initial_state', None) or {})
+    # tri_id -> {base field: value}; a plate/wall region always starts a
+    # sequence with a zero carried state (see solve_phase's docstring) —
+    # chaining across *phases of this sequence* is supported, chaining from an
+    # earlier, separately-solved model is not.
+    accumulated_tri_state: dict = {}
+    # node_id -> [r0, r1, r2] (rx/ry/mz or rw/rtx/rty per domain), summed like
+    # accumulated_forces — needed to release a removed support's reaction (see
+    # dev/SUPPORT_RELEASE_PLAN.md). Always starts at zero: a sequence has no
+    # notion of a support's reaction from before it began.
+    accumulated_reactions: dict = {}
+    accumulated_dist: dict = {}          # eid -> {x, N, V, M} — accumulated across phases
+    cumulative_disp: dict = {}           # node_id -> [ux, uy, rz]
+    prev_active: set = set()
+    prev_nodes: set = set()
+    prev_restraints: dict | None = None   # {node_id: (bool, bool, bool)}
+    prev_support_set_id: str | None = None   # resolved, for operations replay
+    applied_before: set = set()          # case ids applied in earlier phases
+
+    all_ids = ({e.id for e in base.bar_elements}
+              | {t.id for t in getattr(base, 'tri_elements', [])}
+              | set(getattr(base, 'geometry_objects', {}).keys()))
+
+    out_phases: dict = {}
+    last_final: dict | None = None
+
+    for phase in sequence.phases:
+        # A phase authored with Operations (models.Operation) has its
+        # active_elements/support_set_id/applied_cases *resolved* by replaying
+        # them on top of the previous phase's resolved state; a phase with no
+        # operations (legacy / simple mode) keeps declaring them directly.
+        if phase.operations:
+            resolved_active, eff_support_set_id, eff_applied_cases, \
+                eff_case_factors = resolve_phase_state(
+                    prev_active, prev_support_set_id,
+                    phase.operations, all_ids, struc=base)
+            active = resolved_active if resolved_active is not None else all_ids
+        else:
+            active = (set(phase.active_elements)
+                     if phase.active_elements is not None else all_ids)
+            eff_support_set_id = phase.support_set_id
+            eff_applied_cases = list(phase.applied_cases or [])
+            eff_case_factors = dict(getattr(phase, 'case_factors', None) or {})
+        new_elems = active - prev_active
+        removed = prev_active - active
+
+        # Build the phase sub-structure and mask self-weight onto new elements.
+        v = Variant(id=f"__phase__{phase.id}",
+                    active_elements=(None if active == all_ids else active),
+                    support_set_id=eff_support_set_id)
+        sub = base.derive_variant(v, support_sets, filter_tri=True)
+        # The phase only consumes its applied cases (plus the internal removal
+        # case added below): strip everything else from the disposable copy so
+        # calculate() does not pay for the model's whole case/combination set.
+        _strip_unused_cases(sub, eff_applied_cases)
+        if not phase.reapply_self_weight:
+            _mask_self_weight_to_new(sub, new_elems)
+
+        # A case already applied in an earlier phase loads only NEW entities
+        # in this phase (its effect on the old ones is carried in the
+        # inherited state).
+        repeated = [c for c in eff_applied_cases if c in applied_before]
+        if repeated:
+            _mask_repeated_cases_to_new(sub, repeated, new_elems, prev_nodes)
+
+        applied = list(eff_applied_cases)
+
+        # Element removal: release the locked-in end forces of the removed
+        # BARS onto the remaining structure, and drop them from the carried
+        # state (no ghosts). NOTE: a removed TRIANGLE only has its carried
+        # state dropped — computing the equivalent release forces of a 3-node
+        # membrane/plate element is not implemented, so removing a triangle
+        # mid-sequence does not redistribute its locked-in state (unlike a
+        # removed bar); the remaining structure will under-report until this
+        # is added.
+        if removed:
+            rc_id = _add_removal_case(base, sub, removed, accumulated_forces)
+            if rc_id is not None:
+                applied.append(rc_id)
+            for eid in removed:
+                accumulated_forces.pop(eid, None)
+                accumulated_tri_state.pop(eid, None)
+                if eid in getattr(base, 'geometry_objects', {}):
+                    # A removed geometry object's generated ids ("<oid>.t1",
+                    # "<oid>.n0", ...) are never carried directly under the
+                    # object's own id — drop every entry that came from it
+                    # (no release-force computation here either, same
+                    # limitation as removed triangles).
+                    prefix = f"{eid}."
+                    for d in (accumulated_forces, accumulated_tri_state):
+                        for k in [k for k in d if k.startswith(prefix)]:
+                            d.pop(k, None)
+
+        # Support removal: a support present in the previous phase but
+        # absent from this one had, by the end of that phase, an accumulated
+        # reaction — by default (phase.release_supports) that reaction is
+        # released as an equivalent load on the remaining structure (the
+        # escora/prumo case: strike the prop, its reaction redistributes).
+        # With release_supports=False the reaction is simply dropped, no
+        # redistribution (see dev/SUPPORT_RELEASE_PLAN.md).
+        restraints_cur = _effective_restraints(base, eff_support_set_id,
+                                               support_sets)
+        if prev_restraints is not None:
+            removed_dofs = _diff_removed_dofs(prev_restraints, restraints_cur)
+            if removed_dofs and phase.release_supports:
+                rc_id = _add_support_release_case(
+                    sub, removed_dofs, accumulated_reactions)
+                if rc_id is not None:
+                    applied.append(rc_id)
+            for (nid, k) in removed_dofs:
+                if nid in accumulated_reactions:
+                    accumulated_reactions[nid][k] = 0.0
+        prev_restraints = restraints_cur
+        prev_support_set_id = eff_support_set_id
+
+        # Inherit the accumulated state (do not mutate the user's phase).
+        # The internal removal/support-release case ids appended onto
+        # `applied` above have no entry in eff_case_factors and so default
+        # to a unit factor via _superpose_cases — exactly right, they are
+        # not user-authored loads to be scaled.
+        eff_phase = dataclasses.replace(
+            phase, applied_cases=applied, case_factors=eff_case_factors,
+            initial_state=dict(accumulated_forces))
+        res = solve_phase(base, eff_phase, support_sets, _sub=sub,
+                          tri_initial_state=accumulated_tri_state)
+
+        # Accumulate forces (final of this phase becomes the carried state).
+        accumulated_forces = _forces_to_initial_state(res['element_forces'])
+        accumulated_tri_state = _tri_state_to_initial(res['tri_stress'])
+        # Accumulate element distributions: add this phase's increment
+        # distribution on top of what previous phases already carried.
+        accumulated_dist = _accumulate_dist(
+            accumulated_dist, res.get('element_distribution', {}))
+        # Reactions are linear in the loads — sum this phase's increment onto
+        # whatever was already accumulated (a node not restrained this phase
+        # reports a zero increment, so it neither gains nor loses reaction here).
+        for nid, r in res['reactions'].items():
+            cur = accumulated_reactions.get(nid, [0.0, 0.0, 0.0])
+            accumulated_reactions[nid] = [cur[k] + r[k] for k in range(3)]
+        # Replace increment values with accumulated totals before storing.
+        res = dict(res)
+        res['element_distribution'] = dict(accumulated_dist)
+        res['reactions'] = {nid: list(v) for nid, v in accumulated_reactions.items()}
+
+        # Method 2: accumulate displacements.
+        if method == 'cumulative':
+            for nid, d in res['displacements'].items():
+                cur = cumulative_disp.get(nid, [0.0, 0.0, 0.0])
+                cumulative_disp[nid] = [cur[k] + d[k] for k in range(3)]
+            res = dict(res)
+            res['displacements'] = {nid: list(v)
+                                    for nid, v in cumulative_disp.items()}
+
+        out_phases[phase.id] = res
+        last_final = res
+        prev_active = active
+        prev_nodes = set()
+        for eid in active:
+            be = base.bar_elements_by_id.get(eid)
+            if be is not None:
+                prev_nodes.add(be.node_i); prev_nodes.add(be.node_j)
+                continue
+            te = getattr(base, 'tri_elements_by_id', {}).get(eid)
+            if te is not None:
+                prev_nodes.add(te.node_i); prev_nodes.add(te.node_j)
+                prev_nodes.add(te.node_k)
+                continue
+            obj = getattr(base, 'geometry_objects', {}).get(eid)
+            if obj is not None:
+                # Only the object's own authored/corner nodes are tracked
+                # here (its internally-generated mesh nodes are not known
+                # until expansion) — good enough to mask nodal loads placed
+                # on the object's real, user-visible nodes.
+                prev_nodes.update(getattr(obj, 'node_ids', []) or [])
+        applied_before.update(eff_applied_cases)
+
+    return {'phases': out_phases, 'final': last_final}
+
+
+def _tri_state_to_initial(tri_stress: dict) -> dict:
+    """Extract just the linear base fields (+ formulation) from a final
+    per-triangle result dict — the triangle twin of
+    :func:`_forces_to_initial_state`, used to carry the state into the next
+    phase (the derived fields are recomputed there, not carried)."""
+    from .variants import _tri_kind, _TRI_BASE_FIELDS
+    out = {}
+    for tid, d in (tri_stress or {}).items():
+        kind = _tri_kind(d)
+        if kind is None:
+            continue
+        state = {f: d.get(f, 0.0) for f in _TRI_BASE_FIELDS[kind]}
+        state['formulation'] = d.get('formulation', kind)
+        out[tid] = state
+    return out
+
+
+def _strip_unused_cases(sub, keep):
+    """Drop every load case not in *keep* — plus all analysis cases and
+    combinations — from the (already-copied) phase sub-structure. Phasing only
+    reads the plain per-load-case results of the applied cases, so everything
+    else is wasted solve/post-processing time."""
+    keep = set(keep)
+    sub.analysis_cases = []
+    sub.analysis_cases_by_id = {}
+    sub.load_combinations = []
+    for cid in [lc.id for lc in sub.load_cases if lc.id not in keep]:
+        sub.remove_load_case(cid)
+
+
+def _mask_repeated_cases_to_new(sub, case_ids, new_elems, prev_nodes):
+    """Restrict every load of *case_ids* to entities NEW in this phase, on the
+    (already-copied) sub: element/triangle loads survive only on new
+    elements/triangles, nodal loads/settlements only at nodes that did not
+    exist in the previous phase. Explicit self-weight loads added by
+    :func:`_mask_self_weight_to_new` target new elements only, so they are
+    preserved by construction."""
+    cases = set(case_ids)
+    for attr in ('distributed_loads', 'element_point_loads',
+                 'temperature_loads'):
+        setattr(sub, attr, [
+            l for l in getattr(sub, attr, [])
+            if l.load_case_id not in cases or l.element_id in new_elems])
+    for attr in ('tri_edge_loads', 'tri_area_loads', 'tri_temperature_loads'):
+        setattr(sub, attr, [
+            l for l in getattr(sub, attr, [])
+            if l.load_case_id not in cases or l.tri_id in new_elems])
+    for attr in ('point_loads', 'support_settlements'):
+        setattr(sub, attr, [
+            l for l in getattr(sub, attr, [])
+            if l.load_case_id not in cases or l.node_id not in prev_nodes])
+
+
+def _add_removal_case(base, sub, removed, accumulated_forces):
+    """Create an internal load case on *sub* carrying the release forces of
+    the removed elements, and return its id (None when there is nothing to
+    release).
+
+    Convention (verified against the solver): the carried end forces are the
+    local forces the ELEMENT exerts ON each node (a compressed vertical prop
+    reports +N at its top end — it pushes the beam up). Removing the element
+    takes that action away, so the increment on the remaining structure is its
+    negation: ``-T^T·p`` at each surviving node.
+    """
+    import math
+    rc_id = None
+    for eid in sorted(removed):
+        st = accumulated_forces.get(eid)
+        if st is None:
+            continue
+        be = base.bar_elements_by_id.get(eid)
+        if be is None:
+            continue
+        ni = base.nodes.get(be.node_i)
+        nj = base.nodes.get(be.node_j)
+        if ni is None or nj is None:
+            continue
+        dx, dy = nj.x - ni.x, nj.y - ni.y
+        length = math.hypot(dx, dy)
+        if length == 0.0:
+            continue
+        c, s = dx / length, dy / length
+        for nid, p in ((be.node_i, st.i), (be.node_j, st.j)):
+            if nid not in sub.nodes:
+                continue                      # node left with the element
+            fx = -(c * p[0] - s * p[1])
+            fy = -(s * p[0] + c * p[1])
+            mz = -p[2]
+            if fx == 0.0 and fy == 0.0 and mz == 0.0:
+                continue
+            if rc_id is None:
+                rc_id = "__removal__"
+                k = 0
+                while rc_id in sub.load_cases_by_id:
+                    k += 1
+                    rc_id = f"__removal__{k}"
+                sub.add_load_case(rc_id, create_analysis_case=False)
+            sub.add_point_load(nid, rc_id, fx=fx, fy=fy, mz=mz)
+    return rc_id
+
+
+def _effective_restraints(base, support_set_id, support_sets) -> dict:
+    """Per-node restraint booleans in effect for a phase: ``{node_id:
+    (bool, bool, bool)}`` — component 0/1/2 is ux/uy/tz (plane) or
+    w/tx/ty (plate), same aliasing convention as reactions/point loads
+    elsewhere in this module.
+
+    ``support_set_id is None`` means the base's own supports
+    (:func:`workflows.current_restraints`); otherwise the referenced
+    :class:`~xdfem2d.models.SupportSet`, resolved exactly like
+    ``Structure2D.derive_variant`` resolves it — a per-node ``restraints``
+    dict (the GUI model) if present, otherwise named ``assignments`` against
+    the base's own :class:`~xdfem2d.models.Support` types.
+    """
+    if support_set_id is None:
+        from .workflows import current_restraints
+        return current_restraints(base)
+    sset = (support_sets or {}).get(support_set_id)
+    if sset is None:
+        raise ValueError(f"SupportSet '{support_set_id}' not found.")
+    restraints = getattr(sset, 'restraints', None)
+    if restraints:
+        return {nid: (bool(r[0]), bool(r[1]), bool(r[2]))
+                for nid, r in restraints.items()}
+    out = {}
+    for a in sset.assignments:
+        sp = base.supports.get(a.support_name)
+        if sp is not None:
+            out[a.node_id] = (bool(sp.ux), bool(sp.uy), bool(sp.tz))
+    return out
+
+
+def _diff_removed_dofs(prev: dict, cur: dict) -> set:
+    """``{(node_id, component)}`` restrained in *prev* but not in *cur* — the
+    DOFs whose accumulated reaction needs releasing this phase. A DOF added
+    (present in *cur* but not *prev*) needs no symmetric handling: a new
+    support is installed unloaded (standard construction-staging convention),
+    so it is not reported here."""
+    removed = set()
+    for nid, r in prev.items():
+        cr = cur.get(nid, (False, False, False))
+        for k in range(3):
+            if r[k] and not cr[k]:
+                removed.add((nid, k))
+    return removed
+
+
+def _add_support_release_case(sub, removed_dofs, accumulated_reactions):
+    """Create an internal load case on *sub* carrying the negated
+    accumulated reaction of each released support DOF, and return its id
+    (None when there is nothing to release) — the support twin of
+    :func:`_add_removal_case`.
+
+    Convention: the accumulated reaction is what the support was exerting ON
+    the structure to hold it up; releasing the support takes that action
+    away, so the increment on the remaining structure is its negation —
+    exactly the same sign convention as the bar-removal case above, just
+    without a local-axis transform (a reaction component already lives in
+    the same global/aliased frame a point load does)."""
+    rc_id = None
+    for (nid, k) in sorted(removed_dofs):
+        if nid not in sub.nodes:
+            continue                      # the node itself left too
+        r = accumulated_reactions.get(nid, [0.0, 0.0, 0.0])[k]
+        if r == 0.0:
+            continue
+        if rc_id is None:
+            rc_id = "__support_release__"
+            n = 0
+            while rc_id in sub.load_cases_by_id:
+                n += 1
+                rc_id = f"__support_release__{n}"
+            sub.add_load_case(rc_id, create_analysis_case=False)
+        comp = [0.0, 0.0, 0.0]
+        comp[k] = -r
+        sub.add_point_load(nid, rc_id, fx=comp[0], fy=comp[1], mz=comp[2])
+    return rc_id
+
+
+def _forces_to_initial_state(element_forces: dict) -> dict:
+    """Convert a final element_forces dict into {elem_id: ElementInitialState}."""
+    out = {}
+    for eid, v in element_forces.items():
+        out[eid] = ElementInitialState(i=tuple(v['i']), j=tuple(v['j']))
+    return out
+
+
+def _mask_self_weight_to_new(sub, new_elements: set):
+    """Restrict self-weight to *new* elements on the (already-copied) sub.
+
+    For each load case that applies self-weight, the self-weight factor is
+    cleared and replaced by explicit loads on the new elements only — a
+    uniform load per new bar, a lumped nodal load per new triangle (mirrors
+    ``loads._apply_tri_self_weight``'s own W/3-per-vertex formula), and the
+    same per new geometry OBJECT (a GeoRectangle/GeoPolygon/GeoSegment/...):
+    its generated bars/triangles only exist once ``sub`` is expanded, so a
+    throwaway ``expand_geometry(sub)`` is run here just to learn their ids —
+    since expansion is deterministic given unchanged geometry, the point
+    loads added below (keyed by those same generated node ids) land correctly
+    once the real ``sub.calculate()`` re-expands later. Old elements/objects
+    therefore receive no self-weight in this phase (their weight is already
+    carried in the inherited initial state).
+
+    Before this was triangle-aware, clearing ``self_weight_factor`` (a
+    load-case-wide switch, not per-element) silently dropped self-weight from
+    every triangle forever — the bar branch below re-added it for bars, but
+    nothing did for triangles, in a *new* one or an old one. Geometry objects
+    have the same problem one level up: their generated elements do not exist
+    yet in ``sub.bar_elements``/``sub.tri_elements`` for the two loops below
+    to find, so they need their own pass.
+    """
+    from .loads import _is_plate, _tri_area, _quad_area
+    plate = _is_plate(sub)
+
+    new_objects = [oid for oid in getattr(sub, 'geometry_objects', {})
+                  if oid in new_elements]
+    obj_compiled = None
+    obj_trace = None
+    if new_objects:
+        from .geo_expand import expand_geometry
+        obj_compiled, obj_trace = expand_geometry(sub)
+
+    for lc in sub.load_cases:
+        factor = lc.self_weight_factor
+        if factor == 0.0:
+            continue
+        lc.self_weight_factor = 0.0
+        for e in sub.bar_elements:
+            if e.id not in new_elements:
+                continue
+            sec = sub.sections.get(e.section_name)
+            mat = sub.materials.get(sec.material_name) if sec else None
+            if sec is None or mat is None:
+                continue
+            area = (sec.area_override if sec.area_override is not None
+                    else sec.b * sec.h)
+            w = area * mat.unit_weight * factor      # kN/m, downward
+            if w != 0.0:
+                sub.add_distributed_load(e.id, lc.id, fye=-w, fyd=-w, coord_sys='global')
+        for t in getattr(sub, 'tri_elements', []):
+            if t.id not in new_elements:
+                continue
+            sec = sub.tri_sections.get(t.section_name)
+            mat = sub.materials.get(sec.material_name) if sec else None
+            if sec is None or mat is None:
+                continue
+            gamma = getattr(mat, 'unit_weight', 0.0)
+            if gamma == 0.0:
+                continue
+            f = -gamma * sec.thickness * _tri_area(sub, t) / 3.0 * factor
+            if f == 0.0:
+                continue
+            for nid in (t.node_i, t.node_j, t.node_k):
+                if plate:
+                    sub.add_point_load(nid, lc.id, fz=f)
+                else:
+                    sub.add_point_load(nid, lc.id, fy=f)
+        # Directly-authored quads — the 4-node twin of the triangle branch
+        # above (dev/refactor_area_path.md Phase 2): W/4 lumped to each vertex,
+        # matching QuadAreaLoad's tributary rule.
+        for q in getattr(sub, 'quad_elements', []):
+            if q.id not in new_elements:
+                continue
+            sec = sub.quad_sections.get(q.section_name)
+            mat = sub.materials.get(sec.material_name) if sec else None
+            if sec is None or mat is None:
+                continue
+            gamma = getattr(mat, 'unit_weight', 0.0)
+            if gamma == 0.0:
+                continue
+            f = -gamma * sec.thickness * _quad_area(sub, q) / 4.0 * factor
+            if f == 0.0:
+                continue
+            for nid in (q.node_i, q.node_j, q.node_k, q.node_l):
+                if plate:
+                    sub.add_point_load(nid, lc.id, fz=f)
+                else:
+                    sub.add_point_load(nid, lc.id, fy=f)
+
+        for oid in new_objects:
+            info = obj_trace.get(oid, {})
+            for tid in info.get('tris', []) or []:
+                t = obj_compiled.tri_elements_by_id.get(tid)
+                if t is None:
+                    continue
+                sec = obj_compiled.tri_sections.get(t.section_name)
+                mat = obj_compiled.materials.get(sec.material_name) if sec else None
+                if sec is None or mat is None:
+                    continue
+                gamma = getattr(mat, 'unit_weight', 0.0)
+                if gamma == 0.0:
+                    continue
+                f = -gamma * sec.thickness * _tri_area(obj_compiled, t) / 3.0 * factor
+                if f == 0.0:
+                    continue
+                for nid in (t.node_i, t.node_j, t.node_k):
+                    if plate:
+                        sub.add_point_load(nid, lc.id, fz=f)
+                    else:
+                        sub.add_point_load(nid, lc.id, fy=f)
+            for qid in info.get('quads', []) or []:
+                q = obj_compiled.quad_elements_by_id.get(qid)
+                if q is None:
+                    continue
+                sec = obj_compiled.quad_sections.get(q.section_name)
+                mat = obj_compiled.materials.get(sec.material_name) if sec else None
+                if sec is None or mat is None:
+                    continue
+                gamma = getattr(mat, 'unit_weight', 0.0)
+                if gamma == 0.0:
+                    continue
+                f = -gamma * sec.thickness * _quad_area(obj_compiled, q) / 4.0 * factor
+                if f == 0.0:
+                    continue
+                for nid in (q.node_i, q.node_j, q.node_k, q.node_l):
+                    if plate:
+                        sub.add_point_load(nid, lc.id, fz=f)
+                    else:
+                        sub.add_point_load(nid, lc.id, fy=f)
+            for eid in info.get('elems', []) or []:
+                e = obj_compiled.bar_elements_by_id.get(eid)
+                if e is None:
+                    continue
+                sec = obj_compiled.sections.get(e.section_name)
+                mat = obj_compiled.materials.get(sec.material_name) if sec else None
+                if sec is None or mat is None:
+                    continue
+                area = (sec.area_override if sec.area_override is not None
+                        else sec.b * sec.h)
+                w = area * mat.unit_weight * factor
+                if w != 0.0:
+                    sub.add_distributed_load(eid, lc.id, fye=-w, fyd=-w, coord_sys='global')
+
+
+def add_imposed_strain(struc, element_ids, eps, load_case_id):
+    """Apply an imposed axial strain *eps* to elements (shrinkage / creep proxy).
+
+    Implemented via the existing thermal mechanism: an axial strain ``eps`` is
+    equivalent to a uniform temperature change ``ΔT = eps / alpha`` (alpha = the
+    element material's thermal expansion coefficient). This reuses the solver's
+    validated temperature path, so a fully restrained bar reports ``N = -EA·eps``
+    and a free bar reports ``N = 0``.
+
+    Shrinkage: pass ``eps = eps_cs`` (negative, shortening).
+    Creep (approximate): pass an equivalent strain derived from the permanent
+    stress state and a creep coefficient — an approximation, flagged as such.
+    """
+    for eid in element_ids:
+        elem = struc.bar_elements_by_id.get(eid)
+        if elem is None:
+            continue
+        sec = struc.sections.get(elem.section_name)
+        mat = struc.materials.get(sec.material_name) if sec else None
+        alpha = getattr(mat, 'alpha', 1e-5) or 1e-5
+        struc.add_temperature_load(eid, load_case_id,
+                                   dt_uniform=eps / alpha)
+
+
+def initial_state_from_results(results: dict, case_id: str,
+                               element_ids=None) -> dict:
+    """Build ``{elem_id: ElementInitialState}`` from a solved result's
+    ``element_forces`` for a given load case / analysis case / combination.
+
+    Used to seed a phase's ``initial_state`` from the previous model/phase.
+    """
+    ef = (results.get('element_forces', {}).get(case_id)
+          or results.get('analysis_cases', {}).get(case_id, {}).get('element_forces')
+          or results.get('combinations', {}).get(case_id, {}).get('element_forces')
+          or {})
+    out = {}
+    for eid, v in ef.items():
+        if element_ids is not None and eid not in element_ids:
+            continue
+        if 'i' in v and 'j' in v:
+            out[eid] = ElementInitialState(i=tuple(v['i']), j=tuple(v['j']))
+    return out
