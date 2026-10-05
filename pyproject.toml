@@ -1,0 +1,156 @@
+[project]
+# This project is the ENGINE, and only the engine. It is what `pip install
+# xdfem2d` gives you and what is published to PyPI under the LGPLv3 licence in
+# LICENSE.md.
+#
+# The desktop application is deliberately not a distribution.
+# It never needed to be: it ships as a compiled Nuitka bundle, not as a wheel,
+# so there is nothing to gain from packaging it and a licence to violate by
+# doing so — a wheel named `xdfem2d` containing the closed application would be
+# published under LGPL terms by its own metadata. The application's own
+# dependencies are in the 'app' dependency group below, installed by default
+# for development.
+name = "xdfem2d"
+version = "2026.10.7"
+description = "2D plane frame and shell finite element analysis"
+# SPDX expression (PEP 639), not `{ file = ... }`: that form pasted the whole
+# licence text into the "License" field of the PyPI page. The text still
+# travels in the wheel, through license-files.
+license = "LGPL-3.0-or-later"
+license-files = ["LICENSE.md"]
+authors = [{ name = "Paulo Cachim", email = "eurocodepy@gmail.com" }]
+keywords = ["finite element", "structural analysis", "eurocode", "frames", "slabs", "grillages"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+# The engine's own README, not the application's: this text is the package
+# page on PyPI, and the application's README describes an interface that is
+# not in the wheel.
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.4.6",
+    "scipy>=1.11",
+    "eurocodepy>=2027.0.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/pcachim/xdfem2D"
+Documentation = "https://pcachim.github.io/xdfem2D"
+Issues = "https://github.com/pcachim/xdfem2D/issues"
+Releases = "https://github.com/pcachim/xdfem2D/releases"
+
+[project.optional-dependencies]
+# Reporting and drawing exchange. Kept out of the core install because they
+# are reached from exactly two modules — report_io and dxf_io — and only from
+# inside the functions that need them, so an engine without these still
+# imports, assembles, solves and designs. Someone using xdfem2d as a solver in
+# a script or a service should not be made to install Word and DXF libraries
+# to do it.
+#
+# Import them lazily or this becomes a lie: a module-level import in either
+# file turns a missing extra into an ImportError on `import xdfem2d`.
+report = [
+    "matplotlib>=3.10.9",  # figures in the PDF report
+    "openpyxl>=3.1",      # .xlsx results and model tables
+    "python-docx>=1.1",   # .docx reports
+]
+dxf = [
+    "ezdxf>=1.3",         # DXF import and export
+]
+ifc = [
+    "ifcopenshell>=0.8",  # IFC (openBIM) import and export
+]
+all = [
+    "xdfem2d[report,dxf,ifc]",
+]
+
+# No optional client extras. 'openai' is a hard dependency of the 'app' group
+# below: it is the client for every remote provider the application offers, so
+# making it optional only produced an installation where a listed model failed
+# on its first question. Anthropic, which needed a second client of its own,
+# was removed; it is still reachable through OpenRouter.
+# NOTE: mkdocs / mkdocs-material are NOT runtime dependencies — the app only
+# opens the pre-built HTML site (or falls back to the online docs). They live in
+# the 'docs' dependency group below, used only to build the documentation.
+
+# No entry point here: the script would live in the engine wheel and point at
+# a package the wheel does not contain. The application is launched from the
+# compiled bundle, or with `python run_gui.py` in a checkout.
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/xdfem2d"]
+# Icons (and other data files) under src/xdfem2d are included automatically as
+# part of the package — do NOT also force-include them, or hatchling raises
+# "A second file is being added to the wheel archive at the same path".
+
+[dependency-groups]
+# What the desktop application needs on top of the engine. A group rather than
+# an optional extra: an extra is part of the published metadata and would
+# advertise, from within an LGPL package, the dependencies of software that is
+# not in it.
+app = [
+    "pyside6>=6.11.1",
+    # The application offers every export the engine can do, so it takes what
+    # the engine makes optional. Listed rather than pulled in as
+    # `xdfem2d[all]`: a dependency group cannot depend on an extra of its own
+    # project, and a self-reference that resolved from the index would install
+    # the *published* engine over the working copy.
+    "matplotlib>=3.10.9",
+    "openpyxl>=3.1",
+    "python-docx>=1.1",
+    "ezdxf>=1.3",
+    "ifcopenshell>=0.8",
+    "ollama>=0.6.2",
+    "openai>=2.46.0",
+    # API keys for remote assistants go to the OS keychain — Keychain Access on
+    # macOS, and the equivalent elsewhere. Not optional, because the
+    # alternative is writing keys to a plain-text file, and that should not be
+    # a choice an installation makes by accident.
+    "keyring>=25.0",
+    # Signature verification for the time-limited build check -- an
+    # app-only concern, not the engine's.
+    "cryptography>=49.0.0",
+]
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.5",
+]
+build = [
+    "nuitka>=4.1.2",
+]
+# The test runner. A group (not a runtime/optional dependency): pytest is a
+# development tool, never shipped in the LGPLv3 wheel. The whole suite —
+# tests_engine, tests_app, tests_model — runs under `pytest`.
+test = [
+    "pytest>=8.0",
+]
+
+[tool.uv]
+# Always install 'build' (nuitka) and 'test' (pytest) into the project venv, so
+# `uv run python build_app.py` and `uv run pytest` work without extra flags.
+default-groups = ["build", "app", "test"]
+
+[tool.uv.sources]
+eurocodepy = { path = "../eurocodepy", editable = true }
+
+[tool.pytest.ini_options]
+# All tests live under tests/, split into tests_engine, tests_app and
+# tests_model. testpaths lets a bare `pytest` (or VS Code) discover all three
+# at once; pythonpath puts the engine/app source and the shared helpers
+# (tests/context.py) on sys.path without needing an installed package.
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
