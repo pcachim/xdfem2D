@@ -1355,14 +1355,13 @@ reading modal results:</p>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Rocking modes need an explicit rotary inertia</p>
-<p>Any mode whose kinematics involve the nodal <strong>rotations</strong> — the rocking of a
-rigid block on springs is the typical case — must be given a rotational mass
-<code>mtz</code>, otherwise it is carried by degrees of freedom that have no mass and
-are numerically regularised. The regularisation degrades the conditioning of
-the eigenproblem, and the resulting frequency can drift by several percent
-with the member stiffness and even between machines. For a member lumped
-into segments of length <em>h</em>, the consistent value is <code>mtz = mᵢ·h²/12</code> at each
-node. With it, the same frequency is stable to 10⁻⁵.</p>
+<p>Degrees of freedom with no mass (typically the nodal <strong>rotations</strong>) are
+eliminated exactly by static condensation, so they cost no accuracy and
+produce no spurious modes. But a mode whose kinematics involve those
+rotations — the rocking of a rigid block on springs is the typical case —
+only exists if it has a rotational mass <code>mtz</code>: without it the rocking merges
+with heave. For a member lumped into segments of length <em>h</em>, the consistent
+value is <code>mtz = mᵢ·h²/12</code> at each node.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Effective mass percentages are relative to the FREE mass</p>
