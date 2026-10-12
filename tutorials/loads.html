@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="build-a-beam.html">
+        <link rel="prev" href="springs.html">
       
       
-        <link rel="next" href="modify-and-delete.html">
+        <link rel="next" href="analysis-cases.html">
       
       
         
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#loads-a-case-first-then-the-loads-in-it" class="md-skip">
+        <a href="#loads" class="md-skip">
           Skip to content
         </a>
       
@@ -636,8 +636,6 @@
       
         
       
-        
-      
     
     
     
@@ -694,6 +692,90 @@
   
   
     <li class="md-nav__item">
+      <a href="materials-and-sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="nodes-and-bars.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and bars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-and-walls.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs and walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="supports.html" class="md-nav__link">
         
   
@@ -722,14 +804,14 @@
   
   
     <li class="md-nav__item">
-      <a href="build-a-beam.html" class="md-nav__link">
+      <a href="springs.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a beam or a bar
+    Springs
   
 
     
@@ -810,35 +892,235 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#create-a-load-case" class="md-nav__link">
+  <a href="#load-cases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create a load case
+        Load cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-case-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Load case: add
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#uniform-load-on-a-bar" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#load-case-edit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uniform load on a bar
+        Load case: edit
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#a-point-load-at-a-node-and-on-a-bar" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#load-case-remove" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A point load at a node, and on a bar
+        Load case: remove
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loads-on-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads on nodes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loads on nodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-load-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node load: add
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-load-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node load: edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-load-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node load: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loads-on-bars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads on bars
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loads on bars">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#line-load-add-a-uniform-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line load: add a uniform load
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-load-add-a-load-over-part-of-a-span" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line load: add a load over part of a span
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-load-add-a-triangular-or-trapezoidal-load" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line load: add a triangular or trapezoidal load
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-load-add-a-point-load-along-a-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line load: add a point load along a bar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-load-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line load: edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-load-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Line load: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loads-on-regions-slabs-and-walls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads on regions (slabs and walls)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loads on regions (slabs and walls)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#area-load-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Area load: add
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#area-load-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Area load: edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#area-load-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Area load: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -851,16 +1133,144 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pressure-on-a-slab-or-a-wall" class="md-nav__link">
+    <nav class="md-nav" aria-label="Self weight">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#self-weight-add" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pressure on a slab or a wall
+        Self weight: add
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-weight-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self weight: edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-weight-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self weight: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temperature
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Temperature">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temperature-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temperature: add
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temperature-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temperature: edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temperature-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temperature: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settlement-of-a-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settlement of a support
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Settlement of a support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settlement-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settlement: add
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settlement-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settlement: edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settlement-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settlement: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -873,6 +1283,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Several cases and a combination">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loads-combine-several-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads: combine several cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -883,6 +1310,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Common mistakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loads-common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loads: common mistakes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -902,34 +1346,6 @@
   
   
     <li class="md-nav__item">
-      <a href="modify-and-delete.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Edit or delete
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="analysis-cases.html" class="md-nav__link">
         
   
@@ -937,91 +1353,7 @@
   <span class="md-ellipsis">
     
   
-    Analysis cases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="springs.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Springs
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="slabs-and-walls.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Slabs and walls
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="change-section-material.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Change a section or material
+    Analysis cases and combinations
   
 
     
@@ -1221,12 +1553,13 @@
 
 
 
-<h1 id="loads-a-case-first-then-the-loads-in-it">Loads: a case first, then the loads in it<a class="headerlink" href="#loads-a-case-first-then-the-loads-in-it" title="Permanent link">&para;</a></h1>
-<p>Every load belongs to a <strong>load case</strong>. Create the case, then put loads in it.
-Magnitudes are positive numbers; the <strong>direction</strong> gives the sign. The bar, node,
-region and case can each be given as the object a <code>create_*</code> call returned or as
-its id as text (<code>'B1'</code>, <code>'N2'</code>, <code>'G'</code>): the objects only exist in the reply that
-made them, the ids always do.</p>
+<h1 id="loads">Loads<a class="headerlink" href="#loads" title="Permanent link">&para;</a></h1>
+<p>Every load belongs to a <strong>load case</strong>. Create the case, then put loads in it. Magnitudes
+are positive numbers; the <strong>direction</strong> gives the sign. The bar, node, region and case
+can each be given as the object a <code>create_*</code> call returned or as its id as text (<code>'B1'</code>,
+<code>'N2'</code>, <code>'G'</code>): the objects only exist in the reply that made them, the ids always do.</p>
+<p>The same calls add a load to a model that already has some: nothing that is there
+changes. A load on a bar that is already loaded in that case adds to it.</p>
 <table>
 <thead>
 <tr>
@@ -1242,14 +1575,9 @@ made them, the ids always do.</p>
 <td>kN/m</td>
 </tr>
 <tr>
-<td>uniform pressure, on a slab or wall region</td>
-<td><code>create_uniform_load(region, case, value, 'down')</code></td>
-<td>kN/m²</td>
-</tr>
-<tr>
-<td>point load on a node</td>
-<td><code>create_node_load(node, case, p, 'down')</code></td>
-<td>kN</td>
+<td>trapezoidal, on a bar</td>
+<td><code>create_bar_distributed_load(bar, case, q_i=, q_j=)</code></td>
+<td>kN/m</td>
 </tr>
 <tr>
 <td>point load along a bar</td>
@@ -1257,44 +1585,197 @@ made them, the ids always do.</p>
 <td>kN, <code>at</code> is the fraction of the span</td>
 </tr>
 <tr>
+<td>point load on a node</td>
+<td><code>create_node_load(node, case, p, 'down')</code></td>
+<td>kN</td>
+</tr>
+<tr>
+<td>pressure on a slab or wall region</td>
+<td><code>create_uniform_load(region, case, value, 'down')</code></td>
+<td>kN/m²</td>
+</tr>
+<tr>
 <td>self weight</td>
 <td><code>load_case</code> option or <code>create_self_weight(factor, case)</code></td>
 <td></td>
 </tr>
+<tr>
+<td>temperature</td>
+<td><code>create_temperature(bar, uniform=, gradient=, load_case=)</code></td>
+<td>degrees</td>
+</tr>
+<tr>
+<td>settlement of a support</td>
+<td><code>create_support_settlement(node, case, uy=)</code></td>
+<td>m</td>
+</tr>
 </tbody>
 </table>
-<h2 id="create-a-load-case">Create a load case<a class="headerlink" href="#create-a-load-case" title="Permanent link">&para;</a></h2>
-<p>A case has an id and, optionally, a type: <code>'permanent'</code> (the default), <code>'live'</code>,
-<code>'wind'</code>, <code>'seismic'</code> or <code>'temperature'</code>:</p>
+<p>There is no call to edit a load in place: to change one, delete it and create it again
+(<code>delete_load</code>). The headings below are one type of load each, with Add, Edit and Remove.</p>
+<h2 id="load-cases">Load cases<a class="headerlink" href="#load-cases" title="Permanent link">&para;</a></h2>
+<h3 id="load-case-add">Load case: add<a class="headerlink" href="#load-case-add" title="Permanent link">&para;</a></h3>
+<p>A case has an id and, optionally, a type: <code>'permanent'</code> (the default), <code>'live'</code>, <code>'wind'</code>,
+<code>'seismic'</code> or <code>'temperature'</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'HLOAD'</span><span class="p">,</span> <span class="n">action_type</span><span class="o">=</span><span class="s1">'wind'</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'SW'</span><span class="p">,</span> <span class="n">self_weight_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>      <span class="c1"># a case that carries the self weight</span>
 </code></pre></div>
 <p>A linear analysis case with the same name is created with it.</p>
-<h2 id="uniform-load-on-a-bar">Uniform load on a bar<a class="headerlink" href="#uniform-load-on-a-bar" title="Permanent link">&para;</a></h2>
+<h3 id="load-case-edit">Load case: edit<a class="headerlink" href="#load-case-edit" title="Permanent link">&para;</a></h3>
+<p>Change a load case: rename it.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">rename_load_case</span><span class="p">(</span><span class="s1">'G'</span><span class="p">,</span> <span class="s1">'Permanent'</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="load-case-remove">Load case: remove<a class="headerlink" href="#load-case-remove" title="Permanent link">&para;</a></h3>
+<p>Delete a load case (with the loads in it):</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">remove_load_case</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="loads-on-nodes">Loads on nodes<a class="headerlink" href="#loads-on-nodes" title="Permanent link">&para;</a></h2>
+<h3 id="node-load-add">Node load: add<a class="headerlink" href="#node-load-add" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_node_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>                 <span class="c1"># 20 kN</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_node_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">)</span>                 <span class="c1"># 'left' / 'right' are horizontal</span>
+</code></pre></div>
+<h3 id="node-load-edit">Node load: edit<a class="headerlink" href="#node-load-edit" title="Permanent link">&para;</a></h3>
+<p>Change a nodal load: remove it and create it again with the changed value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">)</span>                                  <span class="c1"># what N2 carries in case G</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_node_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>                 <span class="c1"># the new value</span>
+</code></pre></div>
+<h3 id="node-load-remove">Node load: remove<a class="headerlink" href="#node-load-remove" title="Permanent link">&para;</a></h3>
+<p>Delete the loads on a node:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">)</span>          <span class="c1"># one case; '' (or no case) for every case</span>
+</code></pre></div>
+<h2 id="loads-on-bars">Loads on bars<a class="headerlink" href="#loads-on-bars" title="Permanent link">&para;</a></h2>
+<h3 id="line-load-add-a-uniform-load">Line load: add a uniform load<a class="headerlink" href="#line-load-add-a-uniform-load" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'G'</span><span class="p">)</span>                         <span class="c1"># permanent actions</span>
 <span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>    <span class="c1"># 10 kN/m on bar B1, gravity</span>
 </code></pre></div>
-<p><code>direction</code> is <code>'down'</code> or <code>'up'</code> for gravity, and <code>'perp'</code> or <code>'axial'</code> for the
-bar's own axes. The bar is its id as text (<code>'B1'</code>), or the object
-<code>create_bar_element</code> returned when it is made in the same reply; a list loads
-several bars (<code>['B1', 'B2']</code>).</p>
-<h2 id="a-point-load-at-a-node-and-on-a-bar">A point load at a node, and on a bar<a class="headerlink" href="#a-point-load-at-a-node-and-on-a-bar" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_node_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>                 <span class="c1"># 20 kN</span>
-<span class="n">model</span><span class="o">.</span><span class="n">create_node_load</span><span class="p">(</span><span class="s1">'N2'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'right'</span><span class="p">)</span>                 <span class="c1"># 'left' / 'right' are horizontal</span>
-<span class="n">model</span><span class="o">.</span><span class="n">create_bar_point_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">'down'</span><span class="p">)</span>  <span class="c1"># at mid-span</span>
+<p><code>direction</code> is <code>'down'</code> or <code>'up'</code> for gravity, and <code>'perp'</code> or <code>'axial'</code> for the bar's
+own axes. The bar is its id as text (<code>'B1'</code>), or the object <code>create_bar_element</code>
+returned when it is made in the same reply; a list loads several bars (<code>['B1', 'B2']</code>).</p>
+<h3 id="line-load-add-a-load-over-part-of-a-span">Line load: add a load over part of a span<a class="headerlink" href="#line-load-add-a-load-over-part-of-a-span" title="Permanent link">&para;</a></h3>
+<p>A line load covers a whole bar. For "10 kN/m over the second half" put a node where the
+load stops, so that the loaded part is a bar of its own, and load that bar only:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">n1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>       <span class="c1"># where the load starts</span>
+<span class="n">n3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="n">second</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>    <span class="c1"># the first half stays unloaded</span>
 </code></pre></div>
-<p>A load in the middle of a bar is applied there; no extra node is needed.</p>
+<h3 id="line-load-add-a-triangular-or-trapezoidal-load">Line load: add a triangular or trapezoidal load<a class="headerlink" href="#line-load-add-a-triangular-or-trapezoidal-load" title="Permanent link">&para;</a></h3>
+<p><code>create_bar_distributed_load(bar, case, q_i=..., q_j=...)</code> gives the value at each end of
+the bar, in kN/m. "Zero at the left end and 20 kN/m at the right end" is:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">n1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>       <span class="c1"># from n1 (left) to n2 (right)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">pin</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">roller</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="n">free</span><span class="o">=</span><span class="s1">'x'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_bar_distributed_load</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="n">q_i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q_j</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">'down'</span><span class="p">)</span>
+</code></pre></div>
+<p><code>q_i</code> is at the bar's first node, <code>q_j</code> at its second: the order of the nodes in
+<code>create_bar_element</code> decides which end is which.</p>
+<h3 id="line-load-add-a-point-load-along-a-bar">Line load: add a point load along a bar<a class="headerlink" href="#line-load-add-a-point-load-along-a-bar" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_bar_point_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">at</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">'down'</span><span class="p">)</span>  <span class="c1"># at mid-span</span>
+</code></pre></div>
+<p>A load in the middle of a bar is applied there; no extra node is needed. <code>at</code> is the
+fraction of the span from the bar's first node, so a load 2 m from the left support of a
+7 m beam is <code>at=2/7</code>.</p>
+<h3 id="line-load-edit">Line load: edit<a class="headerlink" href="#line-load-edit" title="Permanent link">&para;</a></h3>
+<p>Change the value of a load on a bar: remove it and create it again.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">)</span>                        <span class="c1"># the loads on B1 in case G</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>    <span class="c1"># the new value</span>
+</code></pre></div>
+<h3 id="line-load-remove">Line load: remove<a class="headerlink" href="#line-load-remove" title="Permanent link">&para;</a></h3>
+<p>Delete the loads on a bar:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">)</span>          <span class="c1"># the loads on B1 in case G ('' for every case)</span>
+</code></pre></div>
+<h2 id="loads-on-regions-slabs-and-walls">Loads on regions (slabs and walls)<a class="headerlink" href="#loads-on-regions-slabs-and-walls" title="Permanent link">&para;</a></h2>
+<h3 id="area-load-add">Area load: add<a class="headerlink" href="#area-load-add" title="Permanent link">&para;</a></h3>
+<p>The region is the object <code>create_polygon</code> made (or its id):</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="s1">'L1'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>         <span class="c1"># 5 kN/m²</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_edge_load</span><span class="p">(</span><span class="s1">'L1'</span><span class="p">,</span> <span class="s1">'top'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>             <span class="c1"># kN/m along one edge</span>
+</code></pre></div>
+<p>Edge names are as in <em>Edges of a region</em> in <em>Slabs and walls</em>.</p>
+<h3 id="area-load-edit">Area load: edit<a class="headerlink" href="#area-load-edit" title="Permanent link">&para;</a></h3>
+<p>Change the pressure on a region: remove it and create it again.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_load</span><span class="p">(</span><span class="s1">'L1'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="s1">'L1'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="area-load-remove">Area load: remove<a class="headerlink" href="#area-load-remove" title="Permanent link">&para;</a></h3>
+<p>Delete the loads on a region:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_load</span><span class="p">(</span><span class="s1">'L1'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">)</span>          <span class="c1"># the region's loads in case Q</span>
+</code></pre></div>
 <h2 id="self-weight">Self weight<a class="headerlink" href="#self-weight" title="Permanent link">&para;</a></h2>
+<h3 id="self-weight-add">Self weight: add<a class="headerlink" href="#self-weight-add" title="Permanent link">&para;</a></h3>
 <p>Part of the case itself:</p>
 <div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'SW'</span><span class="p">,</span> <span class="n">self_weight_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>    <span class="c1"># full self weight</span>
 </code></pre></div>
-<h2 id="pressure-on-a-slab-or-a-wall">Pressure on a slab or a wall<a class="headerlink" href="#pressure-on-a-slab-or-a-wall" title="Permanent link">&para;</a></h2>
-<p>The region is the object <code>create_polygon</code> made (or its id):</p>
-<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="s1">'L1'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>         <span class="c1"># 5 kN/m²</span>
+<p>or on an existing case: <code>model.create_self_weight(1.0, 'SW')</code>.</p>
+<h3 id="self-weight-edit">Self weight: edit<a class="headerlink" href="#self-weight-edit" title="Permanent link">&para;</a></h3>
+<p>Change the self-weight factor of a case:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_self_weight</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">'SW'</span><span class="p">)</span>                     <span class="c1"># half of it</span>
 </code></pre></div>
-<p>For a load along one edge of a region, <code>model.create_edge_load('L1', 'top', 'Q', 8)</code>;
-edge names are as in the Supports tutorial.</p>
+<h3 id="self-weight-remove">Self weight: remove<a class="headerlink" href="#self-weight-remove" title="Permanent link">&para;</a></h3>
+<p>Take the self weight out of a case:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_self_weight</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="s1">'SW'</span><span class="p">)</span>                     <span class="c1"># none</span>
+</code></pre></div>
+<h2 id="temperature">Temperature<a class="headerlink" href="#temperature" title="Permanent link">&para;</a></h2>
+<h3 id="temperature-add">Temperature: add<a class="headerlink" href="#temperature-add" title="Permanent link">&para;</a></h3>
+<p>A temperature action goes in a load case of its own. <code>uniform</code> is the change in degrees;
+<code>gradient</code> is the difference through the depth:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_steel_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="s1">'IPE300'</span><span class="p">,</span> <span class="s1">'S275'</span><span class="p">)</span>
+<span class="n">n1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fix</span><span class="p">([</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span> <span class="n">action_type</span><span class="o">=</span><span class="s1">'temperature'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_temperature</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">uniform</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">load_case</span><span class="o">=</span><span class="s1">'T'</span><span class="p">)</span>    <span class="c1"># a rise of 30 degrees</span>
+</code></pre></div>
+<p>A list of bars takes the same temperature. With both ends fixed the bar cannot expand and
+takes an axial force instead.</p>
+<h3 id="temperature-edit">Temperature: edit<a class="headerlink" href="#temperature-edit" title="Permanent link">&para;</a></h3>
+<p>Change a temperature action: delete it and create it again with the changed value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'T'</span><span class="p">,</span> <span class="n">action_type</span><span class="o">=</span><span class="s1">'temperature'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">delete_temperature</span><span class="p">(</span><span class="s1">'B2'</span><span class="p">,</span> <span class="s1">'T'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_temperature</span><span class="p">(</span><span class="s1">'B2'</span><span class="p">,</span> <span class="n">uniform</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">load_case</span><span class="o">=</span><span class="s1">'T'</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="temperature-remove">Temperature: remove<a class="headerlink" href="#temperature-remove" title="Permanent link">&para;</a></h3>
+<p>Delete the temperature loads on a bar:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">delete_temperature</span><span class="p">(</span><span class="s1">'B2'</span><span class="p">,</span> <span class="s1">'T'</span><span class="p">)</span>   <span class="c1"># '' for every case</span>
+</code></pre></div>
+<h2 id="settlement-of-a-support">Settlement of a support<a class="headerlink" href="#settlement-of-a-support" title="Permanent link">&para;</a></h2>
+<h3 id="settlement-add">Settlement: add<a class="headerlink" href="#settlement-add" title="Permanent link">&para;</a></h3>
+<p>A settlement is an imposed displacement of a supported node, in a load case of its own.
+The sign is the axis: <code>uy</code> negative is <strong>downwards</strong>, <code>ux</code> positive is to the right. "The
+middle support settles 10 mm" is <code>uy=-0.01</code> (metres):</p>
+<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">n1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">n3</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">12.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">pin</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">roller</span><span class="p">([</span><span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">],</span> <span class="n">free</span><span class="o">=</span><span class="s1">'x'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'SETTLE'</span><span class="p">)</span>                           <span class="c1"># a case of its own</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_support_settlement</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="s1">'SETTLE'</span><span class="p">,</span> <span class="n">uy</span><span class="o">=-</span><span class="mf">0.01</span><span class="p">)</span>    <span class="c1"># 10 mm down at the middle support</span>
+</code></pre></div>
+<h3 id="settlement-edit">Settlement: edit<a class="headerlink" href="#settlement-edit" title="Permanent link">&para;</a></h3>
+<p>Change a settlement: set its displacement again.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">support_settlements</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="s1">'N2'</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">uy</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.02</span>                                       <span class="c1"># now 20 mm</span>
+</code></pre></div>
+<h3 id="settlement-remove">Settlement: remove<a class="headerlink" href="#settlement-remove" title="Permanent link">&para;</a></h3>
+<p>Delete the settlement of a support:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">support_settlements</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">support_settlements</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">node_id</span> <span class="o">!=</span> <span class="s1">'N2'</span><span class="p">]</span>
+</code></pre></div>
 <h2 id="several-cases-and-a-combination">Several cases and a combination<a class="headerlink" href="#several-cases-and-a-combination" title="Permanent link">&para;</a></h2>
+<h3 id="loads-combine-several-cases">Loads: combine several cases<a class="headerlink" href="#loads-combine-several-cases" title="Permanent link">&para;</a></h3>
 <p>Each case is loaded on its own; they are combined when the analysis is defined:</p>
 <div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'G'</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">create_load_case</span><span class="p">(</span><span class="s1">'Q'</span><span class="p">)</span>
@@ -1302,17 +1783,20 @@ edge names are as in the Supports tutorial.</p>
 <span class="n">model</span><span class="o">.</span><span class="n">create_uniform_load</span><span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'down'</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">create_analysis_case</span><span class="p">(</span><span class="s1">'ULS'</span><span class="p">,</span> <span class="s1">'Linear'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'G'</span><span class="p">:</span> <span class="mf">1.35</span><span class="p">,</span> <span class="s1">'Q'</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">})</span>     <span class="c1"># 1.35 G + 1.5 Q</span>
 </code></pre></div>
-<p>The keys are the case ids as text, or the load case objects <code>create_load_case</code>
-returned (<code>{g: 1.35, q: 1.5}</code>); both work.</p>
-<p><code>create_load_case</code> already makes a linear analysis case of the same name, so a
-single case needs nothing more. <code>create_analysis_case(id, 'Linear', {case:
-factor})</code> combines several. <code>create_load_combination('C1', {'G': 1.35, 'Q': 1.5})</code>
-is for the combinations used in the design checks.</p>
+<p>The keys are the case ids as text, or the load case objects <code>create_load_case</code> returned
+(<code>{g: 1.35, q: 1.5}</code>); both work.</p>
+<p><code>create_load_case</code> already makes a linear analysis case of the same name, so a single
+case needs nothing more. <code>create_analysis_case(id, 'Linear', {case: factor})</code> combines
+several. <code>create_load_combination('C1', {'G': 1.35, 'Q': 1.5})</code> is for the combinations
+used in the design checks. See <em>Analysis cases and combinations</em>.</p>
 <h2 id="common-mistakes">Common mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
+<h3 id="loads-common-mistakes">Loads: common mistakes<a class="headerlink" href="#loads-common-mistakes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>A load on a case that does not exist: create it with <code>create_load_case</code> first.</li>
 <li>A negative magnitude with <code>'down'</code>: it points up. Use <code>'up'</code> instead.</li>
 <li>A load on a bar that has not been created yet: the bar comes first.</li>
+<li>A load on a bar id you did not see: bar ids follow the order of creation, so in a frame
+  whose columns come first <code>B1</code> is a column (see <em>Ids</em> in <em>Nodes and bars</em>).</li>
 </ul>
 
 

@@ -16,7 +16,7 @@
         <link rel="prev" href="../templates.html">
       
       
-        <link rel="next" href="supports.html">
+        <link rel="next" href="materials-and-sections.html">
       
       
         
@@ -636,8 +636,6 @@
       
         
       
-        
-      
     
     
     
@@ -694,14 +692,14 @@
   
   
     <li class="md-nav__item">
-      <a href="supports.html" class="md-nav__link">
+      <a href="materials-and-sections.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Supports
+    Materials and sections
   
 
     
@@ -722,126 +720,14 @@
   
   
     <li class="md-nav__item">
-      <a href="build-a-beam.html" class="md-nav__link">
+      <a href="nodes-and-bars.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a beam or a bar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="loads.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Loads
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="modify-and-delete.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Edit or delete
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="analysis-cases.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analysis cases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="springs.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Springs
+    Nodes and bars
   
 
     
@@ -890,14 +776,98 @@
   
   
     <li class="md-nav__item">
-      <a href="change-section-material.html" class="md-nav__link">
+      <a href="supports.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Change a section or material
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases and combinations
   
 
     
@@ -1098,18 +1068,21 @@
 
 
 <h1 id="tutorials">Tutorials<a class="headerlink" href="#tutorials" title="Permanent link">&para;</a></h1>
-<p>Short recipes for writing a model with <code>model.*</code> calls, one task per page. The AI
-assistant reads them in Create mode (<code>tutorials_tool</code>).</p>
-<ul>
+<p>Short recipes for writing a model with <code>model.*</code> calls, in the order a model is built.
+The AI assistant reads them in Create mode (<code>tutorials_tool</code>). Each page is divided by
+what it handles, and each of those by what you do with it: <strong>add</strong>, <strong>edit</strong>, <strong>remove</strong>.</p>
+<ol>
+<li><a href="materials-and-sections.html">Materials and sections</a>: concrete, steel and timber materials; bar and area sections; another section or material for what exists.</li>
+<li><a href="nodes-and-bars.html">Nodes and bars</a>: nodes, bars, hinges at a bar end, ids.</li>
+<li><a href="slabs-and-walls.html">Slabs and walls</a>: regions with <code>create_polygon</code>; their edges; their loads.</li>
 <li><a href="supports.html">Supports</a>: pin, roller and fixed supports, on nodes and on edges.</li>
-<li><a href="build-a-beam.html">Create a beam or a bar from scratch</a>: nodes, section, bar, supports, a continuous beam and a frame.</li>
-<li><a href="loads.html">Loads</a>: load cases, uniform and point loads, self weight, pressure, combinations.</li>
-<li><a href="modify-and-delete.html">Edit or delete what is already in the model</a>: move, rename and delete nodes, bars, supports and loads.</li>
-<li><a href="analysis-cases.html">Analysis cases and load combinations</a>: linear, non-linear, mass, modal, spectrum; combinations and their types.</li>
 <li><a href="springs.html">Springs</a>: node springs, one-sided springs, plate springs.</li>
-<li><a href="slabs-and-walls.html">A slab or a wall (a region)</a>: create_polygon, edges, supports, loads.</li>
-<li><a href="change-section-material.html">Change a section or a material</a>: give existing bars or area elements another section or material.</li>
-</ul>
+<li><a href="loads.html">Loads</a>: load cases; loads on nodes, bars and regions; self weight; temperature; settlement of a support.</li>
+<li><a href="analysis-cases.html">Analysis cases and combinations</a>: linear, non-linear, mass, modal, spectrum; combinations and their types.</li>
+</ol>
+<p>Two rules for every page. Read the id of what already exists (geometry tool) and write it
+as text: <code>'N2'</code>, <code>'B1'</code>; do not guess an id. And a call that edits something that is not
+there raises an error and changes nothing.</p>
 
 
 

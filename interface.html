@@ -412,6 +412,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Tool bar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#history-and-snapshots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        History and snapshots
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -747,8 +764,6 @@
       
         
       
-        
-      
     
     
     
@@ -805,14 +820,14 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/supports.html" class="md-nav__link">
+      <a href="tutorials/materials-and-sections.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Supports
+    Materials and sections
   
 
     
@@ -833,126 +848,14 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/build-a-beam.html" class="md-nav__link">
+      <a href="tutorials/nodes-and-bars.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a beam or a bar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/loads.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Loads
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/modify-and-delete.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Edit or delete
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/analysis-cases.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analysis cases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/springs.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Springs
+    Nodes and bars
   
 
     
@@ -1001,14 +904,98 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/change-section-material.html" class="md-nav__link">
+      <a href="tutorials/supports.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Change a section or material
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases and combinations
   
 
     
@@ -1235,8 +1222,21 @@ the <strong>left tabs</strong> for model input and results, and the <strong>canv
 </tr>
 </tbody>
 </table>
-<p>The remaining groups — <strong>Scene</strong>, <strong>Add</strong>, <strong>Edit/Delete</strong> — can be shown or hidden
-from <strong>View → Tool bar: …</strong> or in Preferences.</p>
+<p>The remaining groups — <strong>Scene</strong>, <strong>Add</strong>, <strong>Edit/Delete</strong>, <strong>Transform</strong> and
+<strong>History</strong> — can be shown or hidden from <strong>View → Tool bar: …</strong> or in Preferences.</p>
+<h3 id="history-and-snapshots">History and snapshots<a class="headerlink" href="#history-and-snapshots" title="Permanent link">&para;</a></h3>
+<p>The <strong>History</strong> group has Undo and Redo, and two snapshot buttons:</p>
+<ul>
+<li><strong>Save snapshot</strong> asks for a name and stores the model (without results) with
+  the date and time.</li>
+<li><strong>Manage snapshots</strong> lists them, with <strong>Restore</strong>, <strong>Rename…</strong> and <strong>Delete</strong>
+  (double-click restores).</li>
+</ul>
+<p>A snapshot never changes: to keep later edits, save another one. Restoring asks
+first, discards the results and can be undone with Undo. Snapshots are saved in
+the <code>.x2d</code> file and come back when it is opened (<code>.json</code> files do not keep them),
+and creating, renaming or deleting one marks the model as modified. New, Open,
+Import and New from Template start with the snapshots of the file, or none.</p>
 <h2 id="menus">Menus<a class="headerlink" href="#menus" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>File</strong> — New, New from Template, Open (+ Recent), <strong>Import…</strong> (SAP2000 <code>.s2k</code>,

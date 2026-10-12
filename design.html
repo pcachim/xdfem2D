@@ -646,6 +646,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Timber members (EC5)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#timber-beams-pitched-tapered-curved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timber beams (pitched, tapered, curved)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -847,8 +864,6 @@
       
         
       
-        
-      
     
     
     
@@ -905,14 +920,14 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/supports.html" class="md-nav__link">
+      <a href="tutorials/materials-and-sections.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Supports
+    Materials and sections
   
 
     
@@ -933,126 +948,14 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/build-a-beam.html" class="md-nav__link">
+      <a href="tutorials/nodes-and-bars.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a beam or a bar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/loads.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Loads
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/modify-and-delete.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Edit or delete
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/analysis-cases.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analysis cases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorials/springs.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Springs
+    Nodes and bars
   
 
     
@@ -1101,14 +1004,98 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/change-section-material.html" class="md-nav__link">
+      <a href="tutorials/supports.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Change a section or material
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases and combinations
   
 
     
@@ -1444,6 +1431,43 @@ and fill the Design table; the buckling lengths come from the <code>K</code> fac
 <code>V + T</code> and the interactions, with the compression / LTB stability factors) once
 per physical member. The buckling lengths are obtained exactly like steel — same
 physical-member <code>K</code> factors. Results colour the <strong>Timber design</strong> view by ratio.</p>
+<h3 id="timber-beams-pitched-tapered-curved">Timber beams (pitched, tapered, curved)<a class="headerlink" href="#timber-beams-pitched-tapered-curved" title="Permanent link">&para;</a></h3>
+<p><strong>Design → Timber beams…</strong> opens the <em>Beams</em> panel in timber mode. Select the bars of a
+beam (they need not be collinear — a ridge or an arc is fine), press <em>Assign to beam</em>, and the
+design treats them as <strong>one</strong> member — or press <em>Detect beams automatically…</em> to have the chains of
+timber bars proposed (up to 45° from the horizontal, a ridge or an arc included; posts and columns
+are never proposed) and accept them. The list follows the beams: grouped, bottom to top and left to
+right, and along each beam from its left end. Draw the beam with the depth you want in each bar; nothing
+is generated, the design reads it:</p>
+<ul>
+<li>the depth along the beam (a taper or a step), and which edge is inclined to the grain;</li>
+<li>the ridge (apex) and, for an arc, its radius.</li>
+</ul>
+<p>The panel shows what was read and lets you override what cannot be read: the spacing of the
+lateral restraints, the lamination thickness, the inner radius, the type, the inclined edge and
+the depth change. These parameters are design-only, so the analysis results are kept; re-run
+<strong>Timber Members (ULS)</strong> to apply them. The table gains the <em>Type</em>, <em>Taper</em> (§6.4.2) and <em>Apex</em>
+(§6.4.3: bending, tension perpendicular to the grain, and its interaction with shear) columns.
+Use enough bars along a taper: a warning appears when the depth jumps between neighbouring bars
+by more than the Code-preferences limit.</p>
+<p>Below the table the <strong>elevation</strong> draws the beam as modelled, coloured by the utilisation at each
+position, with curves of N+M, shear, tapered edge and apex along its length. The calculation report
+of the member adds the geometry read from the bars and, step by step, each EN 1995-1-1 §6.4
+check at the point where it governs. The apex clause (§6.4.3) applies to glued laminated timber
+and LVL only; for other products a warning is shown. Both code editions are implemented
+(EN 1995-1-1:2004 §6.4 and EN 1995-1-1:2025 §8.3.3–§8.3.4, chosen in <strong>Code preferences</strong>); the 2025
+edition also notes when reinforcement against tension perpendicular to the grain is advised
+(optional). If you tick <strong>Apex reinforced</strong> for the beam, the unreinforced checks of the tension
+perpendicular to the grain and its interaction with shear do not apply (§8.3.4.2(1)); the result
+gives the force the reinforcement must carry (per metre of beam, and per element if you give the
+spacing a1). If you also give the bonded-on plane reinforcement (width, thickness, tensile and
+bond-line design strengths, and optionally the reinforced length and the number per element), its
+resistance is verified element by element (Eqs. 8.48–8.51). For screws and rods (fully threaded
+screws, rods with wood screw thread, bonded-in rods) give the diameter, inner diameter, steel
+strength; the partial factors γ_R = 1.30 and γ_M2 = 1.25 (Table 4.4) are used unless you give
+others: the resistance follows
+§11.2.2 with the reinforced length as withdrawal length. The spacing limits of §8.3.4.2(4) and
+the limits of Table 11.2 are reported as warnings.</p>
 <h2 id="reading-the-results">Reading the results<a class="headerlink" href="#reading-the-results" title="Permanent link">&para;</a></h2>
 <p>The <strong>Design</strong> results panel lists one row per critical section / combination:</p>
 <table>

@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="supports.html">
+        <link rel="prev" href="index.html">
       
       
-        <link rel="next" href="loads.html">
+        <link rel="next" href="nodes-and-bars.html">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Create a beam or a bar - xdfem2D</title>
+        <title>Materials and sections - xdfem2D</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#create-a-beam-or-a-bar-from-scratch" class="md-skip">
+        <a href="#materials-and-sections" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Create a beam or a bar
+              Materials and sections
             
           </span>
         </div>
@@ -636,8 +636,6 @@
       
         
       
-        
-      
     
     
     
@@ -691,34 +689,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="supports.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Supports
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -738,7 +708,7 @@
   <span class="md-ellipsis">
     
   
-    Create a beam or a bar
+    Materials and sections
   
 
     
@@ -749,14 +719,14 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="build-a-beam.html" class="md-nav__link md-nav__link--active">
+      <a href="materials-and-sections.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Create a beam or a bar
+    Materials and sections
   
 
     
@@ -782,65 +752,138 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-bar-of-a-given-length-a-7-m-beam" class="md-nav__link">
+  <a href="#materials" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A bar of a given length (a 7 m beam)
+        Materials
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Materials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#material-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material: add
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#do-not-index-the-models-dictionaries-with-numbers" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#material-edit-change-the-material" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Do not index the model's dictionaries with numbers
+        Material: edit (change the material)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#the-section-must-exist-before-the-bar" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#material-remove" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The section must exist before the bar
+        Material: remove
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#several-bars-in-a-row-a-continuous-beam" class="md-nav__link">
+  <a href="#sections-of-bars" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Several bars in a row (a continuous beam)
+        Sections of bars
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sections of bars">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section: add
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#a-column-on-a-beam-a-portal-frame" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#section-edit-change-the-section" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A column on a beam (a portal frame)
+        Section: edit (change the section)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#a-whole-standard-structure-in-one-call" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#section-remove" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A whole standard structure in one call
+        Section: remove
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sections-of-areas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sections of areas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sections of areas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#area-section-add-and-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Area section: add and edit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ids
       
     </span>
   </a>
@@ -863,98 +906,14 @@
   
   
     <li class="md-nav__item">
-      <a href="loads.html" class="md-nav__link">
+      <a href="nodes-and-bars.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Loads
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="modify-and-delete.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Edit or delete
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="analysis-cases.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analysis cases
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="springs.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Springs
+    Nodes and bars
   
 
     
@@ -1003,14 +962,98 @@
   
   
     <li class="md-nav__item">
-      <a href="change-section-material.html" class="md-nav__link">
+      <a href="supports.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Change a section or material
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases and combinations
   
 
     
@@ -1210,65 +1253,80 @@
 
 
 
-<h1 id="create-a-beam-or-a-bar-from-scratch">Create a beam or a bar from scratch<a class="headerlink" href="#create-a-beam-or-a-bar-from-scratch" title="Permanent link">&para;</a></h1>
-<p>The order that always works: a section, the nodes, the bar that joins them, the
-supports. Keep what each <code>create_*</code> call returns and pass that on; do not look
-nodes up afterwards.</p>
-<h2 id="a-bar-of-a-given-length-a-7-m-beam">A bar of a given length (a 7 m beam)<a class="headerlink" href="#a-bar-of-a-given-length-a-7-m-beam" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>    <span class="c1"># section (it makes its material)</span>
-<span class="n">n1</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>                      <span class="c1"># a node is (x, y) in metres</span>
-<span class="n">n2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>                      <span class="c1"># 7 m to the right</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>           <span class="c1"># section first, then the two nodes</span>
-<span class="n">model</span><span class="o">.</span><span class="n">pin</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>                                         <span class="c1"># supports: see the Supports tutorial</span>
-<span class="n">model</span><span class="o">.</span><span class="n">roller</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="n">free</span><span class="o">=</span><span class="s1">'x'</span><span class="p">)</span>
+<h1 id="materials-and-sections">Materials and sections<a class="headerlink" href="#materials-and-sections" title="Permanent link">&para;</a></h1>
+<p>A material is not a section. A section is a material plus a cross-section (b x h, or a
+profile); bars use sections. There is no <code>set_section()</code> call: create the new section
+first, then point the element at it. Pointing a bar at a section name that was never
+created leaves it without a section.</p>
+<h2 id="materials">Materials<a class="headerlink" href="#materials" title="Permanent link">&para;</a></h2>
+<h3 id="material-add">Material: add<a class="headerlink" href="#material-add" title="Permanent link">&para;</a></h3>
+<p>To create only a material (for example "create the steel material S355"):</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_steel_material</span><span class="p">(</span><span class="s1">'S355'</span><span class="p">)</span>     <span class="c1"># steel grade</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_rc_material</span><span class="p">(</span><span class="s1">'C25/30'</span><span class="p">)</span>      <span class="c1"># concrete class</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_timber_material</span><span class="p">(</span><span class="s1">'C24'</span><span class="p">)</span>     <span class="c1"># timber class</span>
 </code></pre></div>
-<p>The ids are automatic (<code>N1</code>, <code>N2</code>, <code>B1</code>). Every call that takes a node, a bar, a
-section or a load case accepts <strong>either the object or its id as text</strong>:
-<code>model.pin(n1)</code> and <code>model.pin('N1')</code> are the same.</p>
-<ul>
-<li>In the <strong>same</strong> reply, use the objects the <code>create_*</code> calls returned (<code>n1</code>,
-  <code>n2</code>, <code>bar</code>).</li>
-<li>In a <strong>later</strong> reply those variables no longer exist: refer to what is in the
-  model by its id as text (<code>'N1'</code>, <code>'B1'</code>). The ids are in the note about the
-  previous reply, or read them with the geometry tool.</li>
-</ul>
-<h2 id="do-not-index-the-models-dictionaries-with-numbers">Do not index the model's dictionaries with numbers<a class="headerlink" href="#do-not-index-the-models-dictionaries-with-numbers" title="Permanent link">&para;</a></h2>
-<p><code>model.nodes</code> and <code>model.bar_elements_by_id</code> are <strong>dictionaries keyed by the id
-as text</strong>, not lists. <code>model.nodes[0]</code> is a <code>KeyError</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># wrong: model.create_bar_element('S1', model.nodes[0], model.nodes[1])</span>
-<span class="c1"># right: use the objects create_node returned, or the ids as text</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="s1">'N1'</span><span class="p">,</span> <span class="s1">'N2'</span><span class="p">)</span>
+<p>Each returns the material and is shared if it already exists. A material alone changes
+nothing in the model until a section uses it. Do not make up a section (or give a
+section the name of a grade) when the request is for a material.</p>
+<h3 id="material-edit-change-the-material">Material: edit (change the material)<a class="headerlink" href="#material-edit-change-the-material" title="Permanent link">&para;</a></h3>
+<p>Make a material, then change what the section points to; every bar using that section
+follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">mat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_material</span><span class="p">(</span><span class="s1">'C25/30'</span><span class="p">)</span>        <span class="c1"># concrete class, shared</span>
+<span class="n">model</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="s1">'S1'</span><span class="p">]</span><span class="o">.</span><span class="n">material_name</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">name</span>
 </code></pre></div>
-<h2 id="the-section-must-exist-before-the-bar">The section must exist before the bar<a class="headerlink" href="#the-section-must-exist-before-the-bar" title="Permanent link">&para;</a></h2>
-<p><code>create_bar_element('Sec', ...)</code> with no section called <code>Sec</code> leaves the bar
-without a section. Create it first (<code>create_rc_section</code>, <code>create_steel_section</code>),
-or read the names that exist with the geometry tool.</p>
-<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_steel_section</span><span class="p">(</span><span class="s1">'S2'</span><span class="p">,</span> <span class="s1">'IPE300'</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="s1">'S355'</span><span class="p">)</span>
+<p>For steel or timber use <code>create_steel_material('S355')</code> or <code>create_timber_material('C24')</code>.
+To change only the name: <code>model.rename_material('C25/30', 'Concrete')</code>.</p>
+<h3 id="material-remove">Material: remove<a class="headerlink" href="#material-remove" title="Permanent link">&para;</a></h3>
+<p>Delete a material:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">remove_material</span><span class="p">(</span><span class="s1">'C25/30'</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="several-bars-in-a-row-a-continuous-beam">Several bars in a row (a continuous beam)<a class="headerlink" href="#several-bars-in-a-row-a-continuous-beam" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">pin</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">model</span><span class="o">.</span><span class="n">roller</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">free</span><span class="o">=</span><span class="s1">'x'</span><span class="p">)</span>
+<p>It is refused while a section still uses the material.</p>
+<h2 id="sections-of-bars">Sections of bars<a class="headerlink" href="#sections-of-bars" title="Permanent link">&para;</a></h2>
+<h3 id="section-add">Section: add<a class="headerlink" href="#section-add" title="Permanent link">&para;</a></h3>
+<p>The section makes its material too:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">concrete</span><span class="o">=</span><span class="s1">'C30/37'</span><span class="p">)</span>    <span class="c1"># b x h in metres</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_steel_section</span><span class="p">(</span><span class="s1">'S2'</span><span class="p">,</span> <span class="s1">'IPE300'</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="s1">'S355'</span><span class="p">)</span>          <span class="c1"># a profile</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_timber_bar_section</span><span class="p">(</span><span class="s1">'S3'</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">timber</span><span class="o">=</span><span class="s1">'C24'</span><span class="p">)</span>
 </code></pre></div>
-<p><code>pin</code>, <code>fix</code> and <code>roller</code> take a node or a list of nodes.</p>
-<h2 id="a-column-on-a-beam-a-portal-frame">A column on a beam (a portal frame)<a class="headerlink" href="#a-column-on-a-beam-a-portal-frame" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">sec</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>       <span class="c1"># y is up</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)):</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">create_bar_element</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fix</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span>
+<p>Materials are shared: asking for the same concrete class twice does not duplicate it.
+The section must exist before the bar that uses it.</p>
+<h3 id="section-edit-change-the-section">Section: edit (change the section)<a class="headerlink" href="#section-edit-change-the-section" title="Permanent link">&para;</a></h3>
+<p>Change the section of an existing bar (give it another section): create the new one, then point the bar at it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. create the new section (it makes its material too)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S2'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">concrete</span><span class="o">=</span><span class="s1">'C25/30'</span><span class="p">)</span>
+
+<span class="c1"># 2. point the existing bar at it</span>
+<span class="n">model</span><span class="o">.</span><span class="n">bar_elements_by_id</span><span class="p">[</span><span class="s1">'B1'</span><span class="p">]</span><span class="o">.</span><span class="n">section_name</span> <span class="o">=</span> <span class="s1">'S2'</span>
 </code></pre></div>
-<h2 id="a-whole-standard-structure-in-one-call">A whole standard structure in one call<a class="headerlink" href="#a-whole-standard-structure-in-one-call" title="Permanent link">&para;</a></h2>
-<p>For a beam, frame, truss, wall or slab of a standard kind,
-<code>model.create_from_template(kind, **params)</code> builds geometry and supports
-together; see the Templates page. Use the calls above for anything else, or to
-add to what is already there.</p>
+<p>Several bars:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_rc_section</span><span class="p">(</span><span class="s1">'S2'</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">concrete</span><span class="o">=</span><span class="s1">'C25/30'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">bar_id</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'B1'</span><span class="p">,</span> <span class="s1">'B2'</span><span class="p">,</span> <span class="s1">'B3'</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">bar_elements_by_id</span><span class="p">[</span><span class="n">bar_id</span><span class="p">]</span><span class="o">.</span><span class="n">section_name</span> <span class="o">=</span> <span class="s1">'S2'</span>
+</code></pre></div>
+<p>A steel profile instead:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_steel_section</span><span class="p">(</span><span class="s1">'S3'</span><span class="p">,</span> <span class="s1">'IPE300'</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="s1">'S355'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">bar_elements_by_id</span><span class="p">[</span><span class="s1">'B1'</span><span class="p">]</span><span class="o">.</span><span class="n">section_name</span> <span class="o">=</span> <span class="s1">'S3'</span>
+</code></pre></div>
+<p>To rename a section (the bars that use it follow): <code>model.rename_section('S1', 'Beam')</code>.</p>
+<h3 id="section-remove">Section: remove<a class="headerlink" href="#section-remove" title="Permanent link">&para;</a></h3>
+<p>Delete a section:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="s1">'S1'</span><span class="p">)</span>
+</code></pre></div>
+<p>It is refused while a bar still uses the section.</p>
+<h2 id="sections-of-areas">Sections of areas<a class="headerlink" href="#sections-of-areas" title="Permanent link">&para;</a></h2>
+<h3 id="area-section-add-and-edit">Area section: add and edit<a class="headerlink" href="#area-section-add-and-edit" title="Permanent link">&para;</a></h3>
+<p>An area section is created with its material, then the elements are pointed at it.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">create_area_section</span><span class="p">(</span><span class="s1">'A2'</span><span class="p">,</span> <span class="s1">'C25/30'</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">tri_elements_by_id</span><span class="p">[</span><span class="s1">'T1'</span><span class="p">]</span><span class="o">.</span><span class="n">section_name</span> <span class="o">=</span> <span class="s1">'A2'</span>
+<span class="n">model</span><span class="o">.</span><span class="n">quad_elements_by_id</span><span class="p">[</span><span class="s1">'Q1'</span><span class="p">]</span><span class="o">.</span><span class="n">section_name</span> <span class="o">=</span> <span class="s1">'A2'</span>
+</code></pre></div>
+<p>To change only the material of an area section, as for bars:
+<code>model.tri_sections['A1'].material_name = mat.name</code> (and <code>quad_sections</code>).</p>
+<p>The section of a slab or a wall made with <code>create_polygon</code> comes with the region: see
+<em>Slabs and walls</em>.</p>
+<h2 id="ids">Ids<a class="headerlink" href="#ids" title="Permanent link">&para;</a></h2>
+<p>Ids are text (<code>'B1'</code>, <code>'T1'</code>, <code>'Q1'</code>). Read them with the geometry tool before changing
+anything; do not invent them.</p>
 
 
 
