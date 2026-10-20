@@ -1065,10 +1065,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#creating-a-model" class="md-nav__link">
+  <a href="#creating-and-changing-a-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Creating a model
+        Creating and changing a model
       
     </span>
   </a>
@@ -1241,7 +1241,7 @@
 
 
 <h1 id="the-ai-assistant">The AI Assistant<a class="headerlink" href="#the-ai-assistant" title="Permanent link">&para;</a></h1>
-<p>The <strong>AI</strong> panel answers questions about the open model in plain language: where
+<p>The <strong>Assistant</strong> panel answers questions about the open model in plain language: where
 the largest stress is, which combination governs the reinforcement, what a
 command does. Show or hide it from <strong>View → Assistant panel</strong>.</p>
 <p>It is optional. Every other part of xdfem2D works without it, and the panel says
@@ -1255,6 +1255,11 @@ faster, and are noticeably better at <a href="#creating-a-model">building a mode
 model that fits on a laptop. Press <strong>Providers…</strong> beside the model list, paste the
 key, and those models appear in the list below a separator, labelled with the
 provider.</p>
+<p>Before the first message goes to a remote model, and when you turn <strong>Think</strong> on, the
+assistant shows a warning (what is sent where, and that thinking is usually slower
+and not better on a small model). Each has a <em>Don't show this again</em>; the application
+remembers that, and <strong>Preferences ▸ AI Assistant ▸ Show the assistant's warnings
+again</strong> brings the warnings back.</p>
 <h3 id="other-providers">Other providers<a class="headerlink" href="#other-providers" title="Permanent link">&para;</a></h3>
 <p>Most services speak OpenAI's API at a different address, so <strong>OpenAI,
 Google Gemini, Ollama Cloud, DeepSeek, Kimi (Moonshot), GLM (Zhipu),
@@ -1335,6 +1340,10 @@ model <strong>on your own machine</strong>. Nothing about your model is sent any
 <p>Neither Ollama nor the model ships with xdfem2D — the model alone is several
 gigabytes, and most installations never open this panel.</p>
 <h2 id="choosing-a-model">Choosing a model<a class="headerlink" href="#choosing-a-model" title="Permanent link">&para;</a></h2>
+<p>The model, temperature, <strong>Think</strong> and <strong>Task</strong> you choose in the panel are for the
+current session; the ones in <strong>Preferences ▸ AI Assistant</strong> are what a launch starts
+with, and changing them there replaces the choice of the session (see
+<a href="interface.html#preferences-this-session-and-what-the-application-remembers">Preferences</a>).</p>
 <p>Two things matter, and neither is obvious from the model's name.</p>
 <p><strong>It must support tool calling.</strong> The assistant never guesses: it asks the
 application for the numbers through a set of query tools. A model that cannot
@@ -1416,43 +1425,54 @@ trained to reproduce exactly — steadier tool use, less varied wording. It
 does not make the drift impossible, only less likely; a model with no tool
 support at all will not gain any by turning this down. Default is 0.7.</p>
 <h2 id="what-it-can-and-cannot-do">What it can and cannot do<a class="headerlink" href="#what-it-can-and-cannot-do" title="Permanent link">&para;</a></h2>
-<p><strong>It reads, and it can propose a new model.</strong> It cannot edit the currently open
-model in place, run the analysis, or write files directly.</p>
+<p><strong>It reads, and it can build and change the model.</strong> It builds a structure from a
+description and makes changes to the open model — add, edit, delete, assign — checked
+on a copy first (see <a href="#creating-and-changing-a-model">Creating and changing a model</a>).
+It cannot run the analysis or write files directly.</p>
 <p>It is given a short summary of the model up front and asks for detail through
 the tools, so it sees the geometry, loads, cases, results, nodal-averaged
 stresses, design results, <a href="modelling.html#constraints-multi-point">constraints</a>
 and this manual. Results are keyed to the <strong>analysed
 mesh</strong> — the elements that geometry objects expand into — and the assistant
 uses those ids, which is why they may not match what you drew.</p>
-<h3 id="creating-a-model">Creating a model<a class="headerlink" href="#creating-a-model" title="Permanent link">&para;</a></h3>
-<p>Ask it to build a structure — "a 6 m simply supported beam", "a cantilever
-wall", "a simply supported slab" — and it answers with a <strong>new model</strong>, written
-as JSON. The application checks it and, if it is complete, offers a button to
-<strong>open</strong> it; you never have to trust it blind. This is genuinely useful for a
-quick starting point, but treat it as <strong>early and limited</strong>:</p>
+<h3 id="creating-and-changing-a-model">Creating and changing a model<a class="headerlink" href="#creating-and-changing-a-model" title="Permanent link">&para;</a></h3>
+<p>Ask in plain language — "a 6 m simply supported beam", "a cantilever wall", "add a
+20 kN load at midspan", "give bar B1 the section S2". Ask for <strong>one thing at a time</strong>:
+small models do each request well and a long list badly. The assistant answers in one
+of two ways, and the note under the reply says which:</p>
 <ul>
-<li>it works from small templates — a <strong>beam</strong> (bars) or a <strong>wall</strong> (triangles) in
-  the plane domain, or a <strong>slab</strong> (plate-bending triangles) or <strong>grillage</strong> (beam grid) in
-  the plate domain — and edits their values; it is not a general modeller;</li>
+<li><strong>Commands.</strong> Four verbs (<code>add</code>, <code>set</code>, <code>remove</code>, <code>move</code>) are what it tries first;
+  a block is all or nothing — if one line fails, none is applied. They are checked on
+  a <strong>copy of the model</strong>, and if they are valid they
+  are applied to the open model <strong>at once</strong> (<strong>Ctrl+Z</strong> undoes; the results are
+  discarded, so run the analysis again). A block of more than 10 lines, or one that
+  removes three or more elements, waits for the <strong>Apply</strong> button instead, and the
+  note says why.</li>
+<li><strong>Python.</strong> When the commands cannot say it, it writes Python for the model that is
+  open (plain <code>model.…</code> calls, using the <code>xdfem2d</code> API). It is run on a copy first, and
+  if it runs and checks out it is applied at once, exactly like the commands. The line
+  count does not matter for Python (a script is long by nature); only what it removes
+  does. It waits for <strong>Apply</strong> when the model is locked, when it places a template over
+  a model that already has geometry (Apply then asks whether to insert the template or
+  replace the model), when it does not run on the model that is open now, or when it
+  removes three or more elements.</li>
+</ul>
+<p>In both cases <strong>Apply</strong> applies what waits, after checking it again against the model
+open at that moment, and <strong>Open</strong> shows the Python in the <strong>Script editor</strong>
+(<code>Ctrl+Shift+E</code>), where you can read or fix it; Open also works after the Python was
+applied. Nothing runs from the editor until you press <strong>Run</strong> yourself.
+<strong>Preferences ▸ AI Assistant ▸ Apply the assistant's commands at once</strong> switches the
+automatic application off, so that everything waits for Apply.</p>
+<p>This is genuinely useful for a quick starting point and for routine edits, but treat
+it as <strong>early and limited</strong>:</p>
+<ul>
 <li>the more elaborate the request, the more likely something is missing or wrong,
-  so review what opens before you build on it;</li>
+  so review what was applied before you build on it;</li>
 <li>a <strong>capable model matters most here.</strong> A small local model often produces a
   structure that looks right and is not; a stronger remote model
   (<a href="#local-or-remote">with an API key</a>) is markedly better both at answering and
   at building.</li>
 </ul>
-<p><strong>Open model</strong> applies a JSON model that opens cleanly right away — one
-click, same as before. One that does <strong>not</strong> open is opened instead in the
-same JSON editor described below, in place of just naming the problem — what
-stops one is usually a single wrong word, and the editor's <strong>Apply</strong>
-re-checks it after a fix, with no need to leave the application or hand-edit
-a saved file elsewhere.</p>
-<p>It can also write a <strong>Python build script</strong> (using the <code>xdfem2d</code> API) when you
-ask for one instead of a model. A script never runs on its own: <strong>Open model</strong>
-loads it into the <strong>Script editor</strong> (<code>Ctrl+Shift+E</code>), and nothing happens to
-the current model until you press <strong>Run</strong> yourself. The editor's <strong>Save…</strong>
-button writes the text as it stands to a file (<code>.py</code> or <code>.json</code>),
-independently of applying it.</p>
 <p>Two habits make it more useful:</p>
 <ul>
 <li><strong>Name the case.</strong> "In COMBO1" rather than "in the model": extremes differ

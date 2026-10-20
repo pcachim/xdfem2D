@@ -462,6 +462,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Preferences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preferences-this-session-and-what-the-application-remembers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preferences, this session, and what the application remembers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1262,15 +1279,18 @@ Import and New from Template start with the snapshots of the file, or none.</p>
   plus <strong>Variants Workspace…</strong> (which includes the Sequences tab) when the
   <a href="variants.html">variants &amp; construction sequences</a> feature is available.</li>
 <li><strong>Design</strong> — Code preferences, Design combinations, <strong>Buckling lengths…</strong>,
-  then Concrete Members (ULS/SLS), Concrete Areas (ULS), <strong>Steel Members (ULS)</strong>,
-  <strong>Timber Members (ULS)</strong>, and Punching. See <a href="design.html">Design</a>.</li>
+  then, in groups: <em>Concrete</em> — Concrete Members (ULS), <strong>Crack width</strong>,
+  Suggest column reinforcement, <strong>Beam definitions</strong>, Beam bars detailing…,
+  Concrete Areas (ULS) and Punching…; <em>Steel</em> — Steel Members (ULS); <em>Timber</em> —
+  Timber Members (ULS) and <strong>Special timber beams</strong>. See <a href="design.html">Design</a>.</li>
 <li><strong>Scene</strong> — switch, create, rename, delete <a href="scenes.html">Scenes</a>.</li>
 <li><strong>Selection</strong> — Select all / by…, Previous, Invert, Clear, Edit selected
   nodes / bars / triangles, Divide bars.</li>
-<li><strong>View</strong> — View mode, panel and tool-bar visibility toggles, and
-  <strong>Navigate to…</strong> (<span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-1">1</kbd></span> … <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-7">7</kbd></span>) for the input panels that the canvas
-  and Find Entity do not already reach: supports, springs, materials, sections,
-  loads, combinations, analysis cases.</li>
+<li><strong>View</strong> — View mode, panel and tool-bar visibility toggles, <strong>Theme</strong> (light,
+  dark or follow the system — for this session only, see
+  <a href="#preferences">Preferences</a>), and <strong>Navigate to…</strong> (<span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-1">1</kbd></span> … <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-7">7</kbd></span>) for
+  the input panels that the canvas and Find Entity do not already reach:
+  supports, springs, materials, sections, loads, combinations, analysis cases.</li>
 <li><strong>Help</strong> — Documentation (<span class="keys"><kbd class="key-f1">F1</kbd></span>), Keyboard Shortcuts, About.</li>
 </ul>
 <h2 id="left-tabs">Left tabs<a class="headerlink" href="#left-tabs" title="Permanent link">&para;</a></h2>
@@ -1295,24 +1315,74 @@ Import and New from Template start with the snapshots of the file, or none.</p>
   with CSV export. See <a href="results.html#cuts">Results → Cuts</a>.</li>
 </ul>
 <h2 id="preferences">Preferences<a class="headerlink" href="#preferences" title="Permanent link">&para;</a></h2>
-<p><strong>File → Preferences</strong> is organised in tabs: <strong>General</strong>, <strong>Display</strong>, <strong>Design</strong>
-and <strong>Colors</strong>. The <strong>Display</strong> tab holds the display sizing defaults (text,
-marker and line sizes) and the <strong>persistent style defaults</strong> — the colour map
-for each field, the default number of levels, continuous vs. banded fill,
-smoothing, and the bar-diagram and utilisation-ratio styling. The <strong>Design</strong> tab
-holds the default <strong>design code</strong> per material (concrete, steel, timber), whose
-options come from the same registry as <strong>Design → Code preferences</strong>; a code
-stored inside an opened <code>.x2d</code> takes precedence over this default.</p>
+<p><strong>File → Preferences</strong> is organised in tabs: <strong>General</strong>, <strong>Display</strong>, <strong>Design</strong>,
+<strong>Colors</strong>, <strong>AI Assistant</strong> and <strong>Dependencies</strong>.</p>
+<p>The <strong>General</strong> tab holds the theme, the default file location, the coincident-node
+tolerance, the default grid spacing and snap, and whether to open the last model at
+startup. <strong>View options</strong> says what is shown when the application starts: the
+<strong>Panels</strong> (Tables, Assistant, Display) and the <strong>Tool bars</strong> (Add, Edit / Delete,
+Transform, Scene, Variants, Sequences). It also lists the last used model and the
+recent models, with buttons to clear the list or drop the files that no longer
+exist.</p>
+<p>The <strong>Display</strong> tab holds the display sizing defaults (text, marker and line sizes)
+and the <strong>persistent style defaults</strong> — the colour map for each field, the default
+number of levels, continuous vs. banded fill, smoothing, and the bar-diagram and
+utilisation-ratio styling. The <strong>Design</strong> tab holds the default <strong>design code</strong> per
+material (concrete, steel, timber), whose options come from the same registry as
+<strong>Design → Code preferences</strong>; a code stored inside an opened <code>.x2d</code> takes
+precedence over this default.</p>
+<h3 id="preferences-this-session-and-what-the-application-remembers">Preferences, this session, and what the application remembers<a class="headerlink" href="#preferences-this-session-and-what-the-application-remembers" title="Permanent link">&para;</a></h3>
+<p>Three different things are kept apart:</p>
+<ul>
+<li><strong>Preferences</strong> (<code>~/.xdfem2d/preferences.json</code>) are what a launch starts with. They
+  change <strong>only in the Preferences dialog</strong>: <em>OK</em> saves them, <em>Cancel</em> changes
+  nothing. The one other way is the explicit <strong>Set as default</strong> of the
+  <a href="#display-panel">Style tab</a>.</li>
+<li><strong>This session.</strong> Whatever you change while the application runs — <strong>View ▸
+  Theme</strong>, the panel and tool-bar toggles of the View menu, the assistant's
+  temperature, Think, Task and model in its panel, the tolerance asked for when
+  you merge coincident nodes — lasts until you close the application and is <strong>not
+  saved</strong>. When you change the same setting in the Preferences dialog and press OK,
+  that choice replaces the session's; the settings you did not touch keep the value
+  you chose in the session. To make a toggle permanent, set it in Preferences.</li>
+<li><strong>What the application remembers</strong> (<code>~/.xdfem2d/state.json</code>) is not a choice of
+  yours: the recent files and the last folder, the acceptance of the liability
+  notice, the licence cache, the first-run check for the optional tools, and the
+  assistant warnings you switched off with <em>Don't show this again</em>
+  (<strong>Preferences ▸ AI Assistant ▸ Show the assistant's warnings again</strong> brings them
+  back). The application writes it when it needs to.</li>
+</ul>
+<p>Older versions kept all of this in <code>preferences.json</code>; the first launch of a newer
+one moves the remembered part to <code>state.json</code> and leaves the preferences alone.</p>
 <h2 id="display-panel">Display panel<a class="headerlink" href="#display-panel" title="Permanent link">&para;</a></h2>
 <p>A dockable <strong>Display</strong> panel (toggle with <strong>View → Display panel</strong>) has two tabs.</p>
-<p><strong>Model</strong> — layer visibility: what is drawn in the scene. Node markers and
-labels, bars and bar labels, areas (triangles/quads) with their borders and
-labels, objects, support and spring markers, cuts, and the grid (with spacing
-and snap). In the deformed and modal views an <strong>Undeformed structure</strong> toggle
-draws the reference geometry behind the deformed shape. When the model has
-geometry objects, the Structure view gains a <strong>Mesh</strong> checkbox that overlays the
-finite-element mesh generated from those objects (visual only — picking stays on
-the objects). <strong>Reset display</strong> turns the layers back on.</p>
+<p><strong>Model</strong> — what is drawn in the scene, in one row per kind of entity: <em>Nodes</em>
+(markers, labels), <em>Bars</em> (shown, labels), <em>Areas</em> (shown, labels, borders),
+<em>Objects</em> (shown, labels), <em>Supports</em> (markers, constraints), <em>Springs</em> (nodes,
+elements) and <em>Cuts</em>; hover a box for its full name. The title of a row is faded only
+when the model has nothing of that kind. In the deformed and modal views an
+<strong>Undeformed structure</strong> toggle draws the reference geometry behind the deformed
+shape. When the model has geometry objects, the Structure view gains a <strong>Mesh</strong>
+checkbox that overlays the finite-element mesh generated from those objects (visual
+only — picking stays on the objects). Below the layers:</p>
+<ul>
+<li><strong>Colour by</strong> — <em>Model</em> (one colour), <em>Sections</em> or <em>Materials</em>. Bars, areas
+  (triangles and quads) and geometry objects take the colour of their section or
+  material — the surface of a rectangle or polygon object is <strong>filled</strong> like an area
+  element (and its mesh, when shown, lies over that fill), not only outlined; where a
+  result field colours the areas (stresses, shell reinforcement), the field wins. A colour stays with its section for as long as the section is in
+  the model, so adding or removing another one does not change it; with more than 15
+  in use the colours repeat. The <strong>key</strong> is drawn on the canvas, lower right (the
+  support key is upper right), so it is part of any image exported from it, and the
+  <strong>Legend</strong> checkbox hides it; past 12 entries it says <em>+N more</em>. The <strong>list</strong> under
+  the box shows every section or material in use — a section with its size
+  (<code>S1 · 0.30×0.50</code>, a catalogue profile, or <code>t=0.20</code> for an area) — with how many
+  items use it; click an entry to select them on the canvas (<strong>Ctrl</strong> or <strong>Shift</strong>
+  for several).</li>
+<li><strong>Grid</strong> — a section that opens and closes: gridlines, spacing, minor (snap)
+  spacing, snap to grid, and the reference lines with their snap.</li>
+<li><strong>Legend</strong> and <strong>Reset display</strong>, which turns the layers back to their defaults.</li>
+</ul>
 <p><strong>Style</strong> — live, session-only styling of the <em>active</em> view, in two sections:</p>
 <ul>
 <li><strong>Colour maps</strong> — the colour map of the active view's field. Stresses/forces,

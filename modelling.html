@@ -1482,7 +1482,12 @@ analysis runs on the compiled mesh.</p>
 one, or the higher-quality <a href="https://github.com/drufat/triangle">Triangle</a>
 library if installed) into <strong>triangles</strong>, or — on a convex quad outline with
 <strong>Mesh as: Quads</strong> and a quad section — by the structured mesher into <strong>quads</strong>
-(falling back to triangles per cell where a quad would be poorly shaped). When
+(falling back to triangles per cell where a quad would be poorly shaped). Quads
+need an outline of <strong>exactly four vertices with no inward corner</strong>; for any other
+polygon (a circular sector, a ring, an L) the editor switches <strong>Quads</strong> off, says
+why under the box, and meshes it as triangles. A polygon that still asks for quads
+(a script, or an older file) is reported by <em>Model check</em> as <em>Lost quad elements</em>,
+with the fix: <strong>Mesh as: Triangles</strong>. When
 the model is analysed, objects <strong>auto-resolve T-junctions and crossings</strong>: a
 node sitting on another object's span, or two objects that cross, are welded so
 the parts act together.</p>
@@ -1546,7 +1551,9 @@ offer the domain's common cases (plane: PIN / ROLLER-X / FIXED; plate: SIMPLE /
 CLAMPED / SYM-X).</p>
 <p>Assign supports on the <strong>Supports</strong> sub-tab or via the node editor. The on-canvas
 legend names each colour with its canonical family (the <code>-X</code>/<code>-Y</code> variants share
-one entry).</p>
+one entry). With <strong>Colour by</strong> on Sections or Materials in the
+<a href="interface.html#display-panel">Display panel</a>, a second key — the sections or
+materials in use — is drawn lower right.</p>
 <h2 id="springs">Springs<a class="headerlink" href="#springs" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Node springs</strong> — translational <code>Kx</code>, <code>Ky</code> and rotational <code>Kt</code> at a node.</li>
