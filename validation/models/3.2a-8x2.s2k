@@ -1,0 +1,167 @@
+TABLE:  "PROGRAM CONTROL"
+   ProgramName=SAP2000   Version=26.3.0   CurrUnits="KN, m, C"   SteelCode="AISC 360-16"   ConcCode="ACI 318-19"   ConcSCode="Eurocode 2-2004"
+
+TABLE:  "ACTIVE DEGREES OF FREEDOM"
+   UX=Yes   UY=No   UZ=Yes   RX=No   RY=Yes   RZ=No
+
+TABLE:  "MATERIAL PROPERTIES 01 - GENERAL"
+   Material="C"   Type=Concrete   SymType=Isotropic   TempDepend=No
+
+TABLE:  "MATERIAL PROPERTIES 02 - BASIC MECHANICAL PROPERTIES"
+   Material="C"   UnitWeight=0   UnitMass=0   E1=30000000   G12=12500000   U12=0.2   A1=1e-05
+
+TABLE:  "JOINT COORDINATES"
+   Joint="n0_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=0
+   Joint="n1_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0.5   Y=0   Z=0
+   Joint="n2_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1   Y=0   Z=0
+   Joint="n3_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.5   Y=0   Z=0
+   Joint="n4_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=0   Z=0
+   Joint="n5_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2.5   Y=0   Z=0
+   Joint="n6_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=0   Z=0
+   Joint="n7_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3.5   Y=0   Z=0
+   Joint="n8_0"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=0
+   Joint="n0_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=0.25
+   Joint="n1_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0.5   Y=0   Z=0.25
+   Joint="n2_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1   Y=0   Z=0.25
+   Joint="n3_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.5   Y=0   Z=0.25
+   Joint="n4_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=0   Z=0.25
+   Joint="n5_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2.5   Y=0   Z=0.25
+   Joint="n6_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=0   Z=0.25
+   Joint="n7_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3.5   Y=0   Z=0.25
+   Joint="n8_1"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=0.25
+   Joint="n0_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0   Y=0   Z=0.5
+   Joint="n1_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=0.5   Y=0   Z=0.5
+   Joint="n2_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1   Y=0   Z=0.5
+   Joint="n3_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=1.5   Y=0   Z=0.5
+   Joint="n4_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2   Y=0   Z=0.5
+   Joint="n5_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=2.5   Y=0   Z=0.5
+   Joint="n6_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3   Y=0   Z=0.5
+   Joint="n7_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=3.5   Y=0   Z=0.5
+   Joint="n8_2"   CoordSys=GLOBAL   CoordType=Cartesian   XorR=4   Y=0   Z=0.5
+
+TABLE:  "AREA SECTION PROPERTIES"
+   Section="T"   Material="C"   MatAngle=0   AreaType=Shell   Type=Shell-Thin   DrillDOF=Yes   Thickness=0.2   BendThick=0.2
+
+TABLE:  "AREA SECTION PROPERTY DESIGN PARAMETERS"
+   Section="T"   RebarMat=None   RebarOpt=Default
+
+TABLE:  "CONNECTIVITY - AREA"
+   Area="e0"   NumJoints=3   Joint1="n0_0"   Joint2="n1_0"   Joint3="n1_1"
+   Area="e1"   NumJoints=3   Joint1="n0_0"   Joint2="n1_1"   Joint3="n0_1"
+   Area="e2"   NumJoints=3   Joint1="n1_0"   Joint2="n2_0"   Joint3="n2_1"
+   Area="e3"   NumJoints=3   Joint1="n1_0"   Joint2="n2_1"   Joint3="n1_1"
+   Area="e4"   NumJoints=3   Joint1="n2_0"   Joint2="n3_0"   Joint3="n3_1"
+   Area="e5"   NumJoints=3   Joint1="n2_0"   Joint2="n3_1"   Joint3="n2_1"
+   Area="e6"   NumJoints=3   Joint1="n3_0"   Joint2="n4_0"   Joint3="n4_1"
+   Area="e7"   NumJoints=3   Joint1="n3_0"   Joint2="n4_1"   Joint3="n3_1"
+   Area="e8"   NumJoints=3   Joint1="n4_0"   Joint2="n5_0"   Joint3="n5_1"
+   Area="e9"   NumJoints=3   Joint1="n4_0"   Joint2="n5_1"   Joint3="n4_1"
+   Area="e10"   NumJoints=3   Joint1="n5_0"   Joint2="n6_0"   Joint3="n6_1"
+   Area="e11"   NumJoints=3   Joint1="n5_0"   Joint2="n6_1"   Joint3="n5_1"
+   Area="e12"   NumJoints=3   Joint1="n6_0"   Joint2="n7_0"   Joint3="n7_1"
+   Area="e13"   NumJoints=3   Joint1="n6_0"   Joint2="n7_1"   Joint3="n6_1"
+   Area="e14"   NumJoints=3   Joint1="n7_0"   Joint2="n8_0"   Joint3="n8_1"
+   Area="e15"   NumJoints=3   Joint1="n7_0"   Joint2="n8_1"   Joint3="n7_1"
+   Area="e16"   NumJoints=3   Joint1="n0_1"   Joint2="n1_1"   Joint3="n1_2"
+   Area="e17"   NumJoints=3   Joint1="n0_1"   Joint2="n1_2"   Joint3="n0_2"
+   Area="e18"   NumJoints=3   Joint1="n1_1"   Joint2="n2_1"   Joint3="n2_2"
+   Area="e19"   NumJoints=3   Joint1="n1_1"   Joint2="n2_2"   Joint3="n1_2"
+   Area="e20"   NumJoints=3   Joint1="n2_1"   Joint2="n3_1"   Joint3="n3_2"
+   Area="e21"   NumJoints=3   Joint1="n2_1"   Joint2="n3_2"   Joint3="n2_2"
+   Area="e22"   NumJoints=3   Joint1="n3_1"   Joint2="n4_1"   Joint3="n4_2"
+   Area="e23"   NumJoints=3   Joint1="n3_1"   Joint2="n4_2"   Joint3="n3_2"
+   Area="e24"   NumJoints=3   Joint1="n4_1"   Joint2="n5_1"   Joint3="n5_2"
+   Area="e25"   NumJoints=3   Joint1="n4_1"   Joint2="n5_2"   Joint3="n4_2"
+   Area="e26"   NumJoints=3   Joint1="n5_1"   Joint2="n6_1"   Joint3="n6_2"
+   Area="e27"   NumJoints=3   Joint1="n5_1"   Joint2="n6_2"   Joint3="n5_2"
+   Area="e28"   NumJoints=3   Joint1="n6_1"   Joint2="n7_1"   Joint3="n7_2"
+   Area="e29"   NumJoints=3   Joint1="n6_1"   Joint2="n7_2"   Joint3="n6_2"
+   Area="e30"   NumJoints=3   Joint1="n7_1"   Joint2="n8_1"   Joint3="n8_2"
+   Area="e31"   NumJoints=3   Joint1="n7_1"   Joint2="n8_2"   Joint3="n7_2"
+
+TABLE:  "AREA SECTION ASSIGNMENTS"
+   Area="e0"   Section="T"   MatProp=Default
+   Area="e1"   Section="T"   MatProp=Default
+   Area="e2"   Section="T"   MatProp=Default
+   Area="e3"   Section="T"   MatProp=Default
+   Area="e4"   Section="T"   MatProp=Default
+   Area="e5"   Section="T"   MatProp=Default
+   Area="e6"   Section="T"   MatProp=Default
+   Area="e7"   Section="T"   MatProp=Default
+   Area="e8"   Section="T"   MatProp=Default
+   Area="e9"   Section="T"   MatProp=Default
+   Area="e10"   Section="T"   MatProp=Default
+   Area="e11"   Section="T"   MatProp=Default
+   Area="e12"   Section="T"   MatProp=Default
+   Area="e13"   Section="T"   MatProp=Default
+   Area="e14"   Section="T"   MatProp=Default
+   Area="e15"   Section="T"   MatProp=Default
+   Area="e16"   Section="T"   MatProp=Default
+   Area="e17"   Section="T"   MatProp=Default
+   Area="e18"   Section="T"   MatProp=Default
+   Area="e19"   Section="T"   MatProp=Default
+   Area="e20"   Section="T"   MatProp=Default
+   Area="e21"   Section="T"   MatProp=Default
+   Area="e22"   Section="T"   MatProp=Default
+   Area="e23"   Section="T"   MatProp=Default
+   Area="e24"   Section="T"   MatProp=Default
+   Area="e25"   Section="T"   MatProp=Default
+   Area="e26"   Section="T"   MatProp=Default
+   Area="e27"   Section="T"   MatProp=Default
+   Area="e28"   Section="T"   MatProp=Default
+   Area="e29"   Section="T"   MatProp=Default
+   Area="e30"   Section="T"   MatProp=Default
+   Area="e31"   Section="T"   MatProp=Default
+
+TABLE:  "AREA DESIGN PROCEDURES"
+   Area="e0"   DesignProc="Concrete Shell Design"
+   Area="e1"   DesignProc="Concrete Shell Design"
+   Area="e2"   DesignProc="Concrete Shell Design"
+   Area="e3"   DesignProc="Concrete Shell Design"
+   Area="e4"   DesignProc="Concrete Shell Design"
+   Area="e5"   DesignProc="Concrete Shell Design"
+   Area="e6"   DesignProc="Concrete Shell Design"
+   Area="e7"   DesignProc="Concrete Shell Design"
+   Area="e8"   DesignProc="Concrete Shell Design"
+   Area="e9"   DesignProc="Concrete Shell Design"
+   Area="e10"   DesignProc="Concrete Shell Design"
+   Area="e11"   DesignProc="Concrete Shell Design"
+   Area="e12"   DesignProc="Concrete Shell Design"
+   Area="e13"   DesignProc="Concrete Shell Design"
+   Area="e14"   DesignProc="Concrete Shell Design"
+   Area="e15"   DesignProc="Concrete Shell Design"
+   Area="e16"   DesignProc="Concrete Shell Design"
+   Area="e17"   DesignProc="Concrete Shell Design"
+   Area="e18"   DesignProc="Concrete Shell Design"
+   Area="e19"   DesignProc="Concrete Shell Design"
+   Area="e20"   DesignProc="Concrete Shell Design"
+   Area="e21"   DesignProc="Concrete Shell Design"
+   Area="e22"   DesignProc="Concrete Shell Design"
+   Area="e23"   DesignProc="Concrete Shell Design"
+   Area="e24"   DesignProc="Concrete Shell Design"
+   Area="e25"   DesignProc="Concrete Shell Design"
+   Area="e26"   DesignProc="Concrete Shell Design"
+   Area="e27"   DesignProc="Concrete Shell Design"
+   Area="e28"   DesignProc="Concrete Shell Design"
+   Area="e29"   DesignProc="Concrete Shell Design"
+   Area="e30"   DesignProc="Concrete Shell Design"
+   Area="e31"   DesignProc="Concrete Shell Design"
+
+TABLE:  "JOINT RESTRAINT ASSIGNMENTS"
+   Joint="n0_0"   U1=Yes   U2=No   U3=Yes   R1=No   R2=No   R3=No
+   Joint="n0_1"   U1=Yes   U2=No   U3=Yes   R1=No   R2=No   R3=No
+   Joint="n0_2"   U1=Yes   U2=No   U3=Yes   R1=No   R2=No   R3=No
+
+TABLE:  "LOAD PATTERN DEFINITIONS"
+   LoadPat="LC"   DesignType=Other   SelfWtMult=0
+
+TABLE:  "LOAD CASE DEFINITIONS"
+   Case="LC"   Type=LinStatic   InitialCond=Zero   DesignType=Other   RunCase=Yes   CaseStatus="Not Run"
+
+TABLE:  "CASE - STATIC 1 - LOAD ASSIGNMENTS"
+   Case="LC"   LoadType="Load pattern"   LoadName="LC"   LoadSF=1
+
+TABLE:  "JOINT LOADS - FORCE"
+   Joint="n8_1"   LoadPat="LC"   CoordSys=GLOBAL   F1=0   F2=0   F3=-50   M1=0   M2=0   M3=0
+
+END TABLE DATA
