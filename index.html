@@ -305,6 +305,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ai-assistant-and-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AI: assistant and agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-it-does" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1070,6 +1081,33 @@
   
   
     <li class="md-nav__item">
+      <a href="mcp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (external agents)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="exporting.html" class="md-nav__link">
         
   
@@ -1232,6 +1270,16 @@ for the model's life. The two share the same solver machinery but mean different
 things element by element: see <a href="domains.html">Domains (plane vs plate)</a> for the
 full comparison, and <a href="slabs-grillages.html">Slabs and Grillages</a> for a plate-focused
 walkthrough.</p>
+<h2 id="ai-assistant-and-agent">AI: assistant and agent<a class="headerlink" href="#ai-assistant-and-agent" title="Permanent link">&para;</a></h2>
+<p>Two optional ways to work with a model by talking to it:</p>
+<ul>
+<li>The <strong><a href="assistant.html">Assistant</a></strong> is a panel in the application that answers
+  questions about the open model and makes edits. It runs local models by
+  default (<code>gemma4:e4b</code> through Ollama), or a remote one with your own API key.</li>
+<li>The <strong><a href="mcp.html">Agent</a></strong> tab lets a coding agent (Claude Code, or Ollama's
+  cloud models) build, analyse and design on the model you have open while you
+  watch it change. The same tools are an MCP server for any agent you use.</li>
+</ul>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 <h3 id="elements-modelling">Elements &amp; modelling<a class="headerlink" href="#elements-modelling" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1289,6 +1337,8 @@ walkthrough.</p>
 <li>An optional <strong>AI Assistant</strong> panel that answers questions about the open model
   in plain language — local by default (via Ollama), or a remote model with your
   own API key. See <a href="assistant.html">The AI Assistant</a>.</li>
+<li>An <strong>Agent</strong> tab (Claude Code or Ollama cloud models) that works on the open model, and an
+  MCP server for other agents. See <a href="mcp.html">The MCP server and the Agent tab</a>.</li>
 <li>Results: displacements, reactions, element end-forces, N/V/M diagrams, deformed
   and modal shapes, membrane stresses / slab moments, and reaction sums.</li>
 <li>Exports: drawing (PNG/SVG/PDF), a formatted PDF results report, an Excel

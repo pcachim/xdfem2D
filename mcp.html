@@ -1,0 +1,1785 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+        <link rel="prev" href="assistant.html">
+      
+      
+        <link rel="next" href="exporting.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/xdfem2d_logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>MCP server (external agents) - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-mcp-server-for-external-agents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  <img src="assets/xdfem2d_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MCP server (external agents)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  <img src="assets/xdfem2d_logo.png" alt="logo">
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modelling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="slabs-grillages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Grillages (overview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design (concrete, steel, timber)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Phasing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="tutorials/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_15" id="__nav_15_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/materials-and-sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/nodes-and-bars.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and bars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/slabs-and-walls.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs and walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/supports.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases and combinations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (external agents)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="mcp.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (external agents)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-is-and-what-it-is-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it is, and what it is not
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#work-on-the-model-that-is-open-in-the-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Work on the model that is open in the window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#register-it-with-your-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Register it with your agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Register it with your agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-a-source-checkout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From a source checkout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-that-it-works-on-your-machine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check that it works on your machine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-the-agents-files-in-one-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep the agent's files in one folder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-much-the-server-tells-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How much the server tells the agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#copying-and-transforming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Copying and transforming
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamics-and-second-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dynamics and second order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variants-and-construction-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variants and construction sequences
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#figures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Figures
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#an-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        An example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-know" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to know
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#if-something-does-not-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        If something does not work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="engine-api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engine Reference (API & JSON)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="license.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses & Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-mcp-server-for-external-agents">The MCP server (for external agents)<a class="headerlink" href="#the-mcp-server-for-external-agents" title="Permanent link">&para;</a></h1>
+<p>xdfem2D can be driven by an AI agent such as <strong>Claude Code</strong> or <strong>Claude Desktop</strong>, through
+the <a href="https://modelcontextprotocol.io">Model Context Protocol</a> (MCP). The agent builds a
+model with the same command language the <a href="assistant.html">Assistant</a> writes, analyses it,
+designs it, reads the results and writes files, calling tools instead of clicking menus.</p>
+<p>It is not the Assistant. The Assistant is a panel inside the application, meant for the small
+models that run on your computer. The MCP server is for an agent that <strong>you already use</strong>
+(a capable cloud model works best), which then has xdfem2D as one more tool.</p>
+<p>The server is part of the application: the same program that opens the window starts it when it is
+given <code>--mcp</code>. Nothing else has to be installed.</p>
+<h2 id="what-it-is-and-what-it-is-not">What it is, and what it is not<a class="headerlink" href="#what-it-is-and-what-it-is-not" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>One model in memory, separate from the window.</strong> The server keeps its own model, its
+  results and an undo list. It does not see the model open in the application, and the
+  application does not see the agent's. The two meet through <code>.x2d</code> files: the agent saves,
+  you open; you save, the agent loads. If both edit the same file, whoever saves last wins.</li>
+<li><strong>Edits drop the results.</strong> Results belong to the model they were computed from. After any
+  edit the agent runs the analysis again before asking for forces.</li>
+<li><strong>Nothing is lost silently.</strong> <code>new_model</code> and <code>load_model</code> refuse to throw away edits that
+  were not saved (<code>force=true</code> discards them), and <code>undo</code> brings back the last edit.</li>
+<li><strong>It writes files where the agent says</strong>, unless you give it a folder (<code>--root</code>, below).
+  <code>save_model</code>, <code>export_file</code> and <code>export_figure</code> take any path, and the agent chooses it.</li>
+</ul>
+<h2 id="work-on-the-model-that-is-open-in-the-window">Work on the model that is open in the window<a class="headerlink" href="#work-on-the-model-that-is-open-in-the-window" title="Permanent link">&para;</a></h2>
+<p><code>--mcp</code> gives the agent a model of its own. The other way is to let it work on <strong>the model you have open</strong>:
+you see what it does as it does it, you can edit in between, and it sees what you did.</p>
+<ol>
+<li>Open the <strong>Agent</strong> tab of the AI panel (<strong>View ▸ Agent tab</strong>, or F10 and the second tab).</li>
+<li>Write what you want and press Enter. The first time, the window tells you where your model goes (see below)
+   and starts the connection by itself.</li>
+<li>Watch the drawing: it changes after each step the agent takes, and the tab lists the steps.</li>
+</ol>
+<p>The tab has a combo for the <strong>agent</strong> (Claude Code, or Ollama (cloud); other programs can be added) and one for the
+<strong>model</strong> it uses (its own default, Sonnet, Opus or Haiku; for Ollama (cloud), the cloud models your Ollama has).
+<strong>Connection ▾</strong> opens the rest: turn the connection on or off, choose the folder the agent may use for
+files (the same limit as <code>--root</code>), see the token, set the <strong>environment</strong> the agent runs in (<code>KEY=VALUE</code>
+lines, for example <code>ANTHROPIC_BASE_URL=http://localhost:11434</code> to use a model that runs on this computer),
+and register the server with the agent so that it can also be used outside the window (<strong>Register with
+the agent</strong>: it runs <code>claude mcp add</code> for you, for all your projects, under the name <code>xdfem2d-window</code>,
+replacing an earlier registration; the command is there to copy for any other use).</p>
+<p>The agent is run <strong>without a terminal</strong> (<code>claude -p</code>), given the server of the window in the request itself,
+so nothing has to be registered for the tab to work. It is closed in on the tools of the server: it has no
+shell and cannot edit files, and it works in the folder you chose. <strong>New conversation</strong> starts it afresh, and
+the tab does that by itself when you create or open another model, because its memory of the old one would
+mislead it.</p>
+<p><strong>Ollama (cloud)</strong> is an agent that runs inside the application, for Ollama's cloud models only (<code>gemma4:cloud</code>,
+<code>gpt-oss:120b-cloud</code>, ...; the model combo lists those that your Ollama has). It needs Ollama installed and
+signed in (<code>ollama signin</code>), and nothing else: no server, token, registration or environment, because the
+application asks the model and runs the tools itself, on the open window. Nothing runs on this computer, but
+every step is a request to Ollama's cloud and counts against your Ollama usage; the tab shows how many calls
+a message took. If the quota is used up, or you are not signed in, the tab says so in those words.
+<strong>New conversation</strong> clears its memory (it keeps the last 40 messages).</p>
+<p>Where your model goes: Claude Code sends what you write and your model (nodes, loads, results) to Anthropic
+to answer, as it does when you use it in a terminal; Ollama (cloud) sends them to Ollama (ollama.com). The window says so once for each agent (with <em>Don't show
+this again</em>). With a model that runs on this computer it says that it stays here; small models often fail on
+requests of several steps.</p>
+<p>What to know:</p>
+<ul>
+<li><strong>Turns, not a race.</strong> Each tool the agent calls is a turn: it reads the model as the window has it at
+  that moment, and writes its change back at the end. If you edit between two turns the agent sees it in
+  the next one (<code>summary</code> lists the nodes you drew, and what you have selected). If you edit <em>during</em> a
+  turn, that turn writes nothing and says so, and the agent repeats it from what it reads again.</li>
+<li><strong>Long calls keep the model still.</strong> While an analysis, a design or an export runs, the window shows
+  <code>Agent: working (...)</code> in the status bar and editing is switched off, as it is when the Variants panel is
+  open. A short call does not take the model away.</li>
+<li><strong>Undo is yours.</strong> Each call that changes the model is one step of <strong>Edit ▸ Undo</strong>, together with your own.
+  The status bar says what it did (<code>Agent: +2 nodes, +1 bar</code>). The first nodes of a new model are fitted to
+  the screen.</li>
+<li><strong>Results are installed as a Run does.</strong> After the agent analyses, the window is locked on the results and
+  shows the deformed shape; its design shows in the design views. Editing a solved model unlocks it and drops
+  the results, whoever edits.</li>
+<li><strong>Files.</strong> The agent's <code>save_model</code>, <code>load_model</code> and exports work on the window's document: saving makes
+  the file the one the window has open.</li>
+<li><strong>Safety.</strong> The server listens on this computer only (<code>127.0.0.1</code>) and answers only a client that sends the
+  token, which is shown in the dialog and kept in the application's state file. <strong>New token</strong> stops whatever
+  was registered before. It turns off when you close the window, and it is never on unless you turned it on.</li>
+<li><strong>Not shared.</strong> The zoom, the scenes and the variant you are looking at are yours. The agent works on the
+  base model.</li>
+</ul>
+<h2 id="register-it-with-your-agent">Register it with your agent<a class="headerlink" href="#register-it-with-your-agent" title="Permanent link">&para;</a></h2>
+<p><strong>First, open xdfem2D once and accept the notice.</strong> The server will not start before that, and it
+cannot show the notice itself. It also checks, as the window does, that the version has not expired;
+if it refuses, it says why on its standard error (the agent's log).</p>
+<p>The program to register is the application's own executable, with <code>--mcp</code>:</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Program</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS</td>
+<td><code>/Applications/xdfem2D.app/Contents/MacOS/xdfem2D</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>C:\Program Files\xdfem2D\xdfem2D.exe</code> (the folder the installer used)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>/usr/bin/xdfem2D</code> after the <code>.deb</code>, or <code>xdfem2D</code> in the folder you unpacked it in</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Claude Code</strong> (macOS shown):</p>
+<div class="highlight"><pre><span></span><code>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>xdfem2d<span class="w"> </span>--<span class="w"> </span>/Applications/xdfem2D.app/Contents/MacOS/xdfem2D<span class="w"> </span>--mcp
+</code></pre></div>
+<p>Add <code>--scope user</code> after the name to have it in every project. <code>claude mcp list</code> shows
+whether it connected. Open a <strong>new</strong> session: the tools appear when it starts.</p>
+<p><strong>Claude Desktop</strong>, in <code>claude_desktop_config.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"xdfem2d"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Applications/xdfem2D.app/Contents/MacOS/xdfem2D"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"--mcp"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Any other MCP client works the same way: the server speaks MCP over standard input and output.</p>
+<h3 id="from-a-source-checkout">From a source checkout<a class="headerlink" href="#from-a-source-checkout" title="Permanent link">&para;</a></h3>
+<p>If you run xdfem2D from its source, install the environment (<code>uv sync</code>, which includes the <code>mcp</code>
+package) and register the Python module instead:</p>
+<div class="highlight"><pre><span></span><code>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>xdfem2d<span class="w"> </span>--<span class="w"> </span>/path/to/project/.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>xdfem2d_app.mcp_server
+</code></pre></div>
+<p><code>python -m xdfem2d_app.gui --mcp</code> does the same as the executable, notice and expiry check included;
+<code>python -m xdfem2d_app.mcp_server</code> skips both, since a checkout has neither.</p>
+<h3 id="check-that-it-works-on-your-machine">Check that it works on your machine<a class="headerlink" href="#check-that-it-works-on-your-machine" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>/Applications/xdfem2D.app/Contents/MacOS/xdfem2D<span class="w"> </span>--mcp-check
+</code></pre></div>
+<p>starts the server as an agent would, talks to it, and tries what an agent does: it builds a beam,
+analyses it, reads a reaction, designs it, writes a DXF, an Excel file and a Word report, draws a
+figure (which makes the server start the program a second time) and tries a path outside
+<code>--root</code>. Every step is reported as <code>ok</code> or <code>FAIL</code> with the reason, on the screen and in a file,
+<code>~/xdfem2d_mcp_check.txt</code> (<code>--log FILE</code> chooses another). <strong>The file is what to look at, and to send
+if something fails</strong>: a Windows build has no console, and nothing it prints is seen.</p>
+<p>The check refuses, like the server, if the notice has not been accepted in the window (exit code 2),
+and says so. The code is 0 when every step passes and 1 when one fails.</p>
+<h3 id="keep-the-agents-files-in-one-folder">Keep the agent's files in one folder<a class="headerlink" href="#keep-the-agents-files-in-one-folder" title="Permanent link">&para;</a></h3>
+<p><code>--root FOLDER</code> (after <code>--mcp</code>) is the only folder the agent may read or write files in:</p>
+<div class="highlight"><pre><span></span><code>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>xdfem2d<span class="w"> </span>--<span class="w"> </span>/Applications/xdfem2D.app/Contents/MacOS/xdfem2D<span class="w"> </span>--mcp<span class="w"> </span>--root<span class="w"> </span>~/Structures
+</code></pre></div>
+<p>A relative path (<code>beam.x2d</code>, <code>reports/beam.docx</code>) is relative to that folder, and the folders it needs
+are created inside it. A path that leaves it (<code>../x.x2d</code>, <code>~/Desktop/x.docx</code>, an absolute path
+elsewhere, or a link that points out) is refused, with a message that names the folder. The folder
+must exist; if it does not, the server says so and does not start. Without <code>--root</code> the agent can
+use any path. Use it for an agent you do not follow step by step, or one other people share.</p>
+<p><code>summary</code> tells the agent which folder it is limited to.</p>
+<h3 id="how-much-the-server-tells-the-agent">How much the server tells the agent<a class="headerlink" href="#how-much-the-server-tells-the-agent" title="Permanent link">&para;</a></h3>
+<p><code>--instructions short|grammar|full</code> (after <code>--mcp</code>) sets what the server says when a client connects:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>What the agent receives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>short</code></td>
+<td>A line that points to the <code>reference</code> tool</td>
+</tr>
+<tr>
+<td><code>grammar</code></td>
+<td>The command language and its rules</td>
+</tr>
+<tr>
+<td><code>full</code> (default)</td>
+<td>The above, and to read the model with <code>summary</code> before editing one that already has things</td>
+</tr>
+</tbody>
+</table>
+<p>Models that do not read the documentation on their own do much better with <code>full</code>. Put it in
+the registration if you want another: <code>... xdfem2D --mcp --instructions grammar</code>.</p>
+<h2 id="the-tools">The tools<a class="headerlink" href="#the-tools" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reference</code></td>
+<td>The command language: one line per verb and object, with an example</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>What is loaded: the model (nodes with coordinates, bars, supports, sections, cases), the names <code>get</code> understands for its domain, variants, sequences, punching columns</td>
+</tr>
+<tr>
+<td><code>new_model</code></td>
+<td>An empty model. <code>domain</code> is <code>plane</code> (frames and walls) or <code>plate</code> (slabs and grillages) and cannot change afterwards</td>
+</tr>
+<tr>
+<td><code>load_model</code>, <code>save_model</code></td>
+<td>Open and save a <code>.x2d</code> file, with its results and design settings</td>
+</tr>
+<tr>
+<td><code>commands</code></td>
+<td>Edit the model with the command language, one per line. All or nothing: on an error the model is untouched and the answer names the line</td>
+</tr>
+<tr>
+<td><code>check</code></td>
+<td>Try commands on a copy and report the problems</td>
+</tr>
+<tr>
+<td><code>get</code></td>
+<td>Read the model and its results: reactions, displacements, forces, design, lists. The word <code>get</code> may be left out. <code>variant=ID</code> reads a variant</td>
+</tr>
+<tr>
+<td><code>undo</code></td>
+<td>Undo the last edit</td>
+</tr>
+<tr>
+<td><code>ui_action</code></td>
+<td>Only in the window: change what it shows (a view, the layers, the colours of the results, the grid, the zoom), as the Display panel and the View menu do. It never changes the model. With no action it lists them</td>
+</tr>
+<tr>
+<td><code>lock_model</code></td>
+<td>Lock the model against changes (commands, undo, design settings, a new or another model are refused; reading and analysing go on), or unlock it. Unlocking discards the results, so it is refused while there are some unless <code>force=true</code>. In the window it is the Lock of the toolbar, and you can unlock it there</td>
+</tr>
+<tr>
+<td><code>auto_combinations</code></td>
+<td>The EN 1990 combinations (ULS, SLS-K, SLS-FR, SLS-QP) of the model's cases</td>
+</tr>
+<tr>
+<td><code>run_analysis</code></td>
+<td>Analyse. <code>scope="all"</code> also solves the variants and their combinations</td>
+</tr>
+<tr>
+<td><code>set_design</code></td>
+<td>Design preferences (γc, γs, αcc, code editions ...) and the combinations to design for</td>
+</tr>
+<tr>
+<td><code>run_design</code></td>
+<td>Design: <code>concrete</code> (beams and columns), <code>bars</code>, <code>areas</code> (slabs and walls), <code>crack</code>, <code>punching</code>, <code>steel</code>, <code>timber</code></td>
+</tr>
+<tr>
+<td><code>beam_bars</code></td>
+<td>The bars proposed for each beam by zone, a page at a time</td>
+</tr>
+<tr>
+<td><code>add_punch_column</code></td>
+<td>A column for the punching check of a slab</td>
+</tr>
+<tr>
+<td><code>add_variant</code></td>
+<td>A variant: elements switched off, a support taken away, or other supports</td>
+</tr>
+<tr>
+<td><code>add_variant_combination</code></td>
+<td>A combination across variants</td>
+</tr>
+<tr>
+<td><code>set_stages</code>, <code>add_sequence</code></td>
+<td>Construction stages of the elements, and a sequence made from them</td>
+</tr>
+<tr>
+<td><code>remove_overlay</code></td>
+<td>Remove a variant, a combination across variants, a sequence or a punching column</td>
+</tr>
+<tr>
+<td><code>export_file</code></td>
+<td>A Word report (with figures if asked), the tables in Excel, a design report, a DXF</td>
+</tr>
+<tr>
+<td><code>export_figure</code></td>
+<td>A view of the model as a picture, as the window shows it</td>
+</tr>
+</tbody>
+</table>
+<h3 id="copying-and-transforming">Copying and transforming<a class="headerlink" href="#copying-and-transforming" title="Permanent link">&para;</a></h3>
+<p>Beyond the commands the Assistant knows, the agent has the Edit menu as commands (<code>reference</code> lists them):
+<code>copy</code>, <code>array</code> (rectangular or circular), <code>rotate</code>, <code>scale</code>, <code>mirror</code> and <code>divide</code>. They work on nodes, and on bars,
+slabs and walls through the nodes they are made of; a copy brings the bars, slabs and walls made of the copied nodes, and
+their loads if you add <code>loads</code>. The answer names the new ids (<code>A_c2</code>, <code>E1_c2</code> ...), so that the next line can use them.</p>
+<div class="highlight"><pre><span></span><code>copy bar E1 by 0 3 loads
+array nodes A,B rect 1 0 3 3        # three storeys, 3 m apart
+mirror nodes all about x=6 copy
+rotate nodes all about 0 0 by 90
+</code></pre></div>
+<h3 id="dynamics-and-second-order">Dynamics and second order<a class="headerlink" href="#dynamics-and-second-order" title="Permanent link">&para;</a></h3>
+<p>The agent can also set up the seismic and second-order analyses, which the Assistant does not:</p>
+<div class="highlight"><pre><span></span><code>add analysis M mass = 1 G + 0.3 Q                 # the mass of the loads (kN / 9.81)
+add mass B,C mx 2 my 2 case M                     # a concentrated mass, in tonnes
+add analysis Modes modal mass M modes 6           # the vibration modes: get modal
+add spectrum EC8 ec8 ag 1.5 S 1.2 TB 0.15 TC 0.5 TD 2 [q 3]
+add spectrum SP points 0 1  0.5 2.5  2 1          # or a spectrum of your own
+add analysis Sx spectrum modal Modes function EC8 direction X rule CQC
+add analysis P pdelta = 1.35 G + 1.5 Q beams 0.8 columns 0.8
+</code></pre></div>
+<p>Run the analysis, then read them with <code>get modal</code>, <code>get spectrum case Sx</code>, or <code>get max ux on nodes all case Sx</code>. A case
+that cannot be solved (for instance a modal case whose mass case has no mass) does not stop the run: the answer of
+<code>run_analysis</code> lists it in <code>case_errors</code>. P-Delta is for plane models.</p>
+<h3 id="reading-results">Reading results<a class="headerlink" href="#reading-results" title="Permanent link">&para;</a></h3>
+<p><code>get</code> takes the same questions as the command language. A few:</p>
+<div class="highlight"><pre><span></span><code>get sum reaction fy on nodes all case ULS
+get max M on bars all case C1
+get absmax uy on nodes all case C1
+get design concrete bars longitudinal
+get design concrete areas punching worst 3
+get list bars
+</code></pre></div>
+<p>The <code>summary</code> tool lists the names a model understands (a plate has other reactions and
+displacements than a frame). Results are read per case or combination; a design is
+computed per combination, never per analysis case.</p>
+<h3 id="variants-and-construction-sequences">Variants and construction sequences<a class="headerlink" href="#variants-and-construction-sequences" title="Permanent link">&para;</a></h3>
+<p><code>add_variant</code> makes a variant of the model with its own supports or with some elements off,
+and <code>run_analysis</code> with <code>scope="all"</code> solves it; <code>get ... variant=ID</code> reads it, and the base
+model is read without <code>variant</code>. A construction sequence is set up from stages:
+<code>set_stages({"1": ["E1"], "2": ["E2"]})</code>, then <code>add_sequence("SEQ", {"1": ["G"]})</code>, and the
+phases are cases named <code>seq__SEQ__Stage1</code>, <code>seq__SEQ__Stage2</code> ...</p>
+<h3 id="figures">Figures<a class="headerlink" href="#figures" title="Permanent link">&para;</a></h3>
+<p><code>export_figure</code> and the figures of a report are drawn by the application's own canvas, off
+screen, in a process of their own, so they look as they do in the window and take a few
+seconds. The views are <code>structure</code>, <code>loads</code>, <code>deformed</code>, <code>displacements</code>, <code>reactions</code>,
+<code>bending</code>, <code>shear</code> and <code>axial</code>; after a design, <code>reinforcement</code>, <code>crack</code> and the like. A
+view the model does not have is refused with the list of the ones it has.</p>
+<h2 id="an-example">An example<a class="headerlink" href="#an-example" title="Permanent link">&para;</a></h2>
+<p>A conversation with an agent could go like this (the tool the agent chose is in brackets):</p>
+<blockquote>
+<p><strong>You:</strong> A simply supported concrete beam of 6 m, section 0.3 × 0.5, dead load 12 kN/m and
+live load 5 kN/m. Design it and write a report with the drawings to <code>~/Desktop/beam.docx</code>.</p>
+</blockquote>
+<ol>
+<li><code>reference</code>, <code>summary</code> (empty model)</li>
+<li><code>commands</code>: <code>add material ...</code>, <code>add section ...</code>, nodes, bar, supports, cases, loads</li>
+<li><code>auto_combinations</code>, <code>run_analysis</code></li>
+<li><code>run_design concrete</code>, <code>run_design crack</code>, <code>run_design bars</code>, <code>beam_bars</code></li>
+<li><code>export_file report ... figures=true</code></li>
+</ol>
+<h2 id="what-to-know">What to know<a class="headerlink" href="#what-to-know" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Big models are read in pages.</strong> An answer has a size limit: a longer list is cut to its
+  first items, with a note (<code>rows_cut: first 100 of 2000</code>) that says how to ask for less, and
+  <code>beam_bars</code> returns a page at a time (<code>offset</code>, <code>limit</code>).</li>
+<li><strong>Not everything is covered.</strong> The diagrams of the bars of a combination <em>across variants</em>
+  cannot be read with <code>get</code> (reactions and displacements can). A beam's bars are a proposal:
+  the detail stored in the model is not changed, as the menu does.</li>
+<li><strong>Design preferences.</strong> A model loaded from a file brings the design settings saved in it.
+  A new model uses the engine's defaults, which are the application's.</li>
+<li><strong>Optional packages.</strong> Word and Excel files need <code>python-docx</code> and <code>openpyxl</code>, DXF needs
+  <code>ezdxf</code>, and the figures need the interface (<code>pyside6</code>). They come with the application's
+  dependencies. If one is missing, the answer says which. A <code>pandoc</code> on the path is used for the
+  design reports, when there is one.</li>
+</ul>
+<h2 id="if-something-does-not-work">If something does not work<a class="headerlink" href="#if-something-does-not-work" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The server is listed but fails to connect</td>
+<td>Run <code>xdfem2D --mcp-check</code>: it says which step fails and why. Or run the registered command in a terminal: it prints why on standard error (the notice not accepted, an expired version, a wrong path)</td>
+</tr>
+<tr>
+<td>From a checkout: <code>No module named 'mcp'</code></td>
+<td>The environment lacks the package: <code>uv sync</code></td>
+</tr>
+<tr>
+<td>Claude Code says it cannot connect to <code>xdfem2d-window</code></td>
+<td>A registration made earlier, in the folder you were in, has another port and wins there: run <code>claude mcp remove xdfem2d-window -s local</code> in that folder (<code>claude mcp list</code> shows both). The tab's own conversation does not use registrations</td>
+</tr>
+<tr>
+<td>A file is refused as "outside the folder this server may use"</td>
+<td>The server was started with <code>--root</code>: use a path inside it, or a relative one</td>
+</tr>
+<tr>
+<td>The agent does not use the tools</td>
+<td>The session was open before the registration: start a new one</td>
+</tr>
+<tr>
+<td>The agent writes commands the server refuses</td>
+<td>Use <code>--instructions full</code>, and ask it to call <code>reference</code></td>
+</tr>
+<tr>
+<td>An export says a package is not installed</td>
+<td>Install what the answer names</td>
+</tr>
+<tr>
+<td>A figure is refused</td>
+<td>The view needs results (run the analysis) or a design that has not been run</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

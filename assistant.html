@@ -16,7 +16,7 @@
         <link rel="prev" href="tutorials/analysis-cases.html">
       
       
-        <link rel="next" href="exporting.html">
+        <link rel="next" href="mcp.html">
       
       
         
@@ -1065,6 +1065,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#doing-what-the-window-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Doing what the window does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#creating-and-changing-a-model" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1084,6 +1095,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mcp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (external agents)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1241,9 +1279,9 @@
 
 
 <h1 id="the-ai-assistant">The AI Assistant<a class="headerlink" href="#the-ai-assistant" title="Permanent link">&para;</a></h1>
-<p>The <strong>Assistant</strong> panel answers questions about the open model in plain language: where
+<p>The <strong>Assistant</strong> tab of the <strong>AI</strong> panel answers questions about the open model in plain language: where
 the largest stress is, which combination governs the reinforcement, what a
-command does. Show or hide it from <strong>View → Assistant panel</strong>.</p>
+command does. Show or hide it from <strong>View → AI panel</strong>.</p>
 <p>It is optional. Every other part of xdfem2D works without it, and the panel says
 so when nothing is installed.</p>
 <h2 id="local-or-remote">Local or remote<a class="headerlink" href="#local-or-remote" title="Permanent link">&para;</a></h2>
@@ -1334,7 +1372,7 @@ model <strong>on your own machine</strong>. Nothing about your model is sent any
 <ol>
 <li>Install Ollama.</li>
 <li>Start it: <code>ollama serve</code></li>
-<li>Fetch a model: <code>ollama pull granite4.1:8b</code></li>
+<li>Fetch a model: <code>ollama pull gemma4:e4b</code> (the one the assistant starts with; see <a href="#tested-models">Tested models</a>)</li>
 <li>Press <strong>Refresh</strong> in the panel.</li>
 </ol>
 <p>Neither Ollama nor the model ships with xdfem2D — the model alone is several
@@ -1361,47 +1399,54 @@ quoting the correct figure.</p>
 <p>A small model here does not give worse answers. It gives wrong answers that look
 exactly like right ones.</p>
 <h3 id="tested-models">Tested models<a class="headerlink" href="#tested-models" title="Permanent link">&para;</a></h3>
-<p>Measured with <code>tools/bench_assistant.py --task=query</code>, 18 benchmark files,
-99 questions, temperature 0, September 2026:</p>
+<p>The Assistant writes short commands (one request at a time) that the application
+checks and applies. Measured with <code>tools/bench_parts.py</code>, 38 single-part
+requests (nodes, bars, sections, supports, loads, slabs, walls), temperature 0,
+October 2026:</p>
 <table>
 <thead>
 <tr>
 <th>Model</th>
-<th>Correct</th>
-<th>Median s/answer</th>
-<th>Max s/answer</th>
+<th>Right</th>
+<th>Time per request</th>
 <th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>qwen3.5:4b</code> (<code>--think=off</code>)</td>
-<td>98/99</td>
-<td>4.4</td>
-<td>14.8</td>
-<td>Recommended — fastest of the group, same accuracy as the next two.</td>
+<td><code>gemma4:e4b</code></td>
+<td>25–26/38</td>
+<td>under 1 s</td>
+<td><strong>The default.</strong> The most capable of the small models, and the fastest.</td>
 </tr>
 <tr>
-<td><code>granite4.2:3b</code></td>
-<td>98/99</td>
-<td>6.2</td>
-<td>16.2</td>
-<td>Equally reliable, slower; occasionally confuses bar peaks with shell peaks.</td>
+<td><code>gemma4:12b</code></td>
+<td>30–32/38</td>
+<td>slower</td>
+<td>More capable than <code>e4b</code>; worth it if you have the memory and can wait.</td>
 </tr>
 <tr>
-<td><code>granite4.1:8b</code></td>
-<td>96/99</td>
-<td>11.8</td>
-<td>23.4</td>
-<td>No longer a candidate — over twice as slow for the same or worse accuracy.</td>
+<td><code>bonsai-2:27b</code></td>
+<td>34/38</td>
+<td>about 6 s</td>
+<td>The most capable of the local models, and the slowest.</td>
+</tr>
+<tr>
+<td><code>gemma4:cloud</code></td>
+<td>36–37/38</td>
+<td>under 1 s</td>
+<td>Ollama's cloud model: the best result, but your model leaves this computer.</td>
 </tr>
 </tbody>
 </table>
-<p>The app now has three work modes (Auto / Create / Query — see the Task selector
-in the panel); <code>--task=create</code> and <code>--task=query</code> benchmark them separately.
-<code>qwen3.5:4b</code> is the current default, and the one being tuned first.</p>
-<p>Times are from one machine. Without a usable GPU the same model can be several
-times slower.</p>
+<p>Smaller models (3–4 B) fall behind quickly: <code>qwen3.5:4b</code>, <code>ministral-3:3b</code> and
+<code>granite4.2:3b</code> get 15–23 of the 38, and <code>bonsai-2</code> gets 10 at 4 B and 20 at 9 B.
+Questions about a model (reading results) are easier than creating one: a small
+model answers about 95% of them correctly, so the size you need depends on what
+you ask of it.</p>
+<p>Times are from one machine (an Apple-silicon Mac). Without a usable GPU the same
+model can be several times slower, and the cloud time depends on your connection.
+Results move by about ±2 requests between runs.</p>
 <p>These names will age. The benchmark will not: it computes the right answers from
 the model file itself, so it stays valid as models and files change.</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=src python3 tools/bench_assistant.py --task=query yourfile.x2d a_model --runs=5
@@ -1435,6 +1480,17 @@ stresses, design results, <a href="modelling.html#constraints-multi-point">const
 and this manual. Results are keyed to the <strong>analysed
 mesh</strong> — the elements that geometry objects expand into — and the assistant
 uses those ids, which is why they may not match what you drew.</p>
+<h3 id="doing-what-the-window-does">Doing what the window does<a class="headerlink" href="#doing-what-the-window-does" title="Permanent link">&para;</a></h3>
+<p>Some requests are not about the model but about the window: "show the deformed shape", "hide the node labels", "put the
+grid at 50 cm", "use the plasma colormap", "save as beam1". The assistant recognises them (in Portuguese, English or
+French) and <strong>runs the menu command or the Display panel control</strong> itself, then says what it did. This covers the File,
+Edit, View, Selection, Analysis and Design menus and the Display panel: its layers, the grid (spacing, snap, reference
+lines) and the Style tab (colormap, smoothing, fill, levels, contour lines, scale, diagram and utilisation styles). A number
+or a name in the sentence is read ("grelha de 50 cm", "15 níveis", "paleta plasma"). A command that deletes or replaces
+something asks first, and one that is greyed out says why: a Style control waits for a view that has a colour map, a
+diagram or a design to style, and says which view to open.</p>
+<p>An agent (the <strong>Agent</strong> tab of the same panel) can do the display part too, and much more: see
+<a href="mcp.html">The MCP server and the Agent tab</a>.</p>
 <h3 id="creating-and-changing-a-model">Creating and changing a model<a class="headerlink" href="#creating-and-changing-a-model" title="Permanent link">&para;</a></h3>
 <p>Ask in plain language — "a 6 m simply supported beam", "a cantilever wall", "add a
 20 kN load at midspan", "give bar B1 the section S2". Ask for <strong>one thing at a time</strong>:
