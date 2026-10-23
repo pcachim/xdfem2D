@@ -1361,8 +1361,9 @@ you see what it does as it does it, you can edit in between, and it sees what yo
 </ol>
 <p>The tab has a combo for the <strong>agent</strong> (Claude Code, or Ollama (cloud); other programs can be added) and one for the
 <strong>model</strong> it uses (its own default, Sonnet, Opus or Haiku; for Ollama (cloud), the cloud models your Ollama has).
-<strong>Connection ▾</strong> opens the rest: turn the connection on or off, choose the folder the agent may use for
-files (the same limit as <code>--root</code>), see the token, set the <strong>environment</strong> the agent runs in (<code>KEY=VALUE</code>
+<strong>Options</strong> opens the rest (for Claude Code the connection; for Ollama (cloud) only the folder): turn the connection on or off, choose the folder the agent may use for
+files (the same limit as <code>--root</code>; <strong>Automatic</strong>, the default, is the folder of the open model, or the default
+file location of Preferences when no model is open, and follows the model you open), see the token, set the <strong>environment</strong> the agent runs in (<code>KEY=VALUE</code>
 lines, for example <code>ANTHROPIC_BASE_URL=http://localhost:11434</code> to use a model that runs on this computer),
 and register the server with the agent so that it can also be used outside the window (<strong>Register with
 the agent</strong>: it runs <code>claude mcp add</code> for you, for all your projects, under the name <code>xdfem2d-window</code>,
@@ -1399,7 +1400,8 @@ requests of several steps.</p>
   shows the deformed shape; its design shows in the design views. Editing a solved model unlocks it and drops
   the results, whoever edits.</li>
 <li><strong>Files.</strong> The agent's <code>save_model</code>, <code>load_model</code> and exports work on the window's document: saving makes
-  the file the one the window has open.</li>
+  the file the one the window has open, and it joins <strong>File ▸ Open recent</strong> as when you save it.</li>
+<li><strong>Selection.</strong> <code>select nodes ...</code> and <code>select bars ...</code> mark them in the drawing, so that you see what the agent means, and they <strong>add</strong> to what is selected (as in a CAD program); <code>select only ...</code> replaces it, <code>deselect ...</code> takes from it, <code>select none</code> clears it and <code>select previous</code> goes back (the Previous selection of the Selection menu). An action that uses the selection (move, divide, delete ...) leaves nothing selected, and <code>select previous</code> brings it back. The server of <code>--mcp</code> has no drawing, and only reports what matched.</li>
 <li><strong>Safety.</strong> The server listens on this computer only (<code>127.0.0.1</code>) and answers only a client that sends the
   token, which is shown in the dialog and kept in the application's state file. <strong>New token</strong> stops whatever
   was registered before. It turns off when you close the window, and it is never on unless you turned it on.</li>
@@ -1598,7 +1600,7 @@ the registration if you want another: <code>... xdfem2D --mcp --instructions gra
 </tr>
 <tr>
 <td><code>export_figure</code></td>
-<td>A view of the model as a picture, as the window shows it</td>
+<td>A view of the model written to a picture file, as the window draws it (it shows nothing in the window: <code>ui_action</code> does)</td>
 </tr>
 </tbody>
 </table>
