@@ -1,0 +1,3670 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="2D structural analysis of frames, walls, slabs and grillages with a PySide6 desktop interface">
+      
+      
+        <meta name="author" content="xdfem2D">
+      
+      
+      
+        <link rel="prev" href="python-api-results-design.html">
+      
+      
+        <link rel="next" href="tutorials/index.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/xdfem2d_logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>API: Reference - xdfem2D</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python-api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  <img src="assets/xdfem2d_logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xdfem2D
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API: Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="installation.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="domains.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Model
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="analysis.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="design.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="ai.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="scripting.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scripting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="tutorials/index.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Recipes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="file-formats.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
+      
+  <img src="assets/xdfem2d_logo.png" alt="logo">
+
+    </a>
+    xdfem2D
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="interface.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Interface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="modelling.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelling the Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="supports-springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supports, Springs & Constraints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="geometry-objects.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geometry Objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plane-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plane Models (frames & walls)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plate-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plate Models (slabs & grillages)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Construction Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-codes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codes & Preferences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-buckling-lengths.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buckling Lengths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-materials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials & Sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concrete (EC2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concrete (EC2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-members.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beams & Columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-areas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-punching.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Punching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-steel.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steel (EC3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-timber.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timber (EC5)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-reports.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI in xdfem2D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agent.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mcp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (other agents)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scripting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting with the Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Building a Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-loads-analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Loads & Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-results-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Results & Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="python-api-reference.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create_-shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_*: shortcuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add_-fundamental-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_*: fundamental calls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remove_" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_*
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rename_" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rename_*
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete_-forgiving-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        delete_*: forgiving removal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Everything else
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-of-the-other-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions of the other modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions of the other modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dworkflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dcombinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.combinations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.cuts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dmember_utils" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.member_utils
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2ddesign_report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.design_report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dphasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.phasing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dtemplate_api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.template_api
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="tutorials/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recipes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Recipes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/materials-and-sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials and sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/nodes-and-bars.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nodes and bars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/slabs-and-walls.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs and walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/supports.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/springs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Springs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/loads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials/analysis-cases.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis cases and combinations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-formats.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="json-format.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON Data Structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="commands.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Command Language
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="shortcuts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Shortcuts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="license.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenses & Disclaimer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="third-party-notices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party Notices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create_-shortcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_*: shortcuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add_-fundamental-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_*: fundamental calls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remove_" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_*
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rename_" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rename_*
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete_-forgiving-removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        delete_*: forgiving removal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#everything-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Everything else
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-of-the-other-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions of the other modules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions of the other modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dworkflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.workflows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dcombinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.combinations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dcuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.cuts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dmember_utils" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.member_utils
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2ddesign_report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.design_report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dphasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.phasing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xdfem2dtemplate_api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        xdfem2d.template_api
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="index.html" class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="scripting.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Scripting
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="python-api-reference">Python API: reference<a class="headerlink" href="#python-api-reference" title="Permanent link">&para;</a></h1>
+<!-- Written by tools/sync_api_docs.py from the engine: do not edit by hand. -->
+
+<p>Every public call of <code>Structure2D</code>, with its <strong>complete signature</strong>: every parameter, its type and its default. The guide pages
+(<a href="python-api-model.html">building a model</a>, <a href="python-api-loads-analysis.html">loads and analysis</a>,
+<a href="python-api-results-design.html">results and design</a>) explain how to use them; this page is the list. Under each signature is the
+first sentence of its docstring; <code>help(Structure2D.name)</code> in Python shows the rest.</p>
+<h2 id="create_-shortcuts">create_*: shortcuts<a class="headerlink" href="#create_-shortcuts" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>create_analysis_case(
+    id: str | None = None, analysis_type: str = 'Linear', coefficients: dict | None = None,
+    **kwargs) -&gt; AnalysisCase
+    # Like add_analysis_case; id optional (auto AC1, AC2, ...); an existing name (any case) is returned unchanged, not duplicated.
+create_area_element(
+    section: str | TriSection | QuadSection, node_i: str | Node, node_j: str | Node,
+    node_k: str | Node, node_l: str | Node | None = None, id: str | None = None,
+    **kw) -&gt; TriElement | QuadElement
+    # Like add_area_element: id optional; nodes/section take id or object.
+create_area_section(
+    name: str, material_name: str | Material, thickness: float = 0.2, **kw) -&gt; TriSection
+    # Domain-aware area section pair: plane -&gt; CST/QM6 defaults, plate -&gt; MITC3/MITC4 defaults (add_area_section — a TriSection AND a QuadSection under this name, so create_area_element resolves the section whichever shape it ends up building).
+create_bar_distributed_load(
+    elements, load_case=None, q_i: float = None, q_j: float = None, direction: str = 'down')
+    # Trapezoidal bar load — ``q_i``/``q_j`` at each end [kN/m].
+create_bar_element(
+    section: str | Section, node_i: str | Node, node_j: str | Node, id: str | None = None,
+    **kw) -&gt; BarElement
+    # Like add_bar_element: id optional; nodes/section take id or object, section first.
+create_bar_point_load(
+    elements, load_case=None, p: float = None, at: float = 0.5, direction: str = 'down')
+    # Concentrated load on a bar at a fraction of its span, bars only.
+create_bar_section(name: str, material_name: str | Material, b: float, h: float, **kw) -&gt; Section
+    # Like add_section, but material_name may be an unresolved Eurocode class (e.g.
+create_edge_load(object_id: str, edge, load_case=None, p: float = None, direction: str = 'perp')
+    # Distributed load along one edge — ``p`` [kN/m].
+create_from_template(kind: str, **params) -&gt; Structure2D
+    # A standard structure in one call, on an EMPTY model.
+create_load_case(
+    id: str | None = None, self_weight_factor: float = 0.0, action_type=None,
+    create_analysis_case: bool = True) -&gt; LoadCase
+    # Like add_load_case: id optional, auto ("LC1", "LC2", ...).
+create_load_combination(
+    id: str, coefficients: dict[str, float], combo_type='LinearSum') -&gt; LoadCombination
+    # Like add_load_combination, but a name matching an existing combination (any capitalisation) is returned unchanged instead of raising.
+create_material(
+    name: str, elastic_modulus: float, unit_weight: float, alpha: float = 1e-05, unit_mass=None,
+    material_type=None, design=None, poisson: float = 0.2) -&gt; Material
+create_node(x: float, y: float, id: str | None = None) -&gt; Node
+    # Like add_node: id optional, auto ("N1", "N2", ...).
+create_node_list(outline, id_prefix: str | None = None) -&gt; list[Node]
+    # One node per point in outline (flexible point-list forms — see ``_compat.as_points``: pairs, flat list, dicts, or two columns).
+create_node_load(nodes, load_case=None, p: float = None, direction: str = 'down')
+    # Concentrated load at a node, magnitude ``p`` [kN].
+create_panel(
+    outline, thickness: float, material: str = 'C30/37', target_size: float = 0.5,
+    id: str | None = None)
+    # RC polygon (region + section) in one call — keep the return: ``.node_ids`` are real corner nodes (rectangle CCW: bottom-left, bottom-right, top-right, top-left), for e.g.
+create_polygon(
+    outline, thickness: float, material: str = 'C30/37', target_size: float = 0.5,
+    id: str | None = None)
+    # RC polygon (region + section) in one call — keep the return: ``.node_ids`` are real corner nodes (rectangle CCW: bottom-left, bottom-right, top-right, top-left), for e.g.
+create_rc_material(
+    concrete: str = 'C30/37', steel: str = 'B500B', name: str | None = None) -&gt; Material
+    # Get-or-create a Concrete Material carrying fck/fyk from the Eurocode tables.
+create_rc_section(
+    name: str, b: float, h: float, concrete: str = 'C30/37', steel: str = 'B500B',
+    cover: float = 0.045) -&gt; Section
+    # RC rect.
+create_self_weight(factor: float = 1.0, load_case=None) -&gt; LoadCase
+    # Set/create self-weight factor.
+create_steel_material(steel: str = 'S275', name: str | None = None) -&gt; Material
+    # Get-or-create a Steel Material carrying fy/fu from the Eurocode tables (same naming scheme create_steel_section uses: "S_&lt;grade&gt;").
+create_steel_section(name: str, profile: str, grade: str = 'S275') -&gt; Section
+    # Steel section from a catalogue profile + material.
+create_support(
+    nodes: str | Node | list, ux=False, uy=False, tz=False, w=None, tx=None, ty=None,
+    name: str | None = None)
+    # Create+assign a support.
+create_support_settlement(
+    nodes: str | Node | list, load_case=None, ux=0.0, uy=0.0, tz=0.0, w=None, tx=None, ty=None)
+    # Like add_support_settlement: load_case optional, nodes single ref or list.
+create_temperature(target, uniform: float = 0.0, gradient: float = 0.0, load_case=None)
+    # Temperature action, any target — dispatches by type.
+create_timber_bar_section(
+    name: str, b: float, h: float, timber: str = 'C24', service_class: str = 'SC1') -&gt; Section
+    # Create a timber rectangular section (and its material) in one call.
+create_timber_material(timber: str = 'C24', name: str | None = None) -&gt; Material
+    # Get-or-create a Timber Material carrying fmk/fvk/fc0k/ft0k from the Eurocode (EN 338) tables.
+create_uniform_load(targets, load_case, value, direction: str = 'down', coord_sys: str = 'global')
+    # Uniform load of ``value``, on bar-like targets [kN/m] or area-like targets [kN/m²] (pressure — dispatched per target's actual kind, may mix both in one call).
+</code></pre></div>
+<h2 id="add_-fundamental-calls">add_*: fundamental calls<a class="headerlink" href="#add_-fundamental-calls" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>add_analysis_case(
+    id: str, analysis_type: str = 'Linear', coefficients: dict | None = None,
+    **kwargs) -&gt; AnalysisCase
+    # Add an analysis case.
+add_area_element(
+    id: str, node_i: str, node_j: str, node_k: str, node_l: str | None = None, *,
+    section_name: str) -&gt; TriElement | QuadElement
+    # 3 nodes -&gt; add_tri_element, 4 (node_l given) -&gt; add_quad_element.
+add_area_load(target_id: str, load_case_id: str, pz: float = 0.0)
+    # Uniform transverse pressure pz [kN/m²] on a slab — plate domain.
+add_area_section(
+    name: str, material_name: str, thickness: float = 0.1, plane_strain: bool = False,
+    formulation: str = 'CST', quad_formulation: str = 'QM6', rc_cover: float = 0.045,
+    rc_alpha_s: float = 90.0, rc_bar_phi: float = 16.0, rc_shear_min: bool = True,
+    rc_cover_top_x: float = None, rc_cover_top_y: float = None, rc_cover_bot_x: float = None,
+    rc_cover_bot_y: float = None) -&gt; TriSection
+    # Creates a same-named TriSection + QuadSection pair.
+add_area_spring(target_id: str, kz: float = 0.0)
+    # Attach a Winkler (elastic-foundation) area spring — plate domain.
+add_area_temperature_load(
+    object_id: str, load_case_id: str, dt_uniform=0.0, dt_gradient=0.0, field_name='',
+    grad_field_name='') -&gt; AreaTemperatureLoad
+    # Add a temperature to an area object (rectangle / surface), applied to the triangles it meshes into.
+add_bar_element(
+    id: str, node_i: str, node_j: str, section_name: str, hinge_i=False, hinge_j=False,
+    rc_design=False, rc_cover=0.025, rc_cotg_theta=1.0, rc_alpha_s=90.0, sd_ky=None, sd_kz=None,
+    sd_klt=None, sd_ltb=True, stage: int = 1, is_column: Optional[bool] = None,
+    beam: Optional[str] = None) -&gt; BarElement
+add_concrete_material(
+    material_name: str, concrete_class: str, steel_class: str, gamma_c=1.5, gamma_s=1.15,
+    alpha_cc=1.0) -&gt; ConcreteMaterial
+    # Link EC2 concrete/steel properties to an existing material for RC design.
+add_constraint_equation(terms, value: float = 0.0, id: str = '') -&gt; Constraint
+    # Add a raw linear constraint ``sum(coef * dof) = value``.
+add_construction_sequence(sequence) -&gt; object
+add_cut(id: str, x1: float, y1: float, x2: float, y2: float, name: str = '') -&gt; Cut
+    # Create a user-defined section cut, a segment ``(x1,y1)-&gt;(x2,y2)`` used to report resultants of internal forces crossing it (see dev/CUT_PLAN.md).
+add_distributed_load(
+    element_id: str, load_case_id: str, fxe=0.0, fxd=0.0, fye=0.0, fyd=0.0, coord_sys='global',
+    fze=None, fzd=None) -&gt; DistributedLoad
+    # Trapezoidal distributed load, given at BOTH ends.
+add_element_point_load(
+    element_id: str, load_case_id: str, a: float, fx=0.0, fy=0.0, mz=0.0, coord_sys='global',
+    fz=None) -&gt; ElementPointLoad
+    # Add a concentrated load on an element at distance ``a`` from node i.
+add_element_spring(
+    element_id: str, kx=0.0, ky=0.0, coord_sys='global', mode_x='both',
+    mode_y='both') -&gt; ElementSpring
+    # Attach a foundation spring directly to an element (replaces any existing one).
+add_equal_dof(nodes, components, id: str = '') -&gt; Constraint
+    # Constrain every node in *nodes* to share the same value of each component in *components* (e.g.
+add_field(name: str, expression: str = '0.0')
+add_geo_arc(
+    id: str, cx: float, cy: float, radius: float, start_angle: float, end_angle: float,
+    section_name: str = '', divisions: int = 16, max_chord: float = 0.0) -&gt; GeoArc
+    # Add an arc given centre/radius/angles (converted to 3 points).
+add_geo_arc_3pts(
+    id: str, p1, pm, p2, section_name: str = '', divisions: int = 16,
+    max_chord: float = 0.0) -&gt; GeoArc
+    # Add an arc through three points (start, mid, end).
+add_geo_line(
+    id: str, x1: float, y1: float, x2: float, y2: float, section_name: str = '',
+    divisions: int = 1, max_chord: float = 0.0) -&gt; GeoSegment
+add_geo_multisegment(
+    id: str, vertices, closed: bool = False, section_name: str = '', divisions: int = 1,
+    max_chord: float = 0.0, span_divisions: list | None = None) -&gt; GeoMultisegment
+    # ``span_divisions`` (optional): one division count per span instead of sharing ``divisions`` across the whole curve — see :class:`~xdfem2d.models.GeoMultisegment`'s docstring.
+add_geo_polygon(
+    id: str, vertices, section_name: str = '', target_size: float = 0.5, prefer_quad: bool = True,
+    *, tri_section_name: str | None = None) -&gt; GeoPolygon
+    # Closed-polygon region through *vertices* (meshed into DKT/CST triangles, or quads — see GeoRectangle.prefer_quad's docstring, dev/IMPLEMENT_QUAD.md Phase 8).
+add_geo_polyline(
+    id: str, vertices, closed: bool = False, section_name: str = '', divisions: int = 1,
+    max_chord: float = 0.0, span_divisions: list | None = None) -&gt; GeoMultisegment
+    # ``span_divisions`` (optional): one division count per span instead of sharing ``divisions`` across the whole curve — see :class:`~xdfem2d.models.GeoMultisegment`'s docstring.
+add_geo_rectangle(
+    id: str, corner_a, corner_c, section_name: str = '', target_size: float = 0.5,
+    prefer_quad: bool = True, *, tri_section_name: str | None = None) -&gt; GeoRectangle
+    # Axis-aligned rectangle from two opposite corner points (meshed into CST triangles at solve time, or quads — see GeoRectangle.prefer_quad's docstring, dev/IMPLEMENT_QUAD.md Phase 8).
+add_geo_segment(
+    id: str, x1: float, y1: float, x2: float, y2: float, section_name: str = '',
+    divisions: int = 1, max_chord: float = 0.0) -&gt; GeoSegment
+add_geo_surface(
+    id: str, vertices, section_name: str = '', target_size: float = 0.5, prefer_quad: bool = True,
+    *, tri_section_name: str | None = None) -&gt; GeoPolygon
+    # Closed-polygon region through *vertices* (meshed into DKT/CST triangles, or quads — see GeoRectangle.prefer_quad's docstring, dev/IMPLEMENT_QUAD.md Phase 8).
+add_line_distributed_load(
+    object_id: str, load_case_id: str, fx=0.0, fy=0.0, fx_field='', fy_field='',
+    coord_sys='global') -&gt; LineDistributedLoad
+    # Add a distributed load to a line object (line / arc / polyline).
+add_line_element_spring(
+    object_id: str, kx=0.0, ky=0.0, kx_field='', ky_field='', coord_sys='global', mode_x='both',
+    mode_y='both') -&gt; LineElementSpring
+    # Attach a foundation spring to a line object (line / arc / polyline).
+add_line_temperature_load(
+    object_id: str, load_case_id: str, dt_uniform=0.0, dt_gradient=0.0, field_name='',
+    grad_field_name='') -&gt; LineTemperatureLoad
+    # Add a temperature to a line object (line / arc / polyline).
+add_load_case(
+    id: str, self_weight_factor=0.0, action_type=None, create_analysis_case: bool = True,
+    load_duration=None, category: str = '', psi0=None, psi1=None, psi2=None) -&gt; LoadCase
+add_load_combination(
+    id: str, coefficients: dict[str, float], combo_type='LinearSum') -&gt; LoadCombination
+    # Create a load combination.
+add_material(
+    name: str, elastic_modulus: float, unit_weight: float, alpha: float = 1e-05, unit_mass=None,
+    material_type=None, design=None, poisson: float = 0.2) -&gt; Material
+add_nodal_mass(
+    node_id: str, mass_case_id: str, mx: float = 0.0, my: float = 0.0,
+    mtz: float = 0.0) -&gt; NodalMass
+    # Add (or replace) a concentrated nodal mass for a specific Mass analysis case.
+add_node(id: str, x: float, y: float) -&gt; Node
+add_node_spring(
+    node_id: str, kx=0.0, ky=0.0, kt=0.0, mode_x='both', mode_y='both', kz=None, ktx=None,
+    kty=None) -&gt; NodeSpring
+    # Attach a spring directly to a node (replaces any existing spring on that node).
+add_panel(
+    outline, thickness: float, material: str = 'C30/37', target_size: float = 0.5,
+    id: str | None = None)
+    # RC polygon (region + section) in one call — keep the return: ``.node_ids`` are real corner nodes (rectangle CCW: bottom-left, bottom-right, top-right, top-left), for e.g.
+add_plate_section(
+    name: str, material_name: str, thickness: float = 0.2, formulation: str = 'MITC3',
+    **kw) -&gt; TriSection
+    # Sugar for a plate-bending triangle section — plate domain.
+add_point_load(
+    node_id: str, load_case_id: str, fx=0.0, fy=0.0, mz=0.0, fz=None, mx=None,
+    my=None) -&gt; PointLoad
+    # Nodal concentrated load.
+add_punch_column(
+    id: str, node_id: str, shape: str = 'rectangular', bx: float = 0.3, by: float = 0.3,
+    position: str = 'center', force: float = None, dx: float = 0.0, dy: float = 0.0,
+    beta_min: float = 1.0)
+    # Define a column / concentrated support for the EC2 §6.4 punching check (plate domain).
+add_quad_edge_load(
+    id: str, quad_id: str, node_a: str, node_b: str, load_case_id: str, fx: float = 0.0,
+    fy: float = 0.0, coord_sys: str = 'global', pn: float = 0.0, pt: float = 0.0) -&gt; QuadEdgeLoad
+    # Uniform load on one edge of a quad element — the 4-node analogue of :meth:`add_tri_edge_load`.
+add_quad_element(
+    id: str, node_i: str, node_j: str, node_k: str, node_l: str, section_name: str) -&gt; QuadElement
+    # Define a 4-node quadrilateral element, the analogue of :meth:`add_tri_element` (dev/IMPLEMENT_QUAD.md Phase 3).
+add_quad_section(
+    name: str, material_name: str, thickness: float = 0.1, plane_strain: bool = False,
+    formulation: str = 'MITC4', rc_cover: float = 0.045, rc_alpha_s: float = 90.0,
+    rc_bar_phi: float = 16.0, rc_shear_min: bool = True, rc_cover_top_x: float = None,
+    rc_cover_top_y: float = None, rc_cover_bot_x: float = None,
+    rc_cover_bot_y: float = None) -&gt; QuadSection
+    # Define a quadrilateral section (dev/IMPLEMENT_QUAD.md Phase 3) — the 4-node analogue of :meth:`add_tri_section`.
+add_quad_temperature_load(
+    quad_id: str, load_case_id: str, dt_i=0.0, dt_j=0.0, dt_k=0.0, dt_l=0.0,
+    dt_gradient=0.0) -&gt; QuadTemperatureLoad
+    # Add a thermal load to a quad: an in-plane ΔT per node (plane domain) or a through-thickness ``dt_gradient`` T_top − T_bottom [°C] that bends DKT4/MITC4 (plate domain).
+add_rc_section(
+    name: str, b: float, h: float, concrete: str = 'C30/37', steel: str = 'B500B',
+    cover: float = 0.045) -&gt; Section
+    # RC rect.
+add_rigid_link(master: str, slaves, id: str = '') -&gt; Constraint
+    # Tie *slaves* to *master* as a single rigid body (in-plane): each slave follows the master's two translations and rotation through the rigid-body kinematics evaluated from the nodal coordinates.
+add_section(
+    name: str, material_name: str, b: float, h: float, area_override=None, inertia_override=None,
+    profile_name=None, section_type=None, rc_cover=0.045, rc_alpha_s=90.0, rc_bar_phi=16.0,
+    shape=None, tw=0.0, tf=0.0, rc_shear_min=True, torsion_override=None, angle=0.0,
+    inertia_minor_override=None, wel_y_override=None, wpl_y_override=None, wel_z_override=None,
+    wpl_z_override=None, av_y_override=None, av_z_override=None, warping_override=None,
+    wt_override=None, curve_y_override=None, curve_z_override=None, timber_service_class='SC1',
+    is_column: bool = False, rc_phi_ef: float = 2.0, rc_n_bars: int = 4, rc_n_bars_y: int = 2,
+    rc_n_bars_z: int = 2, rc_second_order_method: str = 'nominal_curvature',
+    rc_torsion_distribution: str = 'top_bottom', beam_overrides: Optional[dict] = None) -&gt; Section
+add_spectral_function(
+    id: str, description: str = '', damping: float = 0.05,
+    points: list | None = None) -&gt; SpectralFunction
+add_steel_section(name: str, profile: str, grade: str = 'S275') -&gt; Section
+    # Steel section from a catalogue profile + material.
+add_support(name: str, ux=False, uy=False, tz=False, w=None, tx=None, ty=None) -&gt; Support
+    # Define a named set of restraints.
+add_support_set(support_set) -&gt; object
+add_support_settlement(
+    node_id: str, load_case_id: str, ux=0.0, uy=0.0, tz=0.0, w=None, tx=None,
+    ty=None) -&gt; SupportSettlement
+    # Prescribe a non-zero displacement at a supported node.
+add_surface_edge_load(
+    id: str, object_id: str, node_a: str, node_b: str, load_case_id: str, fx: float = 0.0,
+    fy: float = 0.0, coord_sys: str = 'global', pn: float = 0.0, pt: float = 0.0)
+    # Edge load on a boundary side (node_a→node_b) of a surface object.
+add_temperature_load(
+    bar_id: str | None = None, load_case_id: str | None = None, dt_uniform=0.0, dt_gradient=0.0,
+    alpha=None, *, element_id: str | None = None, delta_t_uniform: float | None = None,
+    delta_t_gradient: float | None = None) -&gt; TemperatureLoad
+    # Add a thermal load to a bar.
+add_tri_edge_load(
+    id: str, tri_id: str, node_a: str, node_b: str, load_case_id: str, fx: float = 0.0,
+    fy: float = 0.0, coord_sys: str = 'global', pn: float = 0.0, pt: float = 0.0) -&gt; TriEdgeLoad
+add_tri_element(id: str, node_i: str, node_j: str, node_k: str, section_name: str) -&gt; TriElement
+add_tri_section(
+    name: str, material_name: str, thickness: float = 0.1, plane_strain: bool = False,
+    formulation: str = 'CST', rc_cover: float = 0.045, rc_alpha_s: float = 90.0,
+    rc_bar_phi: float = 16.0, rc_shear_min: bool = True, rc_cover_top_x: float = None,
+    rc_cover_top_y: float = None, rc_cover_bot_x: float = None,
+    rc_cover_bot_y: float = None) -&gt; TriSection
+    # Define a triangle section.
+add_tri_temperature_load(
+    tri_id: str, load_case_id: str, dt_i=0.0, dt_j=0.0, dt_k=0.0,
+    dt_gradient=0.0) -&gt; TriTemperatureLoad
+    # Add a thermal load to a triangle: an in-plane ΔT per node (plane domain) or a through-thickness ``dt_gradient`` T_top − T_bottom [°C] that bends the DKT (plate domain).
+add_variant(variant) -&gt; object
+</code></pre></div>
+<h2 id="remove_">remove_*<a class="headerlink" href="#remove_" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>remove_analysis_case(case_id: str)
+remove_area_element(eid: str) -&gt; bool
+    # Remove the area element *eid* whatever its kind.
+remove_area_load(target_id: str, load_case_id: str = '')
+    # Remove area loads on *target_id* (all cases, or one case).
+remove_area_section(name: str)
+    # Removes both halves of a paired area section.
+remove_area_spring(target_id: str)
+    # Remove any Winkler area spring on *target_id* (surface, triangle, or quad).
+remove_area_temperature_load(object_id: str, load_case_id: str = '')
+    # Remove area temperature loads on *object_id* (all cases, or one).
+remove_constraint(id: str) -&gt; None
+remove_construction_sequence(seq_id: str)
+remove_cut(cut_id: str)
+remove_distributed_loads(element_id: str, load_case_id: str = '')
+    # Remove distributed loads on *element_id* (all cases, or one).
+remove_element(element_id: str)
+remove_element_spring(element_id: str)
+    # Remove the foundation spring on *element_id* (the inverse of :meth:`add_element_spring`).
+remove_field(name: str)
+remove_geo_object(id: str)
+remove_line_element_spring(object_id: str)
+    # Remove the line spring on *object_id* (the inverse of :meth:`add_line_element_spring`).
+remove_line_temperature_load(object_id: str, load_case_id: str = '')
+    # Remove line temperature loads on *object_id* (all cases, or one).
+remove_load_case(case_id: str)
+remove_load_combination(combo_id: str)
+remove_material(name: str)
+    # Remove a material.
+remove_nodal_mass(node_id: str, mass_case_id: str)
+remove_node(node_id: str)
+    # Remove a node with everything that hangs on it: its supports, springs, loads, settlements, masses, constraints and the elements that use it (see references.SITES).
+remove_node_spring(node_id: str)
+remove_point_loads(node_id: str, load_case_id: str = '')
+    # Remove point loads on *node_id* (all cases, or one).
+remove_punch_column(id: str)
+    # Remove the punching column with the given id.
+remove_quad_edge_load(id: str)
+remove_quad_element(id: str)
+remove_quad_section(name: str)
+remove_quad_temperature_load(quad_id: str, load_case_id: str = '')
+    # Remove quad temperature loads on *quad_id* (all cases, or one).
+remove_section(name: str)
+    # Remove a bar section.
+remove_spectral_function(id: str)
+remove_support(name: str)
+remove_support_assignment(node_id: str, support_name: str = '')
+    # Remove the support on a node — the by-node inverse of :meth:`assign_support`.
+remove_support_set(set_id: str)
+remove_surface_edge_load(id: str)
+remove_temperature_load(element_id: str, load_case_id: str = '')
+    # Remove bar temperature loads on *element_id* (all cases, or one).
+remove_tri_edge_load(id: str)
+remove_tri_element(id: str)
+remove_tri_section(name: str)
+remove_tri_temperature_load(tri_id: str, load_case_id: str = '')
+    # Remove triangle temperature loads on *tri_id* (all cases, or one).
+remove_variant(variant_id: str)
+</code></pre></div>
+<h2 id="rename_">rename_*<a class="headerlink" href="#rename_" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>rename_analysis_case(old_id: str, new_id: str)
+rename_area_section(old: str, new: str)
+    # Renames both halves of a paired area section together.
+rename_bar_element(old_id: str, new_id: str)
+rename_cut(old_id: str, new_id: str)
+rename_load_case(old_id: str, new_id: str)
+rename_load_combination(old_id: str, new_id: str)
+rename_material(old: str, new: str)
+    # Rename a material, and every section / concrete link that names it.
+rename_node(old_id: str, new_id: str)
+rename_quad_element(old_id: str, new_id: str)
+    # Rename a quad, carrying its temperature loads along — the quad counterpart of :meth:`rename_tri_element`.
+rename_quad_section(old: str, new: str)
+    # The quad counterpart of :meth:`rename_tri_section` (added dev/IMPLEMENT_QUAD.md Phase 8, GUI item 2 — the QuadSection manager panel mirrors TriSectionPanel's rename-on-name-change edit flow, and that flow needs this to exist).
+rename_section(old: str, new: str)
+    # Rename a bar section, and every bar / line object that uses it.
+rename_tri_element(old_id: str, new_id: str)
+    # Rename a CST triangle, carrying its temperature/edge loads along — the triangle counterpart of :meth:`rename_bar_element`.
+rename_tri_section(old: str, new: str)
+</code></pre></div>
+<h2 id="delete_-forgiving-removal">delete_*: forgiving removal<a class="headerlink" href="#delete_-forgiving-removal" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>delete_area(object_id: str)
+    # Delete a region/line object and the nodes it owns that nothing else uses — the inverse of :meth:`create_polygon`/``add_geo_*``.
+delete_load(target: str, load_case_id: str = '')
+    # Remove loads on *target* — the inverse of the ``create_*_load`` family.
+delete_spring(target: str)
+    # Remove the spring on *target* — the inverse of the ``add_*_spring`` family.
+delete_support(nodes)
+    # Remove the support from a node or nodes — the inverse of :meth:`pin`/:meth:`fix`/:meth:`roller`/:meth:`symm`/ :meth:`create_support`.
+delete_temperature(target: str, load_case_id: str = '')
+    # Remove temperature loads on *target* — the inverse of :meth:`create_temperature` (and the ``add_*_temperature_load`` family).
+</code></pre></div>
+<h2 id="everything-else">Everything else<a class="headerlink" href="#everything-else" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>area_element_by_id(eid: str)
+    # The tri or quad element with id *eid*, or ``None``.
+area_element_ids() -&gt; list[str]
+    # Ids of every area element (triangles then quads).
+area_elements()
+    # Every area element (triangles then quads), in a single iterable.
+area_kind_of(eid: str)
+    # ``'tri'``, ``'quad'`` or ``None`` for element id *eid*.
+assign_beam(bar_ids=(), tag: Optional[str] = None, name: Optional[str] = None, object_ids=()) -&gt; str
+    # Tag *bar_ids* (and line objects *object_ids*) as one beam (a new free ``V&lt;n&gt;`` when *tag* is None) and register it.
+assign_support(node_id: str, support_name: str) -&gt; SupportAssignment
+    # Put a support defined by :meth:`add_support` on a node.
+calculate() -&gt; dict
+    # Run the full analysis and return a results dictionary.
+check_references()
+    # Raise ``ValueError`` if the model carries any dangling reference.
+clear_beam(bar_ids=(), object_ids=())
+    # Remove the beam tag from *bar_ids* / line objects *object_ids* (they become auto-detected).
+derive_variant(
+    variant, support_sets: Optional[dict] = None, filter_tri: bool = False) -&gt; Structure2D
+    # Return a NEW Structure2D representing *variant* — a pure transform.
+domain_problems() -&gt; list[str]
+    # Features the model uses that its analysis domain ('plane' or 'plate') does not support.
+element_count() -&gt; int
+    # Total finite elements: bars + triangles + quads.
+expand_combination_coefficients(combo) -&gt; dict[str, float]
+    # Resolve *combo* to a flat ``{analysis_case_id: factor}`` map, expanding any referenced sub-combinations recursively.
+field_node_values(name: str) -&gt; dict
+    # {node_id: f(x, y)} for the named field, evaluated at each node.
+fix(nodes: str | Node | list)
+    # Fixed (encastré): restrains everything.
+fix_edge(object_id: str, edge)
+    # Fully restrain an edge — encastré (the edge counterpart of :meth:`fix`).
+free_edge(object_id: str, edge)
+    # Free an edge of an area object — the inverse of :meth:`support_edge`/ :meth:`pin_edge`/:meth:`fix_edge`.
+has_elements() -&gt; bool
+    # True when the model has at least one bar, triangle or quad.
+iter_area_edge_loads()
+    # Yield (kind, load) for every edge load — per-triangle, per-quad and per-surface-object — with *kind* in {'tri', 'quad', 'surface'}.
+iter_area_elements()
+    # Yield (id, kind, element) for every area element — triangles then quads — with *kind* in {'tri', 'quad'}.
+iter_area_loads()
+    # Yield (kind, load) for every transverse area pressure — per-triangle, per-quad and per-surface-object — with *kind* in {'tri', 'quad', 'area'}.
+iter_area_temperature_loads()
+    # Yield (kind, load) for every area temperature load — per-triangle, per-quad and per-object — with *kind* in {'tri', 'quad', 'area'}.
+load(path: str) -&gt; Structure2D
+    # Load structure from JSON (.json).
+materialize_object_nodes(obj, pts, tol: float = 1e-06)
+    # Create/reposition the real nodes at the target defining points *pts*, storing their ids on ``obj.node_ids``.
+next_beam_tag() -&gt; str
+    # A free ``V&lt;n&gt;`` tag.
+normalize_combinations_to_analysis_cases()
+    # Ensure every combination references analysis cases only.
+object_defining_points(obj) -&gt; list
+    # Current (x, y) of the object's defining nodes (read from the nodes, since objects are node-driven).
+pin(nodes: str | Node | list)
+    # Pinned support (create+assign in one call): translation fixed, rotation free.
+pin_edge(object_id: str, edge)
+    # Simply support an edge of a surface object (the edge counterpart of :meth:`pin`).
+prune_beams()
+    # Drop registry entries with no bar left, unless they carry a name or overrides / timber parameters the user set (those survive an empty beam).
+prune_unused_supports(only: set | None = None) -&gt; list
+    # Drop support definitions no node uses.
+purge_dangling_references() -&gt; list[str]
+    # Remove the loads, springs and other entries that refer to something that no longer exists (see :func:`xdfem2d.references.purge`).
+quad_section_of(quad: QuadElement) -&gt; QuadSection | None
+    # The QuadSection referenced by *quad* (or None if missing).
+reference_problems() -&gt; list[str]
+    # Return a list of dangling cross-references (case, load, material, section, support, spring), each as a readable ``'A → B'`` line.
+roller(nodes: str | Node | list, free: str = 'x')
+    # Roller (plane only).
+roller_edge(object_id: str, edge, free: str = 'x')
+    # Roller along an edge (plane only; the edge counterpart of :meth:`roller`).
+save(path: str)
+    # Save the model as JSON.
+set_domain(domain: str) -&gt; dict
+    # Change the domain of a model with no geometry yet.
+solve() -&gt; dict
+    # Run the full analysis and return a results dictionary.
+stiffness_hash() -&gt; str
+    # Deterministic hash of the *effective stiffness* of this structure.
+support_edge(object_id: str, edge, kind: str = 'pin')
+    # Support an edge of an area object — the general edge-support call.
+support_for(ux=False, uy=False, tz=False) -&gt; str | None
+    # The name of a support with these restraints, reusing or creating one.
+support_object_edge(object_id: str, edge, support_name: str)
+    # Restrain one edge (or ``'all'``) of a surface object with a named support, written onto the object's per-edge ``edge_supports`` list.
+symm(nodes: str | Node | list, axis: str = 'x')
+    # Symmetry (plate only): ``w`` free, rotation restrained (``axis="x"``→θx, ``"y"``→θy).
+symm_edge(object_id: str, edge, axis: str = 'x')
+    # Symmetry line along an edge (plate only; the edge counterpart of :meth:`symm`): w free, a rotation restrained (``axis='x'``-&gt;θx, ``'y'``-&gt;θy).
+tri_section_of(tri: TriElement) -&gt; TriSection | None
+    # The TriSection referenced by *tri* (or None if missing).
+twin_analysis_case_id(load_case_id: str) -&gt; str
+    # Return the id of the Linear analysis case that applies *load_case_id* with a unit factor, creating the twin (same id as the load case) if needed.
+used_field_names() -&gt; set
+    # Names of fields referenced by object loads and springs.
+used_spectral_function_names() -&gt; set
+    # Names of spectral functions referenced by a Spectrum analysis case.
+validate_combination_coefficients(coefficients: dict[str, float], combo=None)
+    # Validate a combination's coefficients.
+with_active(active_elements) -&gt; Structure2D
+    # Sugar: derive a variant that only restricts the active geometry.
+with_supports(support_set) -&gt; Structure2D
+    # Sugar: derive a variant that only swaps the supports.
+</code></pre></div>
+<h2 id="functions-of-the-other-modules">Functions of the other modules<a class="headerlink" href="#functions-of-the-other-modules" title="Permanent link">&para;</a></h2>
+<p>These are plain functions, not methods of <code>Structure2D</code>; <code>struc</code> is the model.</p>
+<h3 id="xdfem2dworkflows"><code>xdfem2d.workflows</code><a class="headerlink" href="#xdfem2dworkflows" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>apply_variant_config(
+    base, model, active_elements=None, support_set=None, restore_loads=True, prune=True,
+    restore_base_supports=True)
+    # Reconcile an existing variant *model* with the base and a config, **preserving the variant's own loads/cases/combinations** on surviving elements.
+assign_stage(struc, element_ids, stage: int) -&gt; int
+    # Set the construction stage of the given elements (bars, triangles or quads).
+available_combinations(struc, results) -&gt; list
+    # The combination ids a design can use: the model's load combinations, then any that only the results carry (envelopes), in that order.
+combination_validity(struc, variant_ids, op) -&gt; dict
+    # Report whether *op* is valid for the given variants (for UI warnings).
+current_restraints(struc) -&gt; dict
+    # Return the structure's current supports as ``{node_id: (ux, uy, tz)}``.
+extend_base_with_file(base, other, **kw)
+    # Extend *base* with a model from *other* (path or Structure2D).
+import_file_as_variant(struc, other, overlay_id: str, **kw)
+    # Import *other* (path or Structure2D) into a COPY of struc, registering the resulting variant and support set.
+list_overlays(struc) -&gt; dict
+    # Summarise the registered overlays for a UI list.
+make_variant_model(base, inherit: bool = True, active_elements=None, support_set=None)
+    # Build a variant's authoritative model — a Structure2D that already reflects the variant's **geometry** (only ``active_elements``) and **supports** (``support_set``), plus its loads/cases/combinations.
+phases_from_scenes(scenes, valid_elem_ids, cumulative: bool = True) -&gt; list
+    # Generate ConstructionPhases from an ordered list of scenes.
+phases_from_stages(struc, cases_by_stage: dict = None) -&gt; list
+    # Generate ConstructionPhases from the elements' ``stage`` attribute (bars and area elements — triangles and quads — alike).
+run_analysis(struc, scope: str = 'active', results: dict = None) -&gt; AnalysisOutcome
+    # Run *struc* to completion, with no dialogs: the headless counterpart of the GUI's Run.
+run_design(
+    struc, results: dict, kind: str, prefs: dict = None, combinations=None,
+    sls_combinations=None) -&gt; dict
+    # Design the members of *kind* from the analysis *results* and store the outcome in them, where ``get design`` reads it: the headless counterpart of the GUI's Design menu.
+run_sequence(struc, seq_id: str) -&gt; dict
+    # Run a registered construction sequence by id.
+run_sequences(struc, results, cache: dict = None, on_start=None) -&gt; dict
+    # Run every construction sequence and inject the phase results into *results*, under ``results['analysis_cases']['seq__&lt;seq&gt;__&lt;phase&gt;']``.
+run_variant_combination(
+    struc, terms, op, missing: str = 'zero', allow_geometry_mismatch: bool = False,
+    precomputed: dict = None) -&gt; dict
+    # Solve the structure's registered variants involved in *terms* and combine.
+solve_all_variants(base) -&gt; VariantRun
+    # Solve the base, every variant and every cross-variant combination.
+stage_numbers(struc) -&gt; list
+    # The sorted list of stage numbers present in the model (bars + area elements: triangles and quads).
+sync_all_variants(base) -&gt; dict
+    # Sync every registered variant.
+sync_variant_with_base(
+    base, variant, support_sets=None, force: bool = False, destructive: bool = False) -&gt; bool
+    # Reconcile *variant.model* with the current base (see :func:`apply_variant_config`).
+validate_for_analysis(struc) -&gt; list
+    # What stops *struc* from being analysed, as ``[{'code', 'msg'}, ...]`` (empty when it can run), in the order the GUI reports them.
+variant_base_diff(base, variant, support_sets=None) -&gt; dict
+    # What a sync would change on *variant.model* — pure, no mutation.
+vertical_support_nodes(struc) -&gt; list
+    # Node ids whose transverse deflection is restrained: the nodes a punching column can sit on.
+</code></pre></div>
+<h3 id="xdfem2dcombinations"><code>xdfem2d.combinations</code><a class="headerlink" href="#xdfem2dcombinations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>auto_combinations(struc, types=('ULS',), replace: bool = True) -&gt; dict
+    # Add the EN 1990 combinations of the cases of *struc* to it.
+default_factors(action_type, category='', locale=None)
+    # (gamma_fav, gamma_unf, psi0, psi1, psi2) of an action, from eurocodepy.
+load_case_factors(lc, locale=None)
+    # Factors a load case combines with: its category's defaults, each ψ replaced by the case's own value where it has set one.
+pure_cases(struc) -&gt; list
+    # ``[(PureCase, (gamma_fav, gamma_unf, psi0, psi1, psi2)), ...]`` for the analysis cases of *struc* that are unambiguously one action type: a Spectrum case (always seismic) or a Linear case whose load cases all share one type.
+</code></pre></div>
+<h3 id="xdfem2dcuts"><code>xdfem2d.cuts</code><a class="headerlink" href="#xdfem2dcuts" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>clip_segment_to_triangle(
+    p1: Point, p2: Point, tri: list[Point], tol: float = 1e-09) -&gt; Optional[tuple[float, float]]
+    # Clip segment ``p1-&gt;p2`` to the (convex) triangle ``tri``.
+cut_area_resultant(
+    struc, results, cut, case, ref_point: Optional[Point] = None, tol: float = 1e-09) -&gt; dict
+    # Resultant of the area (triangle AND quad — dev/IMPLEMENT_QUAD.md Phase 7) internal forces crossing ``cut`` for ``case`` (a load case, analysis case, or ``LinearSum`` combination id).
+cut_bar_resultant(
+    struc, results, cut, case, ref_point: Optional[Point] = None, tol: float = 1e-09) -&gt; dict
+    # Resultant of the bar internal forces crossing ``cut`` for ``case`` (a load case, analysis case, or ``LinearSum`` combination id).
+cut_distribution(cutres: dict, n: int = 101) -&gt; dict
+    # Sample ``cutres`` (a :func:`cut_result` return value) into arrays fit for plotting the per-length distribution along ``s in [0, 1]`` (Phase 7): the area fields, piecewise-constant per triangle (zero where the cut isn't inside any triangle),
+cut_result(struc, results, cut, case, ref_point: Optional[Point] = None, tol: float = 1e-09) -&gt; dict
+    # The full result of a cut for one case: bars, areas and their total, ready for the GUI table (Phase 7) — Bars / Areas / Total rows.
+cuts_report(struc, results, cases, ref_point: Optional[Point] = None, tol: float = 1e-09) -&gt; list
+    # One row per ``(cut, case)`` — every cut of ``struc`` against every case id in ``cases`` — with the total resultant, flattened for CSV/report export (Phase 7/8).
+find_bar_crossings(struc, cut, tol: float = 1e-09) -&gt; list[dict]
+    # Bar elements of ``struc`` (a compiled model, see ``geo_expand``) whose segment crosses ``cut``.
+find_quad_crossings(struc, cut, tol: float = 1e-09) -&gt; list[dict]
+    # Quad elements of ``struc`` whose interior the cut passes through — the quad analogue of :func:`find_triangle_crossings` (dev/IMPLEMENT_QUAD.md Phase 7).
+find_triangle_crossings(struc, cut, tol: float = 1e-09) -&gt; list[dict]
+    # Triangles of ``struc`` (a compiled model) whose interior the cut passes through.
+segment_intersection(
+    a1: Point, a2: Point, b1: Point, b2: Point, tol: float = 1e-09) -&gt; Optional[SegmentHit]
+    # Single-point intersection of segment ``a1-&gt;a2`` with ``b1-&gt;b2``.
+</code></pre></div>
+<h3 id="xdfem2dmember_utils"><code>xdfem2d.member_utils</code><a class="headerlink" href="#xdfem2dmember_utils" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>cantilever_k_for(struc, member, prefs, incident=None, constrained=None)
+    # The auto buckling-length factor K for a free-end (cantilever) member, or ``None`` when the feature is off or the member has no free end.
+identify_members(struc) -&gt; tuple
+    # Group the bar elements of *struc* into physical members.
+member_free_ends(struc, member, incident=None, constrained=None) -&gt; tuple
+    # (free_i, free_j): whether each extreme node of *member* is truly free.
+member_has_free_end(struc, member, incident=None, constrained=None) -&gt; bool
+</code></pre></div>
+<h3 id="xdfem2ddesign_report"><code>xdfem2d.design_report</code><a class="headerlink" href="#xdfem2ddesign_report" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>build_reports(
+    struc, results, material: str, *, prefs: dict | None = None, combinations=None) -&gt; dict
+    # Run the design for *material* with reports on and return ``{id: report}``.
+export_docx(
+    reports: dict, path: str, title: str = 'Design report', font_size: int = 10,
+    font_family: str = 'sans', summary: dict | None = None, diagrams: dict | None = None) -&gt; None
+    # Write a Word file at *path*: via **pandoc** (native OMML equations, text matching the ``.md`` byte for byte) when a ``pandoc`` binary is on PATH, else the built-in :func:`render_docx` (no external tool, LaTeX typeset as images + Word-native
+export_html(
+    reports: dict, path: str, title: str = 'Design report', font_size: int = 10,
+    font_family: str = 'sans', summary: dict | None = None, diagrams: dict | None = None) -&gt; None
+    # Write an HTML file at *path*: via **pandoc** when available (same ``.md`` text, same MathJax CDN), else the built-in :func:`render_html`.
+filter_reports(
+    reports: dict, material: str, struc, selected_bars=None, selected_nodes=None,
+    selected_tris=None) -&gt; dict
+    # Keep only the reports touching the current selection.
+latex_png(latex: str, fontsize: int = 15) -&gt; bytes | None
+    # Typeset a LaTeX math string to a transparent PNG (matplotlib mathtext).
+merge_per_combination(per_combo_reports: dict) -&gt; dict
+    # Flatten ``{combination: {id: report}}`` into ``{"&lt;id&gt; · &lt;combo&gt;": report}``.
+pandoc_available() -&gt; bool
+    # True when a ``pandoc`` binary is on PATH.
+per_combination_key(base_id, combination) -&gt; str
+    # The dict key for a single-combination report of *base_id*.
+render_docx(
+    reports: dict, path: str, title: str = 'Design report', font_size: int = 10,
+    font_family: str = 'sans', summary: dict | None = None, diagrams: dict | None = None) -&gt; None
+    # Write ``{id: report_dict}`` to a Word document at *path*.
+render_docx_via_pandoc(
+    reports: dict, path: str, title: str = 'Design report', font_size: int = 10,
+    font_family: str = 'sans', summary: dict | None = None, diagrams: dict | None = None) -&gt; None
+    # Write Word by piping the LaTeX Markdown through **pandoc**, which turns the ``$$…$$`` equations into **native, editable OMML** — no MML2OMML.XSL / lxml needed.
+render_html(
+    reports: dict, title: str = 'Design report', font_size: int = 10, font_family: str = 'sans',
+    summary: dict | None = None, diagrams: dict | None = None) -&gt; str
+    # Render ``{id: report_dict}`` as a self-contained HTML page (MathJax).
+render_html_via_pandoc(
+    reports: dict, path: str, title: str = 'Design report', font_size: int = 10,
+    font_family: str = 'sans', summary: dict | None = None, diagrams: dict | None = None) -&gt; None
+    # Write HTML by piping the LaTeX Markdown through **pandoc** (``--mathjax``, same CDN as :func:`render_html`'s own template) so the exported page comes straight from the same ``.md`` text instead of a second, hand-written HTML renderer that c
+render_markdown(
+    reports: dict, title: str = 'Design report', section_images: dict | None = None,
+    summary: dict | None = None, diagrams: dict | None = None) -&gt; str
+    # Render ``{id: report_dict}`` as Markdown.
+render_pdf(
+    reports: dict, path: str, title: str = 'Design report', progress_cb=None, font_size: int = 10,
+    font_family: str = 'sans', summary: dict | None = None, diagrams: dict | None = None) -&gt; None
+    # Compose an A4 PDF with matplotlib: text + **native, vector-typeset equations** (:func:`_mathtext_extent_in` for sizing + a direct ``Figure.text`` for the actual draw — no rasterisation) + the **section figure** (:func:`section_figure_png`, 
+report_base_id(report: dict) -&gt; str
+    # The base member / element / column id a report is for.
+reports_from(design_output) -&gt; dict
+    # Extract ``{id: report_dict}`` from a design routine's output.
+schema_mismatches(reports: dict) -&gt; list
+    # Ids whose report was produced under a different schema version.
+section_figure_png(geom: dict) -&gt; bytes | None
+    # Draw a cross-section sketch from a ``geom`` dict and return PNG bytes.
+summary_rows(reports: dict, material: str | None = None) -&gt; list
+    # One row per report, read straight from each report's ``meta``.
+write_markdown_bundle(
+    reports: dict, md_path, title: str = 'Design report', summary: dict | None = None,
+    diagrams: dict | None = None)
+    # Write a Markdown report *and* an assets folder next to it.
+</code></pre></div>
+<h3 id="xdfem2dphasing"><code>xdfem2d.phasing</code><a class="headerlink" href="#xdfem2dphasing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>add_imposed_strain(struc, element_ids, eps, load_case_id)
+    # Apply an imposed axial strain *eps* to elements (shrinkage / creep proxy).
+initial_state_from_results(results: dict, case_id: str, element_ids=None) -&gt; dict
+    # Build ``{elem_id: ElementInitialState}`` from a solved result's ``element_forces`` for a given load case / analysis case / combination.
+resolve_phase_state(prev_active, prev_support_set_id, operations, all_ids, struc=None)
+    # Replay one phase's ``operations`` on top of the previous phase's *resolved* state and return the phase's own resolved ``(active_elements, support_set_id, applied_cases, case_factors)``.
+solve_phase(
+    base, phase, support_sets=None, _sub=None, tri_initial_state: dict | None = None) -&gt; dict
+    # Solve one construction phase and return a result dict.
+solve_sequence(base, sequence, support_sets=None) -&gt; dict
+    # Solve an ordered :class:`ConstructionSequence` phase by phase.
+</code></pre></div>
+<h3 id="xdfem2dtemplate_api"><code>xdfem2d.template_api</code><a class="headerlink" href="#xdfem2dtemplate_api" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>build_template(kind: str, **params)
+    # A new :class:`Structure2D` for *kind* with *params* (see TEMPLATE_KINDS).
+check_params(kind: str, params: dict) -&gt; dict
+    # *params* completed with the defaults, or ValueError saying what is wrong.
+domain_mismatch(kind: str, struc) -&gt; str
+    # '' unless *struc* is an empty plate-domain model (a grillage or slab started from New Model) and *kind* is a bar kind, else what is wrong.
+fill_in_place(target, built) -&gt; None
+    # Make *target* (an empty model) the model *built*, keeping its object.
+has_geometry(struc) -&gt; bool
+    # True when *struc* already has nodes, bars, area elements or objects.
+kind_signature(kind: str) -&gt; str
+    # ``kind(name=default, ...)`` as text, for a message or a reference.
+normalize_kind(kind) -&gt; str
+    # The kind *kind* names, or ValueError listing the valid ones.
+template_kinds() -&gt; list[str]
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.path", "toc.follow", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>

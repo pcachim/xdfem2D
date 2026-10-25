@@ -13,17 +13,17 @@
       
       
       
-        <link rel="prev" href="analysis.html">
+        <link rel="prev" href="variants.html">
       
       
-        <link rel="next" href="design.html">
+        <link rel="next" href="exporting.html">
       
       
         
       
       
       <link rel="icon" href="assets/xdfem2d_logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -52,6 +52,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -90,9 +92,7 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
       
@@ -201,6 +201,212 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="installation.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="domains.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Model
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="analysis.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="design.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="ai.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="scripting.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scripting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="tutorials/index.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Recipes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="file-formats.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -214,10 +420,10 @@
                     
 
 
-
   
 
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
       
@@ -262,6 +468,64 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="installation.html" class="md-nav__link">
         
@@ -282,9 +546,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -309,36 +574,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="domains.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Domains (plane vs plate)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -363,9 +602,115 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
   
@@ -390,22 +735,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="slabs-grillages.html" class="md-nav__link">
+      <a href="supports-springs.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Slabs & Grillages (overview)
+    Supports, Springs & Constraints
   
 
     
@@ -417,9 +763,94 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="geometry-objects.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
-      
-      
+  
+    Geometry Objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plane-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plane Models (frames & walls)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plate-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plate Models (slabs & grillages)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
   
@@ -444,9 +875,138 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scenes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scenes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -471,9 +1031,38 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
-      
-      
+  
+    Variants & Construction Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
     
@@ -546,6 +1135,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="View modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-each-view-shows-in-each-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each view shows in each domain
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -622,9 +1228,113 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -637,7 +1347,7 @@
   <span class="md-ellipsis">
     
   
-    Design (concrete, steel, timber)
+    Design Overview
   
 
     
@@ -649,22 +1359,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="variants.html" class="md-nav__link">
+      <a href="design-codes.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Variants & Phasing
+    Codes & Preferences
   
 
     
@@ -676,22 +1387,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="scenes.html" class="md-nav__link">
+      <a href="design-buckling-lengths.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Scenes
+    Buckling Lengths
   
 
     
@@ -703,22 +1415,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="templates.html" class="md-nav__link">
+      <a href="design-materials.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Templates
+    Materials & Sections
   
 
     
@@ -727,6 +1440,636 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concrete (EC2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concrete (EC2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-members.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beams & Columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-areas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-punching.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Punching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-steel.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steel (EC3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-timber.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timber (EC5)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-reports.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI in xdfem2D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agent.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mcp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (other agents)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scripting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting with the Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Building a Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-loads-analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Loads & Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-results-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Results & Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -761,12 +2104,15 @@
     
     
     
+      
+      
+    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -777,7 +2123,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorials
+    Recipes
   
 
     
@@ -788,18 +2134,18 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_15" id="__nav_15_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorials
+    Recipes
   
 
           </label>
@@ -1016,15 +2362,43 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="assistant.html" class="md-nav__link">
+    
+    
+      
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
     
   
-    AI Assistant
+    Reference
   
 
     
@@ -1032,67 +2406,22 @@
   
   
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="mcp.html" class="md-nav__link">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
   
-  
-  <span class="md-ellipsis">
-    
-  
-    MCP server (external agents)
-  
-
-    
-  </span>
-  
+    Reference
   
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="exporting.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Exporting
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1117,22 +2446,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="engine-api.html" class="md-nav__link">
+      <a href="json-format.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Engine Reference (API & JSON)
+    JSON Data Structure
   
 
     
@@ -1144,9 +2474,38 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="commands.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
-      
-      
+  
+    Command Language
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
   
@@ -1171,9 +2530,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1198,6 +2558,42 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="third-party-notices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party Notices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
   </ul>
 </nav>
@@ -1206,9 +2602,177 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#view-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="View modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-each-view-shows-in-each-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each view shows in each domain
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scale-and-undeformed-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scale and undeformed reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactions-and-equilibrium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reactions and equilibrium
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constraint-forces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraint forces
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-results-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Results report
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exports
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="index.html" class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="analysis.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Analysis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1220,8 +2784,8 @@
 <p>After running an analysis (<span class="keys"><kbd class="key-f5">F5</kbd></span>), review results on the canvas, in the <strong>Results</strong>
 tab, and through the exports.</p>
 <h2 id="view-modes">View modes<a class="headerlink" href="#view-modes" title="Permanent link">&para;</a></h2>
-<p>Switch with the <strong>View</strong> dropdown, <strong>View → View mode</strong>, or the <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-1">1</kbd></span>…<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-9">9</kbd></span>
-accelerators. The dropdown lists only the modes that have data for the current
+<p>Switch with the <strong>View</strong> dropdown, <strong>View → View mode</strong>, or the accelerators
+<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-1">1</kbd></span> to <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-6">6</kbd></span> and <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-9">9</kbd></span> (the modes without one are reached from the dropdown). The dropdown lists only the modes that have data for the current
 model, so entries appear and disappear as you mesh, run, or design.</p>
 <table>
 <thead>
@@ -1248,7 +2812,7 @@ model, so entries appear and disappear as you mesh, run, or design.</p>
 <tr>
 <td>Fields</td>
 <td></td>
-<td>A <a href="modelling.html#fields">field</a> expression mapped over the model</td>
+<td>A <a href="supports-springs.html#fields">field</a> expression mapped over the model</td>
 <td>—</td>
 </tr>
 <tr>
@@ -1282,21 +2846,9 @@ model, so entries appear and disappear as you mesh, run, or design.</p>
 <td>analysis cases / sequences / combinations</td>
 </tr>
 <tr>
-<td>Bending moment</td>
+<td>Force diagrams</td>
 <td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-6">6</kbd></span></td>
-<td>M diagram along members</td>
-<td>analysis cases / sequences / combinations</td>
-</tr>
-<tr>
-<td>Shear force</td>
-<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-7">7</kbd></span></td>
-<td>V diagram</td>
-<td>analysis cases / sequences / combinations</td>
-</tr>
-<tr>
-<td>Axial force</td>
-<td><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-8">8</kbd></span></td>
-<td>N diagram</td>
+<td>the diagram along the members of the quantity chosen in the <strong>Diagram</strong> selector: bending moment <code>M</code>, shear force <code>V</code>, axial force <code>N</code> (torsion <code>T</code> in a plate model)</td>
 <td>analysis cases / sequences / combinations</td>
 </tr>
 <tr>
@@ -1329,6 +2881,12 @@ model, so entries appear and disappear as you mesh, run, or design.</p>
 <td>EC2 SLS crack-width verification</td>
 <td>design results</td>
 </tr>
+<tr>
+<td>Steel design, Timber design, Column design</td>
+<td></td>
+<td>the utilisation of each member, colour-coded</td>
+<td>design results</td>
+</tr>
 </tbody>
 </table>
 <p>The <strong>Fields</strong> mode requires a compiled mesh; the stress mode needs triangle
@@ -1336,7 +2894,7 @@ elements; the reinforcement and crack modes need the matching
 <a href="design.html">design run</a>. The analysed mesh itself is inspected via the <strong>Mesh</strong>
 overlay checkbox on the Structure view (Display panel ▸ Model tab), not a
 separate view mode. The <strong>Constraint forces</strong> mode appears only when the
-model has <a href="modelling.html#constraints-multi-point">constraints</a>.</p>
+model has <a href="supports-springs.html#constraints-multi-point">constraints</a>.</p>
 <p>Only modes with available data are enabled. Use the <strong>Case</strong> dropdown to pick which
 analysis case, sequence, or combination to display; for Modal, choose the <strong>Mode</strong>
 number. When a construction sequence is selected, a <strong>phase selector</strong> appears in
@@ -1344,12 +2902,69 @@ the toolbar to navigate phase by phase. A <strong>Cumulative / Increment</strong
 controls whether displacements show the running total (Σ Δu) or only the current
 phase's increment (Δu); forces and reactions always reflect the accumulated state
 up to the selected phase.</p>
-<p>The triangle-field view is domain-aware: its title reads <strong>Stress</strong> in a plane
-model and <strong>Forces</strong> in a plate model, and the component selector lists the
-matching quantities (σ… vs mx, my, …, W-A). In a plane model a <strong>Forces (N=σ·t)</strong>
-checkbox converts the membrane stresses into forces per unit width — Nx, Ny, Nxy,
-N1, N2 in kN/m, each scaled by the triangle's own thickness (von Mises is omitted,
-having no force meaning). Plate results are already stress resultants, so no
+<h3 id="what-each-view-shows-in-each-domain">What each view shows in each domain<a class="headerlink" href="#what-each-view-shows-in-each-domain" title="Permanent link">&para;</a></h3>
+<p>The views are the same in both domains; the quantities they show follow the degrees of freedom
+(<code>ux</code>, <code>uy</code>, <code>θz</code> in a plane model, <code>w</code>, <code>θx</code>, <code>θy</code> in a plate model).</p>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th><strong>Plane</strong></th>
+<th><strong>Plate</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deformed shape, Displacements</td>
+<td>the deflected shape in the plane; <code>ux</code>, <code>uy</code>, <code>rz</code></td>
+<td>the out-of-plane deflection <code>w</code> and the rotations <code>θx</code>, <code>θy</code></td>
+</tr>
+<tr>
+<td>Modal shapes</td>
+<td>in-plane modes</td>
+<td>vertical (out-of-plane) modes</td>
+</tr>
+<tr>
+<td>Reactions</td>
+<td><code>Rx</code>, <code>Ry</code>, <code>Mz</code> per support, and their sums</td>
+<td><code>Rz</code>, <code>Mx</code>, <code>My</code> per support</td>
+</tr>
+<tr>
+<td>Bending moment, Shear force</td>
+<td><code>M</code>, <code>V</code> diagrams along bars</td>
+<td><code>M</code>, <code>V</code> diagrams along grid members</td>
+</tr>
+<tr>
+<td>Axial force / Torsion</td>
+<td><strong>Axial force</strong> <code>N</code></td>
+<td><strong>Torsion</strong> <code>T</code>: the view reads Torsion in a plate model</td>
+</tr>
+<tr>
+<td>Triangle and quad field</td>
+<td><strong>Stress</strong> <code>σx</code>, <code>σy</code>, <code>τxy</code>, <code>σ1</code>, <code>σ2</code>, von Mises (kN/m²)</td>
+<td><strong>Forces</strong> <code>mx</code>, <code>my</code>, <code>mxy</code>, <code>m1</code>, <code>m2</code>, <code>vx</code>, <code>vy</code> (kNm/m, kN/m) and the Wood–Armer (W-A) design moments</td>
+</tr>
+<tr>
+<td>Reinforcement (As), Shear reinf. (Asw)</td>
+<td>beams and columns</td>
+<td>grillage beams</td>
+</tr>
+<tr>
+<td>Shell reinf. (As)</td>
+<td>membrane (Wood/Baumann) reinforcement: <code>As,x</code>, <code>As,y</code> and the concrete stress <code>σc</code></td>
+<td>the bending reinforcement of the slab, by face (<a href="design-concrete-areas.html">Concrete: slabs and walls</a>)</td>
+</tr>
+<tr>
+<td>Cuts</td>
+<td><code>N</code>, <code>V</code>, <code>M</code></td>
+<td><code>V</code>, <code>Mb</code>, <code>Mt</code></td>
+</tr>
+</tbody>
+</table>
+<p>The title of the triangle field reads <strong>Stress</strong> in a plane model and <strong>Forces</strong> in a plate model, and the
+component selector lists the matching quantities. In a plane model a <strong>Forces (N=σ·t)</strong> checkbox converts the
+membrane stresses into forces per unit width — Nx, Ny, Nxy, N1, N2 in kN/m, each scaled by the triangle's own
+thickness (von Mises is omitted, having no force meaning). Plate results are already stress resultants, so no
 toggle appears there.</p>
 <h2 id="scale-and-undeformed-reference">Scale and undeformed reference<a class="headerlink" href="#scale-and-undeformed-reference" title="Permanent link">&para;</a></h2>
 <p>For deformed and diagram views, the <strong>Scale</strong> spin box sets the magnification.
@@ -1366,7 +2981,7 @@ default</strong> there, or <strong>Preferences ▸ Display</strong>, keeps it fo
 <h2 id="reactions-and-equilibrium">Reactions and equilibrium<a class="headerlink" href="#reactions-and-equilibrium" title="Permanent link">&para;</a></h2>
 <p>The <strong>Reactions</strong> view draws an arrow per support and a corner box with the
 <strong>Σ reactions</strong> (ΣRx, ΣRy, ΣMz) — the total support force, which doubles as an
-equilibrium check against the applied loads.</p>
+equilibrium check against the applied loads. In a plate model each support shows <code>Rz</code>, <code>Mx</code> and <code>My</code> instead.</p>
 <p><strong>Spring reactions</strong> are drawn too: node springs as labelled arrows, and element
 (Winkler) foundation springs as a distributed reaction diagram with numeric
 values (reaction per unit length) at each element end. The colour shows the
@@ -1376,7 +2991,7 @@ sections where a tension-/compression-only spring is inactive show <strong>zero<
 reaction (e.g. the lifted part of a footing carries no soil reaction), instead of
 the spurious tension a Linear case would draw.</p>
 <h2 id="constraint-forces">Constraint forces<a class="headerlink" href="#constraint-forces" title="Permanent link">&para;</a></h2>
-<p>For a model with <a href="modelling.html#constraints-multi-point">constraints</a>, the
+<p>For a model with <a href="supports-springs.html#constraints-multi-point">constraints</a>, the
 <strong>Constraint forces</strong> view draws — in magenta — the force each constraint applies
 at the nodes it couples: an arrow for <code>Fx</code> and <code>Fy</code> and a label for the moment
 <code>Mz</code>. This is the force you could apply <em>instead of</em> the constraint to get the
@@ -1411,9 +3026,13 @@ view</a> uses). Below the table, a small plot shows the chosen
 per-length area field along the cut, with a marker at every point a bar
 crosses it. <strong>Export CSV…</strong> writes the same table for the selected case, or
 every case at once, to a spreadsheet-ready file.</p>
-<p>See <code>dev/CUT_PLAN.md</code> for the sign conventions and <code>engine-api.md</code> for the
-Python API (<code>xdfem2d.cuts.cut_result</code> and friends) if you are scripting
-against a model instead of using the GUI.</p>
+<p><strong>Sign conventions.</strong> A cut has a tangent <code>t</code>, from its first point to its second, and a normal <code>n</code>, <code>t</code> turned +90° (to the left of
+the drawing direction). What is reported is what the <strong>positive side</strong> (the side <code>n</code> points to) exerts on the negative side. Moments
+are taken about the cut's midpoint. <strong>Bars</strong> crossing the cut contribute their internal forces at the crossing, rotated to the cut's axes,
+as point contributions. <strong>Areas</strong> contribute the integral of their stress field along the part of the cut inside each triangle, as
+contributions per unit length. Bars and areas are always computed separately and then added for the total.</p>
+<p>If you are scripting against a model instead of using the application, the cuts are in
+<a href="python-api-results-design.html#section-cuts">Python API: results and design</a> (<code>xdfem2d.cuts.cut_result</code> and friends).</p>
 <h2 id="the-results-report">The Results report<a class="headerlink" href="#the-results-report" title="Permanent link">&para;</a></h2>
 <p>The <strong>Results</strong> tab (Analysis → Results) prints a full text report:</p>
 <ul>
@@ -1488,10 +3107,12 @@ against a model instead of using the GUI.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.path", "toc.follow", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="javascripts/tables.js"></script>
       
     
   </body>

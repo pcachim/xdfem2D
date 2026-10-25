@@ -13,17 +13,17 @@
       
       
       
-        <link rel="prev" href="interface.html">
+        <link rel="prev" href="domains.html">
       
       
-        <link rel="next" href="slabs-grillages.html">
+        <link rel="next" href="supports-springs.html">
       
       
         
       
       
       <link rel="icon" href="assets/xdfem2d_logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -31,10 +31,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -52,6 +52,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -90,9 +92,7 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="index.html" title="xdfem2D" class="md-header__button md-logo" aria-label="xdfem2D" data-md-component="logo">
       
@@ -201,6 +201,212 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="installation.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="domains.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Model
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="analysis.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="design.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Design
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="ai.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  AI Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="scripting.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Scripting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="tutorials/index.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Recipes
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="file-formats.html" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -214,10 +420,10 @@
                     
 
 
-
   
 
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="index.html" title="xdfem2D" class="md-nav__button md-logo" aria-label="xdfem2D" data-md-component="logo">
       
@@ -262,6 +468,64 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="installation.html" class="md-nav__link">
         
@@ -282,9 +546,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -309,36 +574,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="domains.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Domains (plane vs plate)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -363,9 +602,120 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Model
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="domains.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domains (plane vs plate)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
     
@@ -461,69 +811,14 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#triangle-surface-elements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Triangle (surface) elements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quadrilateral-surface-elements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quadrilateral (surface) elements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#geometry-objects-parametric" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Geometry objects (parametric)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supports" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Supports
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#springs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Springs
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Springs">
+    <nav class="md-nav" aria-label="Elements">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#unilateral-tension-compression-only-springs" class="md-nav__link">
+  <a href="#what-each-domain-has" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Unilateral (tension-/compression-only) springs
+        What each domain has
       
     </span>
   </a>
@@ -532,28 +827,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#constraints-multi-point" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constraints (multi-point)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fields
-      
-    </span>
-  </a>
   
 </li>
       
@@ -597,22 +870,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="slabs-grillages.html" class="md-nav__link">
+      <a href="supports-springs.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Slabs & Grillages (overview)
+    Supports, Springs & Constraints
   
 
     
@@ -624,9 +898,94 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="geometry-objects.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
-      
-      
+  
+    Geometry Objects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plane-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plane Models (frames & walls)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plate-models.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plate Models (slabs & grillages)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
   
@@ -651,117 +1010,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="analysis.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analysis
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="results.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Results
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="design.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Design (concrete, steel, timber)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="variants.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Variants & Phasing
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -786,9 +1038,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -810,6 +1063,1002 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="variants.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variants & Construction Sequences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="results.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exporting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exporting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-codes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codes & Preferences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-buckling-lengths.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buckling Lengths
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-materials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials & Sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concrete (EC2)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concrete (EC2)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-members.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beams & Columns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-areas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slabs & Walls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-concrete-punching.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Punching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-steel.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Steel (EC3)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-timber.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timber (EC5)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="design-reports.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design Reports
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ai.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI in xdfem2D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="assistant.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="agent.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mcp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP server (other agents)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Scripting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="scripting.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scripting with the Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Building a Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-loads-analysis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Loads & Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-results-design.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Results & Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="python-api-reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API: Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -844,12 +2093,15 @@
     
     
     
+      
+      
+    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -860,7 +2112,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorials
+    Recipes
   
 
     
@@ -871,18 +2123,18 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_15" id="__nav_15_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_15">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorials
+    Recipes
   
 
           </label>
@@ -1099,15 +2351,43 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="assistant.html" class="md-nav__link">
+    
+    
+      
         
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
     
   
-    AI Assistant
+    Reference
   
 
     
@@ -1115,67 +2395,22 @@
   
   
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="mcp.html" class="md-nav__link">
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
   
-  
-  <span class="md-ellipsis">
-    
-  
-    MCP server (external agents)
-  
-
-    
-  </span>
-  
+    Reference
   
 
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="exporting.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Exporting
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1200,22 +2435,23 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="engine-api.html" class="md-nav__link">
+      <a href="json-format.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Engine Reference (API & JSON)
+    JSON Data Structure
   
 
     
@@ -1227,9 +2463,38 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="commands.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
-      
-      
+  
+    Command Language
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
   
@@ -1254,9 +2519,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1281,6 +2547,42 @@
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="third-party-notices.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Third-party Notices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
   </ul>
 </nav>
@@ -1289,9 +2591,166 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#materials-and-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materials and sections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nodes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Elements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Elements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-each-domain-has" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each domain has
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editing-on-the-canvas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editing on the canvas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transforms-and-bulk-edits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transforms and bulk edits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-and-meshing-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checking and meshing the model
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           
             <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="index.html" class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="domains.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Model
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1303,6 +2762,13 @@
 <p>Build a model from the <strong>Geometry</strong> and <strong>Properties</strong> tabs, or directly on the
 canvas. The model must be <strong>unlocked</strong> to edit (toggle with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-l">L</kbd></span>); running an
 analysis locks it.</p>
+<p>This page is what <strong>both domains share</strong>: materials, sections, nodes, the families of
+elements, and the editing tools. What belongs to one domain is on its own page, with
+the same layout: <a href="plane-models.html">Plane models</a> (frames and walls) and
+<a href="plate-models.html">Plate models</a> (slabs and grillages). The mechanisms that act the
+same way in both are on <a href="supports-springs.html">Supports, springs and constraints</a> and
+<a href="geometry-objects.html">Geometry objects</a>. The domain is chosen once, in <strong>New model</strong>
+(see <a href="domains.html">Domains</a>).</p>
 <h2 id="materials-and-sections">Materials and sections<a class="headerlink" href="#materials-and-sections" title="Permanent link">&para;</a></h2>
 <p>Define these first, on the <strong>Properties</strong> tab.</p>
 <ul>
@@ -1363,6 +2829,9 @@ called <strong>Rigid</strong> (numerically very stiff, for near-rigid links) and
 opened read-only, cannot be renamed or deleted, and are shown at the <strong>bottom</strong>
 of the material and section lists.</p>
 </div>
+<p>A <strong>surface section</strong> (the section of a triangle or a quad) is different: it carries a
+<code>thickness</code>, a material and a <strong>formulation</strong>, and it is described on the page of the
+domain, because the formulations are not the same (see below).</p>
 <h2 id="nodes">Nodes<a class="headerlink" href="#nodes" title="Permanent link">&para;</a></h2>
 <p>A node has an <code>(x, y)</code> position. Add nodes from the <strong>Nodes</strong> sub-tab, the
 <strong>Structure</strong> menu, or with the <strong>Add node</strong> tool: enable it and click on the canvas
@@ -1379,321 +2848,98 @@ use these names, so the same primitives read correctly in either domain.</p>
 node, then the end node.</p>
 <p>Each element end can carry a <strong>moment release (hinge)</strong>, drawn as a small open circle
 near the node.</p>
-<h2 id="triangle-surface-elements">Triangle (surface) elements<a class="headerlink" href="#triangle-surface-elements" title="Permanent link">&para;</a></h2>
-<p>For membranes, walls and plates in plane stress or plane strain, xdfem2D uses
-<strong>triangular surface elements</strong>. A <strong>triangle section</strong> carries a <code>thickness</code>, a
-material, a plane-stress/plane-strain flag, and a <strong>formulation</strong>:</p>
-<table>
-<thead>
-<tr>
-<th>Formulation</th>
-<th>DOFs per node</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>CST</strong> (constant-strain triangle)</td>
-<td>ux, uy</td>
-<td>Fast, robust; overly stiff in bending. The node's rotation is left free (auto-restrained) unless a bar also frames in.</td>
-</tr>
-<tr>
-<td><strong>Allman</strong></td>
-<td>ux, uy, θz</td>
-<td>Adds an in-plane <em>drilling</em> rotation, so it can transfer moment to a frame member and converges faster in bending.</td>
-</tr>
-<tr>
-<td><strong>ES-FEM</strong> (edge-based smoothed)</td>
-<td>ux, uy</td>
-<td>Smooths CST over edge domains — softer, more accurate in bending — without adding a DOF.</td>
-</tr>
-</tbody>
-</table>
-<p>Add triangles one by one (three node picks) on the <strong>Triangles</strong> sub-tab, or let
-a <a href="#geometry-objects-parametric">polygon geometry object</a> mesh itself
-automatically.</p>
-<h2 id="quadrilateral-surface-elements">Quadrilateral (surface) elements<a class="headerlink" href="#quadrilateral-surface-elements" title="Permanent link">&para;</a></h2>
-<p>A <strong>quad</strong> is the 4-node counterpart of the triangle, for the same walls and
-slabs. Its main advantage is on a <strong>regular, structured mesh</strong> (a rectangular
-slab or wall panel): a triangle split introduces a directional (diagonal) bias
-in the stress/moment field near supports and point loads — a checkerboard
-pattern — that a quad avoids. Prefer quads on regular grids; keep triangles for
-irregular or concave outlines (the quad mesher is structured-only).</p>
-<p>A <strong>quad section</strong> carries the same <code>thickness</code> / material / plane-strain
-fields as a triangle section, with its own <strong>formulation</strong>:</p>
-<table>
-<thead>
-<tr>
-<th>Formulation</th>
-<th>Domain</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>QM6</strong> (incompatible-modes Q4)</td>
-<td>plane (wall)</td>
-<td>The recommended membrane quad — four internal bubble DOFs, condensed out, fix the bending-lock that plain Q4 suffers.</td>
-</tr>
-<tr>
-<td><strong>Q4</strong> (bilinear)</td>
-<td>plane (wall)</td>
-<td>Reference/patch-test element only — locks in bending, not recommended as the default.</td>
-</tr>
-<tr>
-<td><strong>MITC4</strong> (Mindlin, shear-locking-free)</td>
-<td>plate (slab)</td>
-<td>The recommended slab quad — the 4-node analogue of MITC3.</td>
-</tr>
-<tr>
-<td><strong>DKT4</strong> (thin, Kirchhoff)</td>
-<td>plate (slab)</td>
-<td>Four DKT triangles condensed to a quad; thin-plate analogue of DKT.</td>
-</tr>
-</tbody>
-</table>
-<p>Add quads one by one (four node picks, <strong>i → j → k → l</strong> counter-clockwise) from
-<strong>Structure ▸ Triangles ▸ Add quad</strong>, or let a rectangle/polygon object mesh
-into quads (below). A triangle and a quad are the same modelling role, so they
-share one selection, one <strong>Manage area elements…</strong> manager, one bulk/individual
-editor, and the same result views — pick the shape per element or per surface.</p>
+<p>A triangle and a quad are the same modelling role, so they share one selection, one
+<strong>Manage area elements…</strong> manager, one bulk/individual editor, and the same result
+views — pick the shape per element or per surface.</p>
 <div class="admonition note">
-<p class="admonition-title">Panel sections</p>
-<p>In the GUI a <strong>Panel</strong> pairs a triangle section and a quad section under one
-name (one material/thickness choice), and the surface's <strong>Mesh as:
-Triangles / Quads</strong> selector decides which is used. Programmatically they are
-two sections (<code>tri_sections</code> / <code>quad_sections</code>) that may share a name.</p>
+<p class="admonition-title">Panel and Slab sections</p>
+<p>In the GUI a <strong>Panel</strong> (plane) or a <strong>Slab</strong> (plate) pairs a triangle section and a
+quad section under one name (one material/thickness choice), and the surface's
+<strong>Mesh as: Triangles / Quads</strong> selector decides which is used. Programmatically they
+are two sections (<code>tri_sections</code> / <code>quad_sections</code>) that may share a name.</p>
 </div>
-<h2 id="geometry-objects-parametric">Geometry objects (parametric)<a class="headerlink" href="#geometry-objects-parametric" title="Permanent link">&para;</a></h2>
-<p>Instead of placing every node and element by hand, you can define the structure
-with <strong>parametric geometry objects</strong> that the program discretises into concrete
-nodes and elements <strong>at solve time</strong>. The editable model is left untouched; the
-analysis runs on the compiled mesh.</p>
+<h3 id="what-each-domain-has">What each domain has<a class="headerlink" href="#what-each-domain-has" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Object</th>
-<th>Becomes</th>
-<th>Defined by</th>
+<th></th>
+<th><strong>Plane</strong></th>
+<th><strong>Plate</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Segment</strong></td>
-<td>bar elements</td>
-<td>two end points</td>
+<td>What it models</td>
+<td>a frame or wall in its own plane</td>
+<td>a slab or grillage bending out of plane</td>
 </tr>
 <tr>
-<td><strong>Arc</strong></td>
-<td>bar elements (straight chords)</td>
-<td>centre + radius + angles, or three points</td>
+<td>DOFs per node</td>
+<td><code>ux</code>, <code>uy</code>, <code>θz</code></td>
+<td><code>w</code>, <code>θx</code>, <code>θy</code></td>
 </tr>
 <tr>
-<td><strong>Multisegment</strong></td>
-<td>bar elements</td>
-<td>a chain of vertices, open or closed</td>
+<td>Line element</td>
+<td><strong>Beam</strong>: axial, bending and shear</td>
+<td><strong>Grid</strong> member: bending, shear and St-Venant torsion</td>
 </tr>
 <tr>
-<td><strong>Rectangle</strong></td>
-<td>triangle <strong>or quad</strong> mesh</td>
-<td>two opposite corners</td>
+<td>Triangle</td>
+<td><strong>Panel</strong>: CST, Allman, ES-FEM</td>
+<td><strong>Slab</strong>: MITC3 (default), DKT</td>
 </tr>
 <tr>
-<td><strong>Polygon</strong></td>
-<td>triangle <strong>or quad</strong> mesh</td>
-<td>a closed polygon boundary</td>
+<td>Quad</td>
+<td><strong>Panel</strong>: QM6 (recommended), Q4</td>
+<td><strong>Slab</strong>: MITC4 (recommended), DKT4</td>
+</tr>
+<tr>
+<td>Supports</td>
+<td><code>PIN</code>, <code>FIXED</code>, <code>ROLLER-X/Y</code>, <code>GUIDED-X/Y</code>, <code>BLOCK</code></td>
+<td><code>SIMPLE</code>, <code>CLAMPED</code>, <code>CLAMP-X/Y</code>, <code>SYM-X/Y</code>, <code>BLOCK</code></td>
+</tr>
+<tr>
+<td>Node springs</td>
+<td><code>Kx</code>, <code>Ky</code>, <code>Kt</code></td>
+<td><code>kz</code>, <code>ktx</code>, <code>kty</code></td>
+</tr>
+<tr>
+<td>Foundation</td>
+<td>element spring along a bar (<code>Kx</code>, <code>Ky</code>)</td>
+<td>element spring along a grid member (transverse, <code>w</code> only); <strong>area spring</strong> <code>kz</code> under a slab</td>
+</tr>
+<tr>
+<td>Loads</td>
+<td><code>Fx</code>, <code>Fy</code>, <code>Mz</code>; distributed; edge tractions</td>
+<td><code>Fz</code>, <code>Mx</code>, <code>My</code>; <code>qz</code>; area pressure <code>pz</code></td>
+</tr>
+<tr>
+<td>Constraints</td>
+<td>rigid link, equal DOF, equation</td>
+<td>equal DOF, equation (a rigid link is in-plane kinematics)</td>
+</tr>
+<tr>
+<td>Analyses</td>
+<td>Linear, NonLinear, Mass, Modal, Spectrum, P-Delta</td>
+<td>the same, with vertical modes; <strong>no P-Delta</strong></td>
+</tr>
+<tr>
+<td>Triangle and quad results</td>
+<td>membrane <strong>stresses</strong> σ (with an N = σ·t force toggle)</td>
+<td>slab <strong>forces</strong>: moments, shears, Wood–Armer</td>
+</tr>
+<tr>
+<td>Bar results</td>
+<td><code>M</code>, <code>V</code>, <code>N</code> diagrams</td>
+<td><code>M</code>, <code>V</code>, <code>T</code> diagrams</td>
+</tr>
+<tr>
+<td>Details</td>
+<td><a href="plane-models.html">Plane models</a></td>
+<td><a href="plate-models.html">Plate models</a></td>
 </tr>
 </tbody>
 </table>
-<p>Polygons and rectangles are meshed by an automatic Delaunay mesher (the built-in
-one, or the higher-quality <a href="https://github.com/drufat/triangle">Triangle</a>
-library if installed) into <strong>triangles</strong>, or — on a convex quad outline with
-<strong>Mesh as: Quads</strong> and a quad section — by the structured mesher into <strong>quads</strong>
-(falling back to triangles per cell where a quad would be poorly shaped). Quads
-need an outline of <strong>exactly four vertices with no inward corner</strong>; for any other
-polygon (a circular sector, a ring, an L) the editor switches <strong>Quads</strong> off, says
-why under the box, and meshes it as triangles. A polygon that still asks for quads
-(a script, or an older file) is reported by <em>Model check</em> as <em>Lost quad elements</em>,
-with the fix: <strong>Mesh as: Triangles</strong>. When
-the model is analysed, objects <strong>auto-resolve T-junctions and crossings</strong>: a
-node sitting on another object's span, or two objects that cross, are welded so
-the parts act together.</p>
-<p>Create objects from <strong>Structure ▸ Objects</strong> (segment / arc / multisegment /
-rectangle / polygon). To turn an object into ordinary elements you can edit
-individually, use <strong>Edit ▸ Curve to bar</strong> or <strong>Edit ▸ Surface to mesh</strong> (which
-bakes the surface into its triangles and/or quads).</p>
-<div class="admonition tip">
-<p class="admonition-title">Propagation along an edge</p>
-<p>Supports and springs assigned to <strong>both</strong> corner nodes of a meshed edge
-propagate to the intermediate nodes the mesher creates along that edge. This
-is how you fix a whole wall base with two assignments instead of forty.</p>
-</div>
-<h2 id="supports">Supports<a class="headerlink" href="#supports" title="Permanent link">&para;</a></h2>
-<p>Supports restrain node degrees of freedom — <code>ux</code>, <code>uy</code>, <code>θz</code> in a plane model,
-<code>w</code>, <code>θx</code>, <code>θy</code> in a plate model (see <a href="domains.html">Domains</a>). Each restraint
-combination has a <strong>canonical name</strong>, so the same boundary condition is called
-the same thing whether it was drawn or written by script, and the canvas draws an
-expressive glyph per family. The name depends on the domain:</p>
-<table>
-<thead>
-<tr>
-<th>Restraints</th>
-<th>Plane name</th>
-<th>Plate name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>all three</td>
-<td><code>FIXED</code></td>
-<td><code>CLAMPED</code></td>
-</tr>
-<tr>
-<td>two translations / <code>w</code> only</td>
-<td><code>PIN</code></td>
-<td><code>SIMPLE</code></td>
-</tr>
-<tr>
-<td>one only</td>
-<td><code>ROLLER-X</code> / <code>ROLLER-Y</code></td>
-<td><code>SYM-X</code> / <code>SYM-Y</code></td>
-</tr>
-<tr>
-<td>translation + one rotation</td>
-<td><code>GUIDED-X</code> / <code>GUIDED-Y</code></td>
-<td><code>CLAMP-X</code> / <code>CLAMP-Y</code></td>
-</tr>
-<tr>
-<td>rotation(s), free to move</td>
-<td><code>BLOCK</code></td>
-<td><code>BLOCK</code></td>
-</tr>
-</tbody>
-</table>
-<p>In the plate domain the glyphs read as slab edges: a simply-supported knife-edge
-(<code>SIMPLE</code>), a hatched clamp (<code>CLAMPED</code>), a supported edge with one rotation held
-(<code>CLAMP-X/Y</code>), and a dash-dot <strong>symmetry</strong> line (<code>SYM-X/Y</code>) — the last lets you
-model a whole slab from one wedge. The quick-preset buttons in the support dialog
-offer the domain's common cases (plane: PIN / ROLLER-X / FIXED; plate: SIMPLE /
-CLAMPED / SYM-X).</p>
-<p>Assign supports on the <strong>Supports</strong> sub-tab or via the node editor. The on-canvas
-legend names each colour with its canonical family (the <code>-X</code>/<code>-Y</code> variants share
-one entry). With <strong>Colour by</strong> on Sections or Materials in the
-<a href="interface.html#display-panel">Display panel</a>, a second key — the sections or
-materials in use — is drawn lower right.</p>
-<h2 id="springs">Springs<a class="headerlink" href="#springs" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Node springs</strong> — translational <code>Kx</code>, <code>Ky</code> and rotational <code>Kt</code> at a node.</li>
-<li><strong>Element springs</strong> — a Winkler elastic foundation along an element, per unit length.</li>
-</ul>
-<p>A structure may be supported by springs alone (no classic supports), as long as
-the springs restrain enough degrees of freedom to prevent rigid-body motion.</p>
-<h3 id="unilateral-tension-compression-only-springs">Unilateral (tension-/compression-only) springs<a class="headerlink" href="#unilateral-tension-compression-only-springs" title="Permanent link">&para;</a></h3>
-<p>Each <strong>translational</strong> component of a node or element spring has a behaviour mode:</p>
-<table>
-<thead>
-<tr>
-<th>Mode</th>
-<th>Acts when…</th>
-<th>Typical use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>both</strong> (default)</td>
-<td>always — resists in both directions</td>
-<td>ordinary elastic spring</td>
-</tr>
-<tr>
-<td><strong>compression</strong></td>
-<td>the spring is compressed (node moves in the −axis direction)</td>
-<td>soil under a footing, gap/contact support</td>
-</tr>
-<tr>
-<td><strong>tension</strong></td>
-<td>the spring is stretched (node moves in the +axis direction)</td>
-<td>tie / anchor that only pulls</td>
-</tr>
-</tbody>
-</table>
-<p>Set the mode per component (<code>Kx</code>/<code>Ky</code> for global axes, axial/transverse for an
-element spring in <em>local</em> axes) in the spring dialog, the node/element editor, or
-the bulk-edit dialog. Rotational stiffness <code>Kt</code> is always bilateral.</p>
-<div class="admonition important">
-<p class="admonition-title">Only NonLinear cases honour the mode</p>
-<p>Tension-/compression-only behaviour is applied <strong>only by a
-<a href="analysis.html#nonlinear-cases-unilateral-springs">NonLinear analysis case</a></strong>.
-In Linear (and every other) case the spring acts bilaterally, exactly as
-before. So model the unilateral effect by running a NonLinear case.</p>
-</div>
-<p>Sign convention: for a node spring the component direction is the global axis
-(or, for an element spring in local axes, the element's axial / transverse
-direction). "tension" is active when the displacement projected on that direction
-is positive; "compression" when it is negative. Element-spring activation is
-evaluated <strong>per end-node</strong>, consistent with the lumped foundation model.</p>
-<div class="admonition tip">
-<p class="admonition-title">Modelling a footing on soil (uplift)</p>
-<p>Give the base nodes/elements <strong>compression-only</strong> springs and <strong>remove any
-rigid vertical supports</strong> at those nodes (a rigid support in parallel with a
-spring fixes the DOF and makes the spring inert). Keep a minimal horizontal
-restraint to prevent rigid-body motion, then solve with a NonLinear case: the
-springs that go into tension deactivate and that part of the footing lifts.</p>
-</div>
-<h2 id="constraints-multi-point">Constraints (multi-point)<a class="headerlink" href="#constraints-multi-point" title="Permanent link">&para;</a></h2>
-<p>Supports and springs act on <strong>one</strong> degree of freedom at a time. A <strong>constraint</strong>
-instead couples <strong>several</strong> DOFs — of different nodes — through a linear equation.
-Three kinds are available, all built from the same underlying form
-<code>Σ cᵢ·dofᵢ = value</code>:</p>
-<table>
-<thead>
-<tr>
-<th>Kind</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Rigid link</strong></td>
-<td>A master node and one or more slave nodes move as one rigid body: each slave follows the master's two translations and rotation (<code>ux_s = ux_m − Δy·θ_m</code>, <code>uy_s = uy_m + Δx·θ_m</code>, <code>θ_s = θ_m</code>). Use it for rigid offsets and eccentric connections.</td>
-</tr>
-<tr>
-<td><strong>Equal DOF</strong></td>
-<td>A set of nodes shares the same value of one or more components (<code>ux</code>, <code>uy</code>, <code>θz</code>) — e.g. tying several nodes to the same horizontal displacement.</td>
-</tr>
-<tr>
-<td><strong>Equation (advanced)</strong></td>
-<td>The raw linear form: a list of <code>(node, component, coefficient)</code> terms and a right-hand-side value.</td>
-</tr>
-</tbody>
-</table>
-<p>Create constraints on the <strong>Constraints</strong> sub-tab (Geometry), or from
-<strong>Structure ▸ Constraints ▸ Add constraint</strong> (also under <strong>Structure ▸ Nodes</strong>).
-The <em>Add constraint</em> tool lets you click the nodes to tie on the canvas — each
-picked node is highlighted — and finishes when you <strong>double-click the last node</strong>,
-which opens the editor pre-filled with those nodes. Press <strong>Esc</strong> to leave the
-mode. The dialog previews the resulting equation(s) before you save, and gives a
-default name per kind (<code>Rigid1</code>, <code>Equal1</code>, <code>Constraint1</code>, …).</p>
-<div class="admonition note">
-<p class="admonition-title">How constraints are imposed (penalty)</p>
-<p>Constraints are enforced by <strong>penalty</strong>: each equation adds a very stiff term
-to the stiffness matrix. This is robust and works across all analysis types
-(Linear, NonLinear, P-Delta, Modal, Spectrum), but it is <em>approximate</em> —
-results satisfy the constraint to about 1 part in 10⁶, with a tiny residual
-reaction. An exact master–slave formulation is planned for a future version.</p>
-</div>
-<p>The <strong>model check</strong> flags common mistakes: a constraint referencing a missing
-node, a rigid link whose master is also a slave, two rigid links forming a cycle,
-a tied DOF that a support already restrains, and a constraint on <code>θz</code> at a node
-with no rotational DOF (CST-only).</p>
-<p>See <a href="results.html#constraint-forces">Results ▸ Constraint forces</a> for the force
-each constraint transmits.</p>
-<h2 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h2>
-<p>A <strong>field</strong> is a named spatial expression — a formula in <code>x</code> and <code>y</code> — that can
-drive a value which varies across the model instead of a single constant. The
-main use is a <strong>Winkler foundation modulus that changes along a member</strong>: assign a
-field as an element spring's stiffness and the value is evaluated at each
-generated bar's midpoint. Define fields in <strong>Structure ▸ Fields</strong>, and preview one
-over the model with the <strong>Fields</strong> view mode.</p>
 <h2 id="editing-on-the-canvas">Editing on the canvas<a class="headerlink" href="#editing-on-the-canvas" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Click to select; drag a rectangle for a window selection (left-to-right encloses,
@@ -1736,8 +2982,9 @@ over the model with the <strong>Fields</strong> view mode.</p>
 </tbody>
 </table>
 <p>Two commands <strong>bake</strong> parametric objects into ordinary, individually-editable
-elements: <strong>Curve to bar</strong> (segment / arc / multisegment → bars) and <strong>Area to triangle</strong>
-(rectangle / polygon → triangles); the object is then removed.</p>
+elements: <strong>Line to bar</strong> (segment / arc / multisegment → bars) and <strong>Surface to mesh</strong>
+(rectangle / polygon → triangles and/or quads); the object is then removed. See
+<a href="geometry-objects.html#turning-an-object-into-ordinary-elements">Geometry objects</a>.</p>
 <p>To change many entities at once, select them and use <strong>Selection → Edit selected
 nodes / bars / triangles…</strong> for a bulk editor, or <strong>Divide bars…</strong> to subdivide
 selected members into several elements.</p>
@@ -1746,7 +2993,7 @@ selected members into several elements.</p>
 <li><strong>Structure → Model check</strong> (also in the Analysis menu) reports topology issues
   that are <em>not</em> auto-fixed: isolated nodes, coincident nodes, unconnected
   T-junctions and crossings, duplicate bars, masses on restrained DOFs, and the
-  <a href="#constraints-multi-point">constraint checks</a> above.</li>
+  <a href="supports-springs.html#constraints-multi-point">constraint checks</a> above.</li>
 <li><strong>Analysis → Generate mesh</strong> (<span class="keys"><kbd class="key-f6">F6</kbd></span>) compiles the geometry objects into the
   concrete mesh the solver uses, so you can inspect it before running — it is
   shown via the <strong>Mesh</strong> overlay checkbox on the Structure view (Display panel ▸
@@ -1808,10 +3055,12 @@ selected members into several elements.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.path", "toc.follow", "navigation.tracking", "navigation.indexes", "navigation.top", "content.code.copy"], "search": "assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="javascripts/tables.js"></script>
       
     
   </body>
