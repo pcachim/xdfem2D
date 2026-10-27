@@ -2999,8 +2999,9 @@ add bar ID NODE NODE SECTION [hinge-start] [hinge-end]
     e.g. add bar E1 A B S1
 add section NAME concrete BxH [CLASS] | steel PROFILE [GRADE] | timber BxH [CLASS]
     e.g. add section S1 concrete 0.3x0.5
-add material NAME steel GRADE | concrete CLASS [REBAR] | timber CLASS
+add material NAME steel GRADE | concrete CLASS [REBAR] | timber CLASS | young E [poisson V] [weight V]   (the last one is a generic material of your own numbers, E as 30GPa, weight in kN/m3)
     e.g. add material X steel S355
+    e.g. add material M young 20GPa poisson 0.25 weight 20
 add slab ID X0 Y0 X1 Y1 thickness T [material M]
 add slab ID thickness T [material M] points X Y X Y X Y ...
 add slab ID regular sides N diameter D thickness T [material M] [center X Y]
@@ -3026,7 +3027,7 @@ add selfweight CASE [factor F]
     e.g. add selfweight G
 add load VALUE [down|up|left|right] on SEL [at FRACTION] [case NAME]   (kN on a node or at a point of a bar, kN/m on a bar, kN/m2 on a slab; VALUE..VALUE is a trapezoid on a bar)
     e.g. add load 15 down on E1 case Q
-add load VALUE [perp|tang] on edge REGION EDGE [case NAME]   (kN/m along one edge of a slab or wall; perp is normal to the edge, tang along it; a global direction is a load on the nodes)
+add load VALUE [perp|tang|right|left|up|down] on edge REGION EDGE [case NAME]   (kN/m along one edge of a slab or wall; perp is normal to the edge, tang along it; right, left, up and down are along the global axes)
     e.g. add load 10 perp on edge Slab 1 case Q
 add temperature uniform V [gradient V] on SEL [case NAME]
     e.g. add temperature uniform 30 on E1 case T
@@ -3043,15 +3044,17 @@ add analysis NAME spectrum modal MODALCASE function SPECTRUM [direction X|Y|XY] 
 add analysis NAME pdelta = FACTOR CASE + ... [iterations N] [tolerance T] [beams F] [columns F]   (second order, plane domain; F is the fraction of the stiffness kept)
     e.g. add analysis P pdelta = 1.35 G + 1.5 Q beams 0.8 columns 0.8
 add analysis NAME nonlinear = FACTOR CASE + ...   (unilateral springs)
-add spectrum ID points T SA T SA ... [damping D]  |  add spectrum ID ec8 ag A S S TB T TC T TD T [damping PERCENT] [q Q [beta B]] [tmax T]   (the response spectrum Sa(T); ec8: the EN 1998-1 curve, ag in m/s2, elastic or, with q, design)
+add spectrum ID points T SA T SA ... [damping D]  |  add spectrum ID ec8 ag A S S TB T TC T TD T [damping PERCENT] [q Q [beta B]] [tmax T]  |  add spectrum ID predefined CODE SOIL ZONE [importance i|ii|iii|iv] [damping PERCENT] [q Q [beta B]] [tmax T]   (the response spectrum Sa(T); ec8: the EN 1998-1 curve, ag in m/s2, elastic or, with q, design; predefined: the parameters of CEN-1, CEN-2 (zone .1g ... .9g), PT-1 (zone 1.1 ... 1.6) or PT-2 (zone 2.1 ... 2.5), ground type A to E)
     e.g. add spectrum EC8 ec8 ag 1.5 S 1.2 TB 0.15 TC 0.5 TD 2
+    e.g. add spectrum PT predefined PT-1 B 1.3 importance ii q 1.5
 add mass SEL [mx V] [my V] [mtz V] case MASSCASE   (a concentrated mass, tonnes and t m2, for a Mass case)
     e.g. add analysis M mass = 1 G
     e.g. add mass B mx 2 my 2 case M
 add combination NAME = FACTOR CASE + FACTOR CASE ...   (load or analysis cases)
     e.g. add combination C1 = 1.35 G + 1.5 Q
-add combination NAME = FACTOR CASE + ... type sum|envelope|abssum|srss   (envelope: the largest and the smallest of each result over the terms; sum is the default)
+add combination NAME = FACTOR CASE + ... type sum|envelope|abssum|srss|nonlinear   (envelope: the largest and the smallest of each result over the terms; abssum: the sum of the absolute values; srss: the square root of the sum of squares; nonlinear: the combination of one non-linear analysis case, factor 1; sum is the default)
     e.g. add combination ENV = 1 ULS1 + 1 ULS2 type envelope
+    e.g. add combination CNL = 1 NL type nonlinear
 add constraint equal SEL COMPONENTS   (the nodes move together in these components: ux uy tz)
 add constraint rigid MASTER SLAVES   (the slaves follow the master as one rigid body; the master is a node, the slaves are nodes or a condition)
 add constraint equation 1*A.ux -1*B.ux = 0   (the raw form)
@@ -3068,9 +3071,9 @@ set bar SEL section NAME | hinge-start on|off | hinge-end on|off   (several pair
     e.g. set bar E1 section S2
 set load VALUE [down|up|left|right] on SEL [at FRACTION] [case NAME]   (the load there BECOMES this value: for 'change the load to 20'; add load adds another)
     e.g. set load 20 down on E1 case Q
-set section NAME ATTR VALUE [ATTR VALUE ...]   (ATTR: name, material, size BxH, b, h, thickness, cover, is_column ... any attribute of the section)
+set section NAME attribute value [attribute value ...]   (attributes: name, material, size BxH, b, h, thickness, cover, is_column, shape rectangular|circular|generic, area_override A, inertia_override I ... any attribute of the section; a circular section is shape circular with size DxD, D the diameter; a generic one is shape generic with the area (m2) and the inertia (m4))
     e.g. set section S1 size 0.3x0.6
-set material NAME ATTR VALUE [ATTR VALUE ...]   (ATTR: name, young 33GPa, poisson, weight, density, type ...)
+set material NAME attribute value [attribute value ...]   (attributes: name, young 33GPa, poisson, weight, density, type concrete|steel|timber|other ...)
     e.g. set material X young 33GPa poisson 0.2
 </code></pre></div>
 <h3 id="remove">remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h3>
@@ -3117,6 +3120,9 @@ remove constraint ID
 <p>Moves nodes, to a position or by an amount.</p>
 <div class="highlight"><pre><span></span><code>move node SEL by DX DY | to X Y
     e.g. move node C by 0 0.5
+move element SEL by DX DY | to X Y   (a bar, a slab or a wall: the id says which; `to` puts its first node, or its first corner, there)
+    e.g. move element W1 by 2 0
+    e.g. move element W1 to 6 1
 </code></pre></div>
 <h3 id="select-and-deselect">select and deselect<a class="headerlink" href="#select-and-deselect" title="Permanent link">&para;</a></h3>
 <p>Mark nodes and bars in the window, as the Selection menu does. They change nothing in the model.</p>

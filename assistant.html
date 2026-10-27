@@ -3383,14 +3383,26 @@ quoting the correct figure.</p>
 exactly like right ones.</p>
 <h3 id="tested-models">Tested models<a class="headerlink" href="#tested-models" title="Permanent link">&para;</a></h3>
 <p>The Assistant writes short commands (<a href="commands.html">the command language</a>, one request at a time) that the application
-checks and applies. Measured with <code>tools/bench/bench_parts.py</code>, 38 single-part
-requests (nodes, bars, sections, supports, loads, slabs, walls), temperature 0,
-October 2026:</p>
+checks and applies. Three benchmarks measure it (in <code>tools/bench/</code>), all at temperature 0, with the thinking of the model off
+and the router off, in October 2026. A request is right when the model it leaves passes a check made for that request, or when
+the answer to a question has the value asked:</p>
+<ul>
+<li><strong>Create</strong> (<code>bench_create.py</code>): 86 requests that build or change a model (nodes and bars, supports, loads, sections and
+  materials, load cases and combinations, editing and deleting, hinges, links and springs, slabs and walls, and the
+  dynamic cases: mass, modal, response spectrum, P-Delta, non-linear).</li>
+<li><strong>Query</strong> (<code>bench_query.py</code>): 90 questions about a model that was analysed (counts, reactions, displacements, forces,
+  geometry, design, combinations).</li>
+<li><strong>Chain</strong> (<code>bench_scenarios.py</code>, scenario S1): 36 sentences, in three chains of 12 steps (a wall with edge supports and loads,
+  then mass, modal, spectrum and combinations), in which each step is worded at random in one of three ways and works on the model that
+  the previous steps left.</li>
+</ul>
 <table>
 <thead>
 <tr>
 <th>Model</th>
-<th>Right</th>
+<th>Create</th>
+<th>Query</th>
+<th>Chain</th>
 <th>Time per request</th>
 <th>Notes</th>
 </tr>
@@ -3398,38 +3410,48 @@ October 2026:</p>
 <tbody>
 <tr>
 <td><code>gemma4:e4b</code></td>
-<td>25–26/38</td>
-<td>under 1 s</td>
-<td><strong>The default.</strong> The most capable of the small models, and the fastest.</td>
-</tr>
-<tr>
-<td><code>gemma4:12b</code></td>
-<td>30–32/38</td>
-<td>about 8 s</td>
-<td>More capable than <code>e4b</code>; worth it if you have the memory and can wait.</td>
+<td>73/86</td>
+<td>84/90</td>
+<td>24/36</td>
+<td>about 1 s</td>
+<td><strong>The default.</strong> The fastest of the local models, and the one that falls behind most on the chain.</td>
 </tr>
 <tr>
 <td><code>bonsai-2:27b</code></td>
-<td>34/38</td>
-<td>about 6 s</td>
+<td>74/86</td>
+<td>87/90</td>
+<td>34/36</td>
+<td>about 5 to 7 s</td>
 <td>The most capable of the local models, and the slowest.</td>
 </tr>
 <tr>
 <td><code>gemma4:cloud</code></td>
-<td>36–37/38</td>
+<td>84/86</td>
+<td>85/90</td>
+<td>36/36</td>
 <td>under 1 s</td>
-<td>Ollama's cloud model: the best result, but your model leaves this computer.</td>
+<td>Ollama's cloud model: the best result on the chain, but your model leaves this computer.</td>
+</tr>
+<tr>
+<td><code>beam:cloud</code></td>
+<td>84/86</td>
+<td>89/90</td>
+<td>32/36</td>
+<td>about 1 s</td>
+<td>A larger cloud model, with the best result on questions.</td>
 </tr>
 </tbody>
 </table>
-<p>Smaller models (3–4 B) fall behind quickly: <code>qwen3.5:4b</code>, <code>ministral-3:3b</code> and
-<code>granite4.2:3b</code> get 15–23 of the 38, and <code>bonsai-2</code> gets 10 at 4 B and 20 at 9 B.
-Questions about a model (reading results) are easier than creating one: a small
-model answers about 95% of them correctly, so the size you need depends on what
-you want it to do.</p>
+<p>Where the small models fail is the same everywhere: a request that leaves something to guess (<em>the top-left corner</em>, <em>the centre</em>),
+a request of several steps, and an id that does not exist yet. In the chain, <code>gemma4:e4b</code> misses the same steps in every run: the wall
+read from <em>4,0x20,0 m2 em (6,0)</em>, the loads and supports on an edge, and the nodal load.
+The wording matters: when the same requests were asked again with a trivial change (a full stop, <em>please</em>, Portuguese
+instead of English), <code>gemma4:e4b</code> lost between 6 and 14 points.
+Earlier tests with other, smaller models (3 to 4 B, such as <code>qwen3.5:4b</code>, <code>ministral-3:3b</code> and <code>granite4.2:3b</code>) with another set
+of requests gave much worse results, and they were not measured again.</p>
 <p>Times are from one machine (an Apple-silicon Mac). Without a usable GPU the same
 model can be several times slower, and the cloud time depends on your connection.
-Results move by about ±2 requests between runs.</p>
+Results move by one or two requests between runs.</p>
 <p>These names will age. You can use any other models that support tool calling.</p>
 <h3 id="a-tool-call-that-comes-back-as-text">A tool call that comes back as text<a class="headerlink" href="#a-tool-call-that-comes-back-as-text" title="Permanent link">&para;</a></h3>
 <p>Occasionally a model — even one that generally supports tool calling — writes
