@@ -710,6 +710,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#results-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results window
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-panels-that-open-when-a-command-asks-for-them" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2729,6 +2740,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#results-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results window
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-panels-that-open-when-a-command-asks-for-them" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3025,11 +3047,11 @@ and creating, renaming or deleting one marks the model as modified. New, Open,
 Import and New from Template start with the snapshots of the file, or none.</p>
 <h2 id="the-left-panel">The left panel<a class="headerlink" href="#the-left-panel" title="Permanent link">&para;</a></h2>
 <p>The panel at the left of the window is a stack of tabs. It starts with two, <strong>AI</strong> and <strong>Tables</strong>, and the commands that need more room open <strong>more tabs beside them</strong>, as the rest of this section describes. It opens on <strong>AI</strong>; press
-<strong>Tables</strong> to see the model. Hide or show the whole panel with <strong>View ▸ Tables panel</strong> (<span class="keys"><kbd class="key-f9">F9</kbd></span>) and <strong>View ▸ AI panel</strong> (<span class="keys"><kbd class="key-f10">F10</kbd></span>).</p>
+<strong>Tables</strong> to see the model. Hide or show the whole panel with <strong>View ▸ Tables panel</strong> (<span class="keys"><kbd class="key-f9">F9</kbd></span>) and <strong>View ▸ AI panel</strong> (<span class="keys"><kbd class="key-f10">F10</kbd></span>). The result tables are not in this panel: they have a <a href="#results-tables">window of their own</a>.</p>
 <h3 id="ai">AI<a class="headerlink" href="#ai" title="Permanent link">&para;</a></h3>
 <p><strong>AI</strong> has two tabs of its own, the <a href="assistant.html">Assistant</a> and the <a href="agent.html">Agent</a>. Both are optional: nothing is turned on until you send a message.</p>
 <h3 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h3>
-<p><strong>Tables</strong> holds the tables of the model: where you add, edit and delete what it is made of, and where its results are listed. It has six tabs, and most have sub-tabs, down to three levels:</p>
+<p><strong>Tables</strong> holds the tables of the model: where you add, edit and delete what it is made of. It has four tabs, and most have sub-tabs, down to three levels. The tables of the results are in the <a href="#results-window">Results</a> window:</p>
 <!-- tabs:begin -->
 <ul>
 <li><strong>Properties</strong><ul>
@@ -3089,7 +3111,25 @@ Import and New from Template start with the snapshots of the file, or none.</p>
 </li>
 </ul>
 </li>
-<li><strong>Results</strong><ul>
+<li><strong>Model</strong><ul>
+<li><strong>Cuts</strong></li>
+<li><strong>Fields</strong></li>
+</ul>
+</li>
+</ul>
+<!-- tabs:end -->
+
+<ul>
+<li><strong>Properties</strong>: the project information, the materials, and the sections of bars and of areas.</li>
+<li><strong>Geometry</strong>: the nodes, the bars, the area elements (triangles and quads), the <a href="geometry-objects.html">geometry objects</a> (one table for each kind), the supports, the springs (of nodes and of elements) and the constraints.</li>
+<li><strong>Loads</strong>: the <strong>cases</strong> (load cases, analysis cases, combinations), then the loads by what they act on: <strong>point loads</strong> (and settlements), <strong>bar loads</strong>, <strong>area loads</strong>. The same loads are in the Loads menu.</li>
+<li><strong>Model</strong>: the section <strong>cuts</strong> you have defined and the <strong>fields</strong>.</li>
+</ul>
+<h3 id="results-window">Results window<a class="headerlink" href="#results-window" title="Permanent link">&para;</a></h3>
+<p>The tables of the results are for reading, with many columns and many rows, so they are in a window of their own, not in the left panel. Open it with <strong>View ▸ Results</strong> (<span class="keys"><kbd class="key-f8">F8</kbd></span>); it is not modal, so the canvas keeps working while it is open, and it can go beside the canvas or on another screen. Closing it hides it, and it comes back where it was. It has three tabs (<strong>Results tables</strong>, <strong>Cuts</strong> and <strong>Design tables</strong>), plus the reports you open from its <strong>Reports</strong> menu:</p>
+<!-- tabs:begin -->
+<ul>
+<li><strong>Results tables</strong><ul>
 <li><strong>Displacements</strong></li>
 <li><strong>Reactions</strong></li>
 <li><strong>Constraint forces</strong></li>
@@ -3101,7 +3141,8 @@ Import and New from Template start with the snapshots of the file, or none.</p>
 <li><strong>Info</strong></li>
 </ul>
 </li>
-<li><strong>Design</strong><ul>
+<li><strong>Cuts</strong></li>
+<li><strong>Design tables</strong><ul>
 <li><strong>Concrete</strong><ul>
 <li><strong>Reinforcement</strong></li>
 <li><strong>Shell reinf.</strong></li>
@@ -3116,23 +3157,15 @@ Import and New from Template start with the snapshots of the file, or none.</p>
 <li><strong>Timber</strong></li>
 </ul>
 </li>
-<li><strong>Model</strong><ul>
-<li><strong>Cuts</strong></li>
-<li><strong>Fields</strong></li>
-</ul>
-</li>
 </ul>
 <!-- tabs:end -->
 
 <ul>
-<li><strong>Properties</strong>: the project information, the materials, and the sections of bars and of areas.</li>
-<li><strong>Geometry</strong>: the nodes, the bars, the area elements (triangles and quads), the <a href="geometry-objects.html">geometry objects</a> (one table for each kind), the supports, the springs (of nodes and of elements) and the constraints.</li>
-<li><strong>Loads</strong>: the <strong>cases</strong> (load cases, analysis cases, combinations), then the loads by what they act on: <strong>point loads</strong> (and settlements), <strong>bar loads</strong>, <strong>area loads</strong>. The same loads are in the Loads menu.</li>
-<li><strong>Results</strong>: the tables of the analysis: displacements, reactions, forces of the constraints, forces of the elements, stresses of the panels, modal results, the extremes along each span, the sums of the reactions, and an <em>Info</em> page. See <a href="results.html#the-results-report">Results</a>.</li>
-<li><strong>Design</strong>: the results of the designs. <strong>Concrete</strong> has a tab for each of its designs: the reinforcement of the bars, the shell reinforcement of walls and slabs, the crack width, the columns, the beam bars, the suggested column reinforcement and the punching; <strong>Steel</strong> and <strong>Timber</strong> have one table each.
-  Running a design from the Design menu fills its table. See <a href="design.html">Design</a>.</li>
-<li><strong>Model</strong>: the section <strong>cuts</strong> you have defined and the <strong>fields</strong>.</li>
+<li><strong>Results tables</strong>: the tables of the analysis: displacements, reactions, forces of the constraints, forces of the elements, stresses of the panels, modal results, the extremes along each span, the sums of the reactions, and an <em>Info</em> page. See <a href="results.html#the-results-report">Results</a>.</li>
+<li><strong>Cuts</strong>: the resultant of the forces across a <a href="results.html#cuts">section cut</a>. Pick the <strong>Cut</strong>, the <strong>Case</strong> and the <strong>Plot field</strong>; <strong>Add…</strong> and <strong>Manage…</strong> cuts; the table of <strong>Bars</strong>, <strong>Areas</strong> and <strong>Total</strong>; a plot along the cut; and <strong>CSV (this case)</strong>, <strong>CSV (all cases)</strong> and <strong>Graphics</strong>. <strong>Analysis ▸ Cuts ▸ Results…</strong> brings it to the front. The tab is greyed out while the model has no cuts. It only reads the results, so it works on a locked model.</li>
+<li><strong>Design tables</strong>: the results of the designs. <strong>Concrete</strong> has a tab for each of its designs: the reinforcement of the bars, the shell reinforcement of walls and slabs, the crack width, the columns, the beam bars, the suggested column reinforcement and the punching; <strong>Steel</strong> and <strong>Timber</strong> have one table each. Running a design from the Design menu fills its table. See <a href="design.html">Design</a>.</li>
 </ul>
+<p>The window has a <strong>Reports</strong> menu with the commands that write a document from the results: <strong>Results report…</strong> (the same as <strong>File ▸ Results Report…</strong>: a tab where you choose the format and the content, then <strong>Export…</strong>; it closes with the × of its tab) and <strong>Tables to Excel…</strong> (as in the File menu). The <strong>Design report</strong> (<strong>Design ▸ Design report…</strong>) is not here: it is a tab of the left panel, beside the canvas, because you compose its list from the canvas selection. It composes the step-by-step calculation of the design checks, from the <strong>materials</strong> (which designs), <strong>Summary tables</strong>, <strong>Overview diagrams</strong>, the scope, the <strong>detail</strong> and the <strong>combinations</strong>, with <strong>Preview</strong> and <strong>Export…</strong> in the <strong>format</strong> you choose; see <a href="design-reports.html">Design reports</a>. It only reads the results, so it also works on a locked model.</p>
 <p>The names follow the domain: a bar is a <em>Beam</em> in a plane model and a <em>Grid</em> member in a plate model, an area is a <em>Panel</em> or a <em>Slab</em>. (The list above is written from the application, for a plane model.)</p>
 <h3 id="the-panels-that-open-when-a-command-asks-for-them">The panels that open when a command asks for them<a class="headerlink" href="#the-panels-that-open-when-a-command-asks-for-them" title="Permanent link">&para;</a></h3>
 <p>Some commands open a <strong>panel of their own</strong> in the left panel, as one more tab beside AI and Tables. The tab opens in front, and reopening the command brings it back; it closes with its own <strong>Close</strong> button, which returns you to Tables.
@@ -3149,27 +3182,21 @@ Several can be open at once. They are panels, not windows: the canvas stays in v
 <tbody>
 <tr>
 <td><strong>Support sets</strong></td>
-<td><strong>Analysis ▸ Support Sets…</strong>, or <strong>Edit</strong> in the Variants panel</td>
-<td>named sets of restraints, for variants and for construction phases</td>
-<td>the list of sets (<strong>Add</strong>, <strong>Rename</strong>, <strong>Delete</strong>) and, for the selected one, its <strong>Name</strong> and the table of its supported nodes (a node not listed is free), with <strong>Show</strong> (select them on the canvas), <strong>Add node</strong> (click one on the canvas), <strong>Remove node</strong>, <strong>Load from selection</strong> and <strong>Apply to all</strong>; and, optionally, node springs and element (Winkler) springs</td>
+<td><strong>Analysis ▸ Construction Sequences…</strong> (opens with Sequences)</td>
+<td>named sets of restraints, for the provisional supports of construction phases (<strong>Add</strong> and <strong>Rename</strong> use the name as the set's id)</td>
+<td>the list of sets (<strong>Add</strong>, <strong>Rename</strong>, <strong>Delete</strong>) and, for the selected one, its <strong>Name</strong> and the nodes it changes (a node not listed keeps the base's support; none ticked is no support), with <strong>Show</strong> (select them on the canvas), <strong>Add node</strong> (click one on the canvas), <strong>Remove node</strong>, <strong>Load from selection</strong> and <strong>Apply to all</strong>; in three sub-tabs: <strong>Nodes</strong> (the table of the nodes it changes), <strong>Springs</strong> (node springs and element (Winkler) springs) and <strong>Edges</strong> (the edges of an area object: tick the object, then the degrees of freedom of each edge)</td>
 </tr>
 <tr>
 <td><strong>Variants</strong></td>
 <td><strong>Analysis ▸ Variants…</strong></td>
 <td>parallel what-if scenarios of the model</td>
-<td>the list of variants (<strong>New</strong>, <strong>Rename</strong>, <strong>Delete</strong>), its description, <strong>Support set</strong>, <strong>All elements</strong> or the <strong>Active elements</strong> (<strong>Use selection</strong>, <strong>Remove selection</strong>), <strong>Seed from the base model</strong>, and <strong>Sync with base</strong>, <strong>Save variant</strong>, <strong>Export as .x2d…</strong> and <strong>Variant combinations…</strong></td>
+<td>the list of variants (<strong>New</strong>, <strong>Rename</strong>, <strong>Delete</strong>), its description, its <strong>Supports</strong> against the base (<strong>Reset to base</strong>, <strong>Copy from…</strong>), <strong>All elements</strong> or the <strong>Active elements</strong> (<strong>Use selection</strong>, <strong>Remove selection</strong>), <strong>Seed from the base model</strong>, and <strong>Sync with base</strong>, <strong>Save variant</strong>, <strong>Export as .x2d…</strong> and <strong>Variant combinations…</strong></td>
 </tr>
 <tr>
 <td><strong>Sequences</strong></td>
 <td><strong>Analysis ▸ Construction Sequences…</strong></td>
 <td>construction sequences, phase by phase</td>
 <td>the list of sequences, the <strong>construction stages</strong> (<strong>Stage</strong>, <strong>Assign to</strong> the selected elements, <strong>View all stages</strong>) and the table of <strong>phases</strong> (number, time in days, name), with <strong>Add…</strong>, <strong>Edit…</strong>, <strong>Remove</strong>, <strong>Duplicate</strong>, <strong>Up</strong>, <strong>Down</strong> and <strong>Save sequence</strong></td>
-</tr>
-<tr>
-<td><strong>Cuts</strong></td>
-<td><strong>Analysis ▸ Cuts ▸ Results…</strong></td>
-<td>the resultant of the forces across a section cut</td>
-<td>the <strong>Cut</strong>, the <strong>Case</strong> and the <strong>Plot field</strong>; <strong>Add…</strong> and <strong>Manage…</strong> cuts; the table of <strong>Bars</strong>, <strong>Areas</strong> and <strong>Total</strong>; a plot along the cut; and <strong>CSV (this case)</strong>, <strong>CSV (all cases)</strong> and <strong>Graphics</strong></td>
 </tr>
 <tr>
 <td><strong>Beams</strong></td>
@@ -3195,22 +3222,15 @@ Several can be open at once. They are panels, not windows: the canvas stays in v
 <td>the columns of a slab, for the punching check</td>
 <td>the list of columns (<strong>Add…</strong>, <strong>Edit…</strong>, <strong>Delete</strong>), <strong>Calculate</strong>, <strong>Draw</strong> the control perimeters, <strong>Clear</strong>, and <strong>Show columns on canvas</strong></td>
 </tr>
-<tr>
-<td><strong>Design report</strong></td>
-<td><strong>Design ▸ Design report…</strong></td>
-<td>the step-by-step calculation of the design checks</td>
-<td>the <strong>materials</strong> (which designs), <strong>Summary tables</strong>, <strong>Overview diagrams</strong>, the scope, the <strong>detail</strong>, the <strong>combinations</strong>, the <strong>format</strong>, and <strong>Preview</strong> and <strong>Export…</strong></td>
-</tr>
 </tbody>
 </table>
-<p>Three of them change how the program lets you work:</p>
+<p>Two things change how the program lets you work:</p>
 <ul>
 <li>While <strong>Variants</strong> or <strong>Sequences</strong> is open, the <strong>model is locked for editing</strong>, so that nothing changes under the panel, and the variant selector goes back to the base model. Closing the last of them unlocks it.</li>
 <li><strong>Beams</strong>, <strong>Timber beams</strong> and <strong>Buckling</strong> edit <em>design-only</em> data, which does not change the analysis, so they work on a locked model and keep the results; run the design again to apply what you set.</li>
-<li><strong>Cuts</strong> and <strong>Design report</strong> only read the results, so they also work on a locked model.</li>
 </ul>
 <p>The <strong>Beam bars detailing…</strong> command, and the <strong>Open detailing window…</strong> button of the Beams panel, open the detailing of the bars of each beam in a <strong>window of its own</strong>, not a panel: see <a href="design-concrete-members.html#beam-bars">Concrete: beams and columns</a>.
-What each panel does in detail is on the page of its subject: <a href="variants.html">Variants &amp; construction sequences</a>, <a href="results.html#cuts">Results ▸ Cuts</a>, <a href="design.html">Design</a>, <a href="design-buckling-lengths.html">Buckling lengths</a>,
+What each panel does in detail is on the page of its subject: <a href="variants.html">Variants &amp; construction sequences</a>, <a href="design.html">Design</a>, <a href="design-buckling-lengths.html">Buckling lengths</a>,
 <a href="design-concrete-punching.html">Concrete: punching</a> and <a href="design-reports.html">Design reports</a>.</p>
 <h2 id="the-canvas">The canvas<a class="headerlink" href="#the-canvas" title="Permanent link">&para;</a></h2>
 <table>
@@ -3315,15 +3335,15 @@ current style there).</p>
 colon is a heading inside a menu.</p>
 <!-- menus:begin -->
 <ul>
-<li><strong>File</strong> — New <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-n">N</kbd></span> · New from Template… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-t">T</kbd></span> · Open… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-o">O</kbd></span> · Open recent · Import… · Merge model… · Save <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-s">S</kbd></span> · Save As… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span> · Export… · Export Python… · Script editor… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-e">E</kbd></span> · Write Report… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-w">W</kbd></span> · Write Tables to Excel… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-t">T</kbd></span> · Print Graphics… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-e">E</kbd></span> · Preferences… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-comma">,</kbd></span> · Exit</li>
+<li><strong>File</strong> — New <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-n">N</kbd></span> · New from Template… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-t">T</kbd></span> · Open… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-o">O</kbd></span> · Open recent · Import… · Merge model… · Save <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-s">S</kbd></span> · Save As… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span> · Export… · Export Python… · Script editor… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-e">E</kbd></span> · Results Report… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-w">W</kbd></span> · Tables to Excel… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-t">T</kbd></span> · Print Graphics… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-e">E</kbd></span> · Preferences… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-comma">,</kbd></span> · Exit</li>
 <li><strong>Edit</strong> — Undo <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-z">Z</kbd></span> · Redo <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-y">Y</kbd></span> · Cut <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-x">X</kbd></span> · Copy <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> · Paste <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-v">V</kbd></span> · Delete <span class="keys"><kbd class="key-delete">Del</kbd></span> · Move… · Array… · Rotate… · Scale… · Mirror… · Line to bar · Surface to mesh · Select all <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-a">A</kbd></span></li>
 <li><strong>Structure</strong> — Project Info… · Materials… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-m">M</kbd></span> · Sections ▸ (Bar sections… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-m">M</kbd></span> · Panel sections…) · Spectral Functions… · Fields… · Nodes ▸ (Add node · Add support · Add constraint · Manage Nodes… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-n">N</kbd></span> · Node springs ▸ (Manage… · Add…) · Check Coincident Nodes… · Merge Coincident Nodes… · Select Orphan Nodes) · Bars ▸ (Add bar · Manage bars… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-e">E</kbd></span> · Bar springs ▸ (Manage… · Add…)) · Panels ▸ (Add triangle · Add quad · Manage area elements…) · Objects ▸ (Add segment… · Add arc… · Add multisegment… · Add rectangle… · Add polygon… · Manage objects…) · Supports ▸ (Add support · Manage supports… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-s">S</kbd></span>) · Constraints ▸ (Add constraint · Manage constraints…) · Model check… · Remove invalid references…</li>
 <li><strong>Loads</strong> — Load Cases… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-l">L</kbd></span> · Add Loads Set… · Point loads ▸ (Manage… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span> · Add…) · Distributed loads ▸ (Manage… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-d">D</kbd></span> · Add…) · Area pressure ▸ (Manage… · Add…) · Edge loads ▸ (Manage… · Add…) · Settlements ▸ (Manage… · Add…) · Bar temperature ▸ (Manage… · Add…) · Area temperature ▸ (Manage… · Add…)</li>
-<li><strong>Analysis</strong> — Analysis Cases… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-a">A</kbd></span> · Load Combinations… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-c">C</kbd></span> · Auto Comb. (EN1990)… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-c">C</kbd></span> · Cuts ▸ (Add cut… · Manage cuts… · Results…) · Generate mesh <span class="keys"><kbd class="key-f6">F6</kbd></span> · Model info… · Model check… · Run <span class="keys"><kbd class="key-f5">F5</kbd></span> · Lock <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-l">L</kbd></span> · Support Sets… · Variants… · Construction Sequences…</li>
+<li><strong>Analysis</strong> — Analysis Cases… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-a">A</kbd></span> · Load Combinations… <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-c">C</kbd></span> · Auto Comb. (EN1990)… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-c">C</kbd></span> · Cuts ▸ (Add cut… · Manage cuts… · Results…) · Generate mesh <span class="keys"><kbd class="key-f6">F6</kbd></span> · Model info… · Model check… · Run <span class="keys"><kbd class="key-f5">F5</kbd></span> · Lock <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-l">L</kbd></span> · Variants… · Construction Sequences…</li>
 <li><strong>Design</strong> — Code preferences · Design combinations · <em>General:</em> · Buckling lengths… · Design report… · <em>Concrete:</em> · Concrete members (ULS) · Crack width · Suggest column reinforcement (ULS) · Beam definitions · Beam bars detailing… · Concrete areas (ULS) · Punching… · <em>Steel:</em> · Steel members (ULS) · <em>Timber:</em> · Timber members (ULS) · Special timber beams</li>
 <li><strong>Scene</strong> — Full model · New scene from selection… · Rename scene… · Delete scene · Add selection to scene · Remove selection from scene · Update scene to selection</li>
 <li><strong>Selection</strong> — Select all · Select by… · Find entity… <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-f">F</kbd></span> · Previous selection · Invert selection · Clear selection · Edit selected nodes… · Edit selected bars… · Edit selected area elements… · Edit selected lines… · Edit selected surfaces… · Divide bars… · Divide triangles… · Divide quads… · Delete selection</li>
-<li><strong>View</strong> — View mode ▸ (Structure <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-1">1</kbd></span> · Loads <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-2">2</kbd></span> · Fields · Modal shapes <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-3">3</kbd></span> · Deformed shape <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-4">4</kbd></span> · Displacements · Reactions <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-5">5</kbd></span> · Constraint forces · Force diagrams <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-6">6</kbd></span> · Stresses · Reinforcement (As) <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-9">9</kbd></span> · Shear reinf. (Asw) · Shell reinf. (As) · Crack width (wk) · Steel design · Timber design · Column design) · Theme ▸ (Follow system · Light · Dark) · Display panel · Tables panel <span class="keys"><kbd class="key-f9">F9</kbd></span> · AI panel <span class="keys"><kbd class="key-f10">F10</kbd></span> · Agent tab · Toolbar… ▸ (Add · Edit / Delete · Transform · History (Undo/Redo) · Scene · Variants · Sequences) · Navigate to… ▸ (Supports <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-1">1</kbd></span> · Springs <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-2">2</kbd></span> · Materials <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-3">3</kbd></span> · Sections <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-4">4</kbd></span> · Loads <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-5">5</kbd></span> · Combinations <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-6">6</kbd></span> · Analysis Cases <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-7">7</kbd></span>)</li>
+<li><strong>View</strong> — View mode ▸ (Structure <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-1">1</kbd></span> · Loads <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-2">2</kbd></span> · Fields · Modal shapes <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-3">3</kbd></span> · Deformed shape <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-4">4</kbd></span> · Displacements · Reactions <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-5">5</kbd></span> · Constraint forces · Force diagrams <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-6">6</kbd></span> · Stresses · Reinforcement (As) <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-9">9</kbd></span> · Shear reinf. (Asw) · Shell reinf. (As) · Crack width (wk) · Steel design · Timber design · Column design) · Theme ▸ (Follow system · Light · Dark) · Display panel · Tables panel <span class="keys"><kbd class="key-f9">F9</kbd></span> · Results <span class="keys"><kbd class="key-f8">F8</kbd></span> · AI panel <span class="keys"><kbd class="key-f10">F10</kbd></span> · Agent tab · Toolbar… ▸ (Add · Edit / Delete · Transform · History (Undo/Redo) · Scene · Variants · Sequences) · Navigate to… ▸ (Supports <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-1">1</kbd></span> · Springs <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-2">2</kbd></span> · Materials <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-3">3</kbd></span> · Sections <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-4">4</kbd></span> · Loads <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-5">5</kbd></span> · Combinations <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-6">6</kbd></span> · Analysis Cases <span class="keys"><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-7">7</kbd></span>)</li>
 <li><strong>Help</strong> — Documentation <span class="keys"><kbd class="key-f1">F1</kbd></span> · Keyboard Shortcuts · License Agreement · Third-party Notices · Expiration Date · About</li>
 </ul>
 <!-- menus:end -->

@@ -2744,8 +2744,10 @@ A list is <code>[ {fields} ]</code>, one object per entry, and a map is <code>{ 
                        "beam_stiffness_factor", "column_stiffness_factor", "stored_stiffness_id", "sequence_id",
                        "phase_id", "solved"} ],
   "concrete_materials": [ {"material_name", "concrete_class", "steel_class", "gamma_c", "gamma_s", "alpha_cc"} ],
-  "support_sets": [ {"id", "description", "restraints", "assignments", "node_springs", "element_springs"} ],
-  "variants": [ {"id", "description", "active_elements", "support_set_id", "model"?, "synced_base_sig"?} ],
+  "support_sets": [ {"id", "description", "restraints", "assignments", "node_springs", "element_springs",
+                     "edge_supports"} ],
+  "variants": [ {"id", "description", "active_elements", "base_state"?, "inherit_actions"?, "model"?,
+                 "synced_base_sig"?} ],
   "construction_sequences": [ {"id", "displacement_method", "phases"} ],
   "variant_combinations": { id: {"op", "terms"} }
 }
@@ -2758,11 +2760,11 @@ on a <code>tri_id</code>, a <code>quad_id</code> or an <code>object_id</code>), 
 <h3 id="entries-inside-other-entries">Entries inside other entries<a class="headerlink" href="#entries-inside-other-entries" title="Permanent link">&para;</a></h3>
 <!-- nested:begin -->
 <div class="highlight"><pre><span></span><code>// one phase of a construction sequence (an entry of `phases`)
-{"id", "operations", "active_elements", "applied_cases", "case_factors", "support_set_id", "inherits_from", "reapply_self_weight", "release_supports", "time", "initial_state"}
+{"id", "operations", "active_elements", "applied_cases", "case_factors", "support_set_ids", "inherits_from", "reapply_self_weight", "release_supports", "time", "initial_state"}
 // one operation of a phase (an entry of `operations`)
 {"id", "action", "target", "group_kind", "ids", "factor", "note"}
 // one support set (an entry of `support_sets`)
-{"id", "description", "restraints", "assignments", "node_springs", "element_springs"}
+{"id", "description", "restraints", "assignments", "node_springs", "element_springs", "edge_supports"}
 </code></pre></div>
 <!-- nested:end -->
 

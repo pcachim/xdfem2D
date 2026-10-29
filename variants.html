@@ -1130,6 +1130,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Variants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-a-variant-keeps-of-its-own" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a variant keeps of its own
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2663,6 +2680,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Variants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-a-variant-keeps-of-its-own" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a variant keeps of its own
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2804,9 +2838,11 @@
 
 <h1 id="variants-construction-sequences">Variants &amp; Construction Sequences<a class="headerlink" href="#variants-construction-sequences" title="Permanent link">&para;</a></h1>
 <p>Two related features study a structure under <strong>parallel scenarios</strong> and under a <strong>staged
-construction sequence</strong>. They share the <strong>support sets</strong> and the <strong>scenes</strong>, and each has
-its own side panel, opened from the <strong>Analysis</strong> menu: <strong>Support Sets…</strong>, <strong>Variants…</strong> and
-<strong>Construction Sequences…</strong>. (Variants and sequences also open from buttons in the toolbar.)</p>
+construction sequence</strong>. They share the <strong>scenes</strong>, and each has its own side panel, opened from
+the <strong>Analysis</strong> menu: <strong>Variants…</strong> and <strong>Construction Sequences…</strong>. The sequences open together
+with <strong>Support sets</strong>, the provisional supports of the phases: two tabs that appear and close
+at once (the <strong>Close</strong> button of either closes both). (Variants and sequences also open from
+buttons in the toolbar.)</p>
 <h2 id="which-one-to-use">Which one to use<a class="headerlink" href="#which-one-to-use" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2819,7 +2855,7 @@ its own side panel, opened from the <strong>Analysis</strong> menu: <strong>Supp
 <tbody>
 <tr>
 <td><strong>What it is</strong></td>
-<td>A parallel scenario: the same geometry with a subset of active elements and/or another set of supports</td>
+<td>A parallel scenario: the same geometry with a subset of active elements and/or supports of its own</td>
 <td>A chain of <strong>phases</strong> in time: each phase adds and removes things</td>
 </tr>
 <tr>
@@ -2842,38 +2878,86 @@ its own side panel, opened from the <strong>Analysis</strong> menu: <strong>Supp
 <p>Combining the results of variants with the <strong>same</strong> geometry is exact. Combining variants with
 <strong>different</strong> active geometry is only a comparison (a "what-if"): the mechanically correct way
 to treat added geometry is a construction sequence.</p>
+<p>The two do not mix. A <strong>construction sequence always runs on the base model</strong>: it never sees a
+variant, and a variant's own bars, supports or loads do not reach its phases. A variant, for its
+part, is a plain model: it carries no sequences and no variants of its own (opening a file whose
+variant does is reported). With a variant selected in the toolbar, running does not run the
+sequences: select <strong>BASE</strong> for that. A variant with bars or sections of its own, in a model that
+has sequences, says in its <strong>Differences from the base</strong> box that the sequences ignore it.</p>
 <h2 id="support-sets">Support sets<a class="headerlink" href="#support-sets" title="Permanent link">&para;</a></h2>
-<p>A <strong>support set</strong> is a named, reusable collection of node restraints, for example
-<em>provisional supports</em> used by a variant or by a construction phase. Define them in
-<strong>Analysis ▸ Support Sets…</strong>: a list of sets and, for the selected one, an editor of its
+<p>A <strong>support set</strong> is a named, reusable collection of node restraints, for example the
+<em>provisional supports</em> (props) that a <strong>construction phase</strong> installs. A variant does not use
+them: its supports are its own (see below). Define them in
+the <strong>Support sets</strong> tab, which opens with <strong>Analysis ▸ Construction Sequences…</strong>: a list of sets and, for the selected one, an editor of its
 nodes and the degrees of freedom each restrains (<code>UX</code>, <code>UY</code>, <code>TZ</code> in a plane model, <code>W</code>, <code>θx</code>,
 <code>θy</code> in a plate model). Nodes can be picked on the canvas or loaded from the selection.</p>
-<p>A set <strong>replaces</strong> the base supports when it is applied: it lists <em>all</em> the supported
-nodes of that scenario, and a node that is not listed is free. A set can also carry springs,
-and those replace the base springs the same way.</p>
+<p>A set is known by its <strong>name</strong>, which is also what the phases and their operations call it:
+<strong>Add</strong> takes the name typed in the <em>Name</em> box, and <strong>Rename</strong> changes it, with the phases and
+operations that use the set following. <strong>Delete</strong> takes the set out of the phases that use it and
+removes the operations that named only it.</p>
+<p>A set <strong>changes</strong> the supports of the phase that uses it, on top of the base's: a node it lists
+takes the set's restraints (with none ticked, there is no support at that node), and every
+other node keeps the base's support. So a set of props is just the props, and whatever the base
+does elsewhere still reaches the phase. A set can also carry springs: a node or element it lists
+takes the set's spring, and the others keep the base's. The edges of an <strong>area object</strong> (a
+rectangle or polygon) are in the set's <strong>Edges</strong> tab, because their mesh nodes do not exist
+until the object is meshed: tick <em>This set changes the edges of this object</em> and give each
+edge, in perimeter order, the degrees of freedom it restrains. A ticked object takes those
+edges instead of its own and the others keep theirs. (A phase that takes away an edge support
+needs <code>release_supports</code> off: the reaction of mesh nodes cannot be released yet.) A set that lists a node the model does
+not have is reported by <strong>Model check</strong> and when the phase is solved.</p>
 <h2 id="variants">Variants<a class="headerlink" href="#variants" title="Permanent link">&para;</a></h2>
 <p>A <strong>variant</strong> is a what-if overlay on the working model: the same shared geometry, with a
-chosen subset of <strong>active elements</strong> and an optional <strong>support set</strong>. The base model is never
-changed; each variant is resolved into a derived structure only when it is solved.</p>
+chosen subset of <strong>active elements</strong>, and <strong>supports of its own</strong>. The base model is never
+changed; a variant is a model of its own that stays in step with the base.</p>
 <p>Open <strong>Analysis ▸ Variants…</strong>. The panel lists the variants (<strong>New</strong>, <strong>Rename</strong>, <strong>Delete</strong>)
 and, for the selected one:</p>
 <ul>
 <li>a <strong>Description</strong>;</li>
-<li>the <strong>Support set</strong> to apply, with an <strong>Edit</strong> button that opens the Support Sets panel;</li>
+<li>its <strong>Supports</strong>: how they differ from the base's (<em>Same as the base</em>, or the nodes that
+  differ), with <strong>Reset to base</strong> and <strong>Copy from…</strong> (the base or another variant);</li>
 <li><strong>All elements</strong>: the variant keeps the full geometry and follows any change of the base
   model automatically. With it off, the <strong>Active elements</strong> list says which elements the variant
-  has: <strong>Use selection</strong> and <strong>Remove selection</strong> take them from what is selected on the canvas.
-  Selecting a variant draws its active elements in red;</li>
+  has, and it lists the bars, triangles, quads and area objects: <strong>Use selection</strong> and <strong>Remove
+  selection</strong> take them from what is selected on the canvas. Selecting a variant draws its active
+  elements in red. An area is in the variant only if it is selected in the list;</li>
 <li><strong>Seed from the base model</strong>: on a new variant, copy all the loads, load cases, analysis cases
-  and combinations of the base, so the variant has an action model of its own. Off, it starts
-  clean. A variant that has none inherits the base model's.</li>
+  and combinations of the base, so the variant has an action model of its own. The base's later
+  changes to them reach the variant wherever it has not changed the same thing (see below). Off,
+  it starts clean, and the base's loads and cases never reach it. A variant that has none
+  inherits the base model's.</li>
 </ul>
 <p><strong>Save variant</strong> stores the changes. <strong>Sync with base</strong> reconciles the variant with the current
 base model and shows what changed (a sync also runs when you select a variant or press Run).
 <strong>Export as .x2d…</strong> writes the variant's model as a file of its own.</p>
 <p>Once variants exist, a <strong>variant selector</strong> appears in the toolbar (the base model and each variant).
 Picking one shows its model and results in the normal editors and views. To edit a variant's
-own loads, save it and then switch to it in the selector.</p>
+own loads, bars <strong>or supports</strong>, save it and then switch to it in the selector: they are edited like
+those of any model, with the support tools on the canvas or the Supports table. The selector
+stays usable with the Variants panel open, and the panel follows it. While a variant is on the
+canvas you can edit it; the base is locked against edits from elsewhere (and <strong>Use selection</strong> /
+<strong>Remove selection</strong>, which read the base off the canvas, are available) only while <strong>BASE</strong> is
+shown.</p>
+<h3 id="what-a-variant-keeps-of-its-own">What a variant keeps of its own<a class="headerlink" href="#what-a-variant-keeps-of-its-own" title="Permanent link">&para;</a></h3>
+<p>A variant is a model of its own that starts as a copy of the base. From then on, what you change
+on it <strong>stays</strong>, and what the base changes <strong>reaches</strong> whatever you did not change: a sync, which
+also runs when you select the variant or press Run, compares the base now with the base at the
+last sync and with the variant, item by item. This holds for the <strong>supports and springs</strong>, the
+<strong>nodes</strong> (coordinates), the <strong>bars</strong> (hinges, section, end nodes…, field by field), the
+<strong>sections and materials</strong>, the <strong>triangles, quads and area objects</strong> (their nodes, section, size
+and edge modes, field by field; an object is meshed when the variant is solved, on the variant's
+own model), and the <strong>load cases, analysis cases, combinations and loads</strong> (a load
+is compared as a group: what it acts on, in a given case). When both changed the same thing, the
+variant's value stays, and the <strong>Differences from the base</strong> box says so.</p>
+<p>A variant can have bars, areas and objects the base does not have. The ids of what is created on
+the base or on any variant are chosen so that no two differ in the whole file; if an id typed by
+hand or in an older file names two different things in the base and in a variant, the <strong>Differences
+from the base</strong> box says so, opening the file warns, and the variant keeps its own. <strong>Sync with
+base</strong> (the explicit one) removes what the variant has and the base does not.</p>
+<p>So a hinge you add to a bar of a variant is still there after the base is edited, and a load case
+the base gains afterwards appears in the variants that follow its actions. <strong>Reset supports</strong>
+discards the variant's own supports and springs, which then follow the base again; <strong>Copy supports
+from…</strong> gives it those of the base or of another variant.</p>
 <p><strong>Variant combinations…</strong> opens a window that combines the results of several variants with the same
 arithmetic as a load combination: a list of <em>variant × case × factor</em> terms and an operation
 (<strong>LinearSum</strong>, <strong>Envelope</strong>, <strong>AbsSum</strong> or <strong>SRSS</strong>).</p>
@@ -2913,7 +2997,7 @@ of the phase's <strong>Operations</strong> table, with these columns:</p>
 </tr>
 <tr>
 <td><strong>What</strong></td>
-<td><strong>Elements</strong> (a whole group), <strong>Supports</strong> (a whole support set, restraints and springs) or <strong>Loads</strong> (a whole load case).</td>
+<td><strong>Elements</strong> (a whole group), <strong>Supports</strong> (a support set: its restraints and springs) or <strong>Loads</strong> (a whole load case).</td>
 </tr>
 <tr>
 <td><strong>From</strong>, <strong>Group</strong></td>
@@ -2946,10 +3030,16 @@ between the <strong>increment</strong> of the selected phase (Δu) and the <stro
 It does not change what is solved, but the choice is kept with the sequence: it survives saving, opening and
 the Python export.</p>
 <h3 id="supports-and-release">Supports and release<a class="headerlink" href="#supports-and-release" title="Permanent link">&para;</a></h3>
-<p>A phase can apply a <strong>support set</strong> to install provisional supports such as props or shores. When a later
-phase removes that support set, the accumulated reaction is converted into an equivalent load on the rest of
-the structure, so the redistribution is captured. Clear <strong>Release</strong> on the operation to drop the reaction
-without redistributing it.</p>
+<p>A phase can apply a <strong>support set</strong> to install provisional supports such as props or shores. A phase
+can have <strong>several</strong> in force: each <em>Add</em> puts one more after the ones already there, and each changes the
+supports on top of the base's and of the earlier ones (where two list the same node, the later wins). A
+<em>Remove</em> takes out the set it names, and only that one. When a set is removed, its accumulated reaction is
+converted into an equivalent load on the rest of the structure, so the redistribution is captured. Clear
+<strong>Release</strong> on the operation to drop the reaction without redistributing it.</p>
+<p>Deleting a support set takes it out of the phases that use it, and removes the operations that named only
+it. <strong>Model check</strong> reports a phase operation that names a set which no longer exists.</p>
+<p>Selecting a phase in the panel confines the canvas to the elements built by then, and draws the <strong>supports in
+force</strong> in that phase: the base's, changed by the sets it has on.</p>
 <p>The same holds for a removed <strong>bar</strong>: its locked-in end forces are released onto the remaining structure.
 Removing a <strong>triangle</strong> or <strong>quad</strong> (a wall or a slab element), or a geometry object, does <em>not</em> redistribute
 what it carried: only its carried state is dropped, so the rest of the structure under-reports until that is

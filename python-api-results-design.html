@@ -2898,8 +2898,7 @@ the by-id/by-name primitives (used by the application); the <code>delete_*</code
 add_variant(variant) -&gt; object
 add_construction_sequence(sequence) -&gt; object
     # also keeps its analysis case of type 'Sequence'
-derive_variant(
-    variant, support_sets: Optional[dict] = None, filter_tri: bool = False) -&gt; Structure2D
+derive_variant(variant, support_set=None, filter_tri: bool = False) -&gt; Structure2D
     # a new model for the variant; the original is untouched
 with_active(active_elements) -&gt; Structure2D
     # a copy with only those elements active

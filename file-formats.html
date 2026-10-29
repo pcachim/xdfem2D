@@ -2354,6 +2354,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label=".x2d — native format (recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2580,6 +2597,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label=".x2d — native format (recommended)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Format versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2692,6 +2726,10 @@
 </thead>
 <tbody>
 <tr>
+<td><code>manifest.json</code></td>
+<td>the format version (<code>format_version</code>, a whole number), the version of the program that wrote the file and the list of entries. It is the first entry</td>
+</tr>
+<tr>
 <td><code>structure.json</code></td>
 <td>the model: nodes, elements, materials, sections, supports, springs, constraints, loads, load cases, analysis cases, combinations, spectral functions, nodal masses, geometry objects, cuts, punching columns, beams. Key by key on <a href="json-format.html">JSON data structure</a></td>
 </tr>
@@ -2731,6 +2769,20 @@
 </table>
 <p>This is the default for <strong>Save</strong> / <strong>Open</strong> and preserves everything, including the
 view state.</p>
+<h3 id="format-versions">Format versions<a class="headerlink" href="#format-versions" title="Permanent link">&para;</a></h3>
+<p>The format has a <strong>version</strong>, in <code>manifest.json</code>. The program reads its own version and every older
+one: a file of an older version is converted when it opens (the status bar says so, the file on
+disk stays as it was, and the next <strong>Save</strong> writes the current version). A file without a manifest
+was written before versions existed and is version 1. A file of a <strong>newer</strong> version than the
+program knows is not opened: the message gives its version and the one that wrote it, and asks you
+to update xdfem2D. There is no way to save in an older version; to give a model to someone with an
+older program, export the plain <code>.json</code>.</p>
+<p>The version goes up only when a change would make the new file unreadable as it is for the old
+one (a name, a structure or a meaning changed). A field that is only added, with a default that
+means what the old file meant, does not need one. When a conversion changes the model, the results
+stored in the file no longer describe it and are not loaded.</p>
+<p>Saving the same model twice gives the same file, so a <code>.x2d</code> kept under version control shows only
+what changed.</p>
 <h2 id="json-structure-only"><code>.json</code> — structure only<a class="headerlink" href="#json-structure-only" title="Permanent link">&para;</a></h2>
 <p>A plain JSON export of the model (no results, no view state). Useful for
 interchange and version control. Its contents, key by key, are on
@@ -2739,8 +2791,8 @@ interchange and version control. Its contents, key by key, are on
 <p>When an older model that stored <strong>load-case factors directly in combinations</strong> is
 opened, xdfem2D folds each such factor into a Linear analysis case and rewrites the
 combination to reference that analysis case. This keeps the
-<a href="analysis.html">three-tier model</a> consistent and is applied automatically on load and
-before solving.</p>
+<a href="analysis.html">three-tier model</a> consistent. It runs whenever a model is read from
+data (a <code>.x2d</code>, a <code>.json</code> or an imported SAP2000 file), whatever the format version.</p>
 <h2 id="units">Units<a class="headerlink" href="#units" title="Permanent link">&para;</a></h2>
 <p>All files use the program's units throughout: <strong>kN · m · kNm</strong> (and <strong>t</strong> for mass).</p>
 

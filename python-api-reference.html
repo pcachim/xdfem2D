@@ -3285,6 +3285,8 @@ rename_quad_section(old: str, new: str)
     # The quad counterpart of :meth:`rename_tri_section` (added dev/IMPLEMENT_QUAD.md Phase 8, GUI item 2 — the QuadSection manager panel mirrors TriSectionPanel's rename-on-name-change edit flow, and that flow needs this to exist).
 rename_section(old: str, new: str)
     # Rename a bar section, and every bar / line object that uses it.
+rename_support_set(old: str, new: str)
+    # Give a support set another id; the phases and operations that use it follow.
 rename_tri_element(old_id: str, new_id: str)
     # Rename a CST triangle, carrying its temperature/edge loads along — the triangle counterpart of :meth:`rename_bar_element`.
 rename_tri_section(old: str, new: str)
@@ -3302,7 +3304,9 @@ delete_temperature(target: str, load_case_id: str = '')
     # Remove temperature loads on *target* — the inverse of :meth:`create_temperature` (and the ``add_*_temperature_load`` family).
 </code></pre></div>
 <h2 id="everything-else">Everything else<a class="headerlink" href="#everything-else" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>area_element_by_id(eid: str)
+<div class="highlight"><pre><span></span><code>apply_support_set(support_set) -&gt; None
+    # Change the supports and springs by *support_set*, on top of the ones there are: a node the set lists takes its restraint (none ticked: no support), the others keep theirs.
+area_element_by_id(eid: str)
     # The tri or quad element with id *eid*, or ``None``.
 area_element_ids() -&gt; list[str]
     # Ids of every area element (triangles then quads).
@@ -3320,8 +3324,7 @@ check_references()
     # Raise ``ValueError`` if the model carries any dangling reference.
 clear_beam(bar_ids=(), object_ids=())
     # Remove the beam tag from *bar_ids* / line objects *object_ids* (they become auto-detected).
-derive_variant(
-    variant, support_sets: Optional[dict] = None, filter_tri: bool = False) -&gt; Structure2D
+derive_variant(variant, support_set=None, filter_tri: bool = False) -&gt; Structure2D
     # Return a NEW Structure2D representing *variant* — a pure transform.
 domain_problems() -&gt; list[str]
     # Features the model uses that its analysis domain ('plane' or 'plate') does not support.
@@ -3403,38 +3406,54 @@ used_spectral_function_names() -&gt; set
     # Names of spectral functions referenced by a Spectrum analysis case.
 validate_combination_coefficients(coefficients: dict[str, float], combo=None)
     # Validate a combination's coefficients.
+variant_nesting_problems() -&gt; list[str]
+    # Variants whose own model carries sequences or variants.
 with_active(active_elements) -&gt; Structure2D
     # Sugar: derive a variant that only restricts the active geometry.
 with_supports(support_set) -&gt; Structure2D
-    # Sugar: derive a variant that only swaps the supports.
+    # Sugar: derive a structure that only swaps the supports.
 </code></pre></div>
 <h2 id="functions-of-the-other-modules">Functions of the other modules<a class="headerlink" href="#functions-of-the-other-modules" title="Permanent link">&para;</a></h2>
 <p>These are plain functions, not methods of <code>Structure2D</code>; <code>struc</code> is the model.</p>
 <h3 id="xdfem2dworkflows"><code>xdfem2d.workflows</code><a class="headerlink" href="#xdfem2dworkflows" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>apply_variant_config(
-    base, model, active_elements=None, support_set=None, restore_loads=True, prune=True,
-    restore_base_supports=True)
-    # Reconcile an existing variant *model* with the base and a config, **preserving the variant's own loads/cases/combinations** on surviving elements.
+    base, model, active_elements=None, restore_loads=True, prune=True, old_state=None,
+    actions=True)
+    # Reconcile an existing variant *model* with the base and a config, **preserving the variant's own loads/cases/combinations and supports**.
+area_selection(base, active_elements)
+    # Which areas a variant's ``active_elements`` keep, as ``(tris, quads, objects)`` sets of ids, or ``None`` for all of them (no set: the variant follows the whole base).
 assign_stage(struc, element_ids, stage: int) -&gt; int
     # Set the construction stage of the given elements (bars, triangles or quads).
 available_combinations(struc, results) -&gt; list
     # The combination ids a design can use: the model's load combinations, then any that only the results carry (envelopes), in that order.
+base_state(struc) -&gt; dict
+    # What a variant has to compare against the base: the supports and springs of *struc*, and its nodes, bars, sections and materials, as plain comparable data::
 combination_validity(struc, variant_ids, op) -&gt; dict
     # Report whether *op* is valid for the given variants (for UI warnings).
+copy_variant_supports(variant, source) -&gt; None
+    # Give the variant the supports and springs of *source* (a Structure2D: the base, or another variant's model).
 current_restraints(struc) -&gt; dict
     # Return the structure's current supports as ``{node_id: (ux, uy, tz)}``.
 extend_base_with_file(base, other, **kw)
     # Extend *base* with a model from *other* (path or Structure2D).
 import_file_as_variant(struc, other, overlay_id: str, **kw)
-    # Import *other* (path or Structure2D) into a COPY of struc, registering the resulting variant and support set.
+    # Import *other* (path or Structure2D) into a COPY of struc, registering the resulting variant (its supports are the imported model's).
 list_overlays(struc) -&gt; dict
     # Summarise the registered overlays for a UI list.
 make_variant_model(base, inherit: bool = True, active_elements=None, support_set=None)
-    # Build a variant's authoritative model — a Structure2D that already reflects the variant's **geometry** (only ``active_elements``) and **supports** (``support_set``), plus its loads/cases/combinations.
+    # Build a variant's authoritative model — a Structure2D that already reflects the variant's **geometry** (only ``active_elements``) and its supports, plus its loads/cases/combinations.
+merge_supports(base, model, old_state, actions: bool = True)
+    # Bring what the base changed since *old_state* to the variant *model*, wherever the variant has not changed the same thing: its supports and springs, its nodes, bars, sections and materials (field by field) and, with *actions*, its load case
+new_variant(
+    base, id: str, description: str = '', active_elements=None, inherit: bool = True,
+    support_set=None) -&gt; Variant
+    # A ready variant: its model, and the record of the base's supports it was made from (so a later sync can tell what the user changed).
 phases_from_scenes(scenes, valid_elem_ids, cumulative: bool = True) -&gt; list
     # Generate ConstructionPhases from an ordered list of scenes.
 phases_from_stages(struc, cases_by_stage: dict = None) -&gt; list
     # Generate ConstructionPhases from the elements' ``stage`` attribute (bars and area elements — triangles and quads — alike).
+reset_variant_supports(base, variant) -&gt; None
+    # Discard the variant's own supports and springs: they become the base's, and follow it again.
 run_analysis(struc, scope: str = 'active', results: dict = None) -&gt; AnalysisOutcome
     # Run *struc* to completion, with no dialogs: the headless counterpart of the GUI's Run.
 run_design(
@@ -3455,13 +3474,14 @@ stage_numbers(struc) -&gt; list
     # The sorted list of stage numbers present in the model (bars + area elements: triangles and quads).
 sync_all_variants(base) -&gt; dict
     # Sync every registered variant.
-sync_variant_with_base(
-    base, variant, support_sets=None, force: bool = False, destructive: bool = False) -&gt; bool
+sync_variant_with_base(base, variant, force: bool = False, destructive: bool = False) -&gt; bool
     # Reconcile *variant.model* with the current base (see :func:`apply_variant_config`).
 validate_for_analysis(struc) -&gt; list
     # What stops *struc* from being analysed, as ``[{'code', 'msg'}, ...]`` (empty when it can run), in the order the GUI reports them.
-variant_base_diff(base, variant, support_sets=None) -&gt; dict
+variant_base_diff(base, variant) -&gt; dict
     # What a sync would change on *variant.model* — pure, no mutation.
+variant_id_collisions(base, variant) -&gt; list
+    # Ids the variant's own model gave to a node, bar, triangle, quad or geometry object of its own that the base has since used for another one (``[(kind, id), ...]``).
 vertical_support_nodes(struc) -&gt; list
     # Node ids whose transverse deflection is restrained: the nodes a punching column can sit on.
 </code></pre></div>
@@ -3578,8 +3598,8 @@ write_markdown_bundle(
     # Apply an imposed axial strain *eps* to elements (shrinkage / creep proxy).
 initial_state_from_results(results: dict, case_id: str, element_ids=None) -&gt; dict
     # Build ``{elem_id: ElementInitialState}`` from a solved result's ``element_forces`` for a given load case / analysis case / combination.
-resolve_phase_state(prev_active, prev_support_set_id, operations, all_ids, struc=None)
-    # Replay one phase's ``operations`` on top of the previous phase's *resolved* state and return the phase's own resolved ``(active_elements, support_set_id, applied_cases, case_factors)``.
+resolve_phase_state(prev_active, prev_support_set_ids, operations, all_ids, struc=None)
+    # Replay one phase's ``operations`` on top of the previous phase's *resolved* state and return the phase's own resolved ``(active_elements, support_set_ids, applied_cases, case_factors)``.
 solve_phase(
     base, phase, support_sets=None, _sub=None, tri_initial_state: dict | None = None) -&gt; dict
     # Solve one construction phase and return a result dict.

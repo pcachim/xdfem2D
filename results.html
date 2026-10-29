@@ -3016,7 +3016,7 @@ add/edit/delete. Cuts are drawn on the canvas as a plain segment with its name
 and a short arrow along the normal — the side the arrow points to is the
 <strong>positive side</strong>: results are reported as what the positive side exerts on
 the negative side.</p>
-<p><strong>Analysis → Cuts → Results…</strong> opens the results side panel: pick a cut and a
+<p><strong>Analysis → Cuts → Results…</strong> opens the <strong>Cuts</strong> tab of the <a href="interface.html#results-window">Results</a> window: pick a cut and a
 case/combination, and a table shows the resultant in three rows — <strong>Bars</strong>,
 <strong>Areas</strong>, <strong>Total</strong> — with columns <code>N, V, M</code> for a plane cut (axial along the
 cut's normal, shear along its tangent, in-plane moment about the cut's
@@ -3034,7 +3034,7 @@ contributions per unit length. Bars and areas are always computed separately and
 <p>If you are scripting against a model instead of using the application, the cuts are in
 <a href="python-api-results-design.html#section-cuts">Python API: results and design</a> (<code>xdfem2d.cuts.cut_result</code> and friends).</p>
 <h2 id="the-results-report">The Results report<a class="headerlink" href="#the-results-report" title="Permanent link">&para;</a></h2>
-<p>The <strong>Results</strong> tab (Analysis → Results) prints a full text report:</p>
+<p>The <strong>Info</strong> page of the <strong>Results tables</strong> tab, in the <a href="interface.html#results-window">Results</a> window (<strong>View ▸ Results</strong>, <span class="keys"><kbd class="key-f8">F8</kbd></span>), prints a full text report:</p>
 <ul>
 <li>per load case, combination and analysis case: displacements, reactions
   (with a Σ row), and element end-forces;</li>
@@ -3044,9 +3044,9 @@ contributions per unit length. Bars and areas are always computed separately and
 </ul>
 <h2 id="exports">Exports<a class="headerlink" href="#exports" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Write Report…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-w">W</kbd></span>) — a PDF, Word, or Excel report; pick the
+<li><strong>Results Report…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-w">W</kbd></span>) — a PDF, Word, or Excel report; pick the
   format and the content (tables, drawings, result views per case).</li>
-<li><strong>Write Tables to Excel…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-t">T</kbd></span>) — one-click workbook of the model
+<li><strong>Tables to Excel…</strong> (<span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-t">T</kbd></span>) — one-click workbook of the model
   and result tables (Displacements, Reactions, Constraint forces, Element forces,
   Span extremes, Reaction sums, Modal). The Constraint-forces sheet appears only
   when the model has constraints.</li>
