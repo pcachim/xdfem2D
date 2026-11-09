@@ -1,0 +1,735 @@
+{
+  "nodes": [
+    {
+      "id": "N0_0",
+      "x": 0.0,
+      "y": 0.0
+    },
+    {
+      "id": "N1_0",
+      "x": 5.0,
+      "y": 0.0
+    },
+    {
+      "id": "N2_0",
+      "x": 10.0,
+      "y": 0.0
+    },
+    {
+      "id": "N0_1",
+      "x": 0.0,
+      "y": 3.0
+    },
+    {
+      "id": "N1_1",
+      "x": 5.0,
+      "y": 3.0
+    },
+    {
+      "id": "N2_1",
+      "x": 10.0,
+      "y": 3.0
+    },
+    {
+      "id": "N0_2",
+      "x": 0.0,
+      "y": 6.0
+    },
+    {
+      "id": "N1_2",
+      "x": 5.0,
+      "y": 6.0
+    },
+    {
+      "id": "N2_2",
+      "x": 10.0,
+      "y": 6.0
+    }
+  ],
+  "materials": [
+    {
+      "name": "C30",
+      "elastic_modulus": 33000000.0,
+      "unit_weight": 25.0,
+      "alpha": 1e-05,
+      "unit_mass": null
+    }
+  ],
+  "sections": [
+    {
+      "name": "Beam",
+      "material_name": "C30",
+      "b": 0.3,
+      "h": 0.5,
+      "area_override": null,
+      "inertia_override": null,
+      "profile_name": null,
+      "section_type": "Other"
+    },
+    {
+      "name": "Col",
+      "material_name": "C30",
+      "b": 0.4,
+      "h": 0.4,
+      "area_override": null,
+      "inertia_override": null,
+      "profile_name": null,
+      "section_type": "Other"
+    }
+  ],
+  "bar_elements": [
+    {
+      "id": "C0_0",
+      "node_i": "N0_0",
+      "node_j": "N0_1",
+      "section_name": "Col",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "C1_0",
+      "node_i": "N1_0",
+      "node_j": "N1_1",
+      "section_name": "Col",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "C2_0",
+      "node_i": "N2_0",
+      "node_j": "N2_1",
+      "section_name": "Col",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "C0_1",
+      "node_i": "N0_1",
+      "node_j": "N0_2",
+      "section_name": "Col",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "C1_1",
+      "node_i": "N1_1",
+      "node_j": "N1_2",
+      "section_name": "Col",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "C2_1",
+      "node_i": "N2_1",
+      "node_j": "N2_2",
+      "section_name": "Col",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "B0_1",
+      "node_i": "N0_1",
+      "node_j": "N1_1",
+      "section_name": "Beam",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "B1_1",
+      "node_i": "N1_1",
+      "node_j": "N2_1",
+      "section_name": "Beam",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "B0_2",
+      "node_i": "N0_2",
+      "node_j": "N1_2",
+      "section_name": "Beam",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    },
+    {
+      "id": "B1_2",
+      "node_i": "N1_2",
+      "node_j": "N2_2",
+      "section_name": "Beam",
+      "hinge_i": false,
+      "hinge_j": false,
+      "rc_design": false,
+      "rc_cover": 0.025,
+      "rc_cotg_theta": 1.0,
+      "rc_alpha_s": 90.0
+    }
+  ],
+  "supports": [
+    {
+      "name": "Fixed",
+      "ux": true,
+      "uy": true,
+      "tz": true
+    }
+  ],
+  "support_assignments": [
+    {
+      "node_id": "N0_0",
+      "support_name": "Fixed"
+    },
+    {
+      "node_id": "N1_0",
+      "support_name": "Fixed"
+    },
+    {
+      "node_id": "N2_0",
+      "support_name": "Fixed"
+    }
+  ],
+  "node_springs": [],
+  "element_springs": [],
+  "load_cases": [
+    {
+      "id": "DEAD",
+      "self_weight_factor": 1.0,
+      "action_type": "G \u2013 Permanent"
+    },
+    {
+      "id": "LIVE",
+      "self_weight_factor": 0.0,
+      "action_type": "Q \u2013 Live"
+    },
+    {
+      "id": "WIND",
+      "self_weight_factor": 0.0,
+      "action_type": "W \u2013 Wind"
+    },
+    {
+      "id": "QUAKE",
+      "self_weight_factor": 0.0,
+      "action_type": "E \u2013 Seismic"
+    },
+    {
+      "id": "THERMAL",
+      "self_weight_factor": 0.0,
+      "action_type": "T \u2013 Temperature"
+    }
+  ],
+  "point_loads": [
+    {
+      "node_id": "N0_1",
+      "load_case_id": "WIND",
+      "fx": 8.0,
+      "fy": 0.0,
+      "mz": 0.0
+    },
+    {
+      "node_id": "N0_2",
+      "load_case_id": "WIND",
+      "fx": 16.0,
+      "fy": 0.0,
+      "mz": 0.0
+    },
+    {
+      "node_id": "N0_2",
+      "load_case_id": "QUAKE",
+      "fx": 12.0,
+      "fy": 0.0,
+      "mz": 0.0
+    },
+    {
+      "node_id": "N1_2",
+      "load_case_id": "QUAKE",
+      "fx": 12.0,
+      "fy": 0.0,
+      "mz": 0.0
+    },
+    {
+      "node_id": "N2_2",
+      "load_case_id": "QUAKE",
+      "fx": 12.0,
+      "fy": 0.0,
+      "mz": 0.0
+    }
+  ],
+  "distributed_loads": [
+    {
+      "element_id": "B0_1",
+      "load_case_id": "DEAD",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -10.0,
+      "fyd": -10.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B1_1",
+      "load_case_id": "DEAD",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -10.0,
+      "fyd": -10.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B0_2",
+      "load_case_id": "DEAD",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -10.0,
+      "fyd": -10.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B1_2",
+      "load_case_id": "DEAD",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -10.0,
+      "fyd": -10.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B0_1",
+      "load_case_id": "LIVE",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -15.0,
+      "fyd": -15.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B1_1",
+      "load_case_id": "LIVE",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -15.0,
+      "fyd": -15.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B0_2",
+      "load_case_id": "LIVE",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -15.0,
+      "fyd": -15.0,
+      "coord_sys": "global"
+    },
+    {
+      "element_id": "B1_2",
+      "load_case_id": "LIVE",
+      "fxe": 0.0,
+      "fxd": 0.0,
+      "fye": -15.0,
+      "fyd": -15.0,
+      "coord_sys": "global"
+    }
+  ],
+  "load_combinations": [
+    {
+      "id": "ULS_STR",
+      "combo_type": "SomaLinear",
+      "coefficients": {},
+      "analysis_coefficients": {
+        "DEAD": 1.35,
+        "LIVE": 1.5,
+        "LIN_WIND": 0.9
+      }
+    },
+    {
+      "id": "ENV_SLS",
+      "combo_type": "Envolvente",
+      "coefficients": {},
+      "analysis_coefficients": {
+        "DEAD": 1.0,
+        "LIVE": 1.0,
+        "LIN_WIND": 1.0
+      }
+    },
+    {
+      "id": "ABS_SUM",
+      "combo_type": "SomaModulo",
+      "coefficients": {},
+      "analysis_coefficients": {
+        "DEAD": 1.0,
+        "QUAKE": 1.0
+      }
+    },
+    {
+      "id": "SRSS_SEIS",
+      "combo_type": "RaizSoma",
+      "coefficients": {},
+      "analysis_coefficients": {
+        "SPECTRUM": 1.0,
+        "QUAKE": 1.0,
+        "LIN_WIND": 1.0
+      }
+    }
+  ],
+  "support_settlements": [
+    {
+      "node_id": "N1_0",
+      "load_case_id": "DEAD",
+      "ux": 0.0,
+      "uy": -0.005,
+      "tz": 0.0
+    }
+  ],
+  "temperature_loads": [
+    {
+      "element_id": "B0_2",
+      "load_case_id": "THERMAL",
+      "delta_t_uniform": 20.0,
+      "delta_t_gradient": 10.0
+    },
+    {
+      "element_id": "B1_2",
+      "load_case_id": "THERMAL",
+      "delta_t_uniform": 20.0,
+      "delta_t_gradient": 10.0
+    }
+  ],
+  "spectral_functions": [
+    {
+      "id": "RS_EC8",
+      "description": "Demo EC8-like spectrum",
+      "damping": 0.05,
+      "points": [
+        [
+          0.0,
+          2.5
+        ],
+        [
+          0.15,
+          6.25
+        ],
+        [
+          0.5,
+          6.25
+        ],
+        [
+          1.0,
+          3.13
+        ],
+        [
+          2.0,
+          1.56
+        ],
+        [
+          4.0,
+          0.78
+        ]
+      ]
+    }
+  ],
+  "nodal_masses": [
+    {
+      "node_id": "N0_1",
+      "mass_case_id": "MASS",
+      "mx": 5.0,
+      "my": 5.0,
+      "mtz": 0.0
+    },
+    {
+      "node_id": "N1_1",
+      "mass_case_id": "MASS",
+      "mx": 5.0,
+      "my": 5.0,
+      "mtz": 0.0
+    },
+    {
+      "node_id": "N2_1",
+      "mass_case_id": "MASS",
+      "mx": 5.0,
+      "my": 5.0,
+      "mtz": 0.0
+    },
+    {
+      "node_id": "N0_2",
+      "mass_case_id": "MASS",
+      "mx": 5.0,
+      "my": 5.0,
+      "mtz": 0.0
+    },
+    {
+      "node_id": "N1_2",
+      "mass_case_id": "MASS",
+      "mx": 5.0,
+      "my": 5.0,
+      "mtz": 0.0
+    },
+    {
+      "node_id": "N2_2",
+      "mass_case_id": "MASS",
+      "mx": 5.0,
+      "my": 5.0,
+      "mtz": 0.0
+    }
+  ],
+  "analysis_cases": [
+    {
+      "id": "LIN_ULS",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "DEAD": 1.35,
+        "LIVE": 1.5
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "LIN_WIND",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "WIND": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "MASS",
+      "analysis_type": "Mass",
+      "coefficients": {
+        "DEAD": 1.0,
+        "LIVE": 0.3
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "MODAL",
+      "analysis_type": "Modal",
+      "coefficients": {},
+      "num_modes": 6,
+      "modal_case_id": "MASS",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "SPECTRUM",
+      "analysis_type": "Spectrum",
+      "coefficients": {},
+      "num_modes": 10,
+      "modal_case_id": "MODAL",
+      "spectrum_id": "RS_EC8",
+      "combination_rule": "CQC",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "PDELTA",
+      "analysis_type": "GeometricNonlinear",
+      "coefficients": {
+        "DEAD": 1.0,
+        "LIVE": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 50,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "LIN_PD",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "WIND": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": "PDELTA"
+    },
+    {
+      "id": "DEAD",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "DEAD": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "LIVE",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "LIVE": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "WIND",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "WIND": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "QUAKE",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "QUAKE": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    },
+    {
+      "id": "THERMAL",
+      "analysis_type": "Linear",
+      "coefficients": {
+        "THERMAL": 1.0
+      },
+      "num_modes": 10,
+      "modal_case_id": "",
+      "spectrum_id": "",
+      "combination_rule": "SRSS",
+      "direction": "XY",
+      "damping": 0.05,
+      "nl_method": "P-Delta",
+      "max_iterations": 100,
+      "tolerance": 1e-06,
+      "beam_stiffness_factor": 1.0,
+      "column_stiffness_factor": 1.0,
+      "stored_stiffness_id": ""
+    }
+  ],
+  "concrete_materials": []
+}

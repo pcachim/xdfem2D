@@ -1,0 +1,10 @@
+# Vai para o main do repositório público em cada release do motor. Não editar
+# lá: o push é --force e a árvore é substituída.
+blank_issues_enabled: true
+contact_links:
+  - name: Documentação
+    url: https://pcachim.github.io/xdfem2D
+    about: Guia da aplicação e referência da biblioteca.
+  - name: Descarregar a aplicação
+    url: https://github.com/pcachim/xdfem2D/releases
+    about: Executáveis para macOS, Windows e Linux.

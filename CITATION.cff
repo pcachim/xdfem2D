@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If xdfem2d contributes to published work, please cite it as below. Add the version you used (xdfem2d.__version__) or the DOI of that release."
+type: software
+title: "xdfem2D: 2D plane frame and shell finite element analysis engine"
+authors:
+  - family-names: Cachim
+    given-names: Paulo
+    orcid: "https://orcid.org/0000-0002-0556-1056"
+    affiliation: "Universidade de Aveiro"
+# DOI of the concept: covers every version and resolves to the latest release.
+doi: "10.5281/zenodo.23511092"
+license: LGPL-3.0-or-later
+repository-code: "https://github.com/pcachim/xdfem2D"
+url: "https://pcachim.github.io/xdfem2D"
+abstract: >-
+  xdfem2d is a Python library for the finite element analysis of 2D plane
+  frames, walls, slabs and grillages (linear, non-linear and modal), with
+  Eurocode design checks. It is released under the LGPLv3 and is also
+  published on PyPI.
+keywords:
+  - finite element
+  - structural analysis
+  - eurocode
+  - frames
+  - slabs
+  - grillages
